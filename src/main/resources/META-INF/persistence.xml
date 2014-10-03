@@ -3,7 +3,16 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
 	<persistence-unit name="corporatum">
-
+	<class>br.com.ambientinformatica.fatesg.api.Disciplina</class>
+	<class>br.com.ambientinformatica.fatesg.api.Matriz</class>
+	<class>br.com.ambientinformatica.fatesg.api.Aluno</class>
+	<class>br.com.ambientinformatica.fatesg.api.Colaborador</class>
+	<class>br.com.ambientinformatica.fatesg.api.Avaliacao</class>
+	<class>br.com.ambientinformatica.fatesg.api.CronogramaAula</class>
+	<class>br.com.ambientinformatica.fatesg.api.Curso</class>
+	<class>br.com.ambientinformatica.fatesg.api.Instituicao</class>
+	<class>br.com.ambientinformatica.fatesg.api.UnidadeEnsino</class>
+	<class>br.com.ambientinformatica.fatesg.api.PlanoDeEnsino</class>
 		<properties>
 			<property name="javax.persistence.validation.mode" value="callback" />
 			<property name="javax.persistence.validation.group.pre-update"

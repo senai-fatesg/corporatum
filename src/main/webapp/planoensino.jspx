@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:panel header="Formulário" id="panelplanoensino">
+		<h:panelGrid columns="2">
+			<h:outputText value="Disciplina" />
+			<p:inputText value="#{DisciplinaControl.disciplina.nome }"
+				disabled="true" />
+			<p:commandButton value="Competências" icon="ui-icon-extlink"
+				actionListener="#{PlanoDeEnsinoControl.planoService.openDialogCompetencia }" />
+			<h:outputText value="Status" />
+			<p:commandButton value="Habilidades" icon="ui-icon-extlink" />
+			<h:outputText value="Status" />
+			<p:commandButton value="Bases Tecnológicas" icon="ui-icon-extlink"/>
+			<h:outputText value="Status" />
+			<p:commandButton value="Metodologias de Ensino"
+				icon="ui-icon-extlink" />
+			<h:outputText value="Status" />
+			<p:commandButton value="Recursos Didáticos" icon="ui-icon-extlink"/>
+			<h:outputText value="Status" />
+			<p:commandButton value="Referências Bibliográficas"
+				icon="ui-icon-extlink" />
+			<h:outputText value="Status" />
+			<h:panelGrid columns="1">
+				<h:outputText value="Coordenador(ª) Técnico(ª)" />
+				<p:selectOneMenu />
+				<h:outputText value="Coordenador(ª) Pedagógica(ª)" />
+				<p:selectOneMenu />
+			</h:panelGrid>
+			<p:commandButton actionListener="#{DisciplinaControl.confirmar}"
+				value="Confirmar" update="disciplinas, panelplanoensino" />
+		</h:panelGrid>
+	</p:panel>
+</h:body>
+</html>

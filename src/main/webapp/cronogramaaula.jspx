@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<p:panel header="Formulário" id="panelCronogramaAula">
+		<h:panelGrid columns="2">
+			<h:outputText value="Disciplina" />
+			<p:inputText value="#{DisciplinaControl.disciplina.nome }" />
+			<h:outputText value="Aula nº" />
+			<p:inputText value="#{CronogramaAulaControl.cronogramaAula.aula }" />
+			<h:outputText value="Conteúdo Programático" />
+			<p:inputText value="#{CronogramaAulaControl.cronogramaAula.conteudoProgramatico }" />
+			<h:outputText value="Horas Aulas" />
+			<p:inputText value="#{CronogramaAulaControl.cronogramaAula.horasAulas }" />
+			<p:commandButton actionListener="#{DisciplinaControl.confirmar}"
+				value="Confirmar" update="cronogramasAulas, panelCronogramaAula" />
+		</h:panelGrid>
+	</p:panel>
+
+	<p:dataTable id="cronogramasAulas" value="#{CronogramaAulaControl.cronogramasAulas }"
+		var="cont" width="100%" emptyMessage="Sem registros">
+		<f:facet name="header">
+			<h:outputText value="Lista de Aulas" />
+		</f:facet>
+		<p:column sortBy="#{cont.id }">
+			<f:facet name="header">
+				<h:outputText value="Código" />
+			</f:facet>
+			<h:outputText value="#{cont.id }" />
+		</p:column>
+		<p:column sortBy="#{cont.aula }">
+			<f:facet name="header">
+				<h:outputText value="Aula nº" />
+			</f:facet>
+			<h:outputText value="#{cont.aula }" />
+		</p:column>
+		<p:column sortBy="#{cont.conteudoProgramatico }">
+			<f:facet name="header">
+				<h:outputText value="Conteúdo Programático" />
+			</f:facet>
+			<h:outputText value="#{cont.conteudoProgramatico }" />
+		</p:column>
+		<p:column sortBy="#{cont.horasAulas }">
+			<f:facet name="header">
+				<h:outputText value="Horas Aulas" />
+			</f:facet>
+			<h:outputText value="#{cont.horasAulas }" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>
