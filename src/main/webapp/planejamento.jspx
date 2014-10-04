@@ -10,7 +10,7 @@
 
 			<p:growl id="msgs" showDetail="true" />
 
-			<h3 style="margin-top: 0">Cadastro</h3>
+			<h2 style="margin-top: 0">Planejamento de Semestre</h2>
 			<p:tabView>
 				<p:tab title="Disciplina">
 					<h:panelGrid columns="2" cellpadding="10">
@@ -29,7 +29,7 @@
 				</p:tab>
 				<p:tab title="Avaliações">
 					<h:panelGrid columns="2" cellpadding="10">
-						<ui:include src="" />
+						<ui:include src="/avaliacao.jspx" />
 					</h:panelGrid>
 				</p:tab>
 			</p:tabView>
