@@ -16,16 +16,17 @@
 			<p:inputText value="#{DisciplinaControl.disciplina.nome }" />
 			<h:outputText value="Tipo Avaliação" />
 			<h:panelGrid columns="1">
-				<p:selectOneRadio id="tipoAvaliacao">
+				<p:selectOneRadio id="tipoAvaliacao" >
 					<f:selectItem itemLabel="N1" itemValue="1" />
 					<f:selectItem itemLabel="N2" itemValue="2" />
 					<f:selectItem itemLabel="NT" itemValue="3" />
 				</p:selectOneRadio>
 			</h:panelGrid>			
-			<h:outputText value="Critério" />
-			<p:inputText value="#{AvaliacaoControl.avaliacao.criterio }" />
+			<h:outputText value="Critério"/>
+			<p:inputText value="#{AvaliacaoControl.avaliacao.criterio }"/>
+						
 			<h:outputText value="Observação" />
-			<p:inputText value="#{AvaliacaoControl.avaliacao.observacao }" />
+			<p:inputText value="#{AvaliacaoControl.avaliacao.observacao }"/>
 			
 			<p:commandButton actionListener="#{AvaliacaoControl.confirmar}"
 				value="Confirmar" update="avaliacoes, panelAvaliacao" />

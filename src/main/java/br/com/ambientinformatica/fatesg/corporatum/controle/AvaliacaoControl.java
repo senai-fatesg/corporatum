@@ -18,7 +18,7 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.AvaliacaoDao;
 @Scope("conversation")
 public class AvaliacaoControl {
 
-	private Avaliacao avaliacao;
+	private Avaliacao avaliacao = new Avaliacao();
 	@Autowired
 	private AvaliacaoDao avaliacaoDao;
 	

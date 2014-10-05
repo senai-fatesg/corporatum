@@ -7,14 +7,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Competências</title>
+	<title>Bases Tecnológicas</title>
 </h:head>
 <h:body>
 	<p:panel header="Formulário" id="panel">
 		<h:panelGrid columns="2">
-			<h:outputText value="Competências" />
+			<h:outputText value="Bases Tecnológicas" />
 			<p:inputTextarea
-				value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />
+				value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
 			<p:commandButton value="Confirmar"/>
 		</h:panelGrid>
 	</p:panel>

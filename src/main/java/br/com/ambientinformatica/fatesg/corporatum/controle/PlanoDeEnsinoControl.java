@@ -25,7 +25,7 @@ public class PlanoDeEnsinoControl {
 	private PlanoDeEnsinoDao planoDeEnsinoDao;
 	private List<PlanoDeEnsino> planosDeEnsino = new ArrayList<PlanoDeEnsino>();
 	@ManagedProperty("#{planoEnsinoService}")
-	private PlanoDeEnsinoService planoService;
+	private PlanoDeEnsinoService planoService = new PlanoDeEnsinoService();
 
    @PostConstruct
    public void init(){
