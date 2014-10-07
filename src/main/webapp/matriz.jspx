@@ -13,9 +13,9 @@
 	<p:panel header="Formulário" id="panelMatriz">
 		<h:panelGrid columns="2">
 			<h:outputText value="Matriz" />
-			<p:inputText value="#{MatrizControl.matriz.descricao }" />
+			<p:inputTextarea value="#{MatrizControl.matriz.descricao }" />
 			<h:outputText value="Data" />
-			<<p:inputMask value="#{MatrizControl.matriz.data}" mask="99/99/9999" />
+			<p:inputMask value="#{MatrizControl.matriz.data}" mask="99/99/9999" />
 			<h:outputText value="Quantidade de Periodo" />
 			<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
 			<p:commandButton actionListener="#{MatrizControl.confirmar}"
