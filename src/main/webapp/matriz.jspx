@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+
+<h:body>
+	<p:panel header="Formulário" id="panelMatriz">
+		<h:panelGrid columns="2">
+			<h:outputText value="Matriz" />
+			<p:inputText value="#{MatrizControl.matriz.descricao }" />
+			<h:outputText value="Data" />
+			<<p:inputMask value="#{MatrizControl.matriz.data}" mask="99/99/9999" />
+			<h:outputText value="Quantidade de Periodo" />
+			<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
+			<p:commandButton actionListener="#{MatrizControl.confirmar}"
+				value="Confirmar" update="matrizes panelMatriz" />
+		</h:panelGrid>
+	</p:panel>
+
+	<p:dataTable id="matrizes" value="#{MatrizControl.matrizes }"
+		var="cont" width="100%" emptyMessage="Sem registros">
+		<f:facet name="header">
+			<h:outputText value="Lista de Matrizes" />
+		</f:facet>
+		<p:column sortBy="#{cont.id }">
+			<f:facet name="header">
+				<h:outputText value="Código" />
+			</f:facet>
+			<h:outputText value="#{cont.id }" />
+		</p:column>
+		<p:column sortBy="#{cont.tipo }">
+			<f:facet name="header">
+				<h:outputText value="Descricao" />
+			</f:facet>
+			<h:outputText value="#{cont.tipo }" />
+		</p:column>
+		<p:column sortBy="#{cont.data }">
+			<f:facet name="header">
+				<h:outputText value="Data" />
+			</f:facet>
+			<h:outputText value="#{cont.data}" />
+		</p:column>
+		<p:column sortBy="#{cont.qtdePeriodos }">
+			<f:facet name="header">
+				<h:outputText value="Quantidade Periodo" />
+			</f:facet>
+			<h:outputText value="#{cont.qtdePeriodos}" />
+		</p:column>
+	</p:dataTable>
+</h:body>
+</html>
