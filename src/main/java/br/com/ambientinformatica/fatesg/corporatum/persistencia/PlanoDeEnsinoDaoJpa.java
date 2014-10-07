@@ -9,5 +9,5 @@ import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 public class PlanoDeEnsinoDaoJpa extends PersistenciaJpa<PlanoDeEnsino> implements PlanoDeEnsinoDao{
 
    private static final long serialVersionUID = 1L;
-
+   
 }

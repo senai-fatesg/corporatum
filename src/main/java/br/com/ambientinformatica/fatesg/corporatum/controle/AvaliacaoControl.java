@@ -24,8 +24,7 @@ public class AvaliacaoControl {
 	
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 	
-
-   @PostConstruct
+	@PostConstruct
    public void init(){
       listar(null);
    }

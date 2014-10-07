@@ -59,5 +59,10 @@ public class DisciplinaControl {
 	
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
+	}
+
+	public DisciplinaDao getDisciplinaDao() {
+		return disciplinaDao;
 	}	
+	
 }

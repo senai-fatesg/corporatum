@@ -11,15 +11,13 @@
 <h:body>
 	<p:panel header="Formulário" id="panelCronogramaAula">
 		<h:panelGrid columns="2">
-			<h:outputText value="Disciplina" />
-			<p:inputText value="#{DisciplinaControl.disciplina.nome }" />
 			<h:outputText value="Aula nº" />
 			<p:inputText value="#{CronogramaAulaControl.cronogramaAula.aula }" />
 			<h:outputText value="Conteúdo Programático" />
 			<p:inputText value="#{CronogramaAulaControl.cronogramaAula.conteudoProgramatico }" />
 			<h:outputText value="Horas Aulas" />
 			<p:inputText value="#{CronogramaAulaControl.cronogramaAula.horasAulas }" />
-			<p:commandButton actionListener="#{DisciplinaControl.confirmar}"
+			<p:commandButton actionListener="#{CronogramaAulaControl.confirmar}"
 				value="Confirmar" update="cronogramasAulas, panelCronogramaAula" />
 		</h:panelGrid>
 	</p:panel>
