@@ -7,31 +7,30 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
+		<p:growl id="msgs" showDetail="true" />
 
-			<p:growl id="msgs" showDetail="true" />
-
-			<h2 style="margin-top: 0">Planejamento de Semestre</h2>
-			<p:tabView>
-				<p:tab title="Disciplina">
-					<h:panelGrid columns="2" cellpadding="10">
-						<ui:include src="/disciplina.jspx" />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Plano de Ensino">
-					<h:panelGrid columns="2" cellpadding="10">
-						<ui:include src="/planoensino.jspx" />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Cronograma de Aulas">
-					<h:panelGrid columns="2" cellpadding="10">
-						<ui:include src="/cronogramaaula.jspx" />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Avaliações">
-					<h:panelGrid columns="2" cellpadding="10">
-						<ui:include src="/avaliacao.jspx" />
-					</h:panelGrid>
-				</p:tab>
-			</p:tabView>
+		<h2 style="margin-top: 1">Planejamento de Semestre</h2>
+		<p:tabView>
+			<p:tab title="Disciplina">
+				<h:panelGrid columns="2" cellpadding="10">
+					<ui:include src="/disciplina.jspx" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Plano de Ensino">
+				<h:panelGrid columns="2" cellpadding="10">
+					<ui:include src="/planoensino.jspx" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Cronograma de Aulas">
+				<h:panelGrid columns="2" cellpadding="10">
+					<ui:include src="/cronogramaaula.jspx" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Avaliações">
+				<h:panelGrid columns="2" cellpadding="10">
+					<ui:include src="/avaliacao.jspx" />
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
 	</ui:define>
 </ui:composition>

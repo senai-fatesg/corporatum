@@ -19,8 +19,10 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao
 public class PlanoDeEnsinoControl {
 
 	private PlanoDeEnsino planoDeEnsino = new PlanoDeEnsino();
+
 	@Autowired
 	private PlanoDeEnsinoDao planoDeEnsinoDao;
+	
 	private List<PlanoDeEnsino> planosDeEnsino = new ArrayList<PlanoDeEnsino>();
 
 	@PostConstruct

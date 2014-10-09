@@ -1,40 +1,45 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<link href="css/styles.css" rel="stylesheet" />
-</h:head>
-<h:body>
-	<p:panel header="Formulário" id="panelplanoensino">
-		<h:panelGrid columns="4">
-			<h:outputText value="Competências"/>
-			<p:inputTextarea value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}"/>
-			<h:outputText value="Habilidades" />
-			<p:inputTextarea value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />
-			<h:outputText value="Bases Tecnológicas" />
-			<p:inputTextarea value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
-			<h:outputText value="Metodologias de Ensino" />
-			<p:inputTextarea value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />
-			<h:outputText value="Recursos Didáticos" />
-			<p:inputTextarea value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />
-			<h:outputText value="Bibliografias" />
-			<p:inputTextarea value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
-		</h:panelGrid>
-		<h:panelGrid columns="1">
-			<h:outputText value="Coordenador(ª) Técnico(ª)" />
-			<p:inputText value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}" />
-			<h:outputText value="Coordenador(ª) Pedagógica(ª)" />
-			<p:inputText value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}" />
-		</h:panelGrid>
-		<h:panelGrid columns="2">
-			<p:commandButton actionListener="#{DisciplinaControl.confirmar}"
-				value="Confirmar" update="disciplinas, panelplanoensino" />
-		</h:panelGrid>
-	</p:panel>
-</h:body>
-</html>
+	<ui:define name="corpo">
+		<p:panel header="Formulário" id="panelplanoensino">
+			<h:panelGrid columns="4">
+				<h:outputText value="Competências" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />
+				<h:outputText value="Habilidades" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />
+				<h:outputText value="Bases Tecnológicas" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
+				<h:outputText value="Metodologias de Ensino" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />
+				<h:outputText value="Recursos Didáticos" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />
+				<h:outputText value="Bibliografias" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputText value="Coordenador(ª) Técnico(ª)" />
+				<p:inputText
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}" />
+				<h:outputText value="Coordenador(ª) Pedagógica(ª)" />
+				<p:inputText
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton actionListener="#{PlanoDeEnsinoControl.confirmar}"
+					value="Confirmar" update="panelplanoensino" />
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
