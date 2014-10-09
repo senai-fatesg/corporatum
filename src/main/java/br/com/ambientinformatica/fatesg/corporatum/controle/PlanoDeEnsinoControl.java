@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.PlanoDeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao;
 
@@ -19,7 +20,7 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao
 public class PlanoDeEnsinoControl {
 
 	private PlanoDeEnsino planoDeEnsino = new PlanoDeEnsino();
-
+	
 	@Autowired
 	private PlanoDeEnsinoDao planoDeEnsinoDao;
 	
@@ -68,4 +69,7 @@ public class PlanoDeEnsinoControl {
 		this.planoDeEnsinoDao = planoDeEnsinoDao;
 	}
 
+	public void setPlanosDeEnsino(List<PlanoDeEnsino> planosDeEnsino) {
+		this.planosDeEnsino = planosDeEnsino;
+	}
 }
