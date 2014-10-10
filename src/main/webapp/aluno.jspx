@@ -17,6 +17,11 @@
 				<p:inputMask mask="999.999.999-99" value="#{AlunoControl.aluno.cpfCnpj }"/>
 				<h:outputText value="RG" />
 				<p:inputText value="#{AlunoControl.aluno.rg }" />
+				<p:outputLabel for="sexo" value="Sexo:" />
+        <p:selectOneRadio id="sexo" value="#{AlunoControl.aluno.tipoSexo }">
+            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+        </p:selectOneRadio>
 				<h:outputText value="Titulo de Eleitor" />
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
 				<h:outputText value="Nº Reservista" />
@@ -37,6 +42,7 @@
 				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
 				<h:outputText value="Certificado 2ª Grau" />
 				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
+				<h:outputText value="Disciplina" />
 				
 				<p:commandButton actionListener="#{AlunoControl.confirmar }"
 					value="Confirmar" update="alunos, panelAluno"></p:commandButton>
