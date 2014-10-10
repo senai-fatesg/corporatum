@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:panel header="Formulário" id="panelAluno">
+			<h:panelGrid columns="2">
+				<h:outputText value="Código" />
+				<p:inputText value="#{AlunoControl.aluno.id }" />
+				<h:outputText value="Nome" />
+				<p:inputText value="#{AlunoControl.aluno.nome }" />
+				<h:outputText value="CPF" />
+				<p:inputMask mask="999.999.999-99" value="#{AlunoControl.aluno.cpfCnpj }"/>
+				<h:outputText value="RG" />
+				<p:inputText value="#{AlunoControl.aluno.rg }" />
+				<h:outputText value="Titulo de Eleitor" />
+				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
+				<h:outputText value="Nº Reservista" />
+				<p:inputText value="#{AlunoControl.aluno.reservista }" />
+				<h:outputText value="Telefone" />
+				<p:inputText value="#{AlunoControl.aluno.telefone }" />
+				<h:outputText value="Celular" />
+				<p:inputText value="#{AlunoControl.aluno.celular }" />
+				<h:outputText value="E-mail" />
+				<p:inputText value="#{AlunoControl.aluno.email }" />
+				<h:outputText value="Endereço" />
+				<p:inputText value="#{AlunoControl.aluno.endereco }" />
+				<h:outputText value="Cidade" />
+				<p:inputText value="#{AlunoControl.aluno.municipio }" />
+				<h:outputText value="UF" />
+				<p:inputText value="#{AlunoControl.aluno.uf }" />
+				<h:outputText value="CEP" />
+				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
+				<h:outputText value="Certificado 2ª Grau" />
+				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
+				
+				<p:commandButton actionListener="#{AlunoControl.confirmar }"
+					value="Confirmar" update="alunos, panelAluno"></p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dataTable id="alunos"
+			value="#{AlunoControl.alunos }" var="cont" width="100%"
+			emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Lista de Alunos" />
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+				<h:outputText value="#{cont.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cpfCnpj }">
+				<f:facet name="header">
+					<h:outputText value="CPF" />
+				</f:facet>
+				<h:outputText value="#{cont.cpfCnpj }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.telefone }">
+				<f:facet name="header">
+					<h:outputText value="Telefone" />
+				</f:facet>
+				<h:outputText value="#{cont.telefone }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.celular }">
+				<f:facet name="header">
+					<h:outputText value="Celular" />
+				</f:facet>
+				<h:outputText value="#{cont.celular }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.email }">
+				<f:facet name="header">
+					<h:outputText value="E-mail" />
+				</f:facet>
+				<h:outputText value="#{cont.email }"></h:outputText>
+			</p:column>
+			
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
