@@ -17,11 +17,13 @@
 					mask="999.999.999-99"></p:inputMask>
 				<h:outputText value="RG"></h:outputText>
 				<p:inputText value="#{ColaboradorControl.colaborador.rg }"></p:inputText>
-				 <p:selectOneRadio id="sexo" value="#{ColaboradorControl.colaborador.tipoSexo }">
-            <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-            <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-        </p:selectOneRadio>
-        <h:outputText value="Titulo de Eleitor" />
+				<p:outputLabel for="sexo" value="Sexo:" />
+				<p:selectOneMenu value="#{ColaboradorControl.colaborador.tipoSexo}">  
+                        <f:selectItem itemLabel="Selecione" />  
+                        <f:selectItems value="#{colaborador.tipoSexo}" var="tipoSexo"  
+                            itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.label}"/>  
+                </p:selectOneMenu>  
+                <h:outputText value="Titulo de Eleitor" />
 				<p:inputText value="#{ColaboradorControl.colaborador.tituloEleitor }" />
 				<h:outputText value="Nº Reservista" />
 				<p:inputText value="#{ColaboradorControl.colaborador.reservista }" />
@@ -41,6 +43,12 @@
 				<p:inputMask mask="99999-999" value="#{ColaboradorControl.colaborador.cep }" />
 				<h:outputText value="Histórico" />
 				<p:inputText value="#{ColaboradorControl.colaborador.historico }" />
+				<p:outputLabel for="tipo" value="Tipo Colaborador:" />
+				<p:selectOneMenu value="#{ColaboradorControl.colaborador.tipo}">  
+                        <f:selectItem itemLabel="Selecione" />  
+                        <f:selectItems value="#{colaborador.tipo}" var="tipo"  
+                            itemValue="#{tipo}" itemLabel="#{tipo.label}"/>  
+                </p:selectOneMenu>  
 				
 				<p:commandButton actionListener="#{ColaboradorControl.confirmar }"
 					value="Confirmar" update="colaboradores, panel"></p:commandButton>
