@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="templatePlanoEnsino.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+	
+		<p:panel header="Formulário" id="panel">
+			<h:panelGrid columns="2">	
+				<h:outputText value="Código" />
+				<p:inputText value="#{CursoControl.curso.id }" />
+				<h:outputText value="Descrição" />
+				<p:inputText value="#{CursoControl.curso.descricao }" />
+				<p:outputLabel for="turno" value="Turno:" />
+				<p:selectOneMenu value="#{CursoControl.curso.turno}">  
+                        <f:selectItem itemLabel="Selecione" />  
+                        <f:selectItems value="#{curso.turno}" var="turno"  
+                            itemValue="#{turno}" itemLabel="#{turno.label}"/>  
+                </p:selectOneMenu>  
+                <p:outputLabel for="modalidade" value="Modalidade:" />
+				<p:selectOneMenu value="#{CursoControl.curso.modalidade}">  
+                        <f:selectItem itemLabel="Selecione" />  
+                        <f:selectItems value="#{curso.modalidade}" var="modalidade"  
+                            itemValue="#{modalidade}" itemLabel="#{modalidade.label}"/>  
+                </p:selectOneMenu>  
+				<h:outputText value="Carga Horária" />
+				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
+				<h:outputText value="Nome" />
+				<p:inputText value="#{CursoControl.curso.nome }" />
+				<h:outputText value="Sigla" />
+				<p:inputText value="#{CursoControl.curso.sigla }" />
+
+				<p:commandButton ajax="true" actionListener="#{AvaliacaoControl.confirmar}"
+					value="Confirmar" update="avaliacoes, panel" />
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dataTable id="cursos" value="#{CursoControl.cursos }"
+			var="cont" width="100%" emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Lista de Cursos" />
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }" />
+			</p:column>
+			<p:column sortBy="#{cont.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+				<h:outputText value="#{cont.nome }" />
+			</p:column>
+			<p:column sortBy="#{cont.descricao }">
+				<f:facet name="header">
+					<h:outputText value="Descrição" />
+				</f:facet>
+				<h:outputText value="#{cont.descricao }" />
+			</p:column>
+			<p:column sortBy="#{cont.turno }">
+				<f:facet name="header">
+					<h:outputText value="Turno" />
+				</f:facet>
+				<h:outputText value="#{cont.turno}" />
+			</p:column>
+			<p:column sortBy="#{cont.cargaHoraria }">
+				<f:facet name="header">
+					<h:outputText value="Carga Horária" />
+				</f:facet>
+				<h:outputText value="#{cont.cargaHoraria }" />
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
