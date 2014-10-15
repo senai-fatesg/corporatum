@@ -22,6 +22,8 @@ public class DisciplinaControl {
 	@Autowired
 	private DisciplinaDao disciplinaDao;
 	
+	
+	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 

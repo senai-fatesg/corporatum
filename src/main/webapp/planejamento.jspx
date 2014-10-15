@@ -7,30 +7,23 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:growl id="msgs" showDetail="true" />
-
-		<h2 style="margin-top: 1">Planejamento de Semestre</h2>
-		<p:tabView>
-			<p:tab title="Disciplina">
-				<h:panelGrid columns="2" cellpadding="10">
-					<ui:include src="/disciplina.jspx" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab title="Plano de Ensino">
-				<h:panelGrid columns="2" cellpadding="10">
-					<ui:include src="/planoensino.jspx" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab title="Cronograma de Aulas">
-				<h:panelGrid columns="2" cellpadding="10">
-					<ui:include src="/cronogramaaula.jspx" />
-				</h:panelGrid>
-			</p:tab>
-			<p:tab title="Avaliações">
-				<h:panelGrid columns="2" cellpadding="10">
-					<ui:include src="/avaliacao.jspx" />
-				</h:panelGrid>
-			</p:tab>
-		</p:tabView>
+		<p:tabMenu activeIndex="#{param.i}">
+			<p:menuitem value="Disciplina" outcome="/disciplina.jspx"
+				icon="ui-icon-document">
+				<f:param name="i" value="0" />
+			</p:menuitem>
+			<p:menuitem value="Plano de Ensino" outcome="/planoensino.jspx"
+				icon="ui-icon-document">
+				<f:param name="i" value="1" />
+			</p:menuitem>
+			<p:menuitem value="Cronograma de Aulas" outcome="/cronogramaaula.jspx"
+				icon="ui-icon-document">
+				<f:param name="i" value="2" />
+			</p:menuitem>
+			<p:menuitem value="Avaliações" outcome="/avaliacao.jspx"
+				icon="ui-icon-document">
+				<f:param name="i" value="3" />
+			</p:menuitem>
+		</p:tabMenu>
 	</ui:define>
 </ui:composition>

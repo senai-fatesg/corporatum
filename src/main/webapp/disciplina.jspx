@@ -16,8 +16,8 @@
 				<h:outputText value="Carga Horária" />
 				<p:inputText value="#{DisciplinaControl.disciplina.cargaHoraria }" />
 
-				<p:commandButton actionListener="#{DisciplinaControl.confirmar }"
-					value="Confirmar" update="disciplinas, panelDisciplina"></p:commandButton>
+				<p:commandButton ajax="true" actionListener="#{DisciplinaControl.confirmar }"
+					value="Confirmar" update="disciplinas, panelDisciplina"/>
 			</h:panelGrid>
 		</p:panel>
 

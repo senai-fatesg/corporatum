@@ -17,7 +17,7 @@
 				<h:outputText value="Horas Aulas" />
 				<p:inputText
 					value="#{CronogramaAulaControl.cronogramaAula.horasAulas }" />
-				<p:commandButton actionListener="#{CronogramaAulaControl.confirmar}"
+				<p:commandButton ajax="true" actionListener="#{CronogramaAulaControl.confirmar}"
 					value="Confirmar" update="cronogramasAulas, panelCronogramaAula" />
 			</h:panelGrid>
 		</p:panel>

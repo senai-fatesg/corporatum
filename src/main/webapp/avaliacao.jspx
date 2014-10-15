@@ -11,17 +11,17 @@
 		<p:panel header="Formulário" id="panelAvaliacao">
 			<h:panelGrid columns="2">
 				<h:outputText value="Tipo de Avaliação" />
-				<h:selectOneRadio id="tipoAvaliacao">
-					<f:selectItem itemLabel="N1" itemValue="N1" />
-					<f:selectItem itemLabel="N2" itemValue="N2" />
-					<f:selectItem itemLabel="NT" itemValue="NT" />
+				<h:selectOneRadio id="tipoAvaliacao" value="#{AvaliacaoControl.avaliacao.tipo}">
+					<f:selectItem itemLabel="N1" itemValue= "N1" />
+					<f:selectItem itemLabel="N2" itemValue= "N2" />
+					<f:selectItem itemLabel="NT" itemValue= "NT" />
 				</h:selectOneRadio>
 				<h:outputText value="Critério" />
 				<p:inputText value="#{AvaliacaoControl.avaliacao.criterio }" />
 				<h:outputText value="Observação" />
 				<p:inputText value="#{AvaliacaoControl.avaliacao.observacao }" />
 
-				<p:commandButton actionListener="#{AvaliacaoControl.confirmar}"
+				<p:commandButton ajax="true" actionListener="#{AvaliacaoControl.confirmar}"
 					value="Confirmar" update="avaliacoes, panelAvaliacao" />
 			</h:panelGrid>
 		</p:panel>

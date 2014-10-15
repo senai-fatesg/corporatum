@@ -46,7 +46,7 @@
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}" />
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton actionListener="#{PlanoDeEnsinoControl.confirmar}"
+				<p:commandButton ajax="true" actionListener="#{PlanoDeEnsinoControl.confirmar}"
 					value="Confirmar" update="panelplanoensino" />
 			</h:panelGrid>
 		</p:panel>
