@@ -24,7 +24,7 @@
 </h:head>
 
 <h:body>
-	<ui:insert name="menuPrincipal">
+	<ui:insert name="menuPlanoEnsino">
 		<div class="wrapper">
 			<div class="header">
 				<div class="container">
@@ -38,12 +38,10 @@
 					<div class="row navigation">
 						<div class="span12">
 							<ul class="nav nav-tabs">
-								<li><a href="/corporatum/matriz.jsf">Matriz</a></li>
-								<li><a href="/corporatum/instituicao.jsf">Instituição</a></li>
-								<li><a href="">Unidade de Ensino</a></li>
-								<li><a href="">Curso</a></li>
-								<li><a href="/corporatum/colaborador.jsf">Colaborador</a></li>
-								<li><a href="/corporatum/aluno.jsf">Aluno</a></li>
+								<li><a href="/corporatum/disciplina.jsf">Disciplina</a></li>
+								<li><a href="/corporatum/planoensino.jsf">Plano de Ensino</a></li>
+								<li><a href="/corporatum/cronogramaaula.jsf">Cronograma de Aulas</a></li>
+								<li><a href="/corporatum/avaliacao.jsf">Avaliações</a></li>
 							</ul>
 						</div>
 					</div>
@@ -51,6 +49,7 @@
 			</div>
 		</div>
 	</ui:insert>
+
 	<h:form id="formCorpo">
 		<p:growl autoUpdate="true"></p:growl>
 		<ui:insert name="corpo" />
