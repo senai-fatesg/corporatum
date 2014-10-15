@@ -33,8 +33,8 @@
 				<h:outputText value="Sigla" />
 				<p:inputText value="#{CursoControl.curso.sigla }" />
 
-				<p:commandButton ajax="true" actionListener="#{AvaliacaoControl.confirmar}"
-					value="Confirmar" update="avaliacoes, panel" />
+				<p:commandButton ajax="true" actionListener="#{CursoControl.confirmar}"
+					value="Confirmar" update="cursos, panel" />
 			</h:panelGrid>
 		</p:panel>
 
