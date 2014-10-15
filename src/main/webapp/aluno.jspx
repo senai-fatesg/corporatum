@@ -16,6 +16,11 @@
 				<h:outputText value="RG" />
 				<p:inputText value="#{AlunoControl.aluno.rg }" />
 				<p:outputLabel for="sexo" value="Sexo:" />
+				 <p:selectOneMenu value="#{AlunoControl.aluno.tipoSexo}">  
+                        <f:selectItem itemLabel="Selecione" />  
+                        <f:selectItems value="#{aluno.tipoSexo}" var="tipoSexo"  
+                            itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.label}"/>  
+                    </p:selectOneMenu>  
         <p:selectOneRadio id="sexo" value="#{AlunoControl.aluno.tipoSexo }">
             <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
             <f:selectItem itemLabel="Feminino" itemValue="Feminino" />
