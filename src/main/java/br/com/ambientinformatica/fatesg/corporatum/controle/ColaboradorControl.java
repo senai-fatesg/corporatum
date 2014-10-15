@@ -40,7 +40,19 @@ public class ColaboradorControl {
 		   UtilFaces.addMensagemFaces(e);
 		}
 	}
-
+	
+	public void excluir(ActionEvent evt){
+		try {
+			colaborador = (Colaborador) evt.getComponent().getAttributes().get("colaborador");
+			colaborador = colaboradorDao.consultar(colaborador.getId());
+			colaboradorDao.excluirPorId(colaborador.getId());
+			listar(evt);
+			
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);		
+		}
+	}
+	
 	public void listar(ActionEvent evt){
 		try {
 			colaboradores = colaboradorDao.listar();

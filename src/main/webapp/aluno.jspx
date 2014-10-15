@@ -9,8 +9,6 @@
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelAluno">
 			<h:panelGrid columns="2">
-				<h:outputText value="Código" />
-				<p:inputText value="#{AlunoControl.aluno.id }" />
 				<h:outputText value="Nome" />
 				<p:inputText value="#{AlunoControl.aluno.nome }" />
 				<h:outputText value="CPF" />

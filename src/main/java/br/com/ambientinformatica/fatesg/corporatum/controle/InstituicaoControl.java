@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Aluno;
+import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.api.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
@@ -43,6 +44,18 @@ public class InstituicaoControl {
 		}
 	}
 
+	public void excluir(ActionEvent evt){
+		try {
+			instituicao = (Instituicao) evt.getComponent().getAttributes().get("instituicao");
+			instituicao = instituicaoDao.consultar(instituicao.getId());
+			instituicaoDao.excluirPorId(instituicao.getId());
+			listar(evt);
+			
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);		
+		}
+	}
+	
 	public void listar(ActionEvent evt){
 		try {
 			instituicoes = instituicaoDao.listar();

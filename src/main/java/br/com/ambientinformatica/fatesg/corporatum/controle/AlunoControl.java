@@ -40,6 +40,18 @@ public class AlunoControl {
 		   UtilFaces.addMensagemFaces(e);
 		}
 	}
+	
+	public void excluir(ActionEvent evt){
+		try {
+			aluno = (Aluno) evt.getComponent().getAttributes().get("aluno");
+			aluno = alunoDao.consultar(aluno.getId());
+			alunoDao.excluirPorId(aluno.getId());
+			listar(evt);
+			
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);		
+		}
+	}
 
 	public void listar(ActionEvent evt){
 		try {

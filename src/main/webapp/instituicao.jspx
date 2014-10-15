@@ -10,32 +10,56 @@
 
 		<p:panel header="Formulário" id="panel">
 			<h:panelGrid columns="2">
-				<h:outputText value="Nome"></h:outputText>
-				<p:inputText value="#{ContatoControl.contato.nome }"></p:inputText>
-				<h:outputText value="Telefone"></h:outputText>
-				<p:inputMask value="#{ContatoControl.contato.telefone }"
-					mask="(99) 9999-9999"></p:inputMask>
-				<p:commandButton actionListener="#{ContatoControl.confirmar }"
-					value="Confirmar" update="contatos, panel"></p:commandButton>
+				<h:outputText value="Nome Fantasia"></h:outputText>
+				<p:inputText value="#{InstituicaoControl.instituicao.nomeFantasia }"></p:inputText>
+				<h:outputText value="Razão Social"></h:outputText>
+				<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }"></p:inputText>
+				<h:outputText value="CNPJ"></h:outputText>
+				<p:inputMask value="#{InstituicaoControl.instituicao.cnpj }" mask="99.999.999/9999-99"></p:inputMask>
+				<h:outputText value="Inscrição Estadual"></h:outputText>
+				<p:inputText value="#{InstituicaoControl.instituicao.inscricaoEstadual }"></p:inputText>
+				<h:outputText value="Descrição"></h:outputText>
+				<p:inputText value="#{InstituicaoControl.instituicao.descricao }"></p:inputText>
+
+				<p:commandButton actionListener="#{InstituicaoControl.confirmar }"
+					value="Confirmar" update="instituicoes, panel"></p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 
-		<p:dataTable id="contatos" value="#{ContatoControl.contatos }"
+		<p:dataTable id="instituicoes" value="#{InstituicaoControl.instituicoes }"
 			var="cont" width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
-				<h:outputText value="Lista de Contatos"></h:outputText>
+				<h:outputText value="Lista de Instituições"></h:outputText>
 			</f:facet>
-			<p:column sortBy="#{cont.nome }">
+			<p:column sortBy="#{cont.nomeFantasia }">
 				<f:facet name="header">
-					<h:outputText value="Nome"></h:outputText>
+					<h:outputText value="Nome Fantazia"></h:outputText>
 				</f:facet>
-				<h:outputText value="#{cont.nome }"></h:outputText>
+				<h:outputText value="#{cont.nomeFantasia }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.telefone }">
+			<p:column sortBy="#{cont.razaoSocial }">
 				<f:facet name="header">
-					<h:outputText value="Telefone"></h:outputText>
+					<h:outputText value="Razao Social"></h:outputText>
 				</f:facet>
-				<h:outputText value="#{cont.telefone }"></h:outputText>
+				<h:outputText value="#{cont.razaoSocial }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cnpj }">
+				<f:facet name="header">
+					<h:outputText value="CNPJ"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.cnpj }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.inscricaoEstadual }">
+				<f:facet name="header">
+					<h:outputText value="Inscrição Estadual"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.inscricaoEstadual }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.descricao }">
+				<f:facet name="header">
+					<h:outputText value="Descricao"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.descricao }"></h:outputText>
 			</p:column>
 		</p:dataTable>
 
