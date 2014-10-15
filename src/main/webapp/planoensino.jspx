@@ -8,47 +8,81 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelplanoensino">
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">
 				<h:outputText value="Disciplina" />
+				<h:outputText value="Coord. Técnico(ª)" />
+				<h:outputText value="Coord. Técnico(ª)" />
 				<p:selectOneMenu value="#{DisciplinaControl.disciplina}"
 					converter="#{disciplinaConverter}">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="dic"
-						itemLabel="#{dic.nome}"/>				
+						itemLabel="#{dic.nome}" />
+				</p:selectOneMenu>				
+				<p:selectOneMenu
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}">
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+				</p:selectOneMenu>				
+				<p:selectOneMenu
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}">
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 				</p:selectOneMenu>
 			</h:panelGrid>
-			<h:panelGrid columns="4">
+			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />
-				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />
 				<h:outputText value="Habilidades" />
-				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />
 				<h:outputText value="Bases Tecnológicas" />
-				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
-				<h:outputText value="Metodologias de Ensino" />
-				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />
+				<h:outputText value="Metod. de Ensino" />
 				<h:outputText value="Recursos Didáticos" />
-				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />
 				<h:outputText value="Bibliografias" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />				
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />				
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />				
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />				
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />				
 				<p:inputTextarea
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
 			</h:panelGrid>
-			<h:panelGrid columns="1">
-				<h:outputText value="Coordenador(ª) Técnico(ª)" />
-				<p:inputText
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}" />
-				<h:outputText value="Coordenador(ª) Pedagógica(ª)" />
-				<p:inputText
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}" />
-			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton ajax="true" actionListener="#{PlanoDeEnsinoControl.confirmar}"
-					value="Confirmar" update="panelplanoensino" />
+				<p:commandButton ajax="true"
+					actionListener="#{PlanoDeEnsinoControl.confirmar}"
+					value="Confirmar" update="panelplanoensino, planosensino" />
 			</h:panelGrid>
 		</p:panel>
+		<p:dataTable id="planosensino"
+			value="#{PlanoDeEnsinoControl.planosDeEnsino }" var="cont" width="100%"
+			emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Planos de Ensino" />
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.disciplina }">
+				<f:facet name="header">
+					<h:outputText value="Disciplina" />
+				</f:facet>
+				<h:outputText value="#{cont.disciplina }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.coordenadorTecnico }">
+				<f:facet name="header">
+					<h:outputText value="Coordenador(ª) Técnico(ª) " />
+				</f:facet>
+				<h:outputText value="#{cont.coordenadorTecnico }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.coordenadorPedagogico }">
+				<f:facet name="header">
+					<h:outputText value="Coordenador(ª) Pedagogico(ª) " />
+				</f:facet>
+				<h:outputText value="#{cont.coordenadorPedagogico }"></h:outputText>
+			</p:column>
+		</p:dataTable>
 	</ui:define>
 </ui:composition>
