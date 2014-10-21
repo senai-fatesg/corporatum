@@ -55,6 +55,16 @@
 				</f:facet>
 				<h:outputText value="#{cont.observacao }" />
 			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" title="Excluir" update="@this">
+					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
+						value="#{avaliacao}" />
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-pencil" title="Editar" update="@form">
+					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
+						value="#{avaliacao}" />
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
 	</ui:define>
 </ui:composition>

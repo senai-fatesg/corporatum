@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
+import br.com.ambientinformatica.fatesg.corporatum.util.PlanoDeEnsinoRelatorio;
 
 @Controller("DisciplinaControl")
 @Scope("conversation")
@@ -23,6 +24,8 @@ public class DisciplinaControl {
 	private DisciplinaDao disciplinaDao;	
 	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
+	
+	private PlanoDeEnsinoRelatorio relatorio = new PlanoDeEnsinoRelatorio();
 	
    @PostConstruct
    public void init(){
@@ -61,6 +64,13 @@ public class DisciplinaControl {
 
 	public DisciplinaDao getDisciplinaDao() {
 		return disciplinaDao;
+	}
+
+	public PlanoDeEnsinoRelatorio getRelatorio() {
+		return relatorio;
+	}
+
+	public void setRelatorio(PlanoDeEnsinoRelatorio relatorio) {
+		this.relatorio = relatorio;
 	}	
-	
 }

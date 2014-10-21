@@ -12,28 +12,30 @@
 				<h:outputText value="Disciplina" />
 				<h:outputText value="Coord. Técnico(ª)" />
 				<h:outputText value="Coord. Técnico(ª)" />
-				<p:selectOneMenu value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}"
+				<p:selectOneMenu
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}"
 					converter="#{disciplinaConverter}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="dic"
-						itemLabel="#{dic.nome}" itemValue="#{dic}"/>
-				</p:selectOneMenu>	
-							
-				<p:selectOneMenu value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}"
+						itemLabel="#{dic.nome}" itemValue="#{dic}" />
+				</p:selectOneMenu>
+
+				<p:selectOneMenu
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}"
 					converter="#{colaboradorConverter}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="col"
-						itemLabel="#{col.nome}" itemValue="#{col}"/>
+					<f:selectItems value="#{ColaboradorControl.colaboradores}"
+						var="col" itemLabel="#{col.nome}" itemValue="#{col}" />
 				</p:selectOneMenu>
-								
+
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}"
 					converter="#{colaboradorConverter}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="col"
-						itemLabel="#{col.nome}" />
+					<f:selectItems value="#{ColaboradorControl.colaboradores}"
+						var="col" itemLabel="#{col.nome}" />
 				</p:selectOneMenu>
-				
+
 			</h:panelGrid>
 			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />
@@ -43,15 +45,15 @@
 				<h:outputText value="Recursos Didáticos" />
 				<h:outputText value="Bibliografias" />
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />				
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />				
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />				
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />				
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />				
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />
 				<p:inputTextarea
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
 			</h:panelGrid>
@@ -62,8 +64,8 @@
 			</h:panelGrid>
 		</p:panel>
 		<p:dataTable id="planosensino"
-			value="#{PlanoDeEnsinoControl.planosDeEnsino }" var="cont" width="100%"
-			emptyMessage="Sem registros">
+			value="#{PlanoDeEnsinoControl.planosDeEnsino }" var="cont"
+			width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
 				<h:outputText value="Planos de Ensino" />
 			</f:facet>
@@ -90,6 +92,16 @@
 					<h:outputText value="Coordenador(ª) Pedagogico(ª) " />
 				</f:facet>
 				<h:outputText value="#{cont.coordenadorPedagogico }"></h:outputText>
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" title="Excluir">
+					<f:setPropertyActionListener target="#{PlanoDeEnsinoControl.planosDeEnsino}"
+						value="#{planoDeEnsino}" />
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-pencil" title="Editar" update="panelplanoensino">
+					<f:setPropertyActionListener target="#{PlanoDeEnsinoControl.planosDeEnsino}"
+						value="#{planoDeEnsino}" />
+				</p:commandButton>
 			</p:column>
 		</p:dataTable>
 	</ui:define>

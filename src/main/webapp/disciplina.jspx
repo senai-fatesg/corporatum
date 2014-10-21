@@ -6,7 +6,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
+	
 	<ui:define name="corpo">
+	<p:commandButton ajax="true" styleClass="btn btn-warning"
+		value="Gerar Plano de Ensino" icon="ui-icon-document"
+		actionListener="DisciplinaControl.relatorio.imprimir" />
 		<p:panel header="Formulário" id="panelDisciplina">
 			<h:panelGrid columns="2">
 				<h:outputText value="Código" />
@@ -16,8 +20,9 @@
 				<h:outputText value="Carga Horária" />
 				<p:inputText value="#{DisciplinaControl.disciplina.cargaHoraria }" />
 
-				<p:commandButton ajax="true" actionListener="#{DisciplinaControl.confirmar }"
-					value="Confirmar" update="disciplinas, panelDisciplina"/>
+				<p:commandButton ajax="true"
+					actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
+					update="disciplinas, panelDisciplina" />
 			</h:panelGrid>
 		</p:panel>
 
@@ -38,6 +43,12 @@
 					<h:outputText value="Nome" />
 				</f:facet>
 				<h:outputText value="#{cont.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cargaHoraria }">
+				<f:facet name="header">
+					<h:outputText value="Carga Horária" />
+				</f:facet>
+				<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
 			</p:column>
 			<p:column sortBy="#{cont.cargaHoraria }">
 				<f:facet name="header">
