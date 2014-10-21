@@ -32,6 +32,10 @@
 				<p:inputText value="#{CursoControl.curso.nome }" />
 				<h:outputText value="Sigla" />
 				<p:inputText value="#{CursoControl.curso.sigla }" />
+				<h:outputText value="Data Início" />
+				<p:inputText value="#{CursoControl.curso.dtInicio }" />
+				<h:outputText value="Data Termino" />
+				<p:inputText value="#{CursoControl.curso.dtTermino }" />
 
 				<p:commandButton ajax="true" actionListener="#{CursoControl.confirmar}"
 					value="Confirmar" update="cursos, panel" />
