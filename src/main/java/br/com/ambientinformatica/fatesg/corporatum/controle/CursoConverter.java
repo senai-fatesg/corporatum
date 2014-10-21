@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.corporatum.util;
+package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
