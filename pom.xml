@@ -22,7 +22,7 @@
 			</properties>
 		</profile>
 	</profiles>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>postgresql</groupId>
@@ -40,7 +40,7 @@
 			<artifactId>fatesg-api</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>ambient-jpa</artifactId>
@@ -84,7 +84,7 @@
 			<artifactId>spring-security-core-tiger</artifactId>
 			<version>2.0.6.RELEASE</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
@@ -151,25 +151,32 @@
 			<artifactId>oauth-signature</artifactId>
 			<version>1.18.1</version>
 		</dependency>
-		
+
 		<dependency>
-   			<groupId>com.itextpdf</groupId>
+			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
 			<version>5.4.2</version>
-		</dependency>             
+		</dependency>
 		<dependency>
 			<groupId>net.sf.jtidy</groupId>
 			<artifactId>jtidy</artifactId>
 			<version>r938</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.xhtmlrenderer</groupId>
-		    <artifactId>flying-saucer-pdf</artifactId>
-		    <version>9.0.1</version>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf</artifactId>
+			<version>9.0.1</version>
+		</dependency>
+
+		<!-- habititando a execuçao da classe SpringJUnit4ClassRunner e o uso das 
+			anotações: @ContextConfiguration e @TransactionConfiguration -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.2.4.RELEASE</version>
 		</dependency>
 	</dependencies>
-
 
 	<repositories>
 		<repository>
@@ -229,7 +236,7 @@
 			</plugin>
 
 		</plugins>
-		
+
 		<finalName>${artifactId}</finalName>
 	</build>
 </project>

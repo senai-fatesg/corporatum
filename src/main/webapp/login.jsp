@@ -25,17 +25,10 @@
     	<div class="container">
         	<div class="row branding">
             	<div class="span6">
-                	<h1 class="pull-left"><a href="index.html"><strong>Título Sistema</strong></a></h1>
+                	<h1 class="pull-left"><a href="index.html"><strong>Corporatum</strong></a></h1>
                 </div>            	
             </div>
-            <div class="row navigation">
-	           	<div class="span12">
-                    <ul class="nav nav-tabs">
-                      <li><a href="menu1.jsp">Menu 1</a></li>
-                      <li><a href="menu2.jsp">Menu 2</a></li>
-                    </ul>
-                </div>
-            </div>
+           
         </div>        
     </div>
 	<div class="container content">
@@ -82,7 +75,7 @@
             </div>
             
             <div class="span4 sidebar">
-                <h2><a href="#" class="btn btn-large btn-warning">Alguma ação</a></h2>
+                <h2><a href="" class="btn btn-large btn-warning">Cadastre-se</a></h2>
                 <div class="well quickSignupForm">
                   <h3>Acesso ao Sistema</h3>
 					<%

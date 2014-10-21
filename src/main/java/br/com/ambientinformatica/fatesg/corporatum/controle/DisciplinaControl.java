@@ -20,13 +20,10 @@ public class DisciplinaControl {
 
 	private Disciplina disciplina  = new Disciplina();
 	@Autowired
-	private DisciplinaDao disciplinaDao;
-	
-	
+	private DisciplinaDao disciplinaDao;	
 	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
-
    @PostConstruct
    public void init(){
       listar(null);

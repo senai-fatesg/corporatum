@@ -12,20 +12,28 @@
 				<h:outputText value="Disciplina" />
 				<h:outputText value="Coord. Técnico(ª)" />
 				<h:outputText value="Coord. Técnico(ª)" />
-				<p:selectOneMenu value="#{DisciplinaControl.disciplina}"
+				<p:selectOneMenu value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}"
 					converter="#{disciplinaConverter}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="dic"
-						itemLabel="#{dic.nome}" />
-				</p:selectOneMenu>				
-				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}">
+						itemLabel="#{dic.nome}" itemValue="#{dic}"/>
+				</p:selectOneMenu>	
+							
+				<p:selectOneMenu value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}"
+					converter="#{colaboradorConverter}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-				</p:selectOneMenu>				
-				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="col"
+						itemLabel="#{col.nome}" itemValue="#{col}"/>
 				</p:selectOneMenu>
+								
+				<p:selectOneMenu
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}"
+					converter="#{colaboradorConverter}">
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="col"
+						itemLabel="#{col.nome}" />
+				</p:selectOneMenu>
+				
 			</h:panelGrid>
 			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />

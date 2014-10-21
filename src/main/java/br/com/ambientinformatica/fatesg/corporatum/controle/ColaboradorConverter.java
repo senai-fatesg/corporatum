@@ -6,21 +6,22 @@ import javax.faces.convert.Converter;
 
 import org.springframework.stereotype.Component;
 
-import br.com.ambientinformatica.fatesg.api.Disciplina;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
+import br.com.ambientinformatica.fatesg.api.Colaborador;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
-@Component("disciplinaConverter")
-public class DisciplinaConverter implements Converter {
+@Component("colaboradorConverter")
+public class ColaboradorConverter implements Converter {
 
-	private DisciplinaDao disciplinaDao;
+	private ColaboradorDao colaboradorDao;
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
 
 		try {
-			Disciplina disciplina = disciplinaDao.consultar(id);
-			return disciplina;
+			Colaborador colaborador = colaboradorDao.consultar(Long
+					.parseLong(id));
+			return colaborador;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			return null;
@@ -33,11 +34,11 @@ public class DisciplinaConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent component,
-			Object disciplina) {
+			Object colaborador) {
 		try {
-			if (disciplina != null) {
-				Disciplina d = (Disciplina) disciplina;
-				return d.getId();
+			if (colaborador != null) {
+				Colaborador c = (Colaborador) colaborador;
+				return c.getId().toString();
 			}
 			return null;
 		} catch (Exception e) {
@@ -45,4 +46,5 @@ public class DisciplinaConverter implements Converter {
 			return null;
 		}
 	}
+
 }
