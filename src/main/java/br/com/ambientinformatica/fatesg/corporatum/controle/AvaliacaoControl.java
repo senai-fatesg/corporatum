@@ -59,6 +59,10 @@ public class AvaliacaoControl {
 		}
 	}
 
+	public void limpar(){
+		avaliacao = new Avaliacao();
+	}
+	
 	public Avaliacao getAvaliacao() {
 		return avaliacao;
 	}

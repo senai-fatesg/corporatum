@@ -17,19 +17,11 @@
     </param-value>
 	</context-param>
 
-	<!--  
-	<context-param>
-		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
-		<param-value>-1</param-value>
-	</context-param>
-	-->
+	<!-- <context-param> <param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name> 
+		<param-value>-1</param-value> </context-param> -->
 
-<!-- 
-	<context-param>
-		<param-name>primefaces.THEME</param-name>
-		<param-value>bluesky</param-value>
-	</context-param>
- -->
+	<!-- <context-param> <param-name>primefaces.THEME</param-name> <param-value>bluesky</param-value> 
+		</context-param> -->
 
 	<context-param>
 		<param-name>openEntityManagerInViewPhaseListenerBeanName</param-name>
@@ -83,6 +75,12 @@
 		<filter-name>Ambient Jsf Filter</filter-name>
 		<servlet-name>/*</servlet-name>
 	</filter-mapping>
+
+	<servlet>
+		<servlet-name>Fabrica Servlet</servlet-name>
+		<servlet-class>br.com.ambientinformatica.jpa.util.FabricaLoadServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 
 	<servlet>
 		<servlet-name>Resource Servlet</servlet-name>

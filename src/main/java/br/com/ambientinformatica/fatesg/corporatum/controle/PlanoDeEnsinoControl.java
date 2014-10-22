@@ -59,6 +59,10 @@ public class PlanoDeEnsinoControl {
 		}	
 	}
 
+	public void limpar(){
+		planoDeEnsino = new PlanoDeEnsino();
+	}
+	
 	public PlanoDeEnsino getPlanoDeEnsino() {
 		return planoDeEnsino;
 	}

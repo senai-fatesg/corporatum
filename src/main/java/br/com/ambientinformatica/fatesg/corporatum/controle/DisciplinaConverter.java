@@ -3,45 +3,41 @@ package br.com.ambientinformatica.fatesg.corporatum.controle;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-
-import org.springframework.stereotype.Component;
+import javax.faces.convert.FacesConverter;
 
 import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
-@Component("disciplinaConverter")
+@FacesConverter("disciplinaConverter")
 public class DisciplinaConverter implements Converter {
 
 	private DisciplinaDao disciplinaDao;
 
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
-
-		try {
-			Disciplina disciplina = disciplinaDao.consultar(id);
-			return disciplina;
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			return null;
-		} catch (PersistenciaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+	public String getAsString(FacesContext facesContext, UIComponent component,
+			Object value) {
+		if (value == null || value.equals("")) {
+			return "";
+		} else {
+			return String.valueOf(((Disciplina) value).getId());
 		}
 	}
 
 	@Override
-	public String getAsString(FacesContext arg0, UIComponent component,
-			Object disciplina) {
-		try {
-			if (disciplina != null) {
-				Disciplina d = (Disciplina) disciplina;
-				return d.getId();
+	public Object getAsObject(FacesContext context, UIComponent component,
+			String value) {
+		if (value != null && !value.trim().equals("")) {
+			Disciplina disciplina = new Disciplina();
+			try {
+				disciplina = disciplinaDao.consultar(value);
+			} catch (PersistenciaException e) {
+				e.printStackTrace();
+			} catch (NumberFormatException exception) {
+				return null;
 			}
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
+			return disciplina;
+		} else {
 			return null;
 		}
 	}

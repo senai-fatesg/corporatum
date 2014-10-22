@@ -17,8 +17,12 @@
 				<h:outputText value="Horas Aulas" />
 				<p:inputText
 					value="#{CronogramaAulaControl.cronogramaAula.horasAulas }" />
-				<p:commandButton ajax="true" actionListener="#{CronogramaAulaControl.confirmar}"
+				<p:commandButton ajax="true"
+					actionListener="#{CronogramaAulaControl.confirmar}"
 					value="Confirmar" update="cronogramasAulas, panelCronogramaAula" />
+
+				<p:commandButton ajax="true" action="#{CronogramaAulaControl.limpar}"
+					value="Limpar" update="panelCronogramaAula" />
 			</h:panelGrid>
 		</p:panel>
 
@@ -52,21 +56,21 @@
 				</f:facet>
 				<h:outputText value="#{cont.horasAulas }" />
 			</p:column>
-				<p:column headerText="Ação">
+			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					oncomplete="confirmacao.show()">
 
-					<f:setPropertyActionListener target="#{CronogramaAulaControl.cronogramaAula}"
-						value="#{cont}" />
+					<f:setPropertyActionListener
+						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" 
-					update="@form" process="@this">
-				
-					<f:setPropertyActionListener target="#{CronogramaAulaControl.cronogramaAula}"
-						value="#{cont}" />
-				
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
+					<f:setPropertyActionListener
+						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
+
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
@@ -76,7 +80,8 @@
 
 			<p:commandButton value="Sim"
 				actionListener="#{CronogramaAulaControl.excluir}"
-				onclick="confirmacao.hide()" update="cronogramasAulas" process="@this" />
+				onclick="confirmacao.hide()" update="cronogramasAulas"
+				process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 	</ui:define>

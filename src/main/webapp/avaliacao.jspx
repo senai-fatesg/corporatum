@@ -24,6 +24,10 @@
 				<p:commandButton ajax="true"
 					actionListener="#{AvaliacaoControl.confirmar}" value="Confirmar"
 					update="avaliacoes, panelAvaliacao" />
+					
+				<p:commandButton ajax="true" 
+				    action="#{AvaliacaoControl.limpar}" value="Limpar"
+				    update="panelAvaliacao"/>
 			</h:panelGrid>
 		</p:panel>
 		<p:dataTable id="avaliacoes" value="#{AvaliacaoControl.avaliacoes }"

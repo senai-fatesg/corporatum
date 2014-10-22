@@ -23,6 +23,9 @@
 				<p:commandButton ajax="true"
 					actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
 					update="disciplinas, panelDisciplina" />
+				<p:commandButton ajax="true" 
+				    action="#{DisciplinaControl.limpar}" value="Limpar"
+				    update="panelDisciplina"/>
 			</h:panelGrid>
 		</p:panel>
 
