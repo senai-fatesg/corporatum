@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-
 import br.com.ambientinformatica.fatesg.api.CronogramaAula;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CronogramaAulaDao;
 
@@ -49,6 +48,16 @@ public class CronogramaAulaControl {
 		}
 	}
 
+	public void excluir() {
+		try {			
+			cronogramaAulaDao.excluirPorId(cronogramaAula.getId());
+			cronogramaAula = new CronogramaAula();
+			cronogramasAulas = cronogramaAulaDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}	
+	}
+	
 	public CronogramaAula getCronogramaAula() {
 		return cronogramaAula;
 	}

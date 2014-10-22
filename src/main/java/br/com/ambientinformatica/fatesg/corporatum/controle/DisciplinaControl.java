@@ -49,6 +49,16 @@ public class DisciplinaControl {
 		   UtilFaces.addMensagemFaces(e);
 		}
 	}
+
+	public void excluir() {
+		try {			
+			disciplinaDao.excluirPorId(disciplina.getId());
+			disciplina = new Disciplina();
+			disciplinas = disciplinaDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}	
+	}
 	
 	public Disciplina getDisciplina() {
 		return disciplina;

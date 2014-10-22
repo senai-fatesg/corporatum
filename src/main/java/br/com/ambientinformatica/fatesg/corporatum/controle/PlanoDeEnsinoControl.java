@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.Avaliacao;
 import br.com.ambientinformatica.fatesg.api.PlanoDeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao;
 
@@ -46,6 +47,16 @@ public class PlanoDeEnsinoControl {
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
+	}
+	
+	public void excluir() {
+		try {			
+			planoDeEnsinoDao.excluirPorId(planoDeEnsino.getId());
+			planoDeEnsino = new PlanoDeEnsino();
+			planosDeEnsino = planoDeEnsinoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}	
 	}
 
 	public PlanoDeEnsino getPlanoDeEnsino() {

@@ -103,6 +103,32 @@
 						value="#{planoDeEnsino}" />
 				</p:commandButton>
 			</p:column>
+				<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener target="#{PlanoDeEnsinoControl.planoDeEnsino}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" 
+					update="@form" process="@this">
+				
+					<f:setPropertyActionListener target="#{PlanoDeEnsinoControl.planoDeEnsino}"
+						value="#{cont}" />
+				
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{PlanoDeEnsinoControl.excluir}"
+				onclick="confirmacao.hide()" update="planosensino" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
 	</ui:define>
 </ui:composition>

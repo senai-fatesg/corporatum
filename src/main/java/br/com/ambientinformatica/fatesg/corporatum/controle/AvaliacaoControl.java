@@ -16,9 +16,11 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.AvaliacaoDao;
 
 @Controller("AvaliacaoControl")
 @Scope("conversation")
+
 public class AvaliacaoControl {
 
 	private Avaliacao avaliacao = new Avaliacao();
+	
 	@Autowired
 	private AvaliacaoDao avaliacaoDao;
 	
@@ -41,7 +43,7 @@ public class AvaliacaoControl {
 
 	public void excluir() {
 		try {			
-			avaliacaoDao.excluirPorId(avaliacao);
+			avaliacaoDao.excluirPorId(avaliacao.getId());
 			avaliacao = new Avaliacao();
 			avaliacoes = avaliacaoDao.listar();
 		} catch (Exception e) {

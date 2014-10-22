@@ -7,7 +7,6 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-
 		<p:panel header="Formulário" id="panelAvaliacao">
 			<h:panelGrid columns="2">
 				<h:outputText value="Tipo de Avaliação" />
@@ -27,7 +26,6 @@
 					update="avaliacoes, panelAvaliacao" />
 			</h:panelGrid>
 		</p:panel>
-
 		<p:dataTable id="avaliacoes" value="#{AvaliacaoControl.avaliacoes }"
 			var="cont" width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
@@ -58,18 +56,20 @@
 				<h:outputText value="#{cont.observacao }" />
 			</p:column>
 				<p:column headerText="Ação">
-				<p:commandButton ajax="true" icon="ui-icon-trash" value="Excluir"
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					oncomplete="confirmacao.show()">
 
 					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
-						value="#{avaliacao}" />
+						value="#{cont}" />
 
 				</p:commandButton>
 
-				<p:commandButton ajax="true" icon="ui-icon-pencil" value="Editar"
-					update="panelAvaliacao">
+				<p:commandButton icon="ui-icon-pencil" value="Editar" 
+					update="@form" process="@this">
+				
 					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
-						value="#{avaliacao}" />
+						value="#{cont}" />
+				
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
@@ -77,7 +77,7 @@
 			message="Tem Certeza que deseja excluir?" severity="alert"
 			closable="true">
 
-			<p:commandButton ajax="true" value="Sim"
+			<p:commandButton value="Sim"
 				actionListener="#{AvaliacaoControl.excluir}"
 				onclick="confirmacao.hide()" update="avaliacoes" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
