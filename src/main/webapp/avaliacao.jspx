@@ -7,22 +7,24 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-	
+
 		<p:panel header="Formulário" id="panelAvaliacao">
-			<h:panelGrid columns="2">	
+			<h:panelGrid columns="2">
 				<h:outputText value="Tipo de Avaliação" />
-				<h:selectOneRadio id="tipoAvaliacao" value="#{AvaliacaoControl.avaliacao.tipo}">
-					<f:selectItem itemLabel="N1" itemValue= "N1" />
-					<f:selectItem itemLabel="N2" itemValue= "N2" />
-					<f:selectItem itemLabel="NT" itemValue= "NT" />
+				<h:selectOneRadio id="tipoAvaliacao"
+					value="#{AvaliacaoControl.avaliacao.tipo}">
+					<f:selectItem itemLabel="N1" itemValue="N1" />
+					<f:selectItem itemLabel="N2" itemValue="N2" />
+					<f:selectItem itemLabel="NT" itemValue="NT" />
 				</h:selectOneRadio>
 				<h:outputText value="Critério" />
 				<p:inputText value="#{AvaliacaoControl.avaliacao.criterio }" />
 				<h:outputText value="Observação" />
 				<p:inputText value="#{AvaliacaoControl.avaliacao.observacao }" />
 
-				<p:commandButton ajax="true" actionListener="#{AvaliacaoControl.confirmar}"
-					value="Confirmar" update="avaliacoes, panelAvaliacao" />
+				<p:commandButton ajax="true"
+					actionListener="#{AvaliacaoControl.confirmar}" value="Confirmar"
+					update="avaliacoes, panelAvaliacao" />
 			</h:panelGrid>
 		</p:panel>
 
@@ -55,16 +57,30 @@
 				</f:facet>
 				<h:outputText value="#{cont.observacao }" />
 			</p:column>
-			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" title="Excluir" update="@this">
+				<p:column headerText="Ação">
+				<p:commandButton ajax="true" icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
 					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
 						value="#{avaliacao}" />
+
 				</p:commandButton>
-				<p:commandButton icon="ui-icon-pencil" title="Editar" update="@form">
+
+				<p:commandButton ajax="true" icon="ui-icon-pencil" value="Editar"
+					update="panelAvaliacao">
 					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
 						value="#{avaliacao}" />
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton ajax="true" value="Sim"
+				actionListener="#{AvaliacaoControl.excluir}"
+				onclick="confirmacao.hide()" update="avaliacoes" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
 	</ui:define>
 </ui:composition>

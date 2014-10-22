@@ -39,6 +39,16 @@ public class AvaliacaoControl {
 		}
 	}
 
+	public void excluir() {
+		try {			
+			avaliacaoDao.excluirPorId(avaliacao);
+			avaliacao = new Avaliacao();
+			avaliacoes = avaliacaoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}	
+	}
+	
 	public void listar(ActionEvent evt){
 		try {
 			avaliacoes = avaliacaoDao.listar();
