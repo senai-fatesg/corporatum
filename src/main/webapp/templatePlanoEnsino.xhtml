@@ -40,10 +40,14 @@
 							<ul class="nav nav-tabs">
 								<li><a href="/corporatum/inicio.jsf">Início</a></li>
 								<li><a href="/corporatum/disciplina.jsf">Disciplina</a></li>
-								<li><a href="/corporatum/planoensino.jsf">Plano de Ensino</a></li>
-								<li><a href="/corporatum/cronogramaaula.jsf">Cronograma de Aulas</a></li>
+								<li><a href="/corporatum/planoensino.jsf">Plano de
+										Ensino</a></li>
+								<li><a href="/corporatum/cronogramaaula.jsf">Cronograma
+										de Aulas</a></li>
 								<li><a href="/corporatum/avaliacao.jsf">Avaliações</a></li>
-								
+								<p:commandButton ajax="true" styleClass="btn btn-warning"
+									value="Gerar Plano de Ensino" icon="ui-icon-document"
+									actionListener="DisciplinaControl.relatorio.imprimir" />
 							</ul>
 						</div>
 					</div>
@@ -52,7 +56,7 @@
 		</div>
 	</ui:insert>
 	<h:form id="formCorpo">
-		
+
 		<ui:insert name="corpo" />
 	</h:form>
 </h:body>

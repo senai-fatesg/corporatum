@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelplanoensino">
+			<p:messages />
 			<h:panelGrid columns="3">
 				<h:outputText value="Disciplina" />
 				<h:outputText value="Coord. Técnico(ª)" />
@@ -16,8 +17,8 @@
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}"
 					converter="#{disciplinaConverter}" id="selDisciplina">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="dic"
-						itemLabel="#{dic.nome}" />
+					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="disc"
+						itemLabel="#{disc.nome}" itemValue="#{disc}"/>
 				</p:selectOneMenu>
 
 				<p:selectOneMenu

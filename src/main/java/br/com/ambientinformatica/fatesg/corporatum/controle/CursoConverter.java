@@ -28,7 +28,6 @@ public class CursoConverter implements Converter {
 			e.printStackTrace();
 			return null;
 		}
-		
 	}
 
 	@Override

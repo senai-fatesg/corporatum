@@ -8,9 +8,6 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	<ui:define name="corpo">
-	<p:commandButton ajax="true" styleClass="btn btn-warning"
-		value="Gerar Plano de Ensino" icon="ui-icon-document"
-		actionListener="DisciplinaControl.relatorio.imprimir" />
 		<p:panel header="Formulário" id="panelDisciplina">
 			<h:panelGrid columns="2">
 				<h:outputText value="Código" />

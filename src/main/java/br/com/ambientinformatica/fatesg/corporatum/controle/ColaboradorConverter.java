@@ -9,7 +9,7 @@ import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
-@FacesConverter("colaboradorConverter")
+@FacesConverter(value = "colaboradorConverter", forClass = Colaborador.class)
 public class ColaboradorConverter implements Converter {
 
 	private ColaboradorDao colaboradorDao;
@@ -23,6 +23,7 @@ public class ColaboradorConverter implements Converter {
 			return String.valueOf(((Colaborador) value).getId());
 		}
 	}
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
