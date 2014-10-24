@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Curso;
-import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
 
 @Controller("CursoControl")
@@ -40,6 +39,18 @@ public class CursoControl {
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
+	}
+	public void excluir() {
+		try {			
+			cursoDao.excluirPorId(curso.getId());
+			curso = new Curso();
+			cursos = cursoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}	
+	}
+	public void limpar(){
+		curso = new Curso();
 	}
 
 	public void listar(ActionEvent evt){
