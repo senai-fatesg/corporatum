@@ -14,31 +14,25 @@
 				<p:inputText value="#{CursoControl.curso.id }" />
 				<h:outputText value="Descrição" />
 				<p:inputText value="#{CursoControl.curso.descricao }" />
-				<p:outputLabel for="turno" value="Turno:" />
-				<p:selectOneMenu value="#{CursoControl.curso.turno}">  
-                        <f:selectItem itemLabel="Selecione" />  
-                        <f:selectItems value="#{curso.turno}" var="turno"  
-                            itemValue="#{turno}" itemLabel="#{turno.label}"/>  
-                </p:selectOneMenu>  
-                <p:outputLabel for="modalidade" value="Modalidade:" />
-				<p:selectOneMenu value="#{CursoControl.curso.modalidade}">  
-                        <f:selectItem itemLabel="Selecione" />  
-                        <f:selectItems value="#{curso.modalidade}" var="modalidade"  
-                            itemValue="#{modalidade}" itemLabel="#{modalidade.label}"/>  
-                </p:selectOneMenu>  
+				
 				<h:outputText value="Carga Horária" />
 				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
 				<h:outputText value="Nome" />
 				<p:inputText value="#{CursoControl.curso.nome }" />
 				<h:outputText value="Sigla" />
 				<p:inputText value="#{CursoControl.curso.sigla }" />
-				<h:outputText value="Data Início" />
-				<p:inputText value="#{CursoControl.curso.dtInicio }" />
-				<h:outputText value="Data Termino" />
-				<p:inputText value="#{CursoControl.curso.dtTermino }" />
+				<p:outputLabel for="dtInicio" value="Data Inicio:" />
+                <p:calendar id="dtInicio" value="#{CursoControl.curso.dtInicio}" />
+				<p:outputLabel for="dtTermino" value="Data Termino" />
+                <p:calendar id="dtTermino" value="#{CursoControl.curso.dtTermino}" />
 
-				<p:commandButton ajax="true" actionListener="#{CursoControl.confirmar}"
+				<h:panelGrid columns="2">
+				<p:commandButton ajax="true"
+					actionListener="#{CursoControl.confirmar}"
 					value="Confirmar" update="cursos, panel" />
+				<p:commandButton ajax="true" action="#{CursoControl.limpar}"
+					value="Limpar" update="panel" />
+			</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 
@@ -77,6 +71,32 @@
 				</f:facet>
 				<h:outputText value="#{cont.cargaHoraria }" />
 			</p:column>
+				<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener target="#{CursoControl.curso}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" 
+					update="@form" process="@this">
+				
+					<f:setPropertyActionListener target="#{CursoControl.curso}"
+						value="#{cont}" />
+				
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{CursoControl.excluir}"
+				onclick="confirmacao.hide()" update="cursos" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
 	</ui:define>
 </ui:composition>
