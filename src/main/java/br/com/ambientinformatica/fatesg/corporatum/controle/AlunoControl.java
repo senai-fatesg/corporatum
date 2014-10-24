@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Aluno;
 import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
-import br.com.ambientinformatica.fatesg.api.PlanoDeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 
 @Controller("AlunoControl")
@@ -37,7 +36,6 @@ public class AlunoControl {
 	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
-
    @PostConstruct
    public void init(){
       listar(null);
