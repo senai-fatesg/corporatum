@@ -1,6 +1,7 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Aluno;
+import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
+import br.com.ambientinformatica.fatesg.api.PlanoDeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 
 @Controller("AlunoControl")
@@ -22,6 +25,15 @@ public class AlunoControl {
 	
 	@Autowired
 	private AlunoDao alunoDao;
+	
+	 private EnumTipoSexo enumTipoSexo;
+	    //aqui vamos fornecer a lista com todos os enums
+	    private List<EnumTipoSexo> todosTipos;
+	 
+	    public List<EnumTipoSexo> getTodosTipos() {
+	        //aqui retornamos a lista de enums
+	        return Arrays.asList(EnumTipoSexo.values());
+	    }
 	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
@@ -41,16 +53,14 @@ public class AlunoControl {
 		}
 	}
 	
-	public void excluir(ActionEvent evt){
-		try {
-			aluno = (Aluno) evt.getComponent().getAttributes().get("aluno");
-			aluno = alunoDao.consultar(aluno.getId());
+	public void excluir() {
+		try {			
 			alunoDao.excluirPorId(aluno.getId());
-			listar(evt);
-			
+			aluno = new Aluno();
+			alunos = alunoDao.listar();
 		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);		
-		}
+			UtilFaces.addMensagemFaces(e);
+		}	
 	}
 
 	public void listar(ActionEvent evt){
@@ -59,6 +69,9 @@ public class AlunoControl {
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
+	}
+	public void limpar(){
+		aluno = new Aluno();
 	}
 
 	public Aluno getAluno() {
@@ -72,6 +85,9 @@ public class AlunoControl {
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
+	
+
+
 	
 
 }
