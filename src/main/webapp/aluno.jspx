@@ -7,28 +7,22 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel header="Formulário" id="panelAluno">
+		<p:panel header="Cadastro de Alunos" id="panelAluno">
 			<h:panelGrid columns="2">
 				<h:outputText value="Nome" />
 				<p:inputText value="#{AlunoControl.aluno.nome }" />
-				<h:outputText value="CPF" />
-				<p:inputMask mask="999.999.999-99" value="#{AlunoControl.aluno.cpfCnpj }"/>
 				<h:outputText value="RG" />
 				<p:inputText value="#{AlunoControl.aluno.rg }" />
-				<p:outputLabel for="sexo" value="Sexo:" />
-				<p:selectOneMenu value="#{AlunoControl.aluno.tipoSexo}">  
-                        <f:selectItem itemLabel="Selecione" />  
-                        <f:selectItems value="#{aluno.tipoSexo}" var="tipoSexo"  
-                            itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.label}"/>  
-                </p:selectOneMenu>  
+				<h:outputText value="CPF" />
+				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }" mask="999.999.999-99"/>
 				<h:outputText value="Titulo de Eleitor" />
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
 				<h:outputText value="Nº Reservista" />
 				<p:inputText value="#{AlunoControl.aluno.reservista }" />
 				<h:outputText value="Telefone" />
-				<p:inputText value="#{AlunoControl.aluno.telefone }" />
+				<p:inputMask value="#{AlunoControl.aluno.telefone }" mask="(99)9999-9999"/>
 				<h:outputText value="Celular" />
-				<p:inputText value="#{AlunoControl.aluno.celular }" />
+				<p:inputMask value="#{AlunoControl.aluno.celular }" mask="(99)9999-9999"/>
 				<h:outputText value="E-mail" />
 				<p:inputText value="#{AlunoControl.aluno.email }" />
 				<h:outputText value="Endereço" />
@@ -41,10 +35,14 @@
 				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
 				<h:outputText value="Certificado 2ª Grau" />
 				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
-				<h:outputText value="Disciplina" />
 				
-				<p:commandButton actionListener="#{AlunoControl.confirmar }"
-					value="Confirmar" update="alunos, panelAluno"></p:commandButton>
+				<h:panelGrid columns="2">
+				<p:commandButton ajax="true"
+					actionListener="#{AlunoControl.confirmar}"
+					value="Confirmar" update="alunos, panelAluno" />
+				<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
+					value="Limpar" update="panelAluno" />
+			</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 
@@ -90,7 +88,33 @@
 				</f:facet>
 				<h:outputText value="#{cont.email }"></h:outputText>
 			</p:column>
-			
+				<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener target="#{AlunoControl.aluno}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" 
+					update="@form" process="@this">
+				
+					<f:setPropertyActionListener target="#{AlunoControl.aluno}"
+						value="#{cont}" />
+				
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{AlunoControl.excluir}"
+				onclick="confirmacao.hide()" update="alunos" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+		
 	</ui:define>
 </ui:composition>
