@@ -9,7 +9,7 @@ import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
-@FacesConverter(value = "colaboradorConverter", forClass = Colaborador.class)
+@FacesConverter(forClass = Colaborador.class)
 public class ColaboradorConverter implements Converter {
 
 	private ColaboradorDao colaboradorDao;
@@ -28,7 +28,7 @@ public class ColaboradorConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null && !value.trim().equals("")) {
-			Colaborador colaborador = new Colaborador();
+			
 			try {
 				colaborador = colaboradorDao.consultar(Long.parseLong(value));
 			} catch (PersistenciaException e) {

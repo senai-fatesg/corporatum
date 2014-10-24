@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Avaliacao;
 import br.com.ambientinformatica.fatesg.api.Matriz;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.MatrizDao;
 
@@ -47,6 +46,19 @@ public class MatrizControl {
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
+	}
+	
+	public void excluir() {
+		try {			
+			matrizDao.excluirPorId(matriz.getId());
+			matriz = new Matriz();
+			matrizes = matrizDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}	
+	}
+	public void limpar(){
+		matriz = new Matriz();
 	}
 
 	public Matriz getMatriz() {

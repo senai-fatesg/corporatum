@@ -1,57 +1,93 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-</h:head>
-
-<h:body>
-	<p:panel header="Formulário" id="panelMatriz">
-		<h:panelGrid columns="2">
-			<h:outputText value="Matriz" />
-			<p:inputTextarea value="#{MatrizControl.matriz.descricao }" />
-			<h:outputText value="Data" />
-			<p:inputMask value="#{MatrizControl.matriz.data}" mask="99/99/9999" />
-			<h:outputText value="Quantidade de Periodo" />
-			<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
-			<p:commandButton actionListener="#{MatrizControl.confirmar}"
-				value="Confirmar" update="matrizes panelMatriz" />
-		</h:panelGrid>
-	</p:panel>
-
-	<p:dataTable id="matrizes" value="#{MatrizControl.matrizes }"
-		var="cont" width="100%" emptyMessage="Sem registros">
-		<f:facet name="header">
-			<h:outputText value="Lista das Matrizes" />
-		</f:facet>
-		<p:column sortBy="#{cont.id }">
-			<f:facet name="header">
-				<h:outputText value="Código" />
-			</f:facet>
-			<h:outputText value="#{cont.id }" />
-		</p:column>
-		<p:column sortBy="#{cont.tipo }">
-			<f:facet name="header">
-				<h:outputText value="Descricao" />
-			</f:facet>
-			<h:outputText value="#{cont.tipo }" />
-		</p:column>
-		<p:column sortBy="#{cont.data }">
-			<f:facet name="header">
+	<ui:define name="corpo">
+		<p:panel header="Formulário" id="panelMatriz">
+			<p:messages/>
+			<h:panelGrid columns="2">
+				<h:outputText value="Descrição" />
+				<p:inputTextarea
+					value="#{MatrizControl.matriz.descricao}" />
 				<h:outputText value="Data" />
-			</f:facet>
-			<h:outputText value="#{cont.data}" />
-		</p:column>
-		<p:column sortBy="#{cont.qtdePeriodos }">
+				<p:inputMask value="#{MatrizControl.matriz.data}" mask="99/99/9999" />
+				<h:outputText value="Qtde. Períodos" />
+				<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
+				<h:outputText value="Curso" />
+				<p:selectOneMenu
+					value="#{MatrizControl.matriz.curso}"
+					converter="#{CursoConverter}" id="selCurso">
+					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+					<f:selectItems value="#{CursoControl.cursos}" var="curso"
+						itemLabel="#{curso.descricao}" itemValue="#{curso}"/>
+				</p:selectOneMenu>				
+				<p:commandButton ajax="true"
+					actionListener="#{MatrizControl.confirmar }" value="Confirmar"
+					update="matrizes, panelMatriz" />
+				<p:commandButton ajax="true" action="#{MatrizControl.limpar}"
+					value="Limpar" update="panelMatriz" />
+			</h:panelGrid>
+		</p:panel>
+		
+		<p:dataTable id="matrizes" value="#{MatrizControl.matrizes }"
+			var="cont" width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
-				<h:outputText value="Quantidade Periodo" />
+				<h:outputText value="Lista de Matrizes" />
 			</f:facet>
-			<h:outputText value="#{cont.qtdePeriodos}" />
-		</p:column>
-	</p:dataTable>
-</h:body>
-</html>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.descricao }">
+				<f:facet name="header">
+					<h:outputText value="Descricao" />
+				</f:facet>
+				<h:outputText value="#{cont.descricao }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.data }">
+				<f:facet name="header">
+					<h:outputText value="Data" />
+				</f:facet>
+				<h:outputText value="#{cont.data }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.qtdPeriodos }">
+				<f:facet name="header">
+					<h:outputText value="Qtde. Periodo" />
+				</f:facet>
+				<h:outputText value="#{cont.qtdPeriodos }"></h:outputText>
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener target="#{MatrizControl.matriz}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
+					<f:setPropertyActionListener target="#{MatrizControl.matriz}"
+						value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{MatrizControl.excluir}"
+				onclick="confirmacao.hide()" update="matrizes" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

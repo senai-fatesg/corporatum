@@ -9,7 +9,7 @@ import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
-@FacesConverter(value="disciplinaConverter" ,forClass=Disciplina.class)
+@FacesConverter(forClass=Disciplina.class)
 public class DisciplinaConverter implements Converter {
 
 	private DisciplinaDao disciplinaDao;
