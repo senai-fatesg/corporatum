@@ -21,8 +21,13 @@
 				<h:outputText value="Descrição"></h:outputText>
 				<p:inputText value="#{InstituicaoControl.instituicao.descricao }"></p:inputText>
 
-				<p:commandButton actionListener="#{InstituicaoControl.confirmar }"
-					value="Confirmar" update="instituicoes, panel"></p:commandButton>
+				<h:panelGrid columns="2">
+				<p:commandButton ajax="true"
+					actionListener="#{InstituicaoControl.confirmar}"
+					value="Confirmar" update="instituicoes, panel" />
+				<p:commandButton ajax="true" action="#{InstituicaoControl.limpar}"
+					value="Limpar" update="panel" />
+			</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 
@@ -31,6 +36,12 @@
 			<f:facet name="header">
 				<h:outputText value="Lista de Instituições"></h:outputText>
 			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
 			<p:column sortBy="#{cont.nomeFantasia }">
 				<f:facet name="header">
 					<h:outputText value="Nome Fantazia"></h:outputText>
@@ -61,7 +72,32 @@
 				</f:facet>
 				<h:outputText value="#{cont.descricao }"></h:outputText>
 			</p:column>
-		</p:dataTable>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
 
+					<f:setPropertyActionListener target="#{InstituicaoControl.instituicao}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" 
+					update="@form" process="@this">
+				
+					<f:setPropertyActionListener target="#{InstituicaoControl.instituicao}"
+						value="#{cont}" />
+				
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{InstituicaoControl.excluir}"
+				onclick="confirmacao.hide()" update="instituicoes" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
 	</ui:define>
 </ui:composition>
