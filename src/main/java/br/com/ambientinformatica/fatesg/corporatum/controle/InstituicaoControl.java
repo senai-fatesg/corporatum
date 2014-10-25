@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
+import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCNPJ;
 
 @Controller("InstituicaoControl")
 @Scope("conversation")
@@ -25,6 +26,10 @@ public class InstituicaoControl {
 	
 	private List<Instituicao> instituicoes = new ArrayList<Instituicao>();
 	
+	private ValidaCNPJ validaCNPJ = new ValidaCNPJ();
+	
+	Boolean validado = true;
+	
 
    @PostConstruct
    public void init(){
@@ -33,9 +38,14 @@ public class InstituicaoControl {
    
 	public void confirmar(ActionEvent evt){
 		try {
-			instituicaoDao.alterar(instituicao);
-         listar(evt);
-         instituicao = new Instituicao();
+			 verificarCampos();
+			 
+			 if(!validado.equals(false)){
+				 instituicaoDao.alterar(instituicao);
+				 instituicoes = instituicaoDao.listar();
+		         instituicao = new Instituicao();
+			 }
+        
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
@@ -73,6 +83,31 @@ public class InstituicaoControl {
 	public List<Instituicao> getInstituicoes() {
 		return instituicoes;
 	}
-	
+	public void verificarCampos(){
+
+		String nomeFantasia = instituicao.getNomeFantasia();
+		String razaoSocial = instituicao.getRazaoSocial();
+		String inscricaoEstadual= instituicao.getInscricaoEstadual();
+		String cnpj = instituicao.getCnpj();
+		
+		if(nomeFantasia.equals("")){
+			throw new IllegalArgumentException("Insira Nome Fantasia");
+		}
+		if(razaoSocial.equals("")){
+			throw new IllegalArgumentException("Insira Razão Social");
+		}
+		if(cnpj.equals("")){
+			throw new IllegalArgumentException("Insira CNPJ");
+		}else{
+			validado = validaCNPJ.validaCnpj(cnpj);
+			if(validado == false){
+				throw new IllegalArgumentException("CNPJ Inválido");
+			}
+		}
+		if(inscricaoEstadual.equals("")){
+			throw new IllegalArgumentException("Insira Inscrição Estadual");
+		}
+		
+	}
 
 }
