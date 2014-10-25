@@ -30,10 +30,10 @@ public class PlanoDeEnsinoControl {
 		listar(null);
 	}
 
-	public void confirmar(ActionEvent evt) {
+	public void confirmar() {
 		try {
 			planoDeEnsinoDao.alterar(planoDeEnsino);
-			listar(evt);
+			planosDeEnsino = planoDeEnsinoDao.listar();
 			planoDeEnsino = new PlanoDeEnsino();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);

@@ -7,9 +7,9 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
+		<p:messages />
+		<h:inputHidden value="#{PlanoDeEnsinoControl.planoDeEnsino.id}" />
 		<p:panel header="Formulário" id="panelplanoensino">
-			<p:messages />
-			<h:inputHidden value="#{PlanoDeEnsinoControl.planoDeEnsino.id}"/>
 			<h:panelGrid columns="3">
 				<h:outputText value="Disciplina" />
 				<h:outputText value="Coord. Técnico(ª)" />
@@ -18,23 +18,22 @@
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="disc"
-					   itemLabel="#{disc.nome}" itemValue="#{disc}"/>
+						itemLabel="#{disc.nome}" itemValue="#{disc}" />
 				</p:selectOneMenu>
-				
+
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="tecn"
-					   itemLabel="#{tecn.nome}" itemValue="#{tecn}"/>
+					<f:selectItems value="#{ColaboradorControl.colaboradores}"
+						var="tecn" itemLabel="#{tecn.nome}" itemValue="#{tecn}" />
 				</p:selectOneMenu>
-				
+
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="pedag"
-					   itemLabel="#{pedag.nome}" itemValue="#{pedag}"/>
-				</p:selectOneMenu>	
-							
+					<f:selectItems value="#{ColaboradorControl.colaboradores}"
+						var="pedag" itemLabel="#{pedag.nome}" itemValue="#{pedag}" />
+				</p:selectOneMenu>
 			</h:panelGrid>
 			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />
@@ -57,11 +56,10 @@
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton ajax="true"
-					actionListener="#{PlanoDeEnsinoControl.confirmar}"
-					value="Confirmar" update="panelplanoensino, planosensino" />
+				<p:commandButton ajax="true" action="#{PlanoDeEnsinoControl.confirmar}"
+					value="Confirmar" update="panelplanoensino" />
 				<p:commandButton ajax="true" action="#{PlanoDeEnsinoControl.limpar}"
-					value="Limpar" update="panelplanoensino" />
+					value="Limpar" update="@form" process="@this" />
 			</h:panelGrid>
 		</p:panel>
 		<p:dataTable id="planosensino"
@@ -76,11 +74,11 @@
 				</f:facet>
 				<h:outputText value="#{cont.id }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.disciplina.nome }">
+			<p:column sortBy="#{cont.disciplina }">
 				<f:facet name="header">
 					<h:outputText value="Disciplina" />
 				</f:facet>
-				<h:outputText value="#{cont.disciplina.nome }"></h:outputText>
+				<h:outputText value="#{cont.disciplina }"></h:outputText>
 			</p:column>
 			<p:column sortBy="#{cont.coordenadorTecnico.nome }">
 				<f:facet name="header">
@@ -94,19 +92,7 @@
 				</f:facet>
 				<h:outputText value="#{cont.coordenadorPedagogico.nome }"></h:outputText>
 			</p:column>
-			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" title="Excluir">
-					<f:setPropertyActionListener
-						target="#{PlanoDeEnsinoControl.planosDeEnsino}"
-						value="#{planoDeEnsino}" />
-				</p:commandButton>
-				<p:commandButton icon="ui-icon-pencil" title="Editar"
-					update="panelplanoensino">
-					<f:setPropertyActionListener
-						target="#{PlanoDeEnsinoControl.planosDeEnsino}"
-						value="#{planoDeEnsino}" />
-				</p:commandButton>
-			</p:column>
+
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					oncomplete="confirmacao.show()">
