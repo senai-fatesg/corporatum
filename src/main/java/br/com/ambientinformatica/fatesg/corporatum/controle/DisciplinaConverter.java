@@ -15,26 +15,28 @@ public class DisciplinaConverter implements Converter {
 	private DisciplinaDao disciplinaDao;
 
 	@Override
-	public String getAsString(FacesContext facesContext, UIComponent component,	Object value) {
-		if (value == null || value.equals("")) {
-			return "";
-		} else {
-			return String.valueOf(((Disciplina) value).getId());
+	public String getAsString(FacesContext facesContext, UIComponent component,
+			Object value) {
+		if (value != null) {
+			Disciplina disciplina = (Disciplina) value;
+			return disciplina.getId();
 		}
+		return "";
 	}
 
 	@Override
-	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+	public Object getAsObject(FacesContext context, UIComponent component,
+			String value) {
 		if (value != null && !value.trim().equals("")) {
-			Disciplina disciplina = new Disciplina();
+			String codigo = value;
 			try {
-				disciplina = disciplinaDao.consultar(value);
+				return disciplinaDao.consultar(codigo);
 			} catch (PersistenciaException e) {
 				e.printStackTrace();
 			} catch (NumberFormatException exception) {
 				return null;
 			}
-			return disciplina;
+			return null;
 		} else {
 			return null;
 		}

@@ -18,26 +18,26 @@ public class ColaboradorConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext facesContext, UIComponent component,
 			Object value) {
-		if (value == null || value.equals("")) {
-			return "";
-		} else {
-			return String.valueOf(((Colaborador) value).getId());
+		if (value != null) {
+			Colaborador colaborador = (Colaborador) value;
+			return colaborador.getId().toString();
 		}
+		return "";
 	}
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null && !value.trim().equals("")) {
-			
+			Long codigo = Long.valueOf(value);
 			try {
-				colaborador = colaboradorDao.consultar(Long.parseLong(value));
+				return colaboradorDao.consultar(codigo);
 			} catch (PersistenciaException e) {
 				e.printStackTrace();
 			} catch (NumberFormatException exception) {
 				return null;
 			}
-			return colaborador;
+			return null;
 		} else {
 			return null;
 		}

@@ -9,6 +9,7 @@
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelplanoensino">
 			<p:messages />
+			<h:inputHidden value="#{PlanoDeEnsinoControl.planoDeEnsino.id}"/>
 			<h:panelGrid columns="3">
 				<h:outputText value="Disciplina" />
 				<h:outputText value="Coord. Técnico(ª)" />
@@ -16,25 +17,24 @@
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{DisciplinaControl.disciplinas}"/>
+					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="disc"
+					   itemLabel="#{disc.nome}" itemValue="#{disc}"/>
 				</p:selectOneMenu>
-
+				
 				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}"
-					converter="#{colaboradorConverter}" id="selCoordTecnico">
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}"
-						var="col" itemLabel="#{col.nome}" />
+					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="tecn"
+					   itemLabel="#{tecn.nome}" itemValue="#{tecn}"/>
 				</p:selectOneMenu>
-
+				
 				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}"
-					converter="#{colaboradorConverter}" id="selCoordPedagogico">
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}"
-						var="col" itemLabel="#{col.nome}" />
-				</p:selectOneMenu>
-
+					<f:selectItems value="#{ColaboradorControl.colaboradores}" var="pedag"
+					   itemLabel="#{pedag.nome}" itemValue="#{pedag}"/>
+				</p:selectOneMenu>	
+							
 			</h:panelGrid>
 			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />
@@ -76,23 +76,23 @@
 				</f:facet>
 				<h:outputText value="#{cont.id }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.disciplina }">
+			<p:column sortBy="#{cont.disciplina.nome }">
 				<f:facet name="header">
 					<h:outputText value="Disciplina" />
 				</f:facet>
-				<h:outputText value="#{cont.disciplina }"></h:outputText>
+				<h:outputText value="#{cont.disciplina.nome }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.coordenadorTecnico }">
+			<p:column sortBy="#{cont.coordenadorTecnico.nome }">
 				<f:facet name="header">
 					<h:outputText value="Coordenador(ª) Técnico(ª) " />
 				</f:facet>
-				<h:outputText value="#{cont.coordenadorTecnico }"></h:outputText>
+				<h:outputText value="#{cont.coordenadorTecnico.nome }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.coordenadorPedagogico }">
+			<p:column sortBy="#{cont.coordenadorPedagogico.nome }">
 				<f:facet name="header">
 					<h:outputText value="Coordenador(ª) Pedagogico(ª) " />
 				</f:facet>
-				<h:outputText value="#{cont.coordenadorPedagogico }"></h:outputText>
+				<h:outputText value="#{cont.coordenadorPedagogico.nome }"></h:outputText>
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" title="Excluir">
