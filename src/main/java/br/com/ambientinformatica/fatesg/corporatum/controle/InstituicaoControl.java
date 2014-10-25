@@ -11,10 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Aluno;
-import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.api.Instituicao;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
 
 @Controller("InstituicaoControl")
@@ -44,16 +41,14 @@ public class InstituicaoControl {
 		}
 	}
 
-	public void excluir(ActionEvent evt){
-		try {
-			instituicao = (Instituicao) evt.getComponent().getAttributes().get("instituicao");
-			instituicao = instituicaoDao.consultar(instituicao.getId());
+	public void excluir() {
+		try {			
 			instituicaoDao.excluirPorId(instituicao.getId());
-			listar(evt);
-			
+			instituicao = new Instituicao();
+			instituicoes = instituicaoDao.listar();
 		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);		
-		}
+			UtilFaces.addMensagemFaces(e);
+		}	
 	}
 	
 	public void listar(ActionEvent evt){
@@ -62,6 +57,9 @@ public class InstituicaoControl {
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
+	}
+	public void limpar(){
+		instituicao = new Instituicao();
 	}
 
 	public Instituicao getInstituicao() {
