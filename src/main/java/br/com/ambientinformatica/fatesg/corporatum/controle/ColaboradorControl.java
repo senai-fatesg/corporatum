@@ -1,6 +1,7 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Colaborador;
+import br.com.ambientinformatica.fatesg.api.EnumTipoColaborador;
+import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 
 @Controller("ColaboradorControl")
@@ -25,8 +28,24 @@ public class ColaboradorControl {
 	
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 	
+	private EnumTipoSexo enumTipoSexo;
+	//aqui vamos fornecer a lista com todos os enums
+	private List<EnumTipoSexo> todosTipos;
+	    
+	public List<EnumTipoSexo> getTodosTipos() {
+		//aqui retornamos a lista de enums
+		 return Arrays.asList(EnumTipoSexo.values());	
+	}
+	private EnumTipoColaborador enumTipoColaborador;
+	
+	private List<EnumTipoColaborador> todosTiposColaborador;
+	    
+    public List<EnumTipoColaborador> getTodosTiposColaborador() {
+		 return Arrays.asList(EnumTipoColaborador.values());
+	}
+    
 
-   @PostConstruct
+@PostConstruct
    public void init(){
       listar(null);
    }
@@ -42,15 +61,13 @@ public class ColaboradorControl {
 	}
 	
 	public void excluir(ActionEvent evt){
-		try {
-			colaborador = (Colaborador) evt.getComponent().getAttributes().get("colaborador");
-			colaborador = colaboradorDao.consultar(colaborador.getId());
+		try {			
 			colaboradorDao.excluirPorId(colaborador.getId());
-			listar(evt);
-			
+			colaborador = new Colaborador();
+			colaboradores = colaboradorDao.listar();
 		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);		
-		}
+			UtilFaces.addMensagemFaces(e);
+		}	
 	}
 	
 	public void listar(ActionEvent evt){
@@ -59,6 +76,9 @@ public class ColaboradorControl {
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
+	}
+	public void limpar(){
+		colaborador = new Colaborador();
 	}
 
 	public Colaborador getColaborador() {
