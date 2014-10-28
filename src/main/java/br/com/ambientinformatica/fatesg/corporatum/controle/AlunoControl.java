@@ -54,7 +54,7 @@ public class AlunoControl {
 				alunoDao.alterar(aluno);
 				listar(evt);
 				aluno = new Aluno();
-			}else{
+			} else {
 				throw new IllegalArgumentException("CPF Inválido");
 			}
 
