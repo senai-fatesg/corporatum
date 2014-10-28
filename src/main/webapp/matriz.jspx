@@ -13,8 +13,8 @@
 				<h:outputText value="Descrição" />
 				<p:inputTextarea
 					value="#{MatrizControl.matriz.descricao}" />
-				<h:outputText value="Data" />
-				<p:inputMask value="#{MatrizControl.matriz.data}" mask="99/99/9999" />
+				<h:outputText for="dtInicio" value="Data" />
+				<p:calendar id="dtInicio" value="#{CursoControl.curso.dtInicio}"  />
 				<h:outputText value="Qtde. Períodos" />
 				<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
 				<h:outputText value="Curso" />
