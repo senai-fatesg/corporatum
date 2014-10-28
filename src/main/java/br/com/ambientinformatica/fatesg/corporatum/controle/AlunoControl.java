@@ -25,14 +25,14 @@ public class AlunoControl {
 	@Autowired
 	private AlunoDao alunoDao;
 	
-	 private EnumTipoSexo enumTipoSexo;
-	    //aqui vamos fornecer a lista com todos os enums
-	    private List<EnumTipoSexo> todosTipos;
-	 
-	    public List<EnumTipoSexo> getTodosTipos() {
-	        //aqui retornamos a lista de enums
-	        return Arrays.asList(EnumTipoSexo.values());
-	    }
+    private EnumTipoSexo enumTipoSexo;
+	//aqui vamos fornecer a lista com todos os enums
+	private List<EnumTipoSexo> todosTipos;
+	    
+	public List<EnumTipoSexo> getTodosTipos() {
+		//aqui retornamos a lista de enums
+		  return Arrays.asList(EnumTipoSexo.values());	
+	}
 	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
