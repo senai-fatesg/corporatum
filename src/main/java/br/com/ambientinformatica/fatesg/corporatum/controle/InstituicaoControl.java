@@ -28,7 +28,7 @@ public class InstituicaoControl {
 	
 	private ValidaCNPJ validaCNPJ = new ValidaCNPJ();
 	
-	Boolean validado = true;
+	private Boolean validado = true;
 	
 
    @PostConstruct
@@ -83,6 +83,7 @@ public class InstituicaoControl {
 	public List<Instituicao> getInstituicoes() {
 		return instituicoes;
 	}
+	
 	public void verificarCampos(){
 
 		String nomeFantasia = instituicao.getNomeFantasia();
