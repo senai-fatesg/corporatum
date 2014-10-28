@@ -11,23 +11,26 @@
 			<h:panelGrid columns="4">
 				<h:outputText value="Nome" />
 				<p:inputText value="#{AlunoControl.aluno.nome }" />
-				<p:outputLabel value="Sexo:" />
-			    <h:selectOneMenu value="#{AlunoControl.aluno.tipoSexo}">
-			    <f:selectItem itemLabel="Selecione" itemValue="0"/>
-                <f:selectItems value="#{AlunoControl.todosTipos}" />
-                </h:selectOneMenu>
 				<h:outputText value="RG" />
 				<p:inputText value="#{AlunoControl.aluno.rg }" />
 				<h:outputText value="CPF" />
-				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }" mask="999.999.999-99"/>
+				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
+					mask="999.999.999-99" />
+				<p:outputLabel value="Sexo:" />
+				<h:selectOneMenu value="#{AlunoControl.aluno.tipoSexo}">
+					<f:selectItem itemLabel="Selecione" itemValue="0" />
+					<f:selectItems value="#{AlunoControl.todosTipos}" />
+				</h:selectOneMenu>
 				<h:outputText value="Titulo de Eleitor" />
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
 				<h:outputText value="Nº Reservista" />
 				<p:inputText value="#{AlunoControl.aluno.reservista }" />
 				<h:outputText value="Telefone" />
-				<p:inputMask value="#{AlunoControl.aluno.telefone }" mask="(99)9999-9999"/>
+				<p:inputMask value="#{AlunoControl.aluno.telefone }"
+					mask="(99)9999-9999" />
 				<h:outputText value="Celular" />
-				<p:inputMask value="#{AlunoControl.aluno.celular }" mask="(99)9999-9999"/>
+				<p:inputMask value="#{AlunoControl.aluno.celular }"
+					mask="(99)9999-9999" />
 				<h:outputText value="E-mail" />
 				<p:inputText value="#{AlunoControl.aluno.email }" />
 				<h:outputText value="Endereço" />
@@ -40,20 +43,19 @@
 				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
 				<h:outputText value="Certificado 2ª Grau" />
 				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
-				
+
 				<h:panelGrid columns="2">
-				<p:commandButton ajax="true"
-					actionListener="#{AlunoControl.confirmar}"
-					value="Confirmar" update="alunos, panelAluno" />
-				<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
-					value="Limpar" update="panelAluno" />
-			</h:panelGrid>
+					<p:commandButton ajax="true"
+						actionListener="#{AlunoControl.confirmar}" value="Confirmar"
+						update="alunos, panelAluno" />
+					<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
+						value="Limpar" update="panelAluno" />
+				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 
-		<p:dataTable id="alunos"
-			value="#{AlunoControl.alunos }" var="cont" width="100%"
-			emptyMessage="Sem registros">
+		<p:dataTable id="alunos" value="#{AlunoControl.alunos }" var="cont"
+			width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
 				<h:outputText value="Lista de Alunos" />
 			</f:facet>
@@ -93,7 +95,7 @@
 				</f:facet>
 				<h:outputText value="#{cont.email }"></h:outputText>
 			</p:column>
-				<p:column headerText="Ação">
+			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					oncomplete="confirmacao.show()">
 
@@ -102,12 +104,12 @@
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" 
-					update="@form" process="@this">
-				
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
 					<f:setPropertyActionListener target="#{AlunoControl.aluno}"
 						value="#{cont}" />
-				
+
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
@@ -115,11 +117,10 @@
 			message="Tem Certeza que deseja excluir?" severity="alert"
 			closable="true">
 
-			<p:commandButton value="Sim"
-				actionListener="#{AlunoControl.excluir}"
+			<p:commandButton value="Sim" actionListener="#{AlunoControl.excluir}"
 				onclick="confirmacao.hide()" update="alunos" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
-		
+
 	</ui:define>
 </ui:composition>
