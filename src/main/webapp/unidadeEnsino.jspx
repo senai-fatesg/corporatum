@@ -16,8 +16,9 @@
 				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.endereco }"></p:inputText>
 				<h:outputText value="Telefone"></h:outputText>
 				<p:inputMask value="#{UnidadeEnsinoControl.unidadeEnsino.telefone }" mask="(99)9999-9999"></p:inputMask>
-				<h:outputText value="Instituição"></h:outputText>
+				<h:outputText value="Sigla"></h:outputText>
 				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.sigla }"></p:inputText>
+				<h:outputText value="Instituição"></h:outputText>
 				<p:selectOneMenu value="#{InstituicaoControl.instituicao}"
 					converter="#{instituicaoConverter}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
