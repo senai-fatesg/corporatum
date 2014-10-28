@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="templatePlanoEnsino.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+
+		<p:panel header="Formulário" id="panelPlanoDeEnsino">
+			<h:panelGrid columns="6">
+				<h:outputText value="Disciplina" />
+				<h:outputText value="" />
+				<h:outputText value="Coord. Técnico(ª)" />
+				<h:outputText value="" />
+				<h:outputText value="Coord. Pedagógico(ª)" />
+				<h:outputText value="" />
+
+				<p:inputText
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}" id="inputDisciplina"/>
+				<p:commandButton icon="ui-icon-search"
+					actionListener="#{DisciplinaControl.dialogDisciplinas}" update="inputDisciplina">
+					<p:ajax event="dialogReturn" listener="#{DisciplinaControl.selecionarDisciplina(disciplina)}"/>
+				</p:commandButton>
+
+				<p:inputText
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}" />
+				<p:commandButton icon="ui-icon-search" />
+
+				<p:inputText
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}" />
+				<p:commandButton icon="ui-icon-search" />
+
+
+				<h:outputText value="Competências" />
+				<h:outputText value="Habilidades" />
+				<h:outputText value="Bases Tecnológicas" />
+				<h:outputText value="Metod. de Ensino" />
+				<h:outputText value="Recursos Didáticos" />
+				<h:outputText value="Bibliografias" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade }" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />
+				<p:inputTextarea
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton actionListener="#{PlanoDeEnsinoControl.confirmar }"
+					value="Confirmar" update="panelPlanoDeEnsino, planosDeEnsino "
+					process="@all" />
+				<p:commandButton ajax="true" action="#{PlanoDeEnsinoControl.limpar}"
+					value="Limpar" update="@this" />
+			</h:panelGrid>
+		</p:panel>
+
+		<p:dataTable id="planosDeEnsino"
+			value="#{PlanoDeEnsinoControl.planosDeEnsino }" var="cont"
+			width="100%" emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Lista de Dsiciplinas" />
+			</f:facet>
+			<p:column sortBy="#{cont.competencia }">
+				<f:facet name="header">
+					<h:outputText value="Comp" />
+				</f:facet>
+				<h:outputText value="#{cont.competencia }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.habilidade}">
+				<f:facet name="header">
+					<h:outputText value="Habil" />
+				</f:facet>
+				<h:outputText value="#{cont.habilidade }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.baseTecnologica }">
+				<f:facet name="header">
+					<h:outputText value="Base Tec" />
+				</f:facet>
+				<h:outputText value="#{cont.baseTecnologica }"></h:outputText>
+			</p:column>
+
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener
+						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
+					<f:setPropertyActionListener
+						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{DisciplinaControl.excluir}"
+				onclick="confirmacao.hide()" update="@form" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>

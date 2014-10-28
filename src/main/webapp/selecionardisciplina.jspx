@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>Cars</title>
+	<style type="text/css">
+.ui-widget {
+	font-size: 90%;
+}
+</style>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:dataTable var="disc" value="#{DisciplinaControl.disciplinas}">
+			<p:column headerText="Id">
+				<h:outputText value="#{disc.id}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{disc.nome}" />
+			</p:column>
+
+			<p:column headerText="Carga Horária">
+				<h:outputText value="#{disc.cargaHoraria}" />
+			</p:column>
+
+			<p:column headerText="Selecione">
+				<p:commandButton icon="ui-icon-search" actionListener="#{DisciplinaControl.selecionarDisciplina(disciplina)}" >
+				<f:setPropertyActionListener
+					target="#{DisciplinaControl.disciplina}" value="#{disc}"/>
+			</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+	</h:form>
+</h:body>
+</html>

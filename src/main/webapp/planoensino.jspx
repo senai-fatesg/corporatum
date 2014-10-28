@@ -7,33 +7,33 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:messages />
-		<h:inputHidden value="#{PlanoDeEnsinoControl.planoDeEnsino.id}" />
 		<p:panel header="Formulário" id="panelplanoensino">
 			<h:panelGrid columns="3">
 				<h:outputText value="Disciplina" />
 				<h:outputText value="Coord. Técnico(ª)" />
-				<h:outputText value="Coord. Técnico(ª)" />
+				<h:outputText value="Coord. Pedagógico(ª)" />
+				
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="disc"
-						itemLabel="#{disc.nome}" itemValue="#{disc}" />
+						itemLabel="#{disc.nome}" />
 				</p:selectOneMenu>
 
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{ColaboradorControl.colaboradores}"
-						var="tecn" itemLabel="#{tecn.nome}" itemValue="#{tecn}" />
+						var="tecn" itemLabel="#{tecn.nome}" />
 				</p:selectOneMenu>
 
 				<p:selectOneMenu
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
 					<f:selectItems value="#{ColaboradorControl.colaboradores}"
-						var="pedag" itemLabel="#{pedag.nome}" itemValue="#{pedag}" />
+						var="pedag" itemLabel="#{pedag.nome}" />
 				</p:selectOneMenu>
+
 			</h:panelGrid>
 			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />
@@ -55,11 +55,13 @@
 				<p:inputTextarea
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
 			</h:panelGrid>
+
 			<h:panelGrid columns="2">
-				<p:commandButton ajax="true" action="#{PlanoDeEnsinoControl.confirmar}"
-					value="Confirmar" update="panelplanoensino" />
-				<p:commandButton ajax="true" action="#{PlanoDeEnsinoControl.limpar}"
-					value="Limpar" update="@form" process="@this" />
+				<p:commandButton ajax="true" actionListener="#{PlanoDeEnsinoControl.confirmar }"
+					value="Confirmar" update="@form " process="@form" />
+					
+				<p:commandButton ajax="true" actionListener="#{PlanoDeEnsinoControl.limpar}"
+					value="Limpar" update="panelplanoensino"  process="@this"/>
 			</h:panelGrid>
 		</p:panel>
 		<p:dataTable id="planosensino"
@@ -74,11 +76,11 @@
 				</f:facet>
 				<h:outputText value="#{cont.id }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.disciplina }">
+			<p:column sortBy="#{cont.disciplina.nome }">
 				<f:facet name="header">
 					<h:outputText value="Disciplina" />
 				</f:facet>
-				<h:outputText value="#{cont.disciplina }"></h:outputText>
+				<h:outputText value="#{cont.disciplina.nome }"></h:outputText>
 			</p:column>
 			<p:column sortBy="#{cont.coordenadorTecnico.nome }">
 				<f:facet name="header">
@@ -95,7 +97,8 @@
 
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
+					actionListener="#{PlanoDeEnsinoControl.excluir}"
+					update="planosensino" process="@this">
 
 					<f:setPropertyActionListener
 						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />
@@ -111,14 +114,5 @@
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-
-			<p:commandButton value="Sim"
-				actionListener="#{PlanoDeEnsinoControl.excluir}"
-				onclick="confirmacao.hide()" update="planosensino" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
-		</p:confirmDialog>
 	</ui:define>
 </ui:composition>

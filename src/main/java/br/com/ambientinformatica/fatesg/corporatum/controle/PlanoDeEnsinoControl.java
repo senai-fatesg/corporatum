@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.PlanoDeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao;
 
@@ -19,10 +24,10 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao
 public class PlanoDeEnsinoControl {
 
 	private PlanoDeEnsino planoDeEnsino = new PlanoDeEnsino();
-	
+
 	@Autowired
 	private PlanoDeEnsinoDao planoDeEnsinoDao;
-	
+
 	private List<PlanoDeEnsino> planosDeEnsino = new ArrayList<PlanoDeEnsino>();
 
 	@PostConstruct
@@ -30,10 +35,10 @@ public class PlanoDeEnsinoControl {
 		listar(null);
 	}
 
-	public void confirmar() {
+	public void confirmar(ActionEvent evt) {
 		try {
 			planoDeEnsinoDao.alterar(planoDeEnsino);
-			planosDeEnsino = planoDeEnsinoDao.listar();
+			listar(evt);
 			planoDeEnsino = new PlanoDeEnsino();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
@@ -47,21 +52,21 @@ public class PlanoDeEnsinoControl {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
-	public void excluir() {
-		try {			
+
+	public void excluir(ActionEvent evt) {
+		try {
 			planoDeEnsinoDao.excluirPorId(planoDeEnsino.getId());
 			planoDeEnsino = new PlanoDeEnsino();
-			planosDeEnsino = planoDeEnsinoDao.listar();
+			listar(evt);
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
-		}	
+		}
 	}
 
-	public void limpar(){
+	public void limpar() {
 		planoDeEnsino = new PlanoDeEnsino();
 	}
-	
+
 	public PlanoDeEnsino getPlanoDeEnsino() {
 		return planoDeEnsino;
 	}
@@ -74,15 +79,4 @@ public class PlanoDeEnsinoControl {
 		return planosDeEnsino;
 	}
 
-	public PlanoDeEnsinoDao getPlanoDeEnsinoDao() {
-		return planoDeEnsinoDao;
-	}
-
-	public void setPlanoDeEnsinoDao(PlanoDeEnsinoDao planoDeEnsinoDao) {
-		this.planoDeEnsinoDao = planoDeEnsinoDao;
-	}
-
-	public void setPlanosDeEnsino(List<PlanoDeEnsino> planosDeEnsino) {
-		this.planosDeEnsino = planosDeEnsino;
-	}
 }

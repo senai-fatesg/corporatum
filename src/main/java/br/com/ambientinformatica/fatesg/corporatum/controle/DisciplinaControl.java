@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -13,19 +14,18 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
-import br.com.ambientinformatica.fatesg.corporatum.util.PlanoDeEnsinoRelatorio;
 
 @Controller("DisciplinaControl")
 @Scope("conversation")
 public class DisciplinaControl {
 
 	private Disciplina disciplina  = new Disciplina();
+	
 	@Autowired
 	private DisciplinaDao disciplinaDao;	
 	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-	
-	private PlanoDeEnsinoRelatorio relatorio = new PlanoDeEnsinoRelatorio();
+		
 	
    @PostConstruct
    public void init(){
@@ -64,6 +64,17 @@ public class DisciplinaControl {
 		disciplina = new Disciplina();
 	}
 	
+	public void dialogDisciplinas() {
+		RequestContext.getCurrentInstance().openDialog("selecionardisciplina");
+	}
+
+	public void selecionarDisciplina(Disciplina disciplina) {
+        RequestContext.getCurrentInstance().closeDialog(disciplina);
+    }
+	
+	public String atualizaInputDisc(){
+		return "inputDisciplina"; 
+	}
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
@@ -78,13 +89,5 @@ public class DisciplinaControl {
 
 	public DisciplinaDao getDisciplinaDao() {
 		return disciplinaDao;
-	}
-
-	public PlanoDeEnsinoRelatorio getRelatorio() {
-		return relatorio;
-	}
-
-	public void setRelatorio(PlanoDeEnsinoRelatorio relatorio) {
-		this.relatorio = relatorio;
 	}	
 }
