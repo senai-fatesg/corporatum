@@ -1,6 +1,7 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Curso;
+import br.com.ambientinformatica.fatesg.api.EnumModalidadeCurso;
+import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
+import br.com.ambientinformatica.fatesg.api.EnumTurnoCurso;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
 
 @Controller("CursoControl")
@@ -25,6 +29,14 @@ public class CursoControl {
 	
 	private List<Curso> cursos = new ArrayList<Curso>();
 	
+	private EnumTurnoCurso enumTurnoCurso;
+	//aqui vamos fornecer a lista com todos os enums
+	private List<EnumTurnoCurso> todosTipos;
+	    
+	public List<EnumTurnoCurso> getTodosTipos() {
+		//aqui retornamos a lista de enums
+		  return Arrays.asList(enumTurnoCurso.values());	
+	}
 
    @PostConstruct
    public void init(){
