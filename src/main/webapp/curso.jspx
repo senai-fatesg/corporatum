@@ -13,10 +13,14 @@
 				<h:outputText value="Código" />
 				<p:inputText value="#{CursoControl.curso.id }" />
 				<h:outputText value="Descrição" />
-				<p:inputText value="#{CursoControl.curso.descricao }" />
-				
+				<p:inputText value="#{CursoControl.curso.descricao }" />			
 				<h:outputText value="Carga Horária" />
 				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
+				<p:outputLabel value="Turno" />
+			    <h:selectOneMenu value="#{CursoControl.curso.turno}">
+			    <f:selectItem itemLabel="Selecione" itemValue="0"/>
+                <f:selectItems value="#{CursoControl.todosTipos}" />
+                </h:selectOneMenu>
 				<h:outputText value="Nome" />
 				<p:inputText value="#{CursoControl.curso.nome }" />
 				<h:outputText value="Sigla" />
