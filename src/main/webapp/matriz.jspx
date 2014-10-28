@@ -7,6 +7,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
+	
 		<p:panel header="Formulário" id="panelMatriz">
 			<p:messages/>
 			<h:panelGrid columns="2">
@@ -14,7 +15,7 @@
 				<p:inputTextarea
 					value="#{MatrizControl.matriz.descricao}" />
 				<h:outputText for="dtInicio" value="Data" />
-				<p:calendar id="dtInicio" value="#{CursoControl.curso.dtInicio}"  />
+				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio" value="#{CursoControl.curso.dtInicio}"  />
 				<h:outputText value="Qtde. Períodos" />
 				<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
 				<h:outputText value="Curso" />
