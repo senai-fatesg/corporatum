@@ -15,60 +15,73 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Aluno;
 import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
+import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("AlunoControl")
 @Scope("conversation")
 public class AlunoControl {
 
 	private Aluno aluno = new Aluno();
-	
+
+	private ValidaCPF validaCPF = new ValidaCPF();
+
+	Boolean validado = true;
+
 	@Autowired
 	private AlunoDao alunoDao;
-	
-    private EnumTipoSexo enumTipoSexo;
-	//aqui vamos fornecer a lista com todos os enums
+
+	private EnumTipoSexo enumTipoSexo;
+	// aqui vamos fornecer a lista com todos os enums
 	private List<EnumTipoSexo> todosTipos;
-	    
+
 	public List<EnumTipoSexo> getTodosTipos() {
-		//aqui retornamos a lista de enums
-		  return Arrays.asList(EnumTipoSexo.values());	
+		// aqui retornamos a lista de enums
+		return Arrays.asList(EnumTipoSexo.values());
 	}
-	
+
 	private List<Aluno> alunos = new ArrayList<Aluno>();
-	
-   @PostConstruct
-   public void init(){
-      listar(null);
-   }
-   
-	public void confirmar(ActionEvent evt){
+
+	@PostConstruct
+	public void init() {
+		listar(null);
+	}
+
+	public void confirmar(ActionEvent evt) {
 		try {
-			alunoDao.alterar(aluno);
-         listar(evt);
-         aluno = new Aluno();
+			String cpf = aluno.getCpfCnpj();
+			validado = validaCPF.validacpf(cpf);
+			if (!validado == false) {
+				alunoDao.alterar(aluno);
+				listar(evt);
+				aluno = new Aluno();
+			}else{
+				throw new IllegalArgumentException("CPF Inválido");
+			}
+
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
+
 	public void excluir() {
-		try {			
+		try {
 			alunoDao.excluirPorId(aluno.getId());
 			aluno = new Aluno();
 			alunos = alunoDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
-		}	
+		}
 	}
 
-	public void listar(ActionEvent evt){
+	public void listar(ActionEvent evt) {
 		try {
 			alunos = alunoDao.listar();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	public void limpar(){
+
+	public void limpar() {
 		aluno = new Aluno();
 	}
 
@@ -83,9 +96,5 @@ public class AlunoControl {
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
-	
-
-
-	
 
 }
