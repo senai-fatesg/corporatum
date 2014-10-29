@@ -14,7 +14,6 @@ public class ColaboradorConverter implements Converter {
 
 	private ColaboradorDao colaboradorDao;
 
-	private Colaborador colaborador;
 	@Override
 	public String getAsString(FacesContext facesContext, UIComponent component,
 			Object value) {
