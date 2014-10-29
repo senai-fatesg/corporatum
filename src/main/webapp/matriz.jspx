@@ -8,32 +8,40 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 	
-		<p:panel header="Formulário" id="panelMatriz">
+		<p:panel header="Cadastro de Matriz" id="panelMatriz">
 			<p:messages/>
-			<h:panelGrid columns="2">
-				<h:outputText value="Descrição" />
+				<a:field label="Descrição" width="450px">
 				<p:inputTextarea
-					value="#{MatrizControl.matriz.descricao}" />
-				<h:outputText for="dtInicio" value="Data" />
-				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio" value="#{CursoControl.curso.dtInicio}"  />
-				<h:outputText value="Qtde. Períodos" />
-				<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
-				<h:outputText value="Curso" />
-				<p:selectOneMenu
-					value="#{MatrizControl.matriz.curso}"
-					converter="#{CursoConverter}" id="selCurso">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{CursoControl.cursos}" var="curso"
-						itemLabel="#{curso.descricao}" itemValue="#{curso}"/>
-				</p:selectOneMenu>				
-				<p:commandButton ajax="true"
+					value="#{MatrizControl.matriz.descricao}" style="width:450px" />
+				</a:field>
+				<a:newLine/>
+				<a:field label="Data" >
+					<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio" value="#{CursoControl.curso.dtInicio}"  />
+				</a:field>
+				
+				
+				<a:field label="Qtde. Períodos" spaceLeft="15px" >
+					<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
+				</a:field>
+				<a:newLine/>
+				<a:field label="Curso" >
+					<p:selectOneMenu
+						value="#{MatrizControl.matriz.curso}"
+						converter="#{CursoConverter}" id="selCurso">
+						<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
+						<f:selectItems value="#{CursoControl.cursos}" var="curso"
+							itemLabel="#{curso.descricao}" itemValue="#{curso}"/>
+					</p:selectOneMenu>
+				</a:field>
+				<a:newLine/>
+				<a:newLine/>		
+				<p:commandButton ajax="false"
 					actionListener="#{MatrizControl.confirmar }" value="Confirmar"
-					update="matrizes, panelMatriz" />
-				<p:commandButton ajax="true" action="#{MatrizControl.limpar}"
-					value="Limpar" update="panelMatriz" />
-			</h:panelGrid>
+					update="matrizes, panelMatriz"  />
+					<p:spacer width="45px"/>
+				
 		</p:panel>
-		
+		<a:newLine/>
 		<p:dataTable id="matrizes" value="#{MatrizControl.matrizes }"
 			var="cont" width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
