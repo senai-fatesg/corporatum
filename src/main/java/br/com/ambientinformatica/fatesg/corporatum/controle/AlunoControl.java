@@ -1,11 +1,11 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -30,16 +30,8 @@ public class AlunoControl {
 	@Autowired
 	private AlunoDao alunoDao;
 
-	private EnumTipoSexo enumTipoSexo;
-	// aqui vamos fornecer a lista com todos os enums
-	private List<EnumTipoSexo> todosTipos;
-
-	@SuppressWarnings("static-access")
-	public List<EnumTipoSexo> getTodosTipos() {
-		// aqui retornamos a lista de enums
-		return Arrays.asList(enumTipoSexo.values());
-	}
-
+	private EnumTipoSexo tipoSexo;
+	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	@PostConstruct
@@ -47,18 +39,26 @@ public class AlunoControl {
 		listar(null);
 	}
 
+	public List<SelectItem> getTiposSexo(){
+		return UtilFaces.getListEnum(EnumTipoSexo.values());
+	}
+	
 	public void confirmar(ActionEvent evt) {
 		try {
 			String cpf = aluno.getCpfCnpj();
 			validado = validaCPF.validacpf(cpf);
+			if(tipoSexo != null){
+			
 			if (!validado == false) {
 				alunoDao.alterar(aluno);
 				listar(evt);
 				aluno = new Aluno();
 			} else {
-				throw new IllegalArgumentException("CPF Inválido");
+				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
-
+			}else{
+				UtilFaces.addMensagemFaces("Selecione o Sexo");
+			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -98,4 +98,7 @@ public class AlunoControl {
 		return alunos;
 	}
 
+	public EnumTipoSexo getTipoSexo() {
+		return tipoSexo;
+	}
 }
