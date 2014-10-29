@@ -8,33 +8,6 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelplanoensino">
-			<h:panelGrid columns="3">
-				<h:outputText value="Disciplina" />
-				<h:outputText value="Coord. Técnico(ª)" />
-				<h:outputText value="Coord. Pedagógico(ª)" />
-				
-				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{DisciplinaControl.disciplinas}" var="disc"
-						itemLabel="#{disc.nome}" />
-				</p:selectOneMenu>
-
-				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorTecnico}">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}"
-						var="tecn" itemLabel="#{tecn.nome}" />
-				</p:selectOneMenu>
-
-				<p:selectOneMenu
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.coordenadorPedagogico}">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione" />
-					<f:selectItems value="#{ColaboradorControl.colaboradores}"
-						var="pedag" itemLabel="#{pedag.nome}" />
-				</p:selectOneMenu>
-
-			</h:panelGrid>
 			<h:panelGrid columns="6">
 				<h:outputText value="Competências" />
 				<h:outputText value="Habilidades" />
@@ -57,11 +30,13 @@
 			</h:panelGrid>
 
 			<h:panelGrid columns="2">
-				<p:commandButton ajax="true" actionListener="#{PlanoDeEnsinoControl.confirmar }"
+				<p:commandButton ajax="true"
+					actionListener="#{PlanoDeEnsinoControl.confirmar }"
 					value="Confirmar" update="@form " process="@form" />
-					
-				<p:commandButton ajax="true" actionListener="#{PlanoDeEnsinoControl.limpar}"
-					value="Limpar" update="panelplanoensino"  process="@this"/>
+
+				<p:commandButton ajax="true"
+					actionListener="#{PlanoDeEnsinoControl.limpar}" value="Limpar"
+					update="panelplanoensino" process="@this" />
 			</h:panelGrid>
 		</p:panel>
 		<p:dataTable id="planosensino"
@@ -76,37 +51,54 @@
 				</f:facet>
 				<h:outputText value="#{cont.id }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.disciplina.nome }">
+			<p:column sortBy="#{cont.competencia }">
 				<f:facet name="header">
-					<h:outputText value="Disciplina" />
+					<h:outputText value="Competência" />
 				</f:facet>
-				<h:outputText value="#{cont.disciplina.nome }"></h:outputText>
+				<h:outputText value="#{cont.competencia }" />
 			</p:column>
-			<p:column sortBy="#{cont.coordenadorTecnico.nome }">
+			<p:column sortBy="#{cont.habilidade }">
 				<f:facet name="header">
-					<h:outputText value="Coordenador(ª) Técnico(ª) " />
+					<h:outputText value="Habilidade" />
 				</f:facet>
-				<h:outputText value="#{cont.coordenadorTecnico.nome }"></h:outputText>
+				<h:outputText value="#{cont.habilidade }" />
 			</p:column>
-			<p:column sortBy="#{cont.coordenadorPedagogico.nome }">
+			<p:column sortBy="#{cont.baseTecnologica }">
 				<f:facet name="header">
-					<h:outputText value="Coordenador(ª) Pedagogico(ª) " />
+					<h:outputText value="Base Tecnológica " />
 				</f:facet>
-				<h:outputText value="#{cont.coordenadorPedagogico.nome }"></h:outputText>
+				<h:outputText value="#{cont.baseTecnologica }" />
 			</p:column>
-
+			<p:column sortBy="#{cont.metodologiaEnsino }">
+				<f:facet name="header">
+					<h:outputText value="Metodologia de Ensino " />
+				</f:facet>
+				<h:outputText value="#{cont.metodologiaEnsino }" />
+			</p:column>
+			<p:column sortBy="#{cont.recursoDidatico }">
+				<f:facet name="header">
+					<h:outputText value="Recurso Didático " />
+				</f:facet>
+				<h:outputText value="#{cont.recursoDidatico }" />
+			</p:column>
+			<p:column sortBy="#{cont.bibliografia }">
+				<f:facet name="header">
+					<h:outputText value="Bibliografia " />
+				</f:facet>
+				<h:outputText value="#{cont.bibliografia}" />
+			</p:column>
+			
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					actionListener="#{PlanoDeEnsinoControl.excluir}"
-					update="planosensino" process="@this">
+					update="planosensino">
 
 					<f:setPropertyActionListener
 						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
-					process="@this">
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form">
 
 					<f:setPropertyActionListener
 						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />

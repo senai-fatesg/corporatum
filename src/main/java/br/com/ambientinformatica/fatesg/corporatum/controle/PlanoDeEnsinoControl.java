@@ -1,27 +1,25 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.PlanoDeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao;
 
 @Controller("PlanoDeEnsinoControl")
 @Scope("conversation")
-public class PlanoDeEnsinoControl {
+public class PlanoDeEnsinoControl implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private PlanoDeEnsino planoDeEnsino = new PlanoDeEnsino();
 

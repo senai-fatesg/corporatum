@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,9 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
 
 @Controller("DisciplinaControl")
 @Scope("conversation")
-public class DisciplinaControl {
+public class DisciplinaControl implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Disciplina disciplina  = new Disciplina();
 	
@@ -68,13 +72,15 @@ public class DisciplinaControl {
 		RequestContext.getCurrentInstance().openDialog("selecionardisciplina");
 	}
 
-	public void selecionarDisciplina(Disciplina disciplina) {
-        RequestContext.getCurrentInstance().closeDialog(disciplina);
+	public void selecionarDisciplina(ActionEvent evt) {
+		try {
+			 RequestContext.getCurrentInstance().closeDialog(disciplina);
+			 
+		} catch (Exception e) {
+			   UtilFaces.addMensagemFaces(e);
+		}
     }
 	
-	public String atualizaInputDisc(){
-		return "inputDisciplina"; 
-	}
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}

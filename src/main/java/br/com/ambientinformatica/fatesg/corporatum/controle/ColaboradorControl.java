@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,9 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 
 @Controller("ColaboradorControl")
 @Scope("conversation")
-public class ColaboradorControl {
+public class ColaboradorControl implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Colaborador colaborador = new Colaborador();
 	

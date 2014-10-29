@@ -18,10 +18,12 @@
 				<h:outputText value="" />
 
 				<p:inputText
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}" id="inputDisciplina"/>
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.disciplina}"
+					id="inputDisciplina" />
 				<p:commandButton icon="ui-icon-search"
-					actionListener="#{DisciplinaControl.dialogDisciplinas}" update="inputDisciplina">
-					<p:ajax event="dialogReturn" listener="#{DisciplinaControl.selecionarDisciplina(disciplina)}"/>
+					actionListener="#{DisciplinaControl.dialogDisciplinas}">
+					<p:ajax event="dialogReturn" update="inputDisciplina" />
+
 				</p:commandButton>
 
 				<p:inputText

@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Cars</title>
+	<title>Disciplinas</title>
 	<style type="text/css">
 .ui-widget {
 	font-size: 90%;
@@ -29,14 +29,10 @@
 			</p:column>
 
 			<p:column headerText="Selecione">
-				<p:commandButton icon="ui-icon-search" actionListener="#{DisciplinaControl.selecionarDisciplina(disciplina)}" >
-				<f:setPropertyActionListener
-					target="#{DisciplinaControl.disciplina}" value="#{disc}"/>
-			</p:commandButton>
+				<p:commandButton icon="ui-icon-search"
+					actionListener="#{DisciplinaControl.selecionarDisciplina}" var="disc" />					
 			</p:column>
-
 		</p:dataTable>
-
 	</h:form>
 </h:body>
 </html>

@@ -58,7 +58,8 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
+					actionListener="#{CronogramaAulaControl.excluir}"
+					update="cronogramasAulas">
 
 					<f:setPropertyActionListener
 						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
@@ -74,15 +75,5 @@
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-
-			<p:commandButton value="Sim"
-				actionListener="#{CronogramaAulaControl.excluir}"
-				onclick="confirmacao.hide()" update="cronogramasAulas"
-				process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
-		</p:confirmDialog>
 	</ui:define>
 </ui:composition>
