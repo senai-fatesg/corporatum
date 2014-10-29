@@ -34,9 +34,10 @@ public class AlunoControl {
 	// aqui vamos fornecer a lista com todos os enums
 	private List<EnumTipoSexo> todosTipos;
 
+	@SuppressWarnings("static-access")
 	public List<EnumTipoSexo> getTodosTipos() {
 		// aqui retornamos a lista de enums
-		return Arrays.asList(EnumTipoSexo.values());
+		return Arrays.asList(enumTipoSexo.values());
 	}
 
 	private List<Aluno> alunos = new ArrayList<Aluno>();
