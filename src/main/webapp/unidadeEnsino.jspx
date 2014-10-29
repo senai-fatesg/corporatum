@@ -19,12 +19,22 @@
 				<h:outputText value="Sigla"></h:outputText>
 				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.sigla }"></p:inputText>
 				<h:outputText value="Instituição"></h:outputText>
-				<p:selectOneMenu value="#{InstituicaoControl.instituicao}"
-					converter="#{instituicaoConverter}">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione"/>
-					<f:selectItems value="#{InstituicaoControl.instituicoes}" var="dic"
-						itemLabel="#{dic.nomeFantasia}"/>				
-				</p:selectOneMenu>
+				<a:field for="consInstituicao">
+	               <p:autoComplete id="consInstituicao" maxResults="10" minQueryLength="3" effect="fade"   
+	                    value="#{UnidadeEnsinoControl.unidadeEnsino.instituicao}"   
+	                    var="c" itemLabel="#{c.nome}" itemValue="#{c}" completeMethod="#{UnidadeEnsinoControl.consultarInstituicao}" forceSelection="true" size="42">
+	                    <f:converter converterId="instituicaoConverter"/>
+	                    <f:facet name="itemtip">  
+	                       <h:panelGrid  columns="2" cellpadding="10">  
+	                           <h:outputText id="nomeInstituicaoCons" value="#{c.nome }"/>  
+	                           <h:outputText id="cpfCons" value="#{c.cnpj}" />
+	                       </h:panelGrid>  
+	                    </f:facet>  
+	              </p:autoComplete>
+	               <p:tooltip for="consInstituicao" value="Informe a instituição." showEffect="fade" hideEffect="fade" />  
+	           </a:field>
+	         <a:newLine />
+		        <a:newLine/>
 				
 				<p:commandButton actionListener="#{UnidadeEnsinoControl.confirmar }"
 					value="Confirmar" update="unidadesEnsino, panel"></p:commandButton>
