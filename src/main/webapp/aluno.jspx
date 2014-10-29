@@ -17,10 +17,12 @@
 				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
 					mask="999.999.999-99" />
 				<p:outputLabel value="Sexo:" />
+				
 				<h:selectOneMenu value="#{AlunoControl.aluno.tipoSexo}">
-					<f:selectItem itemLabel="Selecione" itemValue="0" />
-					<f:selectItems value="#{AlunoControl.todosTipos}" />
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{AlunoControl.tiposSexo}" />
 				</h:selectOneMenu>
+				
 				<h:outputText value="Titulo de Eleitor" />
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
 				<h:outputText value="Nº Reservista" />
@@ -45,7 +47,7 @@
 				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
 
 				<h:panelGrid columns="2">
-					<p:commandButton ajax="true"
+					<p:commandButton ajax="false"
 						actionListener="#{AlunoControl.confirmar}" value="Confirmar"
 						update="alunos, panelAluno" />
 					<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
