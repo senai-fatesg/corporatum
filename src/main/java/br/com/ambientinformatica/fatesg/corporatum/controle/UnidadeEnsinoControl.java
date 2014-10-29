@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.Instituicao;
 import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao;
 
 @Controller("UnidadeEnsinoControl")
@@ -22,6 +24,9 @@ public class UnidadeEnsinoControl {
 	
 	@Autowired
 	private UnidadeEnsinoDao unidadeEnsinoDao;
+	
+	@Autowired
+	private InstituicaoDao instituicaoDao;
 	
 	private List<UnidadeEnsino> unidadesEnsino = new ArrayList<UnidadeEnsino>();
 	
@@ -59,7 +64,16 @@ public class UnidadeEnsinoControl {
 		   UtilFaces.addMensagemFaces(e);
 		}
 	}
+	public List<Instituicao> consultarInstituicao(String nome){
+		try {
+			return instituicaoDao.listarPorNome(nome);
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+			return new ArrayList<Instituicao>();
+		}
+	}
 	
+
 	public UnidadeEnsino getUnidadeEnsino() {
 		return unidadeEnsino;
 	}
