@@ -11,11 +11,20 @@
 			<h:panelGrid columns="4">
 				<h:outputText value="Nome" />
 				<p:inputText value="#{ColaboradorControl.colaborador.nome }" />
-				<p:outputLabel value="Sexo:" />
-			    <h:selectOneMenu value="#{ColaboradorControl.colaborador.tipoSexo}">
-			    <f:selectItem itemLabel="Selecione" itemValue="0"/>
-                <f:selectItems value="#{AlunoControl.todosTipos}" />
-                </h:selectOneMenu>
+				<a:field label="Sexo" width="150px">
+					<p:selectOneMenu value="#{ColaboradorControl.tipoSexo }"
+						style="width:150px;" id="descricao">
+						<f:selectItem itemLabel="Selecione" itemValue=""/>
+						<f:selectItems value="#{ColaboradorControl.tiposSexo }" />
+					</p:selectOneMenu>
+				</a:field>
+				<a:field label="Tipo Colaborador" width="150px">
+					<p:selectOneMenu value="#{ColaboradorControl.tipoColaborador }"
+						style="width:200px;" id="tipo">
+						<f:selectItem itemLabel="Selecione" itemValue=""/>
+						<f:selectItems value="#{ColaboradorControl.tiposColaboradores }" />
+					</p:selectOneMenu>
+				</a:field>
 				<h:outputText value="RG" />
 				<p:inputText value="#{ColaboradorControl.colaborador.rg }" />
 				<h:outputText value="CPF" />
@@ -42,7 +51,7 @@
 				<p:inputText value="#{ColaboradorControl.colaborador.historico }" />
 				
 				<h:panelGrid columns="2">
-				<p:commandButton ajax="true"
+				<p:commandButton ajax="false"
 					actionListener="#{ColaboradorControl.confirmar}"
 					value="Confirmar" update="colaboradores, panelColaborador" />
 				<p:commandButton ajax="true" action="#{ColaboradorControl.limpar}"

@@ -16,13 +16,12 @@
 				<h:outputText value="CPF" />
 				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
 					mask="999.999.999-99" />
-				<p:outputLabel value="Sexo:" />
-				
-				<h:selectOneMenu value="#{AlunoControl.aluno.tipoSexo}">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{AlunoControl.tiposSexo}" />
-				</h:selectOneMenu>
-				
+				<h:outputText value="Sexo" />
+				<h:selectOneListbox id="tipo" size="1"
+					value="#{AlunoControl.tipoSexo.descricao}">
+					<f:selectItems value="#{AlunoControl.tiposSexo}" var="t"
+						itemLabel="#{t.descricao}" itemValue="#{aluno.tipoSexo}" />
+				</h:selectOneListbox>
 				<h:outputText value="Titulo de Eleitor" />
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
 				<h:outputText value="Nº Reservista" />
