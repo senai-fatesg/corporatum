@@ -30,8 +30,6 @@ public class AlunoControl {
 	@Autowired
 	private AlunoDao alunoDao;
 
-	private EnumTipoSexo tipoSexo;
-	
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 
 	@PostConstruct
@@ -39,16 +37,17 @@ public class AlunoControl {
 		listar(null);
 	}
 
-	/*public List<SelectItem> getTiposSexo(){
+	public List<SelectItem> getTiposSexo() {
+		//return Arrays.asList(EnumTipoSexo.values());
 		return UtilFaces.getListEnum(EnumTipoSexo.values());
-	}*/
-	
+	}
+
 	public void confirmar(ActionEvent evt) {
 		try {
+			alunoDao.verificarCampos(aluno);
 			String cpf = aluno.getCpfCnpj();
 			cpfValido = validaCPF.validacpf(cpf);
-			if(tipoSexo != null){
-			
+
 			if (!cpfValido == false) {
 				alunoDao.alterar(aluno);
 				listar(evt);
@@ -56,9 +55,7 @@ public class AlunoControl {
 			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
-			}else{
-				UtilFaces.addMensagemFaces("Selecione o Sexo");
-			}
+
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -98,20 +95,7 @@ public class AlunoControl {
 		return alunos;
 	}
 
-	public EnumTipoSexo getTipoSexo() {
-		return tipoSexo;
-	}
-
-	public void setTipoSexo(EnumTipoSexo tipoSexo) {
-		this.tipoSexo = tipoSexo;
-	}
-	public SelectItem[] getTiposSexo() {
-	    SelectItem[] items = new SelectItem[EnumTipoSexo.values().length];
-	    int i = 0;
-	    for(EnumTipoSexo t: EnumTipoSexo.values()) {
-	        items[i++] = new SelectItem(t, t.getDescricao());
-	    }
-	    return items;
-	}
-	
+	/*public EnumTipoSexo[] getTiposSexo() {
+		return EnumTipoSexo.values();
+	}*/
 }

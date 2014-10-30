@@ -21,58 +21,71 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao
 public class UnidadeEnsinoControl {
 
 	private UnidadeEnsino unidadeEnsino = new UnidadeEnsino();
-	
+
 	@Autowired
 	private UnidadeEnsinoDao unidadeEnsinoDao;
-	
+
+	private Instituicao instituicao = new Instituicao();
+
 	@Autowired
 	private InstituicaoDao instituicaoDao;
-	
+
+	private List<Instituicao> instituicoes = new ArrayList<Instituicao>();
+
 	private List<UnidadeEnsino> unidadesEnsino = new ArrayList<UnidadeEnsino>();
-	
 
-   @PostConstruct
-   public void init(){
-      listar(null);
-   }
-   
-	public void confirmar(ActionEvent evt){
+	@PostConstruct
+	public void init() {
+		listar(null);
+	}
+
+	public void confirmar(ActionEvent evt) {
 		try {
+			unidadeEnsinoDao.verificarCampos(unidadeEnsino);
 			unidadeEnsinoDao.alterar(unidadeEnsino);
-         listar(evt);
-         unidadeEnsino = new UnidadeEnsino();
-		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
-		}
-	}
-	public void excluir(ActionEvent evt){
-		try {
-			unidadeEnsino = (UnidadeEnsino) evt.getComponent().getAttributes().get("unidadeEnsino");
-			unidadeEnsino = unidadeEnsinoDao.consultar(unidadeEnsino.getId());
-			unidadeEnsinoDao.excluirPorId(unidadeEnsino.getId());
 			listar(evt);
-			
+			unidadeEnsino = new UnidadeEnsino();
 		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);		
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void listar(ActionEvent evt){
+	public void excluir(ActionEvent evt) {
+		try {
+			unidadeEnsinoDao.excluirPorId(unidadeEnsino.getId());
+			unidadeEnsino = new UnidadeEnsino();
+			unidadesEnsino = unidadeEnsinoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+
+	public void listar(ActionEvent evt) {
 		try {
 			unidadesEnsino = unidadeEnsinoDao.listar();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
-		}
-	}
-	public List<Instituicao> consultarInstituicao(String nome){
-		try {
-			return instituicaoDao.listarPorNome(nome);
-		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
-			return new ArrayList<Instituicao>();
 		}
 	}
-	
+
+	public List<Instituicao> listarInstituicoes(String nome) {
+		instituicoes = instituicaoDao.listarPorNome(nome);
+        
+        return instituicoes;
+    }
+
+	public List<Instituicao> completeInstituicoes(String nome) {
+
+		List<Instituicao> resultados = new ArrayList<Instituicao>();
+		instituicoes = instituicaoDao.listarPorNome(nome);
+
+		for (Instituicao c : instituicoes) {
+			resultados.add(c);
+		}
+
+		return resultados;
+
+	}
 
 	public UnidadeEnsino getUnidadeEnsino() {
 		return unidadeEnsino;
@@ -85,6 +98,21 @@ public class UnidadeEnsinoControl {
 	public List<UnidadeEnsino> getUnidadesEnsino() {
 		return unidadesEnsino;
 	}
-	
+
+	public Instituicao getInstituicao() {
+		return instituicao;
+	}
+
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
+	}
+
+	public List<Instituicao> getInstituicoes() {
+		return instituicoes;
+	}
+
+	public void setInstituicoes(List<Instituicao> instituicoes) {
+		this.instituicoes = instituicoes;
+	}
 
 }

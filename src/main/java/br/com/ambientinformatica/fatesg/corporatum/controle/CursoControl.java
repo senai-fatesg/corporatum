@@ -29,13 +29,13 @@ public class CursoControl {
 	
 	private List<Curso> cursos = new ArrayList<Curso>();
 	
-	private EnumTurnoCurso enumTurnoCurso;
+	private EnumTurnoCurso turnoCurso;
 	//aqui vamos fornecer a lista com todos os enums
 	private List<EnumTurnoCurso> todosTipos;
 	    
 	public List<EnumTurnoCurso> getTodosTipos() {
 		//aqui retornamos a lista de enums
-		  return Arrays.asList(enumTurnoCurso.values());	
+		  return Arrays.asList(EnumTurnoCurso.values());	
 	}
 
    @PostConstruct
@@ -83,6 +83,14 @@ public class CursoControl {
 
 	public List<Curso> getCursos() {
 		return cursos;
+	}
+
+	public EnumTurnoCurso getTurnoCurso() {
+		return turnoCurso;
+	}
+
+	public void setTurnoCurso(EnumTurnoCurso turnoCurso) {
+		this.turnoCurso = turnoCurso;
 	}
 	
 

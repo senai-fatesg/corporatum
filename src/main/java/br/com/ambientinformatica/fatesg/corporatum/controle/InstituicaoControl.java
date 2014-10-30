@@ -20,55 +20,60 @@ import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCNPJ;
 public class InstituicaoControl {
 
 	private Instituicao instituicao = new Instituicao();
-	
+
 	@Autowired
 	private InstituicaoDao instituicaoDao;
-	
+
 	private List<Instituicao> instituicoes = new ArrayList<Instituicao>();
+
+	private Boolean valido = true;
 	
 	private ValidaCNPJ validaCNPJ = new ValidaCNPJ();
-	
-	private Boolean validado = true;
-	
 
-   @PostConstruct
-   public void init(){
-      listar(null);
-   }
-   
-	public void confirmar(ActionEvent evt){
+	@PostConstruct
+	public void init() {
+		listar(null);
+	}
+
+	public void confirmar(ActionEvent evt) {
 		try {
-			 verificarCampos();
-			 
-			 if(!validado.equals(false)){
-				 instituicaoDao.alterar(instituicao);
-				 instituicoes = instituicaoDao.listar();
-		         instituicao = new Instituicao();
-			 }
-        
+			
+			String cnpj = instituicao.getCnpj();
+			instituicaoDao.verificarCampos(instituicao);
+			valido = validaCNPJ.validaCnpj(cnpj);
+			
+			if (!valido.equals(false)) {
+				instituicaoDao.alterar(instituicao);
+				instituicoes = instituicaoDao.listar();
+				instituicao = new Instituicao();
+			}else{
+				UtilFaces.addMensagemFaces("CNPJ Inválido");
+			}
+
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
 	public void excluir() {
-		try {			
+		try {
 			instituicaoDao.excluirPorId(instituicao.getId());
 			instituicao = new Instituicao();
 			instituicoes = instituicaoDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
-		}	
+		}
 	}
-	
-	public void listar(ActionEvent evt){
+
+	public void listar(ActionEvent evt) {
 		try {
 			instituicoes = instituicaoDao.listar();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	public void limpar(){
+
+	public void limpar() {
 		instituicao = new Instituicao();
 	}
 
@@ -82,33 +87,6 @@ public class InstituicaoControl {
 
 	public List<Instituicao> getInstituicoes() {
 		return instituicoes;
-	}
-	
-	public void verificarCampos(){
-
-		String nomeFantasia = instituicao.getNomeFantasia();
-		String razaoSocial = instituicao.getRazaoSocial();
-		String inscricaoEstadual= instituicao.getInscricaoEstadual();
-		String cnpj = instituicao.getCnpj();
-		
-		if(nomeFantasia.equals("")){
-			throw new IllegalArgumentException("Insira Nome Fantasia");
-		}
-		if(razaoSocial.equals("")){
-			throw new IllegalArgumentException("Insira Razão Social");
-		}
-		if(cnpj.equals("")){
-			throw new IllegalArgumentException("Insira CNPJ");
-		}else{
-			validado = validaCNPJ.validaCnpj(cnpj);
-			if(validado == false){
-				throw new IllegalArgumentException("CNPJ Inválido");
-			}
-		}
-		if(inscricaoEstadual.equals("")){
-			throw new IllegalArgumentException("Insira Inscrição Estadual");
-		}
-		
 	}
 
 }
