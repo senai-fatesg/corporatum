@@ -8,44 +8,49 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 
-		<p:panel header="Formulário" id="panel">
-			<h:panelGrid columns="2">
-				<h:outputText value="Nome"></h:outputText>
-				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.nome }"></p:inputText>
-				<h:outputText value="Endereço"></h:outputText>
-				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.endereco }"></p:inputText>
-				<h:outputText value="Telefone"></h:outputText>
-				<p:inputMask value="#{UnidadeEnsinoControl.unidadeEnsino.telefone }" mask="(99)9999-9999"></p:inputMask>
-				<h:outputText value="Sigla"></h:outputText>
-				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.sigla }"></p:inputText>
-				<h:outputText value="Instituição"></h:outputText>
-				<a:field for="consInstituicao">
-	               <p:autoComplete id="consInstituicao" maxResults="10" minQueryLength="3" effect="fade"   
-	                    value="#{UnidadeEnsinoControl.unidadeEnsino.instituicao}"   
-	                    var="c" itemLabel="#{c.nome}" itemValue="#{c}" completeMethod="#{UnidadeEnsinoControl.consultarInstituicao}" forceSelection="true" size="42">
-	                    <f:converter converterId="instituicaoConverter"/>
-	                    <f:facet name="itemtip">  
-	                       <h:panelGrid  columns="2" cellpadding="10">  
-	                           <h:outputText id="nomeInstituicaoCons" value="#{c.nome }"/>  
-	                           <h:outputText id="cpfCons" value="#{c.cnpj}" />
-	                       </h:panelGrid>  
-	                    </f:facet>  
-	              </p:autoComplete>
-	               <p:tooltip for="consInstituicao" value="Informe a instituição." showEffect="fade" hideEffect="fade" />  
-	           </a:field>
-	         <a:newLine />
-		        <a:newLine/>
-				
-				<p:commandButton actionListener="#{UnidadeEnsinoControl.confirmar }"
-					value="Confirmar" update="unidadesEnsino, panel" ajax="false"></p:commandButton>
-			</h:panelGrid>
+		<p:panel header="Cadastro de Unidade Ensino" id="panel">
+			<a:field label="Nome">
+				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.nome }" />
+			</a:field>
+			<a:field label="Telefone" spaceLeft="15px">
+				<p:inputMask value="#{UnidadeEnsinoControl.unidadeEnsino.telefone }"
+					mask="(99)9999-9999" />
+				<a:newLine />
+			</a:field>
+			<a:newLine />
+			<a:field label="Endereço">
+				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.endereco }"
+					style="width:444px" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Sigla">
+				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.sigla }" />
+			</a:field>
+			<h:outputText value="Instituição: " />
+			<p:autoComplete value="#{UnidadeEnsinoControl.unidadeEnsino.instituicao}"
+				completeMethod="#{UnidadeEnsinoControl.completeInstituicoes}"
+				var="cliente" itemLabel="#{instituicao.nomefantasia}" itemValue="#{instituicao}"
+				converter="instituicaoConverter" />
+			<a:newLine />
+			<a:newLine />
+
+			<p:commandButton actionListener="#{UnidadeEnsinoControl.confirmar }"
+				value="Confirmar" update="unidadesEnsino, panel" ajax="false"></p:commandButton>
+			<a:newLine />
 		</p:panel>
 
-		<p:dataTable id="unidadesEnsino" value="#{UnidadeEnsinoControl.unidadesEnsino }"
-			var="cont" width="100%" emptyMessage="Sem registros">
+		<p:dataTable id="unidadesEnsino"
+			value="#{UnidadeEnsinoControl.unidadesEnsino }" var="cont"
+			width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
 				<h:outputText value="Lista Unidades de Ensino"></h:outputText>
 			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
 			<p:column sortBy="#{cont.nome }">
 				<f:facet name="header">
 					<h:outputText value="Nome"></h:outputText>
@@ -76,7 +81,33 @@
 				</f:facet>
 				<h:outputText value="#{cont.instituicao }"></h:outputText>
 			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener
+						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
+					<f:setPropertyActionListener
+						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
 		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{UnidadeEnsinoControl.excluir}"
+				onclick="confirmacao.hide()" update="unidadesEnsino" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
 
 	</ui:define>
 </ui:composition>

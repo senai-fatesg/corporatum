@@ -17,7 +17,7 @@
 				<h:outputText value="Carga Horária" />
 				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
 				<p:outputLabel value="Turno" />
-			    <h:selectOneMenu value="#{CursoControl.curso.turno}">
+			    <h:selectOneMenu value="#{CursoControl.curso.turno }">
 			    <f:selectItem itemLabel="Selecione" itemValue="0"/>
                 <f:selectItems value="#{CursoControl.todosTipos}" />
                 </h:selectOneMenu>
@@ -31,7 +31,7 @@
                 <p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino" value="#{CursoControl.curso.dtTermino}" />
 
 				<h:panelGrid columns="2">
-				<p:commandButton ajax="true"
+				<p:commandButton ajax="false"
 					actionListener="#{CursoControl.confirmar}"
 					value="Confirmar" update="cursos, panel" />
 				<p:commandButton ajax="true" action="#{CursoControl.limpar}"
