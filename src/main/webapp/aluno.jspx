@@ -8,51 +8,68 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Cadastro de Alunos" id="panelAluno">
-			<h:panelGrid columns="4">
-				<h:outputText value="Nome" />
+			<a:field label="Nome">
 				<p:inputText value="#{AlunoControl.aluno.nome }" />
-				<h:outputText value="RG" />
+			</a:field>
+			<a:field label="RG" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.rg }" />
-				<h:outputText value="CPF" />
+			</a:field>
+			<a:field label="CPF" spaceLeft="15px">
 				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
 					mask="999.999.999-99" />
-				<h:outputText value="Sexo" />
-				<h:selectOneListbox id="tipo" size="1"
-					value="#{AlunoControl.tipoSexo.descricao}">
-					<f:selectItems value="#{AlunoControl.tiposSexo}" var="t"
-						itemLabel="#{t.descricao}" itemValue="#{aluno.tipoSexo}" />
-				</h:selectOneListbox>
-				<h:outputText value="Titulo de Eleitor" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Sexo">
+				<p:selectOneMenu id="tiposexo"
+					value="#{AlunoControl.aluno.tipoSexo}" style="width:219px" >
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItems value="#{AlunoControl.tiposSexo}" var="tipoSexo"
+						itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.descricao}"  />
+				</p:selectOneMenu>
+			</a:field>
+			<a:field label="Titulo de Eleitor" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
-				<h:outputText value="Nº Reservista" />
+			</a:field>
+			<a:field label="Nº Reservista" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.reservista }" />
-				<h:outputText value="Telefone" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Telefone">
 				<p:inputMask value="#{AlunoControl.aluno.telefone }"
 					mask="(99)9999-9999" />
-				<h:outputText value="Celular" />
+			</a:field>
+			<a:field label="Celular" spaceLeft="15px">
 				<p:inputMask value="#{AlunoControl.aluno.celular }"
 					mask="(99)9999-9999" />
-				<h:outputText value="E-mail" />
+			</a:field>
+			<a:field label="E-mail" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.email }" />
-				<h:outputText value="Endereço" />
-				<p:inputText value="#{AlunoControl.aluno.endereco }" />
-				<h:outputText value="Cidade" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Endereço">
+				<p:inputText value="#{AlunoControl.aluno.endereco }" style="width:444px"/>
+			</a:field>
+			<a:field label="Cidade" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.municipio }" />
-				<h:outputText value="UF" />
+			</a:field>
+			<a:newLine />
+			<a:field label="UF">
 				<p:inputText value="#{AlunoControl.aluno.uf }" />
-				<h:outputText value="CEP" />
+			</a:field>
+			<a:field label="CEP" spaceLeft="15px">
 				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
-				<h:outputText value="Certificado 2ª Grau" />
+			</a:field>
+			<a:field label="Certificado 2ª Grau" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
-
-				<h:panelGrid columns="2">
-					<p:commandButton ajax="false"
-						actionListener="#{AlunoControl.confirmar}" value="Confirmar"
-						update="alunos, panelAluno" />
-					<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
-						value="Limpar" update="panelAluno" />
-				</h:panelGrid>
-			</h:panelGrid>
+			</a:field>
+			<a:newLine />
+			<a:newLine />
+			<p:commandButton ajax="false"
+				actionListener="#{AlunoControl.confirmar}" value="Confirmar"
+				update="alunos, panelAluno" />
+			<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
+				value="Limpar" update="panelAluno" />
+			<a:newLine />
 		</p:panel>
 
 		<p:dataTable id="alunos" value="#{AlunoControl.alunos }" var="cont"
