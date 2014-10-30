@@ -9,4 +9,6 @@ public interface InstituicaoDao extends Persistencia<Instituicao>{
 	
 	List<Instituicao> listarPorNome(String nome);
 
+	public void verificarCampos(Instituicao instituicao);
+
 }
