@@ -25,7 +25,7 @@ public class AlunoControl {
 
 	private ValidaCPF validaCPF = new ValidaCPF();
 
-	Boolean validado = true;
+	Boolean cpfValido = true;
 
 	@Autowired
 	private AlunoDao alunoDao;
@@ -39,17 +39,17 @@ public class AlunoControl {
 		listar(null);
 	}
 
-	public List<SelectItem> getTiposSexo(){
+	/*public List<SelectItem> getTiposSexo(){
 		return UtilFaces.getListEnum(EnumTipoSexo.values());
-	}
+	}*/
 	
 	public void confirmar(ActionEvent evt) {
 		try {
 			String cpf = aluno.getCpfCnpj();
-			validado = validaCPF.validacpf(cpf);
+			cpfValido = validaCPF.validacpf(cpf);
 			if(tipoSexo != null){
 			
-			if (!validado == false) {
+			if (!cpfValido == false) {
 				alunoDao.alterar(aluno);
 				listar(evt);
 				aluno = new Aluno();
@@ -101,4 +101,17 @@ public class AlunoControl {
 	public EnumTipoSexo getTipoSexo() {
 		return tipoSexo;
 	}
+
+	public void setTipoSexo(EnumTipoSexo tipoSexo) {
+		this.tipoSexo = tipoSexo;
+	}
+	public SelectItem[] getTiposSexo() {
+	    SelectItem[] items = new SelectItem[EnumTipoSexo.values().length];
+	    int i = 0;
+	    for(EnumTipoSexo t: EnumTipoSexo.values()) {
+	        items[i++] = new SelectItem(t, t.getDescricao());
+	    }
+	    return items;
+	}
+	
 }
