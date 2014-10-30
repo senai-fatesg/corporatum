@@ -37,7 +37,7 @@
 		        <a:newLine/>
 				
 				<p:commandButton actionListener="#{UnidadeEnsinoControl.confirmar }"
-					value="Confirmar" update="unidadesEnsino, panel"></p:commandButton>
+					value="Confirmar" update="unidadesEnsino, panel" ajax="false"></p:commandButton>
 			</h:panelGrid>
 		</p:panel>
 
