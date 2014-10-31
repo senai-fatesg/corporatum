@@ -2,6 +2,9 @@ package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -38,16 +41,16 @@ public class InstituicaoDaoJpa extends PersistenciaJpa<Instituicao> implements
 		String cnpj = instituicao.getCnpj();
 
 		if (nomeFantasia.equals("")) {
-			throw new IllegalArgumentException("Insira Nome Fantasia");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Nome Fantasia");
 		}
 		if (razaoSocial.equals("")) {
-			throw new IllegalArgumentException("Insira Razão Social");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Razão Social");
 		}
 		if (cnpj.equals("")) {
-			throw new IllegalArgumentException("Insira CNPJ");
+			throw new IllegalArgumentException("*Campo Obrigátorio: CNPJ");
 		}
 		if (inscricaoEstadual.equals("")) {
-			throw new IllegalArgumentException("Insira Inscrição Estadual");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Inscrição Estadual");
 		}
 
 	}

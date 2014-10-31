@@ -32,6 +32,7 @@ public class MatrizControl {
    
 	public void confirmar(ActionEvent evt){
 		try {
+			matrizDao.verificarCampos(matriz);
 			matrizDao.alterar(matriz);
          listar(evt);
          matriz = new Matriz();

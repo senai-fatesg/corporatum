@@ -1,5 +1,8 @@
 package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.Aluno;
@@ -28,8 +31,9 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 		String certificado2Grau = aluno.getCertificado2Grau();
 
 		if (nome.equals("")) {
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: Nome");
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "*Campo Obrigátorio: Nome"));
+			/*throw new IllegalArgumentException(
+					"*Campo Obrigátorio: Nome");*/
 		}
 		if (rg.equals("")) {
 			throw new IllegalArgumentException(
