@@ -2,8 +2,11 @@ package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.Instituicao;
@@ -15,22 +18,17 @@ public class InstituicaoDaoJpa extends PersistenciaJpa<Instituicao> implements
 
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Instituicao> listarPorNome(String nome) {
+	public List<Instituicao> consultarPeloNome(String nomeFantasia){
+		Session session = this.em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Instituicao.class);
 		
-			Query query = em.createQuery("select instituicao from Instituicao instituicao where upper(instituicao.nomefantasia) like :nome");
-			query.setParameter("nome", "%"+nome.toUpperCase()+"%") ;
-			return query.getResultList();
+		if (StringUtils.isNotBlank(nomeFantasia)) {
+			criteria.add(Restrictions.ilike("nomeFantasia", nomeFantasia.toUpperCase(), MatchMode.START));
+		}
+		return criteria.list();
 	}
-	/*@SuppressWarnings("unchecked")
-	@Override
-	public List<Instituicao> listarPorNome(String nomefantasia) {
-		Query q = this.em
-				.createQuery("from instituicao as a where a.nomefantasia like :nomefantasia");
-		q.setParameter("nomefantasia", "%" + nomefantasia + "%");
-		return q.getResultList();
-	}*/
-
 	@Override
 	public void verificarCampos(Instituicao instituicao) {
 

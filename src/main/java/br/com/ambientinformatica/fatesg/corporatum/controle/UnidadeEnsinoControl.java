@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.Instituicao;
 import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
@@ -67,24 +68,12 @@ public class UnidadeEnsinoControl {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-
-	public List<Instituicao> listarInstituicoes(String nome) {
-		instituicoes = instituicaoDao.listarPorNome(nome);
-        
-        return instituicoes;
-    }
-
-	public List<Instituicao> completeInstituicoes(String nome) {
-
-		List<Instituicao> resultados = new ArrayList<Instituicao>();
-		instituicoes = instituicaoDao.listarPorNome(nome);
-
-		for (Instituicao c : instituicoes) {
-			resultados.add(c);
+	public List<Instituicao> completarInstituicoes(String nomefantasia){
+		List<Instituicao> listaInstitucoes = instituicaoDao.consultarPeloNome(nomefantasia);
+		if (listaInstitucoes.size() == 0) {
+			UtilFaces.addMensagemFaces("Disciplina não encontrada");
 		}
-
-		return resultados;
-
+		return listaInstitucoes;
 	}
 
 	public UnidadeEnsino getUnidadeEnsino() {
@@ -114,5 +103,10 @@ public class UnidadeEnsinoControl {
 	public void setInstituicoes(List<Instituicao> instituicoes) {
 		this.instituicoes = instituicoes;
 	}
+
+	public UnidadeEnsinoDao getUnidadeEnsinoDao() {
+		return unidadeEnsinoDao;
+	}
+	
 
 }

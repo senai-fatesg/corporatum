@@ -7,7 +7,7 @@ import br.com.ambientinformatica.fatesg.api.Instituicao;
 
 public interface InstituicaoDao extends Persistencia<Instituicao>{
 	
-	List<Instituicao> listarPorNome(String nome);
+	List<Instituicao> consultarPeloNome(String nomeFantasia);
 
 	public void verificarCampos(Instituicao instituicao);
 
