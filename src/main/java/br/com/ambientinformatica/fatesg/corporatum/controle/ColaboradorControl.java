@@ -17,6 +17,7 @@ import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.api.EnumTipoColaborador;
 import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
+import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("ColaboradorControl")
 @Scope("conversation")
@@ -32,32 +33,45 @@ public class ColaboradorControl implements Serializable {
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
 	private EnumTipoSexo tipoSexo;
-	
+
 	private EnumTipoColaborador tipoColaborador;
+
+	private ValidaCPF validaCPF = new ValidaCPF();
+
+	Boolean cpfValido = true;
 
 	@PostConstruct
 	public void init() {
 		listar(null);
 	}
-	
-	public List<SelectItem> getTiposSexo(){
+
+	public List<SelectItem> getTiposSexo() {
 		return UtilFaces.getListEnum(EnumTipoSexo.values());
 	}
-	public List<SelectItem> getTiposColaboradores(){
+
+	public List<SelectItem> getTiposColaboradores() {
 		return UtilFaces.getListEnum(EnumTipoColaborador.values());
 	}
 
 	public void confirmar(ActionEvent evt) {
 		try {
-			
-			if(!tipoSexo.equals("")){
-				colaboradorDao.alterar(colaborador);
-				listar(evt);
-				colaborador = new Colaborador();
+			colaboradorDao.verificarCampos(colaborador);
+			String cpf = colaborador.getCpfCnpj();
+			cpfValido = validaCPF.validacpf(cpf);
+
+			if (!cpfValido == false) {
+
+				if (!tipoSexo.equals("")) {
+					colaboradorDao.alterar(colaborador);
+					listar(evt);
+					colaborador = new Colaborador();
+				} else {
+					UtilFaces.addMensagemFaces("Selecione um sexo");
+				}
 			}else{
-				UtilFaces.addMensagemFaces("Selecione um sexo");
+				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
-			
+
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -97,7 +111,6 @@ public class ColaboradorControl implements Serializable {
 		return colaboradores;
 	}
 
-
 	public EnumTipoSexo getTipoSexo() {
 		return tipoSexo;
 	}
@@ -113,6 +126,5 @@ public class ColaboradorControl implements Serializable {
 	public void setTipoColaborador(EnumTipoColaborador tipoColaborador) {
 		this.tipoColaborador = tipoColaborador;
 	}
-	
 
 }
