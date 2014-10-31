@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Cadastro de Colaboradores" id="panelColaborador">
+			<p:messages />
 			<a:field label="Nome">
 				<p:inputText value="#{ColaboradorControl.colaborador.nome }" />
 			</a:field>
@@ -19,7 +20,7 @@
 					mask="999.999.999-99" />
 			</a:field>
 			<a:newLine />
-			
+
 			<a:field label="Titulo de Eleitor">
 				<p:inputText
 					value="#{ColaboradorControl.colaborador.tituloEleitor }" />
@@ -27,10 +28,9 @@
 			<a:field label="Nº Reservista" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.reservista }" />
 			</a:field>
-				<a:field label="Tipo Colaborador" spaceLeft="15px">
+			<a:field label="Tipo Colaborador" spaceLeft="15px">
 				<p:selectOneMenu id="tipocolaborador"
-					value="#{ColaboradorControl.colaborador.tipo}"
-					style="width:219px">
+					value="#{ColaboradorControl.colaborador.tipo}" style="width:219px">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{ColaboradorControl.tiposColaboradores}"
 						var="tipocolaborador" itemValue="#{tipo}"
@@ -73,13 +73,13 @@
 				<p:selectOneMenu id="tiposexo"
 					value="#{ColaboradorControl.colaborador.tipoSexo}"
 					style="width:219px">
-					<f:selectItem itemLabel="Selecione" itemValue=""/>
+					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{ColaboradorControl.tiposSexo}"
 						var="tipoSexo" itemValue="#{tipoSexo}"
 						itemLabel="#{tipoSexo.descricao}" />
 				</p:selectOneMenu>
 			</a:field>
-		
+
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton ajax="false"

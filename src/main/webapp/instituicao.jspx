@@ -9,12 +9,15 @@
 	<ui:define name="corpo">
 
 		<p:panel header="Cadastro de Instituição" id="panel">
+			<p:messages />
 			<a:field label="Nome Fantasia">
-				<p:inputText value="#{InstituicaoControl.instituicao.nomeFantasia }" style="width:444px" />
+				<p:inputText value="#{InstituicaoControl.instituicao.nomeFantasia }"
+					style="width:444px" />
 			</a:field>
 			<a:newLine />
 			<a:field label="Razão Social">
-				<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }" style="width:444px"/>
+				<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }"
+					style="width:444px" />
 			</a:field>
 			<a:newLine />
 			<a:field label="CNPJ">

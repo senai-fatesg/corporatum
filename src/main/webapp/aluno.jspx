@@ -8,6 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Cadastro de Alunos" id="panelAluno">
+			<p:messages />
 			<a:field label="Nome">
 				<p:inputText value="#{AlunoControl.aluno.nome }" />
 			</a:field>
@@ -21,10 +22,10 @@
 			<a:newLine />
 			<a:field label="Sexo">
 				<p:selectOneMenu id="tiposexo"
-					value="#{AlunoControl.aluno.tipoSexo}" style="width:219px" >
+					value="#{AlunoControl.aluno.tipoSexo}" style="width:219px">
 					<f:selectItem itemLabel="Selecione" />
 					<f:selectItems value="#{AlunoControl.tiposSexo}" var="tipoSexo"
-						itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.descricao}"  />
+						itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.descricao}" />
 				</p:selectOneMenu>
 			</a:field>
 			<a:field label="Titulo de Eleitor" spaceLeft="15px">
@@ -47,7 +48,8 @@
 			</a:field>
 			<a:newLine />
 			<a:field label="Endereço">
-				<p:inputText value="#{AlunoControl.aluno.endereco }" style="width:444px"/>
+				<p:inputText value="#{AlunoControl.aluno.endereco }"
+					style="width:444px" />
 			</a:field>
 			<a:field label="Cidade" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.municipio }" />
