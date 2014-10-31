@@ -42,10 +42,12 @@ public class UnidadeEnsinoControl {
 
 	public void confirmar(ActionEvent evt) {
 		try {
+
 			unidadeEnsinoDao.verificarCampos(unidadeEnsino);
 			unidadeEnsinoDao.alterar(unidadeEnsino);
 			listar(evt);
 			unidadeEnsino = new UnidadeEnsino();
+
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -68,8 +70,10 @@ public class UnidadeEnsinoControl {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	public List<Instituicao> completarInstituicoes(String nomefantasia){
-		List<Instituicao> listaInstitucoes = instituicaoDao.consultarPeloNome(nomefantasia);
+
+	public List<Instituicao> completarInstituicoes(String nomefantasia) {
+		List<Instituicao> listaInstitucoes = instituicaoDao
+				.consultarPeloNome(nomefantasia);
 		if (listaInstitucoes.size() == 0) {
 			UtilFaces.addMensagemFaces("Disciplina não encontrada");
 		}
@@ -107,6 +111,5 @@ public class UnidadeEnsinoControl {
 	public UnidadeEnsinoDao getUnidadeEnsinoDao() {
 		return unidadeEnsinoDao;
 	}
-	
 
 }

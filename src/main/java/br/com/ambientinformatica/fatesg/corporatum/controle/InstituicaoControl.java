@@ -41,7 +41,6 @@ public class InstituicaoControl {
 			String cnpj = instituicao.getCnpj();
 			instituicaoDao.verificarCampos(instituicao);
 			valido = validaCNPJ.validaCnpj(cnpj);
-			
 			if (!valido.equals(false)) {
 				instituicaoDao.alterar(instituicao);
 				instituicoes = instituicaoDao.listar();
