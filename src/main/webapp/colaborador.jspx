@@ -8,56 +8,87 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Cadastro de Colaboradores" id="panelColaborador">
-			<h:panelGrid columns="4">
-				<h:outputText value="Nome" />
+			<a:field label="Nome">
 				<p:inputText value="#{ColaboradorControl.colaborador.nome }" />
-				<a:field label="Sexo" width="150px">
-					<p:selectOneMenu value="#{ColaboradorControl.tipoSexo }"
-						style="width:150px;" id="descricao">
-						<f:selectItem itemLabel="Selecione" itemValue=""/>
-						<f:selectItems value="#{ColaboradorControl.tiposSexo }" />
-					</p:selectOneMenu>
-				</a:field>
-				<a:field label="Tipo Colaborador" width="150px">
-					<p:selectOneMenu value="#{ColaboradorControl.tipoColaborador }"
-						style="width:200px;" id="tipo">
-						<f:selectItem itemLabel="Selecione" itemValue=""/>
-						<f:selectItems value="#{ColaboradorControl.tiposColaboradores }" />
-					</p:selectOneMenu>
-				</a:field>
-				<h:outputText value="RG" />
+			</a:field>
+			<a:field label="RG" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.rg }" />
-				<h:outputText value="CPF" />
-				<p:inputMask value="#{ColaboradorControl.colaborador.cpfCnpj }" mask="999.999.999-99"/>
-				<h:outputText value="Titulo de Eleitor" />
-				<p:inputText value="#{ColaboradorControl.colaborador.tituloEleitor }" />
-				<h:outputText value="Nº Reservista" />
+			</a:field>
+			<a:field label="CPF" spaceLeft="15px">
+				<p:inputMask value="#{ColaboradorControl.colaborador.cpfCnpj }"
+					mask="999.999.999-99" />
+			</a:field>
+			<a:newLine />
+			
+			<a:field label="Titulo de Eleitor">
+				<p:inputText
+					value="#{ColaboradorControl.colaborador.tituloEleitor }" />
+			</a:field>
+			<a:field label="Nº Reservista" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.reservista }" />
-				<h:outputText value="Telefone" />
-				<p:inputMask value="#{ColaboradorControl.colaborador.telefone }" mask="(99)9999-9999"/>
-				<h:outputText value="Celular" />
-				<p:inputMask value="#{ColaboradorControl.colaborador.celular }" mask="(99)9999-9999"/>
-				<h:outputText value="E-mail" />
+			</a:field>
+				<a:field label="Tipo Colaborador" spaceLeft="15px">
+				<p:selectOneMenu id="tipocolaborador"
+					value="#{ColaboradorControl.colaborador.tipo}"
+					style="width:219px">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ColaboradorControl.tiposColaboradores}"
+						var="tipocolaborador" itemValue="#{tipo}"
+						itemLabel="#{tipo.descricao}" />
+				</p:selectOneMenu>
+			</a:field>
+			<a:newLine />
+			<a:field label="Telefone">
+				<p:inputMask value="#{ColaboradorControl.colaborador.telefone }"
+					mask="(99)9999-9999" />
+			</a:field>
+			<a:field label="Celular" spaceLeft="15px">
+				<p:inputMask value="#{ColaboradorControl.colaborador.celular }"
+					mask="(99)9999-9999" />
+			</a:field>
+			<a:field label="E-mail" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.email }" />
-				<h:outputText value="Endereço" />
-				<p:inputText value="#{ColaboradorControl.colaborador.endereco }" />
-				<h:outputText value="Cidade" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Endereço">
+				<p:inputText value="#{ColaboradorControl.colaborador.endereco }"
+					style="width:444px" />
+			</a:field>
+			<a:field label="Cidade" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.municipio }" />
-				<h:outputText value="UF" />
+			</a:field>
+			<a:newLine />
+			<a:field label="UF">
 				<p:inputText value="#{ColaboradorControl.colaborador.uf }" />
-				<h:outputText value="CEP" />
-				<p:inputMask mask="99999-999" value="#{ColaboradorControl.colaborador.cep }" />
-				<h:outputText value="Histórico" />
+			</a:field>
+			<a:field label="CEP" spaceLeft="15px">
+				<p:inputMask mask="99999-999"
+					value="#{ColaboradorControl.colaborador.cep }" />
+			</a:field>
+			<a:field label="Histórico" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.historico }" />
-				
-				<h:panelGrid columns="2">
-				<p:commandButton ajax="false"
-					actionListener="#{ColaboradorControl.confirmar}"
-					value="Confirmar" update="colaboradores, panelColaborador" />
-				<p:commandButton ajax="true" action="#{ColaboradorControl.limpar}"
-					value="Limpar" update="panelColaborador" />
-			</h:panelGrid>
-			</h:panelGrid>
+			</a:field>
+			<a:newLine />
+			<a:field label="Sexo">
+				<p:selectOneMenu id="tiposexo"
+					value="#{ColaboradorControl.colaborador.tipoSexo}"
+					style="width:219px">
+					<f:selectItem itemLabel="Selecione" itemValue=""/>
+					<f:selectItems value="#{ColaboradorControl.tiposSexo}"
+						var="tipoSexo" itemValue="#{tipoSexo}"
+						itemLabel="#{tipoSexo.descricao}" />
+				</p:selectOneMenu>
+			</a:field>
+		
+			<a:newLine />
+			<a:newLine />
+			<p:commandButton ajax="false"
+				actionListener="#{ColaboradorControl.confirmar}" value="Confirmar"
+				update="colaboradores, panelColaborador" />
+			<p:commandButton ajax="true" action="#{ColaboradorControl.limpar}"
+				value="Limpar" update="panelColaborador" />
+
+			<a:newLine />
 		</p:panel>
 
 		<p:dataTable id="colaboradores"
@@ -102,21 +133,21 @@
 				</f:facet>
 				<h:outputText value="#{cont.email }"></h:outputText>
 			</p:column>
-				<p:column headerText="Ação">
+			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					oncomplete="confirmacao.show()">
 
-					<f:setPropertyActionListener target="#{ColaboradorControl.colaborador}"
-						value="#{cont}" />
+					<f:setPropertyActionListener
+						target="#{ColaboradorControl.colaborador}" value="#{cont}" />
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" 
-					update="@form" process="@this">
-				
-					<f:setPropertyActionListener target="#{ColaboradorControl.colaborador}"
-						value="#{cont}" />
-				
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
+					<f:setPropertyActionListener
+						target="#{ColaboradorControl.colaborador}" value="#{cont}" />
+
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
@@ -129,6 +160,6 @@
 				onclick="confirmacao.hide()" update="colaboradores" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
-		
+
 	</ui:define>
 </ui:composition>
