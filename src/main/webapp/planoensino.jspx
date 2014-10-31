@@ -8,37 +8,49 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelplanoensino">
-			<h:panelGrid columns="6">
-				<h:outputText value="Competências" />
-				<h:outputText value="Habilidades" />
-				<h:outputText value="Bases Tecnológicas" />
-				<h:outputText value="Metod. de Ensino" />
-				<h:outputText value="Recursos Didáticos" />
-				<h:outputText value="Bibliografias" />
+			<a:field label="Competências" width="440px">
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}" />
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}"
+					style="width:420px" />
+			</a:field>
+			<a:field label="Habilidades" width="440px">
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}" />
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.habilidade}"
+					style="width:420px" />
+			</a:field>
+			<a:field label="Bases Tecnológicas" width="440px">
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}" />
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.baseTecnologica}"
+					style="width:420px" />
+			</a:field>
+			<a:newLine />
+			<a:newLine />
+			<a:field label="Metod. de Ensino" width="440px">
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}" />
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.metodologiaEnsino}"
+					style="width:420px" />
+			</a:field>
+			<a:field label="Recursos Didáticos" width="440px">
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}" />
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.recursoDidatico}"
+					style="width:420px" />
+			</a:field>
+			<a:field label="Bibliografias" width="440px">
 				<p:inputTextarea
-					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}" />
-			</h:panelGrid>
-
-			<h:panelGrid columns="2">
-				<p:commandButton ajax="true"
-					actionListener="#{PlanoDeEnsinoControl.confirmar }"
-					value="Confirmar" update="@form " process="@form" />
-
-				<p:commandButton ajax="true"
-					actionListener="#{PlanoDeEnsinoControl.limpar}" value="Limpar"
-					update="panelplanoensino" process="@this" />
-			</h:panelGrid>
+					value="#{PlanoDeEnsinoControl.planoDeEnsino.bibliografia}"
+					style="width:420px" />
+			</a:field>
+			<a:newLine />
+			<a:newLine />
+			<p:commandButton ajax="true"
+				actionListener="#{PlanoDeEnsinoControl.confirmar }"
+				value="Confirmar" update="@form " process="@form" />
+			<p:spacer width="45px" />
+			<p:commandButton ajax="true"
+				actionListener="#{PlanoDeEnsinoControl.limpar}" value="Limpar"
+				update="panelplanoensino" process="@this" />
 		</p:panel>
+		<a:newLine />
 		<p:dataTable id="planosensino"
 			value="#{PlanoDeEnsinoControl.planosDeEnsino }" var="cont"
 			width="100%" emptyMessage="Sem registros">
@@ -87,24 +99,32 @@
 				</f:facet>
 				<h:outputText value="#{cont.bibliografia}" />
 			</p:column>
-			
+
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					actionListener="#{PlanoDeEnsinoControl.excluir}"
-					update="planosensino">
+					oncomplete="confirmacao.show()">
 
 					<f:setPropertyActionListener
 						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form">
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
 
 					<f:setPropertyActionListener
 						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />
-
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{PlanoDeEnsinoControl.excluir}"
+				onclick="confirmacao.hide()" update="planosensino" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
 	</ui:define>
 </ui:composition>

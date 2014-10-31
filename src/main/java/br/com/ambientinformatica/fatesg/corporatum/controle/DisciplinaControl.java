@@ -67,10 +67,13 @@ public class DisciplinaControl implements Serializable {
 		disciplina = new Disciplina();
 	}
 	
-	public void dialogDisciplinas() {
-		RequestContext.getCurrentInstance().openDialog("selecionardisciplina");
+	public List<Disciplina> completarDisciplina(String nome){
+		List<Disciplina> listaDisciplinas = disciplinaDao.consultarPeloNome(nome);
+		if (listaDisciplinas.size() == 0) {
+			UtilFaces.addMensagemFaces("Disciplina não encontrada");
+		}
+		return listaDisciplinas;
 	}
-
 	public void selecionarDisciplina(ActionEvent evt) {
 		try {
 			 RequestContext.getCurrentInstance().closeDialog(disciplina);

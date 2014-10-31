@@ -9,7 +9,7 @@ import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
-@FacesConverter(forClass=Disciplina.class)
+@FacesConverter(forClass = Disciplina.class)
 public class DisciplinaConverter implements Converter {
 
 	private DisciplinaDao disciplinaDao;
@@ -28,9 +28,8 @@ public class DisciplinaConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null && !value.trim().equals("")) {
-			String codigo = value;
 			try {
-				return disciplinaDao.consultar(codigo);
+				return disciplinaDao.consultar(value);
 			} catch (PersistenciaException e) {
 				e.printStackTrace();
 			} catch (NumberFormatException exception) {
