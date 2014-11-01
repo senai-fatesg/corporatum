@@ -43,6 +43,7 @@ public class CursoControl {
 
 	public void confirmar(ActionEvent evt) {
 		try {
+			cursoDao.verificarCampos(curso);
 			EnumTurnoCurso turnoCurso = curso.getTurno();
 			if (!turnoCurso.equals("")) {
 				cursoDao.alterar(curso);
