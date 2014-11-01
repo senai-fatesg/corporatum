@@ -13,24 +13,24 @@
 			<a:field label="Código">
 				<p:inputText value="#{CursoControl.curso.id }" />
 			</a:field>
-			<a:field label="Nome">
+			<a:field label="Nome" spaceLeft="15px">
 				<p:inputText value="#{CursoControl.curso.nome }" />
 			</a:field>
-			<a:field label="Descrição" spaceLeft="15px">
+			<a:newLine />
+			<a:field label="Descrição" >
 				<p:inputText value="#{CursoControl.curso.descricao }" />
 			</a:field>
-			<a:newLine />
-			<a:field label="Carga Horária">
+			<a:field label="Carga Horária" spaceLeft="15px">
 				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
 			</a:field>
-			<a:field label="Turno" spaceLeft="15px">
+			<a:newLine />
+			<a:field label="Turno" >
 				<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{CursoControl.turnosCurso}"
 						itemValue="#{turno.descricao }" itemLabel="#{turno }" />
 				</h:selectOneMenu>
 			</a:field>
-			<a:newLine />
 			<a:field label="Sigla" spaceLeft="15px">
 				<p:inputText value="#{CursoControl.curso.sigla }" />
 			</a:field>
