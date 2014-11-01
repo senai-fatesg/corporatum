@@ -75,10 +75,11 @@ public class UnidadeEnsinoControl {
 		List<Instituicao> listaInstitucoes = instituicaoDao
 				.consultarPeloNome(nomefantasia);
 		if (listaInstitucoes.size() == 0) {
-			UtilFaces.addMensagemFaces("Disciplina não encontrada");
+			UtilFaces.addMensagemFaces("Instituição não encontrada\nVerifique o nome da Instituição.");
 		}
 		return listaInstitucoes;
 	}
+	
 
 	public UnidadeEnsino getUnidadeEnsino() {
 		return unidadeEnsino;

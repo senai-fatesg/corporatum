@@ -38,7 +38,6 @@ public class AlunoControl {
 	}
 
 	public List<SelectItem> getTiposSexo() {
-		//return Arrays.asList(EnumTipoSexo.values());
 		return UtilFaces.getListEnum(EnumTipoSexo.values());
 	}
 

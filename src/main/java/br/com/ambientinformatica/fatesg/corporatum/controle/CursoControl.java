@@ -1,11 +1,12 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,13 +14,12 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Curso;
-import br.com.ambientinformatica.fatesg.api.EnumModalidadeCurso;
-import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.api.EnumTurnoCurso;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
 
 @Controller("CursoControl")
 @Scope("conversation")
+@ManagedBean
 public class CursoControl {
 
 	private Curso curso = new Curso();
@@ -27,11 +27,18 @@ public class CursoControl {
 	@Autowired
 	private CursoDao cursoDao;
 
+	@SuppressWarnings("unused")
+	private EnumTurnoCurso turnosCurso;
+
 	private List<Curso> cursos = new ArrayList<Curso>();
 
 	@PostConstruct
 	public void init() {
 		listar(null);
+	}
+
+	public List<SelectItem> getTurnosCurso() {
+		return UtilFaces.getListEnum(EnumTurnoCurso.values());
 	}
 
 	public void confirmar(ActionEvent evt) {
@@ -77,8 +84,5 @@ public class CursoControl {
 	public List<Curso> getCursos() {
 		return cursos;
 	}
-	public EnumTurnoCurso[] getTurnos(){  
-        return EnumTurnoCurso.values();  
-    } 
 
 }
