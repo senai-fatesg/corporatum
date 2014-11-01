@@ -43,9 +43,15 @@ public class CursoControl {
 
 	public void confirmar(ActionEvent evt) {
 		try {
-			cursoDao.alterar(curso);
-			listar(evt);
-			curso = new Curso();
+			EnumTurnoCurso turnoCurso = curso.getTurno();
+			if (!turnoCurso.equals("")) {
+				cursoDao.alterar(curso);
+				listar(evt);
+				curso = new Curso();
+			} else {
+				UtilFaces.addMensagemFaces("Selecione turno do Curso!");
+			}
+
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
