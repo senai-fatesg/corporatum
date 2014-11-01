@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 
-		<p:panel header="Formulário" id="panel">
+		<p:panel header="Cadastro de Curso" id="panel">
 			<h:panelGrid columns="2">
 				<h:outputText value="Código" />
 				<p:inputText value="#{CursoControl.curso.id }" />
@@ -19,32 +19,29 @@
 				<p:tab id="tab" title="Turno">
 					<p:panelGrid columns="7" styleClass="semBorda">
 						<h:outputText value="Turno:"></h:outputText>
-						<p:selectOneMenu id="turno"
-							value="#{CursoControl.curso}">
-							<f:selectItem itemLabel="Selecione" />
-							<f:selectItems value="#{CursoControl.turnos}"
-								var="equip" itemValue="#{turno}" itemLabel="#{turno.label}" />
-						</p:selectOneMenu>
-						</p:panelGrid>
-						</p:tab>
-						<h:outputText value="Nome" />
-						<p:inputText value="#{CursoControl.curso.nome }" />
-						<h:outputText value="Sigla" />
-						<p:inputText value="#{CursoControl.curso.sigla }" />
-						<p:outputLabel for="dtInicio" value="Data Inicio:" />
-						<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio"
-							value="#{CursoControl.curso.dtInicio}" />
-						<p:outputLabel for="dtTermino" value="Data Termino" />
-						<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino"
-							value="#{CursoControl.curso.dtTermino}" />
+						<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno" converter="enumSexoConverter">
+							<f:selectItems value="#{CursoControl.turnosCurso}" itemValue="#{turno.descricao }" />
+						</h:selectOneMenu>
+					</p:panelGrid>
+				</p:tab>
+				<h:outputText value="Nome" />
+				<p:inputText value="#{CursoControl.curso.nome }" />
+				<h:outputText value="Sigla" />
+				<p:inputText value="#{CursoControl.curso.sigla }" />
+				<p:outputLabel for="dtInicio" value="Data Inicio:" />
+				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio"
+					value="#{CursoControl.curso.dtInicio}" />
+				<p:outputLabel for="dtTermino" value="Data Termino" />
+				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino"
+					value="#{CursoControl.curso.dtTermino}" />
 
-						<h:panelGrid columns="2">
-							<p:commandButton ajax="false"
-								actionListener="#{CursoControl.confirmar}" value="Confirmar"
-								update="cursos, panel" />
-							<p:commandButton ajax="true" action="#{CursoControl.limpar}"
-								value="Limpar" update="panel" />
-						</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton ajax="false"
+						actionListener="#{CursoControl.confirmar}" value="Confirmar"
+						update="cursos, panel" />
+					<p:commandButton ajax="true" action="#{CursoControl.limpar}"
+						value="Limpar" update="panel" />
+				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 
