@@ -9,42 +9,47 @@
 	<ui:define name="corpo">
 
 		<p:panel header="Cadastro de Curso" id="panel">
-			<h:panelGrid columns="2">
-				<h:outputText value="Código" />
+			<p:messages />
+			<a:field label="Código">
 				<p:inputText value="#{CursoControl.curso.id }" />
-				<h:outputText value="Descrição" />
+			</a:field>
+			<a:field label="Descrição" spaceLeft="15px">
 				<p:inputText value="#{CursoControl.curso.descricao }" />
-				<h:outputText value="Carga Horária" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Carga Horária">
 				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
-				<p:tab id="tab" title="Turno">
-					<p:panelGrid columns="7" styleClass="semBorda">
-						<h:outputText value="Turno:"></h:outputText>
-						<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno" converter="enumSexoConverter">
-							<f:selectItems value="#{CursoControl.turnosCurso}" itemValue="#{turno.descricao }" />
-						</h:selectOneMenu>
-					</p:panelGrid>
-				</p:tab>
-				<h:outputText value="Nome" />
+			</a:field>	
+			<a:field label="Turno" spaceLeft="15px">
+				<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno">
+					<f:selectItem itemLabel="Selecione" itemValue=""/>
+					<f:selectItems value="#{CursoControl.turnosCurso}"
+						itemValue="#{turno.descricao }" itemLabel="#{turno }"/>
+				</h:selectOneMenu>
+			</a:field>
+			<a:newLine />
+			<a:field label="Nome">
 				<p:inputText value="#{CursoControl.curso.nome }" />
-				<h:outputText value="Sigla" />
+			</a:field>
+			<a:field label="Sigla" spaceLeft="15px">
 				<p:inputText value="#{CursoControl.curso.sigla }" />
-				<p:outputLabel for="dtInicio" value="Data Inicio:" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Data Inicio">
 				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio"
 					value="#{CursoControl.curso.dtInicio}" />
-				<p:outputLabel for="dtTermino" value="Data Termino" />
+			</a:field>
+			<a:field label="Data Termino" spaceLeft="15px">
 				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino"
 					value="#{CursoControl.curso.dtTermino}" />
-
-				<h:panelGrid columns="2">
-					<p:commandButton ajax="false"
-						actionListener="#{CursoControl.confirmar}" value="Confirmar"
-						update="cursos, panel" />
-					<p:commandButton ajax="true" action="#{CursoControl.limpar}"
-						value="Limpar" update="panel" />
-				</h:panelGrid>
-			</h:panelGrid>
+			</a:field>
+			<a:newLine />
+			<a:newLine />
+			<p:commandButton ajax="false"
+				actionListener="#{CursoControl.confirmar}" value="Confirmar"
+				update="cursos, panel" />
+			<a:newLine />
 		</p:panel>
-
 		<p:dataTable id="cursos" value="#{CursoControl.cursos }" var="cont"
 			width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
