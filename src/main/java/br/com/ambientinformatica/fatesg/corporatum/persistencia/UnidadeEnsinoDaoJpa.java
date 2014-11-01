@@ -19,16 +19,16 @@ public class UnidadeEnsinoDaoJpa extends PersistenciaJpa<UnidadeEnsino> implemen
 		String sigla = unidadeEnsino.getSigla();
 		
 		if (nome.equals("")) {
-			throw new IllegalArgumentException("Insira Nome da Unidade");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Nome da Unidade");
 		}
 		if (telefone.equals("")) {
-			throw new IllegalArgumentException("Insira telefone");
+			throw new IllegalArgumentException("*Campo Obrigátorio: telefone");
 		}
 		if (endereco.equals("")) {
-			throw new IllegalArgumentException("Insira endereço da Unidade");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Endereço da Unidade");
 		}
 		if (sigla.equals("")) {
-			throw new IllegalArgumentException("Insira Sigla da Unidade");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Sigla da Unidade");
 		}
 	}
 
