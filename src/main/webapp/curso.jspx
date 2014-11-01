@@ -7,41 +7,49 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-	
+
 		<p:panel header="Formulário" id="panel">
-			<h:panelGrid columns="2">	
+			<h:panelGrid columns="2">
 				<h:outputText value="Código" />
 				<p:inputText value="#{CursoControl.curso.id }" />
 				<h:outputText value="Descrição" />
-				<p:inputText value="#{CursoControl.curso.descricao }" />			
+				<p:inputText value="#{CursoControl.curso.descricao }" />
 				<h:outputText value="Carga Horária" />
 				<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
-				<p:outputLabel value="Turno" />
-			    <h:selectOneMenu value="#{CursoControl.curso.turno }">
-			    <f:selectItem itemLabel="Selecione" itemValue="0"/>
-                <f:selectItems value="#{CursoControl.todosTipos}" />
-                </h:selectOneMenu>
-				<h:outputText value="Nome" />
-				<p:inputText value="#{CursoControl.curso.nome }" />
-				<h:outputText value="Sigla" />
-				<p:inputText value="#{CursoControl.curso.sigla }" />
-				<p:outputLabel for="dtInicio" value="Data Inicio:" />
-                <p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio" value="#{CursoControl.curso.dtInicio}" />
-				<p:outputLabel for="dtTermino" value="Data Termino" />
-                <p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino" value="#{CursoControl.curso.dtTermino}" />
+				<p:tab id="tab" title="Turno">
+					<p:panelGrid columns="7" styleClass="semBorda">
+						<h:outputText value="Turno:"></h:outputText>
+						<p:selectOneMenu id="turno"
+							value="#{CursoControl.curso}">
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItems value="#{CursoControl.turnos}"
+								var="equip" itemValue="#{turno}" itemLabel="#{turno.label}" />
+						</p:selectOneMenu>
+						</p:panelGrid>
+						</p:tab>
+						<h:outputText value="Nome" />
+						<p:inputText value="#{CursoControl.curso.nome }" />
+						<h:outputText value="Sigla" />
+						<p:inputText value="#{CursoControl.curso.sigla }" />
+						<p:outputLabel for="dtInicio" value="Data Inicio:" />
+						<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio"
+							value="#{CursoControl.curso.dtInicio}" />
+						<p:outputLabel for="dtTermino" value="Data Termino" />
+						<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino"
+							value="#{CursoControl.curso.dtTermino}" />
 
-				<h:panelGrid columns="2">
-				<p:commandButton ajax="false"
-					actionListener="#{CursoControl.confirmar}"
-					value="Confirmar" update="cursos, panel" />
-				<p:commandButton ajax="true" action="#{CursoControl.limpar}"
-					value="Limpar" update="panel" />
-			</h:panelGrid>
+						<h:panelGrid columns="2">
+							<p:commandButton ajax="false"
+								actionListener="#{CursoControl.confirmar}" value="Confirmar"
+								update="cursos, panel" />
+							<p:commandButton ajax="true" action="#{CursoControl.limpar}"
+								value="Limpar" update="panel" />
+						</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 
-		<p:dataTable id="cursos" value="#{CursoControl.cursos }"
-			var="cont" width="100%" emptyMessage="Sem registros">
+		<p:dataTable id="cursos" value="#{CursoControl.cursos }" var="cont"
+			width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
 				<h:outputText value="Lista de Cursos" />
 			</f:facet>
@@ -75,7 +83,7 @@
 				</f:facet>
 				<h:outputText value="#{cont.cargaHoraria }" />
 			</p:column>
-				<p:column headerText="Ação">
+			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
 					oncomplete="confirmacao.show()">
 
@@ -84,12 +92,12 @@
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" 
-					update="@form" process="@this">
-				
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
 					<f:setPropertyActionListener target="#{CursoControl.curso}"
 						value="#{cont}" />
-				
+
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
@@ -97,38 +105,42 @@
 			message="Tem Certeza que deseja excluir?" severity="alert"
 			closable="true">
 
-			<p:commandButton value="Sim"
-				actionListener="#{CursoControl.excluir}"
+			<p:commandButton value="Sim" actionListener="#{CursoControl.excluir}"
 				onclick="confirmacao.hide()" update="cursos" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
-		<script>  
-            PrimeFaces.locales['pt'] = {  
-                closeText: 'Fechar',  
-                prevText: 'Anterior',  
-                nextText: 'Próximo',  
-                currentText: 'Começo',  
-                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],  
-                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],  
-                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],  
-                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],  
-                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],  
-                weekHeader: 'Semana',  
-                firstDay: 0,  
-                isRTL: false,  
-                showMonthAfterYear: false,  
-                yearSuffix: '',  
-                timeOnlyTitle: 'Só Horas',  
-                timeText: 'Tempo',  
-                hourText: 'Hora',  
-                minuteText: 'Minuto',  
-                secondText: 'Segundo',  
-                ampm: false,  
-                month: 'Mês',  
-                week: 'Semana',  
-                day: 'Dia',  
-                allDayText: 'Todo o Dia'  
-            };  
-        </script>  
+		<script>
+			PrimeFaces.locales['pt'] = {
+				closeText : 'Fechar',
+				prevText : 'Anterior',
+				nextText : 'Próximo',
+				currentText : 'Começo',
+				monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+						'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+						'Outubro', 'Novembro', 'Dezembro' ],
+				monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+						'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+				dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+						'Sexta', 'Sábado' ],
+				dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+						'Sáb' ],
+				dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+				weekHeader : 'Semana',
+				firstDay : 0,
+				isRTL : false,
+				showMonthAfterYear : false,
+				yearSuffix : '',
+				timeOnlyTitle : 'Só Horas',
+				timeText : 'Tempo',
+				hourText : 'Hora',
+				minuteText : 'Minuto',
+				secondText : 'Segundo',
+				ampm : false,
+				month : 'Mês',
+				week : 'Semana',
+				day : 'Dia',
+				allDayText : 'Todo o Dia'
+			};
+		</script>
 	</ui:define>
 </ui:composition>

@@ -23,56 +23,49 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
 public class CursoControl {
 
 	private Curso curso = new Curso();
-	
+
 	@Autowired
 	private CursoDao cursoDao;
-	
+
 	private List<Curso> cursos = new ArrayList<Curso>();
-	
-	private EnumTurnoCurso turnoCurso;
-	//aqui vamos fornecer a lista com todos os enums
-	private List<EnumTurnoCurso> todosTipos;
-	    
-	public List<EnumTurnoCurso> getTodosTipos() {
-		//aqui retornamos a lista de enums
-		  return Arrays.asList(EnumTurnoCurso.values());	
+
+	@PostConstruct
+	public void init() {
+		listar(null);
 	}
 
-   @PostConstruct
-   public void init(){
-      listar(null);
-   }
-   
-	public void confirmar(ActionEvent evt){
+	public void confirmar(ActionEvent evt) {
 		try {
 			cursoDao.alterar(curso);
-         listar(evt);
-         curso = new Curso();
+			listar(evt);
+			curso = new Curso();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
+
 	public void excluir() {
-		try {			
+		try {
 			cursoDao.excluirPorId(curso.getId());
 			curso = new Curso();
 			cursos = cursoDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
-		}	
+		}
 	}
-	public void limpar(){
+
+	public void limpar() {
 		curso = new Curso();
 	}
 
-	public void listar(ActionEvent evt){
+	public void listar(ActionEvent evt) {
 		try {
 			cursos = cursoDao.listar();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
+
 	public Curso getCurso() {
 		return curso;
 	}
@@ -84,14 +77,8 @@ public class CursoControl {
 	public List<Curso> getCursos() {
 		return cursos;
 	}
-
-	public EnumTurnoCurso getTurnoCurso() {
-		return turnoCurso;
-	}
-
-	public void setTurnoCurso(EnumTurnoCurso turnoCurso) {
-		this.turnoCurso = turnoCurso;
-	}
-	
+	public EnumTurnoCurso[] getTurnos(){  
+        return EnumTurnoCurso.values();  
+    } 
 
 }
