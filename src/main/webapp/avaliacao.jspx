@@ -9,18 +9,16 @@
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelAvaliacao">
 			<a:field label="Disciplina" width="440px" for="disciplina">
-				<p:autoComplete id="disciplina" value="#{AvaliacaoControl.avaliacao.disciplina}"
+				<p:autoComplete style="width:420px" id="disciplina" value="#{AvaliacaoControl.avaliacao.disciplina}"
 				completeMethod="#{DisciplinaControl.completarDisciplina}" var="d"
 				itemLabel="#{d.nome}" itemValue="#{d}"/>
 				<p:watermark value="Pesquise pelo nome" for="disciplina"/>
 			</a:field>
-			<a:newLine />
 			<a:field label="Tipo de Avaliação">
 				<h:selectOneRadio id="tipoAvaliacao"
-					value="#{AvaliacaoControl.avaliacao.tipo}">
-					<f:selectItem itemLabel="N1" itemValue="N1" />
-					<f:selectItem itemLabel="N2" itemValue="N2" />
-					<f:selectItem itemLabel="NT" itemValue="NT" />
+					value="#{AvaliacaoControl.avaliacao.tipoAvaliacao}">
+					<f:selectItems value="#{ AvaliacaoControl.tiposAvaliacoes}" var="tipo" 
+					itemValue="#{tipo}" itemLabel="#{tipo.descricao}"/>
 				</h:selectOneRadio>
 			</a:field>
 			<a:newLine />

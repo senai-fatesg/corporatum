@@ -7,16 +7,16 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import br.com.ambientinformatica.fatesg.api.Disciplina;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
+import br.com.ambientinformatica.fatesg.api.Avaliacao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.AvaliacaoDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
-@FacesConverter(forClass = Disciplina.class)
-public class DisciplinaConverter implements Converter {
+@FacesConverter(forClass=Avaliacao.class)
+public class AvaliacaoConverter implements Converter {
 
-	private DisciplinaDao disciplinaDao = (DisciplinaDao) FabricaAbstrata
-			.criarObjeto("disciplinaDao");
+	private AvaliacaoDao avaliacaoDao = (AvaliacaoDao) FabricaAbstrata
+			.criarObjeto("avaliacaoDao");
 
 	@Override
 	public String getAsString(FacesContext facesContext, UIComponent component,
@@ -24,7 +24,7 @@ public class DisciplinaConverter implements Converter {
 		if (value == null || value.equals("")) {
 			return "";
 		} else {
-			return String.valueOf(((Disciplina) value).getId());
+			return String.valueOf(((Avaliacao) value).getId());
 		}
 	}
 
@@ -32,18 +32,23 @@ public class DisciplinaConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {
 		if (value != null && !value.trim().equals("")) {
-			Disciplina disciplina = new Disciplina();
+			Avaliacao avaliacao = new Avaliacao();
 			try {
-				disciplina = disciplinaDao.consultar(value);
+				long id = Long.parseLong(value);
 
+				try {
+					avaliacao = avaliacaoDao.consultar(id);
+				} catch (PersistenciaException e) {
+					e.printStackTrace();
+				}
 			} catch (NumberFormatException exception) {
 				throw new ConverterException(new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, "Conversion Error",
-						"Cliente escolhido não é válido"));
-			} catch (PersistenciaException e) {
-				e.printStackTrace();
+						FacesMessage.SEVERITY_ERROR,
+						"Erro de Inserção dos dados!",
+						"Item selecionado não é válido"));
+				// return null;
 			}
-			return disciplina;
+			return avaliacao;
 		} else {
 			return null;
 		}

@@ -8,22 +8,36 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelCronogramaAula">
-			<h:panelGrid columns="2">
-				<h:outputText value="Aula nº" />
-				<p:inputText value="#{CronogramaAulaControl.cronogramaAula.aula }" />
-				<h:outputText value="Conteúdo Programático" />
+			<p:messages />
+			<a:field label="Disciplina" width="440px" for="disciplina">
+				<p:autoComplete id="disciplina"
+					value="#{AvaliacaoControl.avaliacao.disciplina}"
+					completeMethod="#{DisciplinaControl.completarDisciplina}" var="d"
+					itemLabel="#{d.nome}" itemValue="#{d}" />
+				<p:watermark value="Pesquise pelo nome" for="disciplina" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Aula nº">
+				<p:inputText value="#{CronogramaAulaControl.cronogramaAula.aula }"
+					style="width:70px" />
+			</a:field>
+			<a:field label="Conteúdo Programático" spaceLeft="15px">
 				<p:inputText
-					value="#{CronogramaAulaControl.cronogramaAula.conteudoProgramatico }" />
-				<h:outputText value="Horas Aulas" />
+					value="#{CronogramaAulaControl.cronogramaAula.conteudoProgramatico }"
+					style="width:300px" />
+			</a:field>
+			<a:field label="Horas Aulas" spaceLeft="15px">
 				<p:inputText
-					value="#{CronogramaAulaControl.cronogramaAula.horasAulas }" />
-				<p:commandButton ajax="true"
-					actionListener="#{CronogramaAulaControl.confirmar}"
-					value="Confirmar" update="cronogramasAulas, panelCronogramaAula" />
-
-				<p:commandButton ajax="true" action="#{CronogramaAulaControl.limpar}"
-					value="Limpar" update="panelCronogramaAula" />
-			</h:panelGrid>
+					value="#{CronogramaAulaControl.cronogramaAula.horasAulas }"
+					style="width:70px" />
+			</a:field>
+			<a:newLine />
+			<p:commandButton ajax="true"
+				actionListener="#{CronogramaAulaControl.confirmar}"
+				value="Confirmar" update="cronogramasAulas, panelCronogramaAula" />
+			<p:spacer width="45px" />
+			<p:commandButton ajax="true" action="#{CronogramaAulaControl.limpar}"
+				value="Limpar" update="panelCronogramaAula" />
 		</p:panel>
 
 		<p:dataTable id="cronogramasAulas"
@@ -37,6 +51,12 @@
 					<h:outputText value="Código" />
 				</f:facet>
 				<h:outputText value="#{cont.id }" />
+			</p:column>
+			<p:column sortBy="#{cont.disciplina.nome }">
+				<f:facet name="header">
+					<h:outputText value="Disciplina" />
+				</f:facet>
+				<h:outputText value="#{cont.disciplina.nome }" />
 			</p:column>
 			<p:column sortBy="#{cont.aula }">
 				<f:facet name="header">
