@@ -9,13 +9,7 @@
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelCronogramaAula">
 			<p:messages />
-			<a:field label="Disciplina" width="440px" for="disciplina">
-				<p:autoComplete id="disciplina"
-					value="#{AvaliacaoControl.avaliacao.disciplina}"
-					completeMethod="#{DisciplinaControl.completarDisciplina}" var="d"
-					itemLabel="#{d.nome}" itemValue="#{d}" />
-				<p:watermark value="Pesquise pelo nome" for="disciplina" />
-			</a:field>
+			
 			<a:newLine />
 			<a:field label="Aula nº">
 				<p:inputText value="#{CronogramaAulaControl.cronogramaAula.aula }"

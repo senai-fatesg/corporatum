@@ -15,8 +15,7 @@ import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 @FacesConverter(forClass = Disciplina.class)
 public class DisciplinaConverter implements Converter {
 
-	private DisciplinaDao disciplinaDao = (DisciplinaDao) FabricaAbstrata
-			.criarObjeto("disciplinaDao");
+	private DisciplinaDao disciplinaDao = (DisciplinaDao) FabricaAbstrata.criarObjeto("disciplinaDao");
 
 	@Override
 	public String getAsString(FacesContext facesContext, UIComponent component,

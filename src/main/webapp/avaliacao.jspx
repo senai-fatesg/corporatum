@@ -17,8 +17,8 @@
 			<a:field label="Tipo de Avaliação">
 				<h:selectOneRadio id="tipoAvaliacao"
 					value="#{AvaliacaoControl.avaliacao.tipoAvaliacao}">
-					<f:selectItems value="#{ AvaliacaoControl.tiposAvaliacoes}" var="tipo" 
-					itemValue="#{tipoAvaliacao}" itemLabel="#{tipoAvaliacao.descricao}"/>
+					<f:selectItems value="#{ AvaliacaoControl.tiposAvaliacao}" var="tipo" 
+					itemValue="#{tipo}" itemLabel="#{tipo.descricao}"/>
 				</h:selectOneRadio>
 			</a:field>
 			<a:newLine />
@@ -30,7 +30,7 @@
 			</a:field>
 			<a:newLine />
 			<a:newLine />
-			<p:commandButton ajax="fasle" actionListener="#{AvaliacaoControl.confirmar}" value="Confirmar"
+			<p:commandButton ajax="false" actionListener="#{AvaliacaoControl.confirmar}" value="Confirmar"
 				update="avaliacoes, panelAvaliacao" />
 
 			<p:commandButton ajax="false" action="#{AvaliacaoControl.limpar}"
@@ -54,11 +54,11 @@
 				</f:facet>
 				<h:outputText value="#{cont.disciplina.nome }" />
 			</p:column>
-			<p:column sortBy="#{cont.tipo }">
+			<p:column sortBy="#{cont.tipoAvaliacao }">
 				<f:facet name="header">
 					<h:outputText value="Tipo" />
 				</f:facet>
-				<h:outputText value="#{cont.tipo }" />
+				<h:outputText value="#{cont.tipoAvaliacao }" />
 			</p:column>
 			<p:column sortBy="#{cont.criterio }">
 				<f:facet name="header">
