@@ -18,7 +18,7 @@
 				<h:selectOneRadio id="tipoAvaliacao"
 					value="#{AvaliacaoControl.avaliacao.tipoAvaliacao}">
 					<f:selectItems value="#{ AvaliacaoControl.tiposAvaliacao}" var="tipo" 
-					itemValue="#{tipo}" itemLabel="#{tipo.descricao}"/>
+					itemValue="#{tipo}" itemLabel="#{tipo}"/>
 				</h:selectOneRadio>
 			</a:field>
 			<a:newLine />
@@ -54,12 +54,12 @@
 				</f:facet>
 				<h:outputText value="#{cont.disciplina.nome }" />
 			</p:column>
-			<p:column sortBy="#{cont.tipoAvaliacao }">
+			<p:column sortBy="#{cont.avaliacao.tipoAvaliacao }">
 				<f:facet name="header">
 					<h:outputText value="Tipo" />
 				</f:facet>
-				<h:outputText value="#{cont.tipoAvaliacao }" />
-			</p:column>
+				<h:outputText value="#{cont.avaliacao.tipoAvaliacao }" />
+			</p:column>			
 			<p:column sortBy="#{cont.criterio }">
 				<f:facet name="header">
 					<h:outputText value="Critério" />

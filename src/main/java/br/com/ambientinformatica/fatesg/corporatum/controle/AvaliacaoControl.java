@@ -16,7 +16,6 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Avaliacao;
 import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.EnumTipoAvaliacao;
-import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AvaliacaoDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
 
@@ -36,8 +35,6 @@ public class AvaliacaoControl implements Serializable {
 	@Autowired
 	private DisciplinaDao disciplinaDao;
 
-	private EnumTipoAvaliacao tipoAvaliacao;
-	
 	@PostConstruct
 	public void init() {
 		listar(null);
@@ -108,5 +105,4 @@ public class AvaliacaoControl implements Serializable {
 	public List<SelectItem> getTiposAvaliacao() {
 		return UtilFaces.getListEnum(EnumTipoAvaliacao.values());
 	}
-	
 }
