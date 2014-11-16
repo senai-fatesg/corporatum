@@ -8,8 +8,8 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Formulário" id="panelAvaliacao">
-			<a:field label="Disciplina" width="440px" for="disciplina">
-				<p:autoComplete style="width:420px" id="disciplina" value="#{AvaliacaoControl.avaliacao.disciplina}"
+			<a:field label="Disciplina" width="270px" for="disciplina">
+				<p:autoComplete id="disciplina" value="#{AvaliacaoControl.avaliacao.disciplina}"
 				completeMethod="#{DisciplinaControl.completarDisciplina}" var="d"
 				itemLabel="#{d.nome}" itemValue="#{d}"/>
 				<p:watermark value="Pesquise pelo nome" for="disciplina"/>
@@ -37,6 +37,7 @@
 				value="Limpar" update="panelAvaliacao" />
 				<a:newLine />
 		</p:panel>
+		
 		<p:dataTable id="avaliacoes" value="#{AvaliacaoControl.avaliacoes }"
 			var="cont" width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
@@ -54,11 +55,11 @@
 				</f:facet>
 				<h:outputText value="#{cont.disciplina.nome }" />
 			</p:column>
-			<p:column sortBy="#{cont.avaliacao.tipoAvaliacao }">
+			<p:column sortBy="#{cont.tipoAvaliacao }">
 				<f:facet name="header">
 					<h:outputText value="Tipo" />
 				</f:facet>
-				<h:outputText value="#{cont.avaliacao.tipoAvaliacao }" />
+				<h:outputText value="#{cont.tipoAvaliacao }" />
 			</p:column>			
 			<p:column sortBy="#{cont.criterio }">
 				<f:facet name="header">
