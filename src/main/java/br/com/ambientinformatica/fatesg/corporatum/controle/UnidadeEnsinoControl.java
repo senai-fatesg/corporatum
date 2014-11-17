@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,12 @@ import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao
 
 @Controller("UnidadeEnsinoControl")
 @Scope("conversation")
-public class UnidadeEnsinoControl {
+public class UnidadeEnsinoControl implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private UnidadeEnsino unidadeEnsino = new UnidadeEnsino();
 

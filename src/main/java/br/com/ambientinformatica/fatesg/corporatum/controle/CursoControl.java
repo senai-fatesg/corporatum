@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +15,26 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Curso;
+import br.com.ambientinformatica.fatesg.api.EnumModalidadeCurso;
 import br.com.ambientinformatica.fatesg.api.EnumTurnoCurso;
+import br.com.ambientinformatica.fatesg.api.Instituicao;
+import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao;
 
 @Controller("CursoControl")
 @Scope("conversation")
 @ManagedBean
-public class CursoControl {
+public class CursoControl implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Curso curso = new Curso();
+
+	private UnidadeEnsino unidadeEnsino = new UnidadeEnsino();
 
 	@Autowired
 	private CursoDao cursoDao;
@@ -32,26 +44,23 @@ public class CursoControl {
 
 	private List<Curso> cursos = new ArrayList<Curso>();
 
+	private List<UnidadeEnsino> unidadesEnsino = new ArrayList<UnidadeEnsino>();
+
+	@Autowired
+	private UnidadeEnsinoDao unidadeEnsinoDao;
+
 	@PostConstruct
 	public void init() {
 		listar(null);
 	}
 
-	public List<SelectItem> getTurnosCurso() {
-		return UtilFaces.getListEnum(EnumTurnoCurso.values());
-	}
-
 	public void confirmar(ActionEvent evt) {
 		try {
 			cursoDao.verificarCampos(curso);
-			EnumTurnoCurso turnoCurso = curso.getTurno();
-			if (!turnoCurso.equals("")) {
-				cursoDao.alterar(curso);
-				listar(evt);
-				curso = new Curso();
-			} else {
-				UtilFaces.addMensagemFaces("Selecione turno do Curso!");
-			}
+
+			cursoDao.alterar(curso);
+			listar(evt);
+			curso = new Curso();
 
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
@@ -80,6 +89,16 @@ public class CursoControl {
 		}
 	}
 
+	public List<UnidadeEnsino> completarUnidadesEnsino(String nome) {
+		List<UnidadeEnsino> listaUnidadesEnsino = unidadeEnsinoDao
+				.consultarPeloNome(nome);
+		if (listaUnidadesEnsino.size() == 0) {
+			UtilFaces
+					.addMensagemFaces("UnidadeEnsino não encontrada\nVerifique o nome da UnidadeEnsino.");
+		}
+		return listaUnidadesEnsino;
+	}
+
 	public Curso getCurso() {
 		return curso;
 	}
@@ -90,6 +109,38 @@ public class CursoControl {
 
 	public List<Curso> getCursos() {
 		return cursos;
+	}
+
+	public List<UnidadeEnsino> getUnidadesEnsino() {
+		return unidadesEnsino;
+	}
+
+	public void setUnidadesEnsino(List<UnidadeEnsino> unidadesEnsino) {
+		this.unidadesEnsino = unidadesEnsino;
+	}
+
+	public UnidadeEnsino getUnidadeEnsino() {
+		return unidadeEnsino;
+	}
+
+	public void setUnidadeEnsino(UnidadeEnsino unidadeEnsino) {
+		this.unidadeEnsino = unidadeEnsino;
+	}
+
+	public UnidadeEnsinoDao getUnidadeEnsinoDao() {
+		return unidadeEnsinoDao;
+	}
+
+	public void setUnidadeEnsinoDao(UnidadeEnsinoDao unidadeEnsinoDao) {
+		this.unidadeEnsinoDao = unidadeEnsinoDao;
+	}
+
+	public List<SelectItem> getTurnosCurso() {
+		return UtilFaces.getListEnum(EnumTurnoCurso.values());
+	}
+
+	public List<SelectItem> getModalidadesCurso() {
+		return UtilFaces.getListEnum(EnumModalidadeCurso.values());
 	}
 
 }

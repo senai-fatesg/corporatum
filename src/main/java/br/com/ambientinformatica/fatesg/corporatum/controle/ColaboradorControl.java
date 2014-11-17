@@ -32,10 +32,6 @@ public class ColaboradorControl implements Serializable {
 
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
-	private EnumTipoSexo tipoSexo;
-
-	private EnumTipoColaborador tipoColaborador;
-
 	private ValidaCPF validaCPF = new ValidaCPF();
 
 	Boolean cpfValido = true;
@@ -45,14 +41,6 @@ public class ColaboradorControl implements Serializable {
 		listar(null);
 	}
 
-	public List<SelectItem> getTiposSexo() {
-		return UtilFaces.getListEnum(EnumTipoSexo.values());
-	}
-
-	public List<SelectItem> getTiposColaboradores() {
-		return UtilFaces.getListEnum(EnumTipoColaborador.values());
-	}
-
 	public void confirmar(ActionEvent evt) {
 		try {
 			colaboradorDao.verificarCampos(colaborador);
@@ -60,15 +48,11 @@ public class ColaboradorControl implements Serializable {
 			cpfValido = validaCPF.validacpf(cpf);
 
 			if (!cpfValido == false) {
+				colaboradorDao.alterar(colaborador);
+				listar(evt);
+				colaborador = new Colaborador();
 
-				if (!tipoSexo.equals("")) {
-					colaboradorDao.alterar(colaborador);
-					listar(evt);
-					colaborador = new Colaborador();
-				} else {
-					UtilFaces.addMensagemFaces("Selecione um sexo");
-				}
-			}else{
+			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
 
@@ -111,20 +95,12 @@ public class ColaboradorControl implements Serializable {
 		return colaboradores;
 	}
 
-	public EnumTipoSexo getTipoSexo() {
-		return tipoSexo;
+	public List<SelectItem> getTiposSexo() {
+		return UtilFaces.getListEnum(EnumTipoSexo.values());
 	}
 
-	public void setTipoSexo(EnumTipoSexo tipoSexo) {
-		this.tipoSexo = tipoSexo;
-	}
-
-	public EnumTipoColaborador getTipoColaborador() {
-		return tipoColaborador;
-	}
-
-	public void setTipoColaborador(EnumTipoColaborador tipoColaborador) {
-		this.tipoColaborador = tipoColaborador;
+	public List<SelectItem> getTiposColaboradores() {
+		return UtilFaces.getListEnum(EnumTipoColaborador.values());
 	}
 
 }

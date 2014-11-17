@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.corporatum.controle;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +14,20 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Aluno;
+import br.com.ambientinformatica.fatesg.api.EnumStatusAluno;
+import br.com.ambientinformatica.fatesg.api.EnumTipoAvaliacao;
 import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("AlunoControl")
 @Scope("conversation")
-public class AlunoControl {
+public class AlunoControl implements Serializable {
+
+	/**
+	 * author Glaicon Reis
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Aluno aluno = new Aluno();
 
@@ -35,10 +43,6 @@ public class AlunoControl {
 	@PostConstruct
 	public void init() {
 		listar(null);
-	}
-
-	public List<SelectItem> getTiposSexo() {
-		return UtilFaces.getListEnum(EnumTipoSexo.values());
 	}
 
 	public void confirmar(ActionEvent evt) {
@@ -94,7 +98,11 @@ public class AlunoControl {
 		return alunos;
 	}
 
-	/*public EnumTipoSexo[] getTiposSexo() {
-		return EnumTipoSexo.values();
-	}*/
+	public List<SelectItem> getTiposSexo() {
+		return UtilFaces.getListEnum(EnumTipoSexo.values());
+	}
+
+	public List<SelectItem> getStatus() {
+		return UtilFaces.getListEnum(EnumStatusAluno.values());
+	}
 }
