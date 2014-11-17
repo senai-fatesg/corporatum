@@ -31,7 +31,7 @@
 				<p:autoComplete id="completUsuario"
 					value="#{UnidadeEnsinoControl.unidadeEnsino.instituicao}"
 					completeMethod="#{UnidadeEnsinoControl.completarInstituicoes}"
-					minQueryLength="2" var="instituicao"
+					minQueryLength="3" var="instituicao"
 					itemLabel="#{instituicao.nomeFantasia}" itemValue="#{instituicao}"
 					converter="instituicaoConverter">
 				</p:autoComplete>
