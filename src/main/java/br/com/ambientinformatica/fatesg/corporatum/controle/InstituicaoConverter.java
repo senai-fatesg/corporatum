@@ -14,6 +14,7 @@ import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
 @FacesConverter("instituicaoConverter")
 public class InstituicaoConverter implements Converter {
+	 private Instituicao instituicao;
 	
 	
 	   private InstituicaoDao instituicaoDao = (InstituicaoDao)FabricaAbstrata.criarObjeto("instituicaoDao");
