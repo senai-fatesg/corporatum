@@ -19,6 +19,16 @@
 				<p:inputMask value="#{ColaboradorControl.colaborador.cpfCnpj }"
 					mask="999.999.999-99" />
 			</a:field>
+			<a:field label="Sexo" spaceLeft="15px">
+				<h:selectOneMenu id="tiposexo"
+					value="#{ColaboradorControl.colaborador.tipoSexo}"
+					style="width:219px">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ColaboradorControl.tiposSexo}"
+						var="tipoSexo" itemValue="#{tipoSexo}"
+						itemLabel="#{tipoSexo.descricao}" />
+				</h:selectOneMenu>
+			</a:field>
 			<a:newLine />
 
 			<a:field label="Titulo de Eleitor">
@@ -29,13 +39,15 @@
 				<p:inputText value="#{ColaboradorControl.colaborador.reservista }" />
 			</a:field>
 			<a:field label="Tipo Colaborador" spaceLeft="15px">
-				<p:selectOneMenu id="tipocolaborador"
+				<h:selectOneMenu id="tipocolaborador"
 					value="#{ColaboradorControl.colaborador.tipo}" style="width:219px">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{ColaboradorControl.tiposColaboradores}"
-						var="tipocolaborador" itemValue="#{tipo}"
-						itemLabel="#{tipo.descricao}" />
-				</p:selectOneMenu>
+						var="tipocolaborador" itemValue="#{tipo}" itemLabel="#{tipo}" />
+				</h:selectOneMenu>
+			</a:field>
+			<a:field label="Histórico" spaceLeft="15px">
+				<p:inputText value="#{ColaboradorControl.colaborador.historico }" />
 			</a:field>
 			<a:newLine />
 			<a:field label="Telefone">
@@ -49,6 +61,10 @@
 			<a:field label="E-mail" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.email }" />
 			</a:field>
+			<a:field label="CEP" spaceLeft="15px">
+				<p:inputMask mask="99999-999"
+					value="#{ColaboradorControl.colaborador.cep }" />
+			</a:field>
 			<a:newLine />
 			<a:field label="Endereço">
 				<p:inputText value="#{ColaboradorControl.colaborador.endereco }"
@@ -57,29 +73,9 @@
 			<a:field label="Cidade" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.municipio }" />
 			</a:field>
-			<a:newLine />
-			<a:field label="UF">
+			<a:field label="UF" spaceLeft="15px">
 				<p:inputText value="#{ColaboradorControl.colaborador.uf }" />
 			</a:field>
-			<a:field label="CEP" spaceLeft="15px">
-				<p:inputMask mask="99999-999"
-					value="#{ColaboradorControl.colaborador.cep }" />
-			</a:field>
-			<a:field label="Histórico" spaceLeft="15px">
-				<p:inputText value="#{ColaboradorControl.colaborador.historico }" />
-			</a:field>
-			<a:newLine />
-			<a:field label="Sexo">
-				<p:selectOneMenu id="tiposexo"
-					value="#{ColaboradorControl.colaborador.tipoSexo}"
-					style="width:219px">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{ColaboradorControl.tiposSexo}"
-						var="tipoSexo" itemValue="#{tipoSexo}"
-						itemLabel="#{tipoSexo.descricao}" />
-				</p:selectOneMenu>
-			</a:field>
-
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton ajax="false"

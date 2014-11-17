@@ -19,20 +19,30 @@
 				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
 					mask="999.999.999-99" />
 			</a:field>
+			<a:field label="Status" spaceLeft="15px">
+				<h:selectOneMenu id="status" value="#{AlunoControl.aluno.status}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ AlunoControl.status}" var="tipo"
+						itemValue="#{tipo}" itemLabel="#{tipo}" />
+				</h:selectOneMenu>
+			</a:field>
 			<a:newLine />
 			<a:field label="Sexo">
-				<p:selectOneMenu id="tiposexo"
-					value="#{AlunoControl.aluno.tipoSexo}" style="width:219px">
-					<f:selectItem itemLabel="Selecione" />
-					<f:selectItems value="#{AlunoControl.tiposSexo}" var="tipoSexo"
-						itemValue="#{tipoSexo}" itemLabel="#{tipoSexo.descricao}" />
-				</p:selectOneMenu>
+				<h:selectOneMenu id="tipoSexo"
+					value="#{AlunoControl.aluno.tipoSexo}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ AlunoControl.tiposSexo}" var="tipo"
+						itemValue="#{tipo}" itemLabel="#{tipo}" />
+				</h:selectOneMenu>
 			</a:field>
 			<a:field label="Titulo de Eleitor" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
 			</a:field>
 			<a:field label="Nº Reservista" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.reservista }" />
+			</a:field>
+			<a:field label="Certificado 2ª Grau" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
 			</a:field>
 			<a:newLine />
 			<a:field label="Telefone">
@@ -46,6 +56,9 @@
 			<a:field label="E-mail" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.email }" />
 			</a:field>
+			<a:field label="CEP" spaceLeft="15px">
+				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
+			</a:field>
 			<a:newLine />
 			<a:field label="Endereço">
 				<p:inputText value="#{AlunoControl.aluno.endereco }"
@@ -54,22 +67,15 @@
 			<a:field label="Cidade" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.municipio }" />
 			</a:field>
-			<a:newLine />
-			<a:field label="UF">
+			<a:field label="UF" spaceLeft="15px">
 				<p:inputText value="#{AlunoControl.aluno.uf }" />
-			</a:field>
-			<a:field label="CEP" spaceLeft="15px">
-				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
-			</a:field>
-			<a:field label="Certificado 2ª Grau" spaceLeft="15px">
-				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
 			</a:field>
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton ajax="false"
 				actionListener="#{AlunoControl.confirmar}" value="Confirmar"
 				update="alunos, panelAluno" />
-			<p:commandButton ajax="true" action="#{AlunoControl.limpar}"
+			<p:commandButton  ajax="false" action="#{AlunoControl.limpar}"
 				value="Limpar" update="panelAluno" />
 			<a:newLine />
 		</p:panel>
@@ -90,6 +96,18 @@
 					<h:outputText value="Nome" />
 				</f:facet>
 				<h:outputText value="#{cont.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.tipoSexo }">
+				<f:facet name="header">
+					<h:outputText value="Sexo" />
+				</f:facet>
+				<h:outputText value="#{cont.tipoSexo }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.status }">
+				<f:facet name="header">
+					<h:outputText value="Status" />
+				</f:facet>
+				<h:outputText value="#{cont.status }"></h:outputText>
 			</p:column>
 			<p:column sortBy="#{cont.cpfCnpj }">
 				<f:facet name="header">
