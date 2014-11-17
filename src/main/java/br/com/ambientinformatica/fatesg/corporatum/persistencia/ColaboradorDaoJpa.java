@@ -28,16 +28,13 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		String historico = colaborador.getHistorico();
 
 		if (nome.equals("")) {
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: Nome");
+			throw new IllegalArgumentException("*Campo Obrigátorio: Nome");
 		}
 		if (rg.equals("")) {
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: RG");
+			throw new IllegalArgumentException("*Campo Obrigátorio: RG");
 		}
 		if (cpf.equals("")) {
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: CPF");
+			throw new IllegalArgumentException("*Campo Obrigátorio: CPF");
 		}
 		if (tituloEleitor.equals("")) {
 			throw new IllegalArgumentException(
@@ -47,7 +44,10 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 			throw new IllegalArgumentException(
 					"*Campo Obrigátorio: numero da reservista");
 		}
-		if (celular.equals("")&& telefone.equals("")) {
+		if (historico.equals("")) {
+			throw new IllegalArgumentException("*Campo Obrigátorio: Histórico");
+		}
+		if (celular.equals("") && telefone.equals("")) {
 			throw new IllegalArgumentException(
 					"É necessário um numero Telefone ou Celular");
 		}
@@ -56,28 +56,19 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 					"É necessário um numero Celular ou Telefone");
 		}
 		if (email.equals("")) {
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: E-mail");
+			throw new IllegalArgumentException("*Campo Obrigátorio: E-mail");
 		}
-		if(endereco.equals("")){
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: Endereço");
+		if (historico.equals("")) {
+			throw new IllegalArgumentException("*Campo Obrigátorio: Histórico");
 		}
-		if(municipio.equals("")){
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: Municipio");
+		if (endereco.equals("")) {
+			throw new IllegalArgumentException("*Campo Obrigátorio: Endereço");
 		}
-		if(uf.equals("")){
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: UF(Estado)");
+		if (municipio.equals("")) {
+			throw new IllegalArgumentException("*Campo Obrigátorio: Municipio");
 		}
-		if(cep.equals("")){
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: CEP");
-		}
-		if(historico.equals("")){
-			throw new IllegalArgumentException(
-					"*Campo Obrigátorio: Histórico");
+		if (uf.equals("")) {
+			throw new IllegalArgumentException("*Campo Obrigátorio: UF(Estado)");
 		}
 
 	}

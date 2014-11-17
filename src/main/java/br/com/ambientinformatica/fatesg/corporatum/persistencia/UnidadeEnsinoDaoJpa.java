@@ -1,5 +1,12 @@
 package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
@@ -31,5 +38,17 @@ public class UnidadeEnsinoDaoJpa extends PersistenciaJpa<UnidadeEnsino> implemen
 			throw new IllegalArgumentException("*Campo Obrigátorio: Sigla da Unidade");
 		}
 	}
+
+@SuppressWarnings("unchecked")
+@Override
+public List<UnidadeEnsino> consultarPeloNome(String nome) {
+	Session session = this.em.unwrap(Session.class);
+	Criteria criteria = session.createCriteria(UnidadeEnsino.class);
+	
+	if (StringUtils.isNotBlank(nome)) {
+		criteria.add(Restrictions.ilike("nome", nome.toUpperCase(), MatchMode.START));
+	}
+		return criteria.list();
+}
 
 }
