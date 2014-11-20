@@ -7,8 +7,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
-import br.com.ambientinformatica.fatesg.corporatum.dao.UnidadeEnsinoDao;
+import br.com.ambientinformatica.fatesg.api.dao.UnidadeEnsinoDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
@@ -41,8 +42,7 @@ public class UnidadeEnsinoConverter implements Converter {
 	               e.printStackTrace();
 	            }
 	         } catch(NumberFormatException exception) {  
-	            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro de Inserção dos dados!", "UnidadeEnsino escolhida não é válida"));
-	            //return null;
+	            UtilFaces.addMensagemFaces("Unidade de Ensino escolhida não é válida. Erro no Converter");
 	         }  
 	         return unidadeEnsino;  
 	      }else{

@@ -16,7 +16,7 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Aluno;
 import br.com.ambientinformatica.fatesg.api.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
-import br.com.ambientinformatica.fatesg.corporatum.dao.AlunoDao;
+import br.com.ambientinformatica.fatesg.api.dao.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("AlunoControl")

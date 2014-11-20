@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Matriz;
-import br.com.ambientinformatica.fatesg.corporatum.dao.MatrizDao;
+import br.com.ambientinformatica.fatesg.api.dao.MatrizDao;
 
 @Controller("MatrizControl")
 @Scope("conversation")

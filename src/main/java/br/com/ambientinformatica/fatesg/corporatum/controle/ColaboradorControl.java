@@ -16,7 +16,7 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.api.EnumTipoColaborador;
 import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
-import br.com.ambientinformatica.fatesg.corporatum.dao.ColaboradorDao;
+import br.com.ambientinformatica.fatesg.api.dao.ColaboradorDao;
 import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("ColaboradorControl")

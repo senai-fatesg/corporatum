@@ -11,9 +11,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Avaliacao;
 import br.com.ambientinformatica.fatesg.api.CronogramaAula;
-import br.com.ambientinformatica.fatesg.corporatum.dao.CronogramaAulaDao;
+import br.com.ambientinformatica.fatesg.api.dao.CronogramaAulaDao;
 
 @Controller("CronogramaAulaControl")
 @Scope("conversation")

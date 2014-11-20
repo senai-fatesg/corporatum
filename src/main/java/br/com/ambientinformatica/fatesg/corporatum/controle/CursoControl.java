@@ -17,10 +17,9 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Curso;
 import br.com.ambientinformatica.fatesg.api.EnumModalidadeCurso;
 import br.com.ambientinformatica.fatesg.api.EnumTurnoCurso;
-import br.com.ambientinformatica.fatesg.api.Instituicao;
 import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
-import br.com.ambientinformatica.fatesg.corporatum.dao.CursoDao;
-import br.com.ambientinformatica.fatesg.corporatum.dao.UnidadeEnsinoDao;
+import br.com.ambientinformatica.fatesg.api.dao.CursoDao;
+import br.com.ambientinformatica.fatesg.api.dao.UnidadeEnsinoDao;
 
 @Controller("CursoControl")
 @Scope("conversation")

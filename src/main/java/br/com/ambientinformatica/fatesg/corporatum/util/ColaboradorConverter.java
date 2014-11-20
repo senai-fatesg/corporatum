@@ -7,9 +7,10 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Colaborador;
 import br.com.ambientinformatica.fatesg.api.Instituicao;
-import br.com.ambientinformatica.fatesg.corporatum.dao.ColaboradorDao;
+import br.com.ambientinformatica.fatesg.api.dao.ColaboradorDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
@@ -43,11 +44,7 @@ public class ColaboradorConverter implements Converter {
 					e.printStackTrace();
 				}
 			} catch (NumberFormatException exception) {
-				throw new ConverterException(new FacesMessage(
-						FacesMessage.SEVERITY_ERROR,
-						"Erro de Inserção dos dados!",
-						"Item selecionado não é válido"));
-				// return null;
+            UtilFaces.addMensagemFaces("Colaborador não é válido. Erro no Converter");
 			}
 			return colaborador;
 		} else {

@@ -5,8 +5,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
+import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Curso;
-import br.com.ambientinformatica.fatesg.corporatum.dao.CursoDao;
+import br.com.ambientinformatica.fatesg.api.dao.CursoDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
 @ManagedBean
@@ -24,8 +25,7 @@ public class CursoConverter implements Converter {
 			e.printStackTrace();
 			return null;
 		} catch (PersistenciaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+         UtilFaces.addMensagemFaces("Curso não é válido. Erro no Converter");
 			return null;
 		}
 	}

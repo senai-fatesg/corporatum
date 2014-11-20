@@ -2,8 +2,8 @@ package br.com.ambientinformatica.fatesg.corporatum.dao;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 import br.com.ambientinformatica.fatesg.corporatum.entidade.Contato;
+import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("contatoDao")
 public class ContatoDaoJpa extends PersistenciaJpa<Contato> implements ContatoDao{
