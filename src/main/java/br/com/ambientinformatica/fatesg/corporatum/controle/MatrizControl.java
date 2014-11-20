@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Matriz;
 import br.com.ambientinformatica.fatesg.api.dao.MatrizDao;
+import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
 
 @Controller("MatrizControl")
 @Scope("conversation")

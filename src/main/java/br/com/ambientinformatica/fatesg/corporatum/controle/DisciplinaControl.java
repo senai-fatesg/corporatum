@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.dao.DisciplinaDao;
+import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
 
 @Controller("DisciplinaControl")
 @Scope("conversation")

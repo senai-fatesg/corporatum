@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.Aluno;
-import br.com.ambientinformatica.fatesg.api.EnumStatusAluno;
-import br.com.ambientinformatica.fatesg.api.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.api.dao.AlunoDao;
+import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("AlunoControl")
