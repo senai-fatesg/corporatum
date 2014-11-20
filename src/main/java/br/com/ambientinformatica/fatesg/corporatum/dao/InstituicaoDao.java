@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.corporatum.persistencia;
+package br.com.ambientinformatica.fatesg.corporatum.dao;
 
 import java.util.List;
 

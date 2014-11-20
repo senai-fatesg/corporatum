@@ -15,8 +15,8 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.Instituicao;
 import br.com.ambientinformatica.fatesg.api.UnidadeEnsino;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao;
+import br.com.ambientinformatica.fatesg.corporatum.dao.InstituicaoDao;
+import br.com.ambientinformatica.fatesg.corporatum.dao.UnidadeEnsinoDao;
 
 @Controller("UnidadeEnsinoControl")
 @Scope("conversation")

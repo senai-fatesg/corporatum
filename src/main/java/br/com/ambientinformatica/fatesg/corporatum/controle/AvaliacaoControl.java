@@ -16,8 +16,8 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.Avaliacao;
 import br.com.ambientinformatica.fatesg.api.Disciplina;
 import br.com.ambientinformatica.fatesg.api.EnumTipoAvaliacao;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.AvaliacaoDao;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
+import br.com.ambientinformatica.fatesg.corporatum.dao.AvaliacaoDao;
+import br.com.ambientinformatica.fatesg.corporatum.dao.DisciplinaDao;
 
 @Controller("AvaliacaoControl")
 @Scope("conversation")

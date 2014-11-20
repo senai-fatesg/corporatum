@@ -6,7 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
 import br.com.ambientinformatica.fatesg.api.Curso;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
+import br.com.ambientinformatica.fatesg.corporatum.dao.CursoDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 
 @ManagedBean

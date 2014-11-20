@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.corporatum.persistencia;
+package br.com.ambientinformatica.fatesg.corporatum.dao;
 
 import org.springframework.stereotype.Repository;
 
