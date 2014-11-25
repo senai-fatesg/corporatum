@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<script>  
+            PrimeFaces.locales['pt'] = {  
+                closeText: 'Fechar',  
+                prevText: 'Anterior',  
+                nextText: 'Próximo',  
+                currentText: 'Começo',  
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],  
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],  
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],  
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],  
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],  
+                weekHeader: 'Semana',  
+                firstDay: 0,  
+                isRTL: false,  
+                showMonthAfterYear: false,  
+                yearSuffix: '',  
+                timeOnlyTitle: 'Só Horas',  
+                timeText: 'Tempo',  
+                hourText: 'Hora',  
+                minuteText: 'Minuto',  
+                secondText: 'Segundo',  
+                ampm: false,  
+                month: 'Mês',  
+                week: 'Semana',  
+                day: 'Dia',  
+                allDayText: 'Todo o Dia'  
+            };  
+        </script>  
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" />
+	<link href="css/styles.css" rel="stylesheet" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-Control"
+		content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<script>
+		function focar() {
+			document.getElementById("usuario").focus();
+		}
+	</script>
+</h:head>
+
+<h:body>
+	<ui:insert name="menuPrincipal">
+		<div class="wrapper">
+			<div class="header">
+				<div class="container">
+					<div class="row branding">
+						<div class="span6">
+							<h1 class="pull-left">
+								<a href="/inicio.jsf"><strong>Corporatum</strong></a>
+							</h1>
+						</div>
+					</div>
+					<div class="row navigation">
+						<div class="span12">
+							<ul class="nav nav-tabs">
+								<li><a href="/corporatum/matriz.jsf">Matriz</a></li>
+								<li><a href="/corporatum/instituicao.jsf">Instituição</a></li>
+								<li><a href="/corporatum/unidadeEnsino.jsf">Unidade de Ensino</a></li>
+								<li><a href="/corporatum/curso.jsf">Curso</a></li>
+								<li><a href="/corporatum/colaborador.jsf">Colaborador</a></li>
+								<li><a href="/corporatum/aluno.jsf">Aluno</a></li>
+								<li><a href="/corporatum/planoensino.jsf">Plano de Ensino</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:insert>
+	<h:form id="formCorpo">
+		<p:growl autoUpdate="true"></p:growl>
+		<ui:insert name="corpo" />
+	</h:form>
+</h:body>
+</html>

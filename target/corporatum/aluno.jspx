@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:panel header="Cadastro de Alunos" id="panelAluno">
+			<p:messages />
+			<a:field label="Nome">
+				<p:inputText value="#{AlunoControl.aluno.nome }" />
+			</a:field>
+			<a:field label="RG" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.rg }" />
+			</a:field>
+			<a:field label="CPF" spaceLeft="15px">
+				<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
+					mask="999.999.999-99" />
+			</a:field>
+			<a:field label="Status" spaceLeft="15px">
+				<h:selectOneMenu id="status" value="#{AlunoControl.aluno.status}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ AlunoControl.status}" var="tipo"
+						itemValue="#{tipo}" itemLabel="#{tipo}" />
+				</h:selectOneMenu>
+			</a:field>
+			<a:newLine />
+			<a:field label="Sexo">
+				<h:selectOneMenu id="tipoSexo"
+					value="#{AlunoControl.aluno.tipoSexo}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ AlunoControl.tiposSexo}" var="tipo"
+						itemValue="#{tipo}" itemLabel="#{tipo}" />
+				</h:selectOneMenu>
+			</a:field>
+			<a:field label="Titulo de Eleitor" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.tituloEleitor }" />
+			</a:field>
+			<a:field label="Nº Reservista" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.reservista }" />
+			</a:field>
+			<a:field label="Certificado 2ª Grau" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.certificado2Grau }" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Telefone">
+				<p:inputMask value="#{AlunoControl.aluno.telefone }"
+					mask="(99)9999-9999" />
+			</a:field>
+			<a:field label="Celular" spaceLeft="15px">
+				<p:inputMask value="#{AlunoControl.aluno.celular }"
+					mask="(99)9999-9999" />
+			</a:field>
+			<a:field label="E-mail" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.email }" />
+			</a:field>
+			<a:field label="CEP" spaceLeft="15px">
+				<p:inputMask mask="99999-999" value="#{AlunoControl.aluno.cep }" />
+			</a:field>
+			<a:newLine />
+			<a:field label="Endereço">
+				<p:inputText value="#{AlunoControl.aluno.endereco }"
+					style="width:444px" />
+			</a:field>
+			<a:field label="Cidade" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.municipio }" />
+			</a:field>
+			<a:field label="UF" spaceLeft="15px">
+				<p:inputText value="#{AlunoControl.aluno.uf }" />
+			</a:field>
+			<a:newLine />
+			<a:newLine />
+			<p:commandButton ajax="false"
+				actionListener="#{AlunoControl.confirmar}" value="Confirmar"
+				update="alunos, panelAluno" />
+			<p:commandButton  ajax="false" action="#{AlunoControl.limpar}"
+				value="Limpar" update="panelAluno" />
+			<a:newLine />
+		</p:panel>
+
+		<p:dataTable id="alunos" value="#{AlunoControl.alunos }" var="cont"
+			width="100%" emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Lista de Alunos" />
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+				<h:outputText value="#{cont.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.tipoSexo }">
+				<f:facet name="header">
+					<h:outputText value="Sexo" />
+				</f:facet>
+				<h:outputText value="#{cont.tipoSexo }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.status }">
+				<f:facet name="header">
+					<h:outputText value="Status" />
+				</f:facet>
+				<h:outputText value="#{cont.status }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cpfCnpj }">
+				<f:facet name="header">
+					<h:outputText value="CPF" />
+				</f:facet>
+				<h:outputText value="#{cont.cpfCnpj }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.telefone }">
+				<f:facet name="header">
+					<h:outputText value="Telefone" />
+				</f:facet>
+				<h:outputText value="#{cont.telefone }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.celular }">
+				<f:facet name="header">
+					<h:outputText value="Celular" />
+				</f:facet>
+				<h:outputText value="#{cont.celular }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.email }">
+				<f:facet name="header">
+					<h:outputText value="E-mail" />
+				</f:facet>
+				<h:outputText value="#{cont.email }"></h:outputText>
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener target="#{AlunoControl.aluno}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this">
+
+					<f:setPropertyActionListener target="#{AlunoControl.aluno}"
+						value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim" actionListener="#{AlunoControl.excluir}"
+				onclick="confirmacao.hide()" update="alunos" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+
+	</ui:define>
+</ui:composition>
