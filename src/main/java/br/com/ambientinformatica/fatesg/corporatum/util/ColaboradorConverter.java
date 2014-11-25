@@ -1,16 +1,13 @@
 package br.com.ambientinformatica.fatesg.corporatum.util;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.dao.ColaboradorDao;
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
-import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
@@ -26,7 +23,7 @@ public class ColaboradorConverter implements Converter {
 		if (value == null || value.equals("")) {
 			return "";
 		} else {
-			return String.valueOf(((Instituicao) value).getId());
+			return String.valueOf(((Colaborador) value).getId());
 		}
 	}
 
