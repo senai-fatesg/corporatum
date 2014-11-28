@@ -23,9 +23,6 @@ import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 @Scope("conversation")
 public class AlunoControl implements Serializable {
 
-	/**
-	 * author Glaicon Reis
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Aluno aluno = new Aluno();
