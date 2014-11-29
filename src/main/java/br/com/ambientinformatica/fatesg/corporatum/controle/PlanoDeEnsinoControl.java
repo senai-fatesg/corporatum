@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -23,7 +22,6 @@ public class PlanoDeEnsinoControl implements Serializable{
 
 	private PlanoDeEnsino planoDeEnsino = new PlanoDeEnsino();
 
-	@Autowired
 	private PlanoDeEnsinoDao planoDeEnsinoDao;
 
 	private List<PlanoDeEnsino> planosDeEnsino = new ArrayList<PlanoDeEnsino>();

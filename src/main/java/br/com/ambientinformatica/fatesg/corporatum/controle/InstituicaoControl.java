@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -21,7 +20,6 @@ public class InstituicaoControl {
 
 	private Instituicao instituicao = new Instituicao();
 
-	@Autowired
 	private InstituicaoDao instituicaoDao;
 
 	private List<Instituicao> instituicoes = new ArrayList<Instituicao>();

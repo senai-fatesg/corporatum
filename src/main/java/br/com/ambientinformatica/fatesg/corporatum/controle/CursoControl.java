@@ -35,7 +35,6 @@ public class CursoControl implements Serializable {
 
 	private UnidadeEnsino unidadeEnsino = new UnidadeEnsino();
 
-	@Autowired
 	private CursoDao cursoDao;
 
 	@SuppressWarnings("unused")

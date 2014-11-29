@@ -28,7 +28,6 @@ public class UnidadeEnsinoControl implements Serializable {
 
 	private UnidadeEnsino unidadeEnsino = new UnidadeEnsino();
 
-	@Autowired
 	private UnidadeEnsinoDao unidadeEnsinoDao;
 
 	private Instituicao instituicao = new Instituicao();
