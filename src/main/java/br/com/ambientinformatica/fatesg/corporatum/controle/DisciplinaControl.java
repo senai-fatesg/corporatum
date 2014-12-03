@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -23,11 +24,11 @@ public class DisciplinaControl implements Serializable {
 
 	private Disciplina disciplina  = new Disciplina();
 	
+	@Autowired
 	private DisciplinaDao disciplinaDao;	
 	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 		
-	
    @PostConstruct
    public void init(){
       listar(null);

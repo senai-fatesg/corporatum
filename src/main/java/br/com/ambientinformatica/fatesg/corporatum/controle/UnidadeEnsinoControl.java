@@ -21,13 +21,11 @@ import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
 @Scope("conversation")
 public class UnidadeEnsinoControl implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private UnidadeEnsino unidadeEnsino = new UnidadeEnsino();
 
+	@Autowired
 	private UnidadeEnsinoDao unidadeEnsinoDao;
 
 	private Instituicao instituicao = new Instituicao();

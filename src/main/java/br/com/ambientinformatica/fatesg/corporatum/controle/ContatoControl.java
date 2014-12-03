@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -19,6 +20,7 @@ public class ContatoControl {
 
 	private Contato contato = new Contato();
 
+	@Autowired
 	private ContatoDao contatoDao;
 	
 	private List<Contato> contatos = new ArrayList<Contato>();

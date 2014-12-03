@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -25,12 +26,14 @@ public class AvaliacaoControl implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Avaliacao avaliacao = new Avaliacao();
 
+	@Autowired
 	private AvaliacaoDao avaliacaoDao;
 
 	private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 
 	private Disciplina disciplina = new Disciplina();
 
+	@Autowired
 	private DisciplinaDao disciplinaDao;
 
 	@PostConstruct

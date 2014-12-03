@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -33,6 +34,7 @@ public class AlunoControl implements Serializable {
 
 	Boolean cpfValido = true;
 
+	@Autowired
 	private AlunoDao alunoDao;
 
 	private List<Aluno> alunos = new ArrayList<Aluno>();
