@@ -11,7 +11,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.dao.CursoDao;
 import br.com.ambientinformatica.fatesg.api.dao.MatrizDao;
+import br.com.ambientinformatica.fatesg.api.entidade.Curso;
+import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
 
 @Controller("MatrizControl")
@@ -24,6 +27,11 @@ public class MatrizControl {
 	private MatrizDao matrizDao;
 	
 	private List<Matriz> matrizes = new ArrayList<Matriz>();
+	
+	private List<Curso> cursos = new ArrayList<Curso>();
+	
+	@Autowired
+	private CursoDao cursoDao;
 	
 
    @PostConstruct
@@ -59,6 +67,13 @@ public class MatrizControl {
 			UtilFaces.addMensagemFaces(e);
 		}	
 	}
+	public List<Curso> completarCursos(String nome) {
+		List<Curso> listaCursos = cursoDao.consultarPeloNome(nome);
+		if (listaCursos.size() == 0) {
+			UtilFaces.addMensagemFaces("Curso não encontrado\nVerifique o nome do Curso.");
+		}
+		return listaCursos;
+	}
 	public void limpar(){
 		matriz = new Matriz();
 	}
@@ -73,5 +88,14 @@ public class MatrizControl {
 
 	public List<Matriz> getMatrizes() {
 		return matrizes;
-	}	
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+	
 }
