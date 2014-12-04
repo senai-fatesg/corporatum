@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.dao.InstituicaoDao;
-import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCNPJ;
+import br.com.ambientinformatica.util.UtilCnpj;
 
 @Controller("InstituicaoControl")
 @Scope("conversation")
@@ -26,10 +26,6 @@ public class InstituicaoControl {
 
 	private List<Instituicao> instituicoes = new ArrayList<Instituicao>();
 
-	private Boolean valido = true;
-	
-	private ValidaCNPJ validaCNPJ = new ValidaCNPJ();
-
 	@PostConstruct
 	public void init() {
 		listar(null);
@@ -37,15 +33,14 @@ public class InstituicaoControl {
 
 	public void confirmar(ActionEvent evt) {
 		try {
-			
+
 			String cnpj = instituicao.getCnpj();
 			instituicaoDao.verificarCampos(instituicao);
-			valido = validaCNPJ.validaCnpj(cnpj);
-			if (!valido.equals(false)) {
+			if (UtilCnpj.validarCnpj(cnpj)) {
 				instituicaoDao.alterar(instituicao);
 				instituicoes = instituicaoDao.listar();
 				instituicao = new Instituicao();
-			}else{
+			} else {
 				UtilFaces.addMensagemFaces("CNPJ Inválido");
 			}
 

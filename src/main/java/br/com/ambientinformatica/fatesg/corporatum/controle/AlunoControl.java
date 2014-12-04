@@ -17,7 +17,7 @@ import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.dao.AlunoDao;
-import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
+import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("AlunoControl")
 @Scope("conversation")
@@ -26,10 +26,6 @@ public class AlunoControl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Aluno aluno = new Aluno();
-
-	private ValidaCPF validaCPF = new ValidaCPF();
-
-	private boolean cpfValido = true;
 
 	@Autowired
 	private AlunoDao alunoDao;
@@ -45,16 +41,13 @@ public class AlunoControl implements Serializable {
 		try {
 			alunoDao.verificarCampos(aluno);
 			String cpf = aluno.getCpfCnpj();
-			cpfValido = validaCPF.validacpf(cpf);
-
-			if (!cpfValido == false) {
+			if (UtilCpf.validarCpf(cpf)) {
 				alunoDao.alterar(aluno);
 				listar(evt);
 				aluno = new Aluno();
 			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
-
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

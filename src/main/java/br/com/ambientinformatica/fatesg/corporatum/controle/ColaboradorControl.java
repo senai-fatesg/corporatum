@@ -17,7 +17,7 @@ import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoColaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.dao.ColaboradorDao;
-import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
+import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("ColaboradorControl")
 @Scope("conversation")
@@ -32,10 +32,6 @@ public class ColaboradorControl implements Serializable {
 
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 
-	private ValidaCPF validaCPF = new ValidaCPF();
-
-	Boolean cpfValido = true;
-
 	@PostConstruct
 	public void init() {
 		listar(null);
@@ -45,17 +41,13 @@ public class ColaboradorControl implements Serializable {
 		try {
 			colaboradorDao.verificarCampos(colaborador);
 			String cpf = colaborador.getCpfCnpj();
-			cpfValido = validaCPF.validacpf(cpf);
-
-			if (!cpfValido == false) {
+			if (UtilCpf.validarCpf(cpf)) {
 				colaboradorDao.alterar(colaborador);
 				listar(evt);
 				colaborador = new Colaborador();
-
 			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
-
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
