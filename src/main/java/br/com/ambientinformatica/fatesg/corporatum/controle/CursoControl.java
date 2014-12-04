@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
@@ -14,21 +13,17 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.dao.CursoDao;
-import br.com.ambientinformatica.fatesg.api.dao.UnidadeEnsinoDao;
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumModalidadeCurso;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTurnoCurso;
 import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
+import br.com.ambientinformatica.fatesg.corporatum.dao.CursoDao;
+import br.com.ambientinformatica.fatesg.corporatum.dao.UnidadeEnsinoDao;
 
 @Controller("CursoControl")
 @Scope("conversation")
-@ManagedBean
 public class CursoControl implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Curso curso = new Curso();

@@ -13,26 +13,23 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.dao.AlunoDao;
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
+import br.com.ambientinformatica.fatesg.corporatum.dao.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.util.ValidaCPF;
 
 @Controller("AlunoControl")
 @Scope("conversation")
 public class AlunoControl implements Serializable {
 
-	/**
-	 * author Glaicon Reis
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Aluno aluno = new Aluno();
 
 	private ValidaCPF validaCPF = new ValidaCPF();
 
-	Boolean cpfValido = true;
+	private boolean cpfValido = true;
 
 	@Autowired
 	private AlunoDao alunoDao;

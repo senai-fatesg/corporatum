@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.dao.DisciplinaDao;
 import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
+import br.com.ambientinformatica.fatesg.corporatum.dao.DisciplinaDao;
 
 @Controller("DisciplinaControl")
 @Scope("conversation")
@@ -29,6 +29,7 @@ public class DisciplinaControl implements Serializable {
 	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 		
+	
    @PostConstruct
    public void init(){
       listar(null);

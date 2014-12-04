@@ -1,4 +1,4 @@
-package br.com.ambientinformatica.fatesg.corporatum.util;
+package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -7,7 +7,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.dao.InstituicaoDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
@@ -15,6 +14,8 @@ import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
 @FacesConverter("instituicaoConverter")
 public class InstituicaoConverter implements Converter {
+	
+	 private Instituicao instituicao;
 	
 	
 	   private InstituicaoDao instituicaoDao = (InstituicaoDao)FabricaAbstrata.criarObjeto("instituicaoDao");
@@ -28,11 +29,10 @@ public class InstituicaoConverter implements Converter {
 	       }  
 	   }
 
-
 	   @Override
 	   public Object getAsObject(FacesContext context, UIComponent component, String value) {
 	      if (value != null && !value.trim().equals("")) {  
-			Instituicao instituicao = new Instituicao();
+	         Instituicao instituicao = new Instituicao();
 	         try {  
 	         	long id = Long.parseLong(value);  
 
@@ -42,7 +42,7 @@ public class InstituicaoConverter implements Converter {
 	               e.printStackTrace();
 	            }
 	         } catch(NumberFormatException exception) {  
-	            UtilFaces.addMensagemFaces("Instituição escolhida não é válida. Erro no Converter");
+	            throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Cliente escolhido não é válido"));
 	            //return null;
 	         }  
 	         return instituicao;  
