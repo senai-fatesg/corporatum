@@ -31,6 +31,8 @@ public class AlunoControl implements Serializable {
 	private AlunoDao alunoDao;
 
 	private List<Aluno> alunos = new ArrayList<Aluno>();
+	
+	private List<Aluno> filtrarAlunos = new ArrayList<Aluno>();
 
 	@PostConstruct
 	public void init() {
@@ -85,6 +87,14 @@ public class AlunoControl implements Serializable {
 
 	public List<Aluno> getAlunos() {
 		return alunos;
+	}	
+
+	public List<Aluno> getFiltrarAlunos() {
+		return filtrarAlunos;
+	}
+	
+	public void setFiltrarAlunos(List<Aluno> filtrarAlunos) {
+		this.filtrarAlunos = filtrarAlunos;
 	}
 
 	public List<SelectItem> getTiposSexo() {
