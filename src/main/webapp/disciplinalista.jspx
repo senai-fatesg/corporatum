@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="templatePlanoEnsino.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:dataTable id="disciplinas"
+			value="#{DisciplinaControl.disciplinas }" var="cont" width="100%"
+			emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Lista de Dsiciplinas" />
+			</f:facet>
+			<p:column sortBy="#{cont.id}">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+				<h:outputText value="#{cont.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cargaHoraria }">
+				<f:facet name="header">
+					<h:outputText value="Carga Horária" />
+				</f:facet>
+				<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cargaHoraria }">
+				<f:facet name="header">
+					<h:outputText value="Carga Horária" />
+				</f:facet>
+				<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener
+						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/disciplina.jspx?faces-redirect=true">
+
+					<f:setPropertyActionListener
+						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{DisciplinaControl.excluir}"
+				onclick="confirmacao.hide()" update="disciplinas" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>
