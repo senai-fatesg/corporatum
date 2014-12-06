@@ -9,7 +9,8 @@
 	<ui:define name="corpo">
 		<p:dataTable id="disciplinas"
 			value="#{DisciplinaControl.disciplinas }" var="cont" width="100%"
-			emptyMessage="Sem registros">
+			emptyMessage="Sem registros" rows="200" paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 			<f:facet name="header">
 				<h:outputText value="Lista de Dsiciplinas" />
 			</f:facet>
@@ -63,5 +64,9 @@
 				onclick="confirmacao.hide()" update="disciplinas" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
+		<a:newLine />
+		<p:spacer width="25px" />
+		<p:commandButton action="/disciplina.jspx?faces-redirect=true"
+				value="Voltar" />
 	</ui:define>
 </ui:composition>
