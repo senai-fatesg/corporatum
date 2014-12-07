@@ -32,16 +32,19 @@
 				</f:facet>
 				<h:outputText value="#{cont.tipoSexo }"></h:outputText>
 			</p:column>
-			<p:column filterBy="#{cont.status }" filterMatchMode="exact">
+			<p:column  fiterBy="#{cont.status }" filterMatchMode="exact">
 				<f:facet name="header">
+					<h:outputText value="Status" />
+					<a:newLine />
 					<p:selectOneMenu onchange="PF('alunos').filter()">
 						<f:selectItem itemLabel="Selecione..." itemValue="#{null}"
 							noSelectionOption="true" />
-						<f:selectItems value="#{AlunoControl.status}" var="status"/>
-					</p:selectOneMenu>					
+						<f:selectItems value="#{AlunoControl.status}" var="status" />
+					</p:selectOneMenu>
 				</f:facet>
 				<h:outputText value="#{cont.status }"></h:outputText>
 			</p:column>
+
 			<p:column sortBy="#{cont.cpfCnpj }">
 				<f:facet name="header">
 					<h:outputText value="CPF" />
