@@ -1,5 +1,10 @@
 package br.com.ambientinformatica.fatesg.corporatum.dao;
 
+import java.util.List;
+
+import javax.faces.model.SelectItem;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
@@ -61,6 +66,9 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		if (historico.equals("")) {
 			throw new IllegalArgumentException("*Campo Obrigátorio: Histórico");
 		}
+		if (cep.equals("")) {
+			throw new IllegalArgumentException("*Campo Obrigátorio: CEP");
+		}
 		if (endereco.equals("")) {
 			throw new IllegalArgumentException("*Campo Obrigátorio: Endereço");
 		}
@@ -71,6 +79,24 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 			throw new IllegalArgumentException("*Campo Obrigátorio: UF(Estado)");
 		}
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Colaborador> listarPorNome(String nome) {
+		Query q = this.em
+				.createQuery("from Colaborador as a where a.nome like :nome");
+		q.setParameter("nome", "%" + nome + "%");
+		return q.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Colaborador> listarPorTipo(SelectItem tipo) {
+		Query q = this.em
+				.createQuery("from Colaborador as a where a.tipo like :tipo");
+		q.setParameter("tipo", "%" + tipo + "%");
+		return q.getResultList();
 	}
 
 }
