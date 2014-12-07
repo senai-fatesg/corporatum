@@ -35,14 +35,14 @@
 			</a:field>
 			<a:newLine />
 			<a:newLine />
-			<p:commandButton actionListener="#{AvaliacaoControl.confirmar}" value="Confirmar"
-				update="panelAvaliacao" />
-
+			<p:commandButton actionListener="#{AvaliacaoControl.confirmar}"
+				value="Confirmar" update="panelAvaliacao" />
+			<p:spacer width="25px" />
 			<p:commandButton action="/avaliacaolista.jspx?faces-redirect=true"
-				value="Listar"/>
-
-			<p:commandButton action="#{AvaliacaoControl.limpar}"
-				value="Limpar" update="panelAvaliacao" />
+				value="Listar" />
+			<p:spacer width="25px" />
+			<p:commandButton action="#{AvaliacaoControl.limpar}" value="Limpar"
+				update="panelAvaliacao" />
 			<a:newLine />
 		</p:panel>
 

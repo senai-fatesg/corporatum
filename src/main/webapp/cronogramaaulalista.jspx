@@ -7,10 +7,11 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:dataTable id="avaliacoes" value="#{AvaliacaoControl.avaliacoes }"
-			var="cont" width="100%" emptyMessage="Sem registros">
+		<p:dataTable id="cronogramasAulas"
+			value="#{CronogramaAulaControl.cronogramasAulas }" var="cont"
+			width="100%" emptyMessage="Sem registros">
 			<f:facet name="header">
-				<h:outputText value="Lista de Avaliações" />
+				<h:outputText value="Lista de Aulas" />
 			</f:facet>
 			<p:column sortBy="#{cont.id }">
 				<f:facet name="header">
@@ -24,37 +25,39 @@
 				</f:facet>
 				<h:outputText value="#{cont.disciplina.nome }" />
 			</p:column>
-			<p:column sortBy="#{cont.tipoAvaliacao }">
+			<p:column sortBy="#{cont.aula }">
 				<f:facet name="header">
-					<h:outputText value="Tipo" />
+					<h:outputText value="Aula nº" />
 				</f:facet>
-				<h:outputText value="#{cont.tipoAvaliacao }" />
+				<h:outputText value="#{cont.aula }" />
 			</p:column>
-			<p:column sortBy="#{cont.criterio }">
+			<p:column sortBy="#{cont.conteudoProgramatico }">
 				<f:facet name="header">
-					<h:outputText value="Critério" />
+					<h:outputText value="Conteúdo Programático" />
 				</f:facet>
-				<h:outputText value="#{cont.criterio}" />
+				<h:outputText value="#{cont.conteudoProgramatico }" />
 			</p:column>
-			<p:column sortBy="#{cont.observacao }">
+			<p:column sortBy="#{cont.horasAulas }">
 				<f:facet name="header">
-					<h:outputText value="Observação" />
+					<h:outputText value="Horas Aulas" />
 				</f:facet>
-				<h:outputText value="#{cont.observacao }" />
+				<h:outputText value="#{cont.horasAulas }" />
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
+					actionListener="#{CronogramaAulaControl.excluir}"
+					update="cronogramasAulas" oncomplete="confirmacao.show()">
 
-					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
-						value="#{cont}" />
+					<f:setPropertyActionListener
+						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/avaliaca.jspx?faces-redirect=true">
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this" action="/cronogramaaula.jspx?faces-redirect=true">
 
-					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
-						value="#{cont}" />
+					<f:setPropertyActionListener
+						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
 
 				</p:commandButton>
 			</p:column>
@@ -64,13 +67,13 @@
 			closable="true">
 
 			<p:commandButton value="Sim"
-				actionListener="#{AvaliacaoControl.excluir}"
-				onclick="confirmacao.hide()" update="avaliacoes" process="@this" />
+				actionListener="#{CronogramaAulaControl.excluir}"
+				onclick="confirmacao.hide()" update="cronogramasAulas" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton action="/avaliacao.jspx?faces-redirect=true"
+		<p:commandButton action="/cronogramaaula.jspx?faces-redirect=true"
 				value="Voltar" />
 	</ui:define>
 </ui:composition>

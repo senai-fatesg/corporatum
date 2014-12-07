@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="templatePlanoEnsino.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:dataTable id="planosensino"
+			value="#{PlanoDeEnsinoControl.planosDeEnsino }" var="cont"
+			width="100%" emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Planos de Ensino" />
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.competencia }">
+				<f:facet name="header">
+					<h:outputText value="Competência" />
+				</f:facet>
+				<h:outputText value="#{cont.competencia }" />
+			</p:column>
+			<p:column sortBy="#{cont.habilidade }">
+				<f:facet name="header">
+					<h:outputText value="Habilidade" />
+				</f:facet>
+				<h:outputText value="#{cont.habilidade }" />
+			</p:column>
+			<p:column sortBy="#{cont.baseTecnologica }">
+				<f:facet name="header">
+					<h:outputText value="Base Tecnológica " />
+				</f:facet>
+				<h:outputText value="#{cont.baseTecnologica }" />
+			</p:column>
+			<p:column sortBy="#{cont.metodologiaEnsino }">
+				<f:facet name="header">
+					<h:outputText value="Metodologia de Ensino " />
+				</f:facet>
+				<h:outputText value="#{cont.metodologiaEnsino }" />
+			</p:column>
+			<p:column sortBy="#{cont.recursoDidatico }">
+				<f:facet name="header">
+					<h:outputText value="Recurso Didático " />
+				</f:facet>
+				<h:outputText value="#{cont.recursoDidatico }" />
+			</p:column>
+			<p:column sortBy="#{cont.bibliografia }">
+				<f:facet name="header">
+					<h:outputText value="Bibliografia " />
+				</f:facet>
+				<h:outputText value="#{cont.bibliografia}" />
+			</p:column>
+
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+
+					<f:setPropertyActionListener
+						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this" action="/planoensino.jspx?faces-redirect=true">
+
+					<f:setPropertyActionListener
+						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{PlanoDeEnsinoControl.excluir}"
+				onclick="confirmacao.hide()" update="planosensino" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+		<a:newLine />
+		<p:spacer width="25px" />
+		<p:commandButton action="/planoensino.jspx?faces-redirect=true"
+				value="Voltar" />
+	</ui:define>
+</ui:composition>
