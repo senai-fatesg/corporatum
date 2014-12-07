@@ -8,7 +8,6 @@
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
 		<p:panel header="Cadastro de Alunos" id="panelAluno">
-			<p:messages />
 			<a:field label="Nome">
 				<p:inputText value="#{AlunoControl.aluno.nome }" />
 			</a:field>
@@ -79,8 +78,8 @@
 			<p:commandButton action="/alunolista.jspx?faces-redirect=true"
 				value="Listar" />
 			<p:spacer width="45px" />
-			<p:commandButton action="#{AlunoControl.limpar}"
-				value="Limpar" update="panelAluno" />
+			<p:commandButton action="#{AlunoControl.limpar}" value="Limpar"
+				update="panelAluno" />
 			<a:newLine />
 		</p:panel>
 	</ui:define>

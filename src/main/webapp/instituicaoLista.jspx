@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="corpo">
+		<p:dataTable widgetVar="instituicoes" id="dtInstituicao"
+			value="#{InstituicaoControl.instituicoes }" var="cont" width="100%"
+			emptyMessage="Sem registros" rows="20" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			<f:facet name="header">
+				<h:outputText value="Buscar por Nome:" />
+				<p:inputText id="inputFiltroGlobal"
+					value="#{InstituicaoControl.filtroGlobal}"/>
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
+					actionListener="#{InstituicaoControl.filtrarPorNome}"
+					update="dtInstituicao" />
+				<p:commandButton action="#{InstituicaoControl.limpar}"
+					value="Limpar" icon="ui-icon-cancel" update="dtInstituicao" />
+				<a:newLine />
+				<h:outputText value="Lista de Instituições"></h:outputText>
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.nomeFantasia }">
+				<f:facet name="header">
+					<h:outputText value="Nome Fantazia"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.nomeFantasia }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.razaoSocial }">
+				<f:facet name="header">
+					<h:outputText value="Razao Social"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.razaoSocial }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cnpj }">
+				<f:facet name="header">
+					<h:outputText value="CNPJ"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.cnpj }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.inscricaoEstadual }">
+				<f:facet name="header">
+					<h:outputText value="Inscrição Estadual"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.inscricaoEstadual }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.descricao }">
+				<f:facet name="header">
+					<h:outputText value="Descricao"></h:outputText>
+				</f:facet>
+				<h:outputText value="#{cont.descricao }"></h:outputText>
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
+					<f:setPropertyActionListener
+						target="#{InstituicaoControl.instituicao}" value="#{cont}" />
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-pencil" value="Editar"
+					action="/instituicao.jspx?faces-redirect=true">
+					<f:setPropertyActionListener
+						target="#{InstituicaoControl.instituicao}" value="#{cont}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+			<p:commandButton value="Sim"
+				actionListener="#{IntituicaoControl.excluir}"
+				onclick="confirmacao.hide()" update="@this" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+	</ui:define>
+</ui:composition>
