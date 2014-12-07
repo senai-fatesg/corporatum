@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.dao.InstituicaoDao;
+import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.util.UtilCnpj;
 
 @Controller("InstituicaoControl")
@@ -25,6 +26,8 @@ public class InstituicaoControl {
 	private InstituicaoDao instituicaoDao;
 
 	private List<Instituicao> instituicoes = new ArrayList<Instituicao>();
+
+	private String filtroGlobal = "";
 
 	@PostConstruct
 	public void init() {
@@ -40,6 +43,7 @@ public class InstituicaoControl {
 				instituicaoDao.alterar(instituicao);
 				instituicoes = instituicaoDao.listar();
 				instituicao = new Instituicao();
+				UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 			} else {
 				UtilFaces.addMensagemFaces("CNPJ Inválido");
 			}
@@ -67,8 +71,24 @@ public class InstituicaoControl {
 		}
 	}
 
+	public void filtrarPorNome() {
+		try {
+			instituicoes = instituicaoDao.consultarPeloNome(filtroGlobal);
+			if (instituicoes.isEmpty()) {
+				instituicoes = instituicaoDao.consultarPeloNome(filtroGlobal);
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+
 	public void limpar() {
-		instituicao = new Instituicao();
+		filtroGlobal = "";
+		try {
+			instituicoes = instituicaoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
 	}
 
 	public Instituicao getInstituicao() {
@@ -81,6 +101,14 @@ public class InstituicaoControl {
 
 	public List<Instituicao> getInstituicoes() {
 		return instituicoes;
+	}
+
+	public String getFiltroGlobal() {
+		return filtroGlobal;
+	}
+
+	public void setFiltroGlobal(String filtroGlobal) {
+		this.filtroGlobal = filtroGlobal;
 	}
 
 }

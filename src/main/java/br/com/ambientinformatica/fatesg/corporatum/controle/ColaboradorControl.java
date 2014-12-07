@@ -31,6 +31,10 @@ public class ColaboradorControl implements Serializable {
 	private ColaboradorDao colaboradorDao;
 
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+	
+	private String filtroGlobal = "";
+	
+	private SelectItem tipo = new SelectItem();
 
 	@PostConstruct
 	public void init() {
@@ -45,6 +49,7 @@ public class ColaboradorControl implements Serializable {
 				colaboradorDao.alterar(colaborador);
 				listar(evt);
 				colaborador = new Colaborador();
+				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
 			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
@@ -68,6 +73,18 @@ public class ColaboradorControl implements Serializable {
 			colaboradores = colaboradorDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
+		}
+	}
+	public void filtrarPorNome() {
+		colaboradores = colaboradorDao.listarPorNome(filtroGlobal);
+		if (colaboradores.isEmpty()) {
+			colaboradores = colaboradorDao.listarPorNome(filtroGlobal);
+		}
+	}
+	public void filtrarPorTipo() {
+		colaboradores = colaboradorDao.listarPorTipo(tipo);
+		if (colaboradores.isEmpty()) {
+			colaboradores = colaboradorDao.listarPorTipo(tipo);
 		}
 	}
 
@@ -94,5 +111,14 @@ public class ColaboradorControl implements Serializable {
 	public List<SelectItem> getTiposColaboradores() {
 		return UtilFaces.getListEnum(EnumTipoColaborador.values());
 	}
+
+	public String getFiltroGlobal() {
+		return filtroGlobal;
+	}
+
+	public void setFiltroGlobal(String filtroGlobal) {
+		this.filtroGlobal = filtroGlobal;
+	}
+	
 
 }
