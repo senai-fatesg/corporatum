@@ -7,12 +7,22 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:dataTable widgetVar="alunos" value="#{AlunoControl.alunos }"
-			var="cont" width="100%" emptyMessage="Sem registros" rows="20"
-			paginator="true" filteredValue="#{AlunoControl.filtrarAlunos}"
+		<p:dataTable widgetVar="alunos" id="dtAluno"
+			value="#{AlunoControl.alunos }" var="cont" width="100%"
+			emptyMessage="Sem registros" rows="20" paginator="true"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 			<f:facet name="header">
-				<h:outputText value="Lista de Alunos" />
+				<h:outputText value="Buscar por Status:" />
+				<h:selectOneMenu id="status" value="#{AlunoControl.filtroGlobal}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{ AlunoControl.status}" var="tipo"
+						itemValue="#{tipo}" itemLabel="#{tipo}" />
+				</h:selectOneMenu>
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
+					actionListener="#{AlunoControl.filtrarPorStatus}"
+					update="dtAluno" />
+				<a:newLine />
+				<h:outputText value="Lista de Alunos"></h:outputText>
 			</f:facet>
 			<p:column sortBy="#{cont.id }">
 				<f:facet name="header">
@@ -32,19 +42,12 @@
 				</f:facet>
 				<h:outputText value="#{cont.tipoSexo }"></h:outputText>
 			</p:column>
-			<p:column fiterBy="#{cont.status }" filterMatchMode="exact">
+			<p:column sortBy="#{cont.tipoStatus }">
 				<f:facet name="header">
 					<h:outputText value="Status" />
-					<a:newLine />
-					<p:selectOneMenu onchange="PF('alunos').filter()">
-						<f:selectItem itemLabel="Selecione..." itemValue="#{null}"
-							noSelectionOption="true" />
-						<f:selectItems value="#{AlunoControl.status}" var="status" />
-					</p:selectOneMenu>
 				</f:facet>
 				<h:outputText value="#{cont.status }"></h:outputText>
 			</p:column>
-
 			<p:column sortBy="#{cont.cpfCnpj }">
 				<f:facet name="header">
 					<h:outputText value="CPF" />

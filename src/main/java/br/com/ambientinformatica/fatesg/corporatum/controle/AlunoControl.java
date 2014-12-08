@@ -33,6 +33,8 @@ public class AlunoControl implements Serializable {
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
 	private List<Aluno> filtrarAlunos = new ArrayList<Aluno>();
+	
+	private EnumStatusAluno filtroGlobal;
 
 	@PostConstruct
 	public void init() {
@@ -72,6 +74,17 @@ public class AlunoControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+	
+	public void filtrarPorStatus() {
+		try {
+			alunos = alunoDao.consultarPeloStatus(filtroGlobal);
+			if (alunos.isEmpty()) {
+				alunos = alunoDao.consultarPeloStatus(filtroGlobal);
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
 
 	public void limpar() {
 		aluno = new Aluno();
@@ -104,4 +117,12 @@ public class AlunoControl implements Serializable {
 	public List<SelectItem> getStatus() {
 		return UtilFaces.getListEnum(EnumStatusAluno.values());
 	}
+
+	public EnumStatusAluno getFiltroGlobal() {
+		return filtroGlobal;
+	}
+
+	public void setFiltroGlobal(EnumStatusAluno filtroGlobal) {
+		this.filtroGlobal = filtroGlobal;
+	}	
 }

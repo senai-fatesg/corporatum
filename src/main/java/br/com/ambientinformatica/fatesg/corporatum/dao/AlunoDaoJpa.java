@@ -1,8 +1,15 @@
 package br.com.ambientinformatica.fatesg.corporatum.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 
 @Repository("alunoDao")
@@ -71,7 +78,15 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 		if (uf.equals("")) {
 			throw new IllegalArgumentException("*Campo Obrigátorio: UF(Estado)");
 		}
-
 	}
 
+	@Override
+	public List<Aluno> consultarPeloStatus(EnumStatusAluno status){
+		Disjunction or = Restrictions.disjunction();
+		Session session = this.em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Aluno.class);
+		or.add(Restrictions.eq("status", status));
+		criteria.add(or);
+		return criteria.list();
+	}
 }
