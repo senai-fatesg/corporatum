@@ -76,8 +76,8 @@
 			message="Tem Certeza que deseja excluir?" severity="alert"
 			closable="true">
 			<p:commandButton value="Sim"
-				actionListener="#{IntituicaoControl.excluir}"
-				onclick="confirmacao.hide()" update="@this" process="@this" />
+				actionListener="#{InstituicaoControl.excluir}"
+				onclick="confirmacao.hide()" update="dtInstituicao" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />
