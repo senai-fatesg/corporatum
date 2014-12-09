@@ -79,7 +79,7 @@
 			closable="true">
 			<p:commandButton value="Sim"
 				actionListener="#{UnidadeEnsinoControl.excluir}"
-				onclick="confirmacao.hide()" update="@this" process="@this" />
+				onclick="confirmacao.hide()" update="dtUnidadeEnsino" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />

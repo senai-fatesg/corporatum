@@ -89,7 +89,7 @@
 			closable="true">
 			<p:commandButton value="Sim"
 				actionListener="#{ColaboradorControl.excluir}"
-				onclick="confirmacao.hide()" update="@this" process="@this" />
+				onclick="confirmacao.hide()" update="dtColaboradores" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />
