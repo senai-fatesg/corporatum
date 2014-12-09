@@ -7,9 +7,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.ambientinformatica.fatesg.corporatum.dao.UsuarioDao;
 import br.com.ambientinformatica.fatesg.corporatum.entidade.EnumPapelUsuario;
 import br.com.ambientinformatica.fatesg.corporatum.entidade.Usuario;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.UsuarioDao;
 import br.com.ambientinformatica.util.UtilLog;
 
 @Service("inicializadorSistema")

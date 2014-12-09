@@ -5,7 +5,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.ambientinformatica.corporativo.entidade.Municipio;
-import br.com.ambientinformatica.fatesg.corporatum.dao.MunicipioDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.MunicipioDao;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
 @FacesConverter("municipioConverter")
