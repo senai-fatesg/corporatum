@@ -76,10 +76,10 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 		if (aluno.getEndereco() == null || aluno.getEndereco().isEmpty()) {
 			throw new CorporatumException("*Campo Obrigátorio: Endereço");
 		}
-		if (aluno.getMunicipio() == null || aluno.getMunicipio().isEmpty()) {
+		if (aluno.getMunicipio() == null) {
 			throw new CorporatumException("*Campo Obrigátorio: Municipio");
 		}
-		if (aluno.getUf() == null || aluno.getUf().isEmpty()) {
+		if (aluno.getUf() == null) {
 			throw new CorporatumException("*Campo Obrigátorio: UF(Estado)");
 		}
 	}

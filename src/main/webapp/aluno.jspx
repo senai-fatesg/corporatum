@@ -63,12 +63,20 @@
 				<p:inputText value="#{AlunoControl.aluno.endereco }"
 					style="width:444px" />
 			</a:field>
-			<a:field label="Cidade" spaceLeft="15px">
-				<p:inputText value="#{AlunoControl.aluno.municipio }" />
+			<a:field label="UF" spaceLeft="15px;">
+				<p:selectOneMenu value="#{AlunoControl.uf }" style="width:170px;">
+					<f:selectItems value="#{AlunoControl.ufs }"></f:selectItems>
+					<p:ajax update="municipios" listener="#{AlunoControl.atualizarMunicipios}"></p:ajax>
+				</p:selectOneMenu>
 			</a:field>
-			<a:field label="UF" spaceLeft="15px">
-				<p:inputText value="#{AlunoControl.aluno.uf }" />
-			</a:field>
+        
+            <a:field label="Município" spaceLeft="15px;">
+               <p:selectOneMenu value="#{AlunoControl.municipio }" style="width:150px;" id="municipios" converter="municipioConverter"  >
+                  <f:selectItem itemLabel="Selecione"/>
+                  <f:selectItems value="#{AlunoControl.municipios }"/>
+               </p:selectOneMenu>
+            </a:field>
+            
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton ajax="false"
