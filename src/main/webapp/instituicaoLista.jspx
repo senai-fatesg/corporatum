@@ -14,7 +14,7 @@
 			<f:facet name="header">
 				<h:outputText value="Buscar por Nome:" />
 				<p:inputText id="inputFiltroGlobal"
-					value="#{InstituicaoControl.filtroGlobal}"/>
+					value="#{InstituicaoControl.filtroGlobal}" />
 				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
 					actionListener="#{InstituicaoControl.filtrarPorNome}"
 					update="dtInstituicao" />
@@ -80,5 +80,9 @@
 				onclick="confirmacao.hide()" update="@this" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
+		<a:newLine />
+		<p:spacer width="25px" />
+		<p:commandButton action="/instituicao.jspx?faces-redirect=true"
+			value="Voltar" />
 	</ui:define>
 </ui:composition>

@@ -45,6 +45,8 @@
 			<p:commandButton
 				action="/unidadeEnsinoLista.jspx?faces-redirect=true" value="Listar" />
 			<p:spacer width="45px" />
+			<p:commandButton actionListener="#{UnidadeEnsinoControl.limpar }"
+				value="Limpar" update="panel" ajax="false"/>
 			<a:newLine />
 		</p:panel>
 	</ui:define>

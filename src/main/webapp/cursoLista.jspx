@@ -19,8 +19,8 @@
 					actionListener="#{CursoControl.filtrarPorNome}" update="dtCurso" />
 				<p:commandButton action="#{CursoControl.limparConsulta}"
 					value="Limpar" icon="ui-icon-cancel" update="dtCurso" />
-				<p:commandButton action="#{CursoControl.voltar}"
-					value="Voltar" icon="ui-icon-voltar" ajax="false" />
+				<p:commandButton action="#{CursoControl.voltar}" value="Voltar"
+					icon="ui-icon-voltar" ajax="false" />
 				<a:newLine />
 			</f:facet>
 			<f:facet name="header">
@@ -84,10 +84,13 @@
 		<p:confirmDialog widgetVar="confirmacao"
 			message="Tem Certeza que deseja excluir?" severity="alert"
 			closable="true">
-
 			<p:commandButton value="Sim" actionListener="#{CursoControl.excluir}"
 				onclick="confirmacao.hide()" update="cursos" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
+		<a:newLine />
+		<p:spacer width="25px" />
+		<p:commandButton action="/curso.jspx?faces-redirect=true"
+			value="Voltar" />
 	</ui:define>
 </ui:composition>
