@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
-import br.com.ambientinformatica.fatesg.api.persistencia.InstituicaoDao;
-import br.com.ambientinformatica.fatesg.api.persistencia.UnidadeEnsinoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao;
 
 @Controller("UnidadeEnsinoControl")
 @Scope("conversation")

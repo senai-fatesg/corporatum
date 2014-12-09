@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
-import br.com.ambientinformatica.fatesg.api.persistencia.ColaboradorDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 

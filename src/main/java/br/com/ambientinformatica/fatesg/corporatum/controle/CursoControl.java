@@ -18,8 +18,8 @@ import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumModalidadeCurso;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTurnoCurso;
 import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
-import br.com.ambientinformatica.fatesg.api.persistencia.CursoDao;
-import br.com.ambientinformatica.fatesg.api.persistencia.UnidadeEnsinoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.UnidadeEnsinoDao;
 
 @Controller("CursoControl")
 @Scope("conversation")
