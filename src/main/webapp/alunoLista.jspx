@@ -29,6 +29,8 @@
 			<p:commandButton actionListener="#{AlunoControl.listar }" value="Listar" update="alunos, panel" icon="ui-icon-search"/>
 			<p:spacer width="45px" />
 			<p:commandButton action="/aluno.jspx?faces-redirect=true" value="Novo Aluno" icon="ui-icon-contact"/>
+						<p:spacer width="45px" />
+			<p:commandButton value="Imprimir" icon="ui-icon-print" actionListener="#{AlunoControl.imprimirLista}"/>
 		</p:panel>
 	
 		<p:dataTable widgetVar="alunos" id="alunos"
@@ -105,8 +107,5 @@
 			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />
-		<p:spacer width="25px" />
-		<p:commandButton action="/aluno.jspx?faces-redirect=true"
-			value="Voltar" />
 	</ui:define>
 </ui:composition>

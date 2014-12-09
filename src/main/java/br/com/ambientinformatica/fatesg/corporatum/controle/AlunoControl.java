@@ -2,7 +2,9 @@ package br.com.ambientinformatica.fatesg.corporatum.controle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.event.ActionEvent;
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.ambientjsf.util.UtilFacesRelatorio;
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
@@ -83,6 +86,20 @@ public class AlunoControl implements Serializable {
 		}
 	}
 	
+	
+	public void imprimirLista(ActionEvent evt){
+		try {
+			if(alunos != null){
+				Map<String, Object> parametros = new HashMap<String, Object>();
+				UtilFacesRelatorio.gerarRelatorioFaces("jasper/alunoLista.jasper", alunos, parametros);
+			}else{
+				UtilFaces.addMensagemFaces("É necessário listar ao menos um Aluno");
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces("Metodo não implementado!");
+		}
+		
+	}
 	public void limpar() {
 		aluno = new Aluno();
 	}
