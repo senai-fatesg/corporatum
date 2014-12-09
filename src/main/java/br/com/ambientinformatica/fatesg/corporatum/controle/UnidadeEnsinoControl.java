@@ -37,6 +37,8 @@ public class UnidadeEnsinoControl implements Serializable {
 
 	private List<UnidadeEnsino> unidadesEnsino = new ArrayList<UnidadeEnsino>();
 
+	private String filtroGlobal = "";
+
 	@PostConstruct
 	public void init() {
 		listar(null);
@@ -49,6 +51,7 @@ public class UnidadeEnsinoControl implements Serializable {
 			unidadeEnsinoDao.alterar(unidadeEnsino);
 			listar(evt);
 			unidadeEnsino = new UnidadeEnsino();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
@@ -77,11 +80,31 @@ public class UnidadeEnsinoControl implements Serializable {
 		List<Instituicao> listaInstitucoes = instituicaoDao
 				.consultarPeloNome(nomefantasia);
 		if (listaInstitucoes.size() == 0) {
-			UtilFaces.addMensagemFaces("Instituição não encontrada\nVerifique o nome da Instituição.");
+			UtilFaces
+					.addMensagemFaces("Instituição não encontrada\nVerifique o nome da Instituição.");
 		}
 		return listaInstitucoes;
 	}
-	
+
+	public void filtrarPorNome() {
+		try {
+			unidadesEnsino = unidadeEnsinoDao.listarPorNome(filtroGlobal);
+			if (unidadesEnsino.isEmpty()) {
+				unidadesEnsino = unidadeEnsinoDao.listarPorNome(filtroGlobal);
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+
+	public void limparConsulta() {
+		filtroGlobal = "";
+		try {
+			unidadesEnsino = unidadeEnsinoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
 
 	public UnidadeEnsino getUnidadeEnsino() {
 		return unidadeEnsino;
@@ -113,6 +136,14 @@ public class UnidadeEnsinoControl implements Serializable {
 
 	public UnidadeEnsinoDao getUnidadeEnsinoDao() {
 		return unidadeEnsinoDao;
+	}
+
+	public String getFiltroGlobal() {
+		return filtroGlobal;
+	}
+
+	public void setFiltroGlobal(String filtroGlobal) {
+		this.filtroGlobal = filtroGlobal;
 	}
 
 }

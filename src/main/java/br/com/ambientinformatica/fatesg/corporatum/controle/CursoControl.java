@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
@@ -42,6 +43,8 @@ public class CursoControl implements Serializable {
 
 	@Autowired
 	private UnidadeEnsinoDao unidadeEnsinoDao;
+	
+	private String filtroGlobal = "";
 
 	@PostConstruct
 	public void init() {
@@ -51,10 +54,10 @@ public class CursoControl implements Serializable {
 	public void confirmar(ActionEvent evt) {
 		try {
 			cursoDao.verificarCampos(curso);
-
 			cursoDao.alterar(curso);
 			listar(evt);
 			curso = new Curso();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
@@ -74,8 +77,35 @@ public class CursoControl implements Serializable {
 	public void limpar() {
 		curso = new Curso();
 	}
+	public void voltar(){
+		try {
+			FacesContext.getCurrentInstance().getExternalContext()
+					.redirect("curso.jspx");
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
 
 	public void listar(ActionEvent evt) {
+		try {
+			cursos = cursoDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+	public void filtrarPorNome() {
+		try {
+			cursos = cursoDao.listarPorNome(filtroGlobal);
+			if (cursos.isEmpty()) {
+				cursos = cursoDao.listarPorNome(filtroGlobal);
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+
+	public void limparConsulta() {
+		filtroGlobal = "";
 		try {
 			cursos = cursoDao.listar();
 		} catch (Exception e) {
@@ -85,7 +115,7 @@ public class CursoControl implements Serializable {
 
 	public List<UnidadeEnsino> completarUnidadesEnsino(String nome) {
 		List<UnidadeEnsino> listaUnidadesEnsino = unidadeEnsinoDao
-				.consultarPeloNome(nome);
+				.listarPorNome(nome);
 		if (listaUnidadesEnsino.size() == 0) {
 			UtilFaces
 					.addMensagemFaces("UnidadeEnsino não encontrada\nVerifique o nome da UnidadeEnsino.");
@@ -136,5 +166,14 @@ public class CursoControl implements Serializable {
 	public List<SelectItem> getModalidadesCurso() {
 		return UtilFaces.getListEnum(EnumModalidadeCurso.values());
 	}
+
+	public String getFiltroGlobal() {
+		return filtroGlobal;
+	}
+
+	public void setFiltroGlobal(String filtroGlobal) {
+		this.filtroGlobal = filtroGlobal;
+	}
+	
 
 }
