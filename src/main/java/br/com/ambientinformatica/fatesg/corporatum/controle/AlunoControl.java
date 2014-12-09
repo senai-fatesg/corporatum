@@ -70,8 +70,8 @@ public class AlunoControl implements Serializable {
 
 	public void excluir(ActionEvent evt) {
 		try {
-			alunoDao.excluirPorId(aluno.getId());
-			aluno = new Aluno();
+			aluno.setStatus(EnumStatusAluno.INATIVO);
+			alunoDao.alterar(aluno);
 			listar(evt);
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
