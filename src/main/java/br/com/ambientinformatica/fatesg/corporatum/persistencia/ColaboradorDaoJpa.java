@@ -86,7 +86,7 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 	public List<Colaborador> listarPorNome(String nome) {
 		Query q = this.em
 				.createQuery("from Colaborador as a where a.nome like :nome");
-		q.setParameter("nome", "%" + nome + "%");
+		q.setParameter("nome", "%" + nome.toLowerCase() + "%");
 		return q.getResultList();
 	}
 

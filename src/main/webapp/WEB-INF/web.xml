@@ -107,4 +107,26 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/EncodingFilter</url-pattern>
 	</filter-mapping>
+	
+	
+	<!-- Configura o WS REST -->
+  	<!-- O diretorio do pacote deve ser um nivel acima -->
+	<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+			com.sun.jersey.spi.spring.container.servlet.SpringServlet
+		</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>br.com.ambientinformatica.fatesg.corporatum</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/service/*</url-pattern>
+	</servlet-mapping>
+		<!-- Fim Configuração WS REST -->
+		
 </web-app>
