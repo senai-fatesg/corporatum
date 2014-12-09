@@ -42,6 +42,9 @@
 			<p:commandButton action="/instituicaoLista.jspx?faces-redirect=true"
 				value="Listar" />
 			<p:spacer width="45px" />
+			<p:commandButton ajax="false"
+				actionListener="#{InstituicaoControl.limpar}" value="Limpar"
+				update="panel" />
 		</p:panel>
 	</ui:define>
 </ui:composition>
