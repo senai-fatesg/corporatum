@@ -9,7 +9,6 @@
 	<ui:define name="corpo">
 
 		<p:panel header="Cadastro de Curso" id="panel">
-			<p:messages />
 			<a:field label="Código">
 				<p:inputText value="#{CursoControl.curso.id }" />
 			</a:field>
@@ -34,7 +33,7 @@
 				</h:selectOneMenu>
 			</a:field>
 			<a:newLine />
-			<a:field label="Modalidade" >
+			<a:field label="Modalidade">
 				<h:selectOneMenu value="#{CursoControl.curso.modalidade}"
 					id="modalidade">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -59,89 +58,21 @@
 					itemLabel="#{unidadeEnsino.nome}" itemValue="#{unidadeEnsino}"
 					converter="unidadeEnsinoConverter">
 				</p:autoComplete>
-				<p:watermark value="Pesquise pelo Nome"
-					for="completUnidadeEnsino" />
+				<p:watermark value="Pesquise pelo Nome" for="completUnidadeEnsino" />
 			</a:field>
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton ajax="false"
 				actionListener="#{CursoControl.confirmar}" value="Confirmar"
 				update="cursos, panel" />
+			<p:spacer width="45px" />
+			<p:commandButton
+				action="/cursoLista.jspx?faces-redirect=true" value="Listar" />
+			<p:spacer width="45px" />
+			<p:commandButton actionListener="#{CursoControl.limpar}"
+				value="Limpar" update="panel" />
 			<a:newLine />
 		</p:panel>
-		<p:dataTable id="cursos" value="#{CursoControl.cursos }" var="cont"
-			width="100%" emptyMessage="Sem registros">
-			<f:facet name="header">
-				<h:outputText value="Lista de Cursos" />
-			</f:facet>
-			<p:column sortBy="#{cont.id }">
-				<f:facet name="header">
-					<h:outputText value="Código" />
-				</f:facet>
-				<h:outputText value="#{cont.id }" />
-			</p:column>
-			<p:column sortBy="#{cont.nome }">
-				<f:facet name="header">
-					<h:outputText value="Nome" />
-				</f:facet>
-				<h:outputText value="#{cont.nome }" />
-			</p:column>
-			<p:column sortBy="#{cont.descricao }">
-				<f:facet name="header">
-					<h:outputText value="Descrição" />
-				</f:facet>
-				<h:outputText value="#{cont.descricao }" />
-			</p:column>
-			<p:column sortBy="#{cont.turno }">
-				<f:facet name="header">
-					<h:outputText value="Turno" />
-				</f:facet>
-				<h:outputText value="#{cont.turno}" />
-			</p:column>
-			<p:column sortBy="#{cont.modalidade }">
-				<f:facet name="header">
-					<h:outputText value="Modalidade" />
-				</f:facet>
-				<h:outputText value="#{cont.modalidade}" />
-			</p:column>
-			<p:column sortBy="#{cont.cargaHoraria }">
-				<f:facet name="header">
-					<h:outputText value="Carga Horária" />
-				</f:facet>
-				<h:outputText value="#{cont.cargaHoraria }" />
-			</p:column>
-			<p:column sortBy="#{cont.unidadeEnsino.nome }">
-				<f:facet name="header">
-					<h:outputText value="Unidade de Ensino" />
-				</f:facet>
-				<h:outputText value="#{cont.unidadeEnsino.nome }" />
-			</p:column>
-			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
-
-					<f:setPropertyActionListener target="#{CursoControl.curso}"
-						value="#{cont}" />
-
-				</p:commandButton>
-
-				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
-					process="@this">
-
-					<f:setPropertyActionListener target="#{CursoControl.curso}"
-						value="#{cont}" />
-
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-
-			<p:commandButton value="Sim" actionListener="#{CursoControl.excluir}"
-				onclick="confirmacao.hide()" update="cursos" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
-		</p:confirmDialog>
 		<script>
 			PrimeFaces.locales['pt'] = {
 				closeText : 'Fechar',

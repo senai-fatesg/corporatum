@@ -7,9 +7,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-
 		<p:panel header="Cadastro de Unidade Ensino" id="panel">
-			<p:messages />
 			<a:field label="Nome">
 				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.nome }" />
 			</a:field>
@@ -43,78 +41,11 @@
 
 			<p:commandButton actionListener="#{UnidadeEnsinoControl.confirmar }"
 				value="Confirmar" update="unidadesEnsino, panel" ajax="false"></p:commandButton>
+			<p:spacer width="45px" />
+			<p:commandButton
+				action="/unidadeEnsinoLista.jspx?faces-redirect=true" value="Listar" />
+			<p:spacer width="45px" />
 			<a:newLine />
 		</p:panel>
-
-		<p:dataTable id="unidadesEnsino"
-			value="#{UnidadeEnsinoControl.unidadesEnsino }" var="cont"
-			width="100%" emptyMessage="Sem registros">
-			<f:facet name="header">
-				<h:outputText value="Lista Unidades de Ensino"></h:outputText>
-			</f:facet>
-			<p:column sortBy="#{cont.id }">
-				<f:facet name="header">
-					<h:outputText value="Código"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.id }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.nome }">
-				<f:facet name="header">
-					<h:outputText value="Nome"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.nome }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.endereco }">
-				<f:facet name="header">
-					<h:outputText value="Endereço"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.endereco }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.telefone }">
-				<f:facet name="header">
-					<h:outputText value="Telefone"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.telefone }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.sigla }">
-				<f:facet name="header">
-					<h:outputText value="Sigla"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.sigla }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.instituicao.nomeFantasia }">
-				<f:facet name="header">
-					<h:outputText value="Instituição"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.instituicao.nomeFantasia }"></h:outputText>
-			</p:column>
-			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
-
-					<f:setPropertyActionListener
-						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
-
-				</p:commandButton>
-
-				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
-					process="@this">
-
-					<f:setPropertyActionListener
-						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
-
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-
-			<p:commandButton value="Sim"
-				actionListener="#{UnidadeEnsinoControl.excluir}"
-				onclick="confirmacao.hide()" update="unidadesEnsino" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
-		</p:confirmDialog>
-
 	</ui:define>
 </ui:composition>
