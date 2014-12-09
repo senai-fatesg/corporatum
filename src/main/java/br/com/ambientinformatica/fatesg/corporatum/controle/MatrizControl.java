@@ -65,6 +65,7 @@ public class MatrizControl implements Serializable {
 			matrizDao.excluirPorId(matriz.getId());
 			matriz = new Matriz();
 			matrizes = matrizDao.listar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

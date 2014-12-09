@@ -57,6 +57,7 @@ public class InstituicaoControl {
 			instituicaoDao.excluirPorId(instituicao.getId());
 			instituicao = new Instituicao();
 			instituicoes = instituicaoDao.listar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
