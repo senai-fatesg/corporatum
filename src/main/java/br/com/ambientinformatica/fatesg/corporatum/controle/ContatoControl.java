@@ -22,33 +22,33 @@ public class ContatoControl {
 
 	@Autowired
 	private ContatoDao contatoDao;
-	
-	private List<Contato> contatos = new ArrayList<Contato>();
-	
 
-   @PostConstruct
-   public void init(){
-      listar(null);
-   }
-   
-	public void confirmar(ActionEvent evt){
+	private List<Contato> contatos = new ArrayList<Contato>();
+
+	@PostConstruct
+	public void init() {
+		listar(null);
+	}
+
+	public void confirmar(ActionEvent evt) {
 		try {
 			contatoDao.alterar(contato);
-         listar(evt);
-         contato = new Contato();
+			listar(evt);
+			contato = new Contato();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void listar(ActionEvent evt){
+	public void listar(ActionEvent evt) {
 		try {
 			contatos = contatoDao.listar();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
+
 	public Contato getContato() {
 		return contato;
 	}
@@ -56,7 +56,7 @@ public class ContatoControl {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	
+
 	public List<Contato> getContatos() {
 		return contatos;
 	}

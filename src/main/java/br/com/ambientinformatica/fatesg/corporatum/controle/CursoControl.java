@@ -43,7 +43,7 @@ public class CursoControl implements Serializable {
 
 	@Autowired
 	private UnidadeEnsinoDao unidadeEnsinoDao;
-	
+
 	private String filtroGlobal = "";
 
 	@PostConstruct
@@ -69,6 +69,7 @@ public class CursoControl implements Serializable {
 			cursoDao.excluirPorId(curso.getId());
 			curso = new Curso();
 			cursos = cursoDao.listar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -77,7 +78,8 @@ public class CursoControl implements Serializable {
 	public void limpar() {
 		curso = new Curso();
 	}
-	public void voltar(){
+
+	public void voltar() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
 					.redirect("curso.jspx");
@@ -93,6 +95,7 @@ public class CursoControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+
 	public void filtrarPorNome() {
 		try {
 			cursos = cursoDao.listarPorNome(filtroGlobal);
@@ -174,6 +177,5 @@ public class CursoControl implements Serializable {
 	public void setFiltroGlobal(String filtroGlobal) {
 		this.filtroGlobal = filtroGlobal;
 	}
-	
 
 }

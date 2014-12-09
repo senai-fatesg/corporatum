@@ -17,7 +17,7 @@ import br.com.ambientinformatica.fatesg.corporatum.dao.PlanoDeEnsinoDao;
 
 @Controller("PlanoDeEnsinoControl")
 @Scope("conversation")
-public class PlanoDeEnsinoControl implements Serializable{
+public class PlanoDeEnsinoControl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +38,7 @@ public class PlanoDeEnsinoControl implements Serializable{
 			planoDeEnsinoDao.alterar(planoDeEnsino);
 			listar(evt);
 			planoDeEnsino = new PlanoDeEnsino();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -56,6 +57,7 @@ public class PlanoDeEnsinoControl implements Serializable{
 			planoDeEnsinoDao.excluirPorId(planoDeEnsino.getId());
 			planoDeEnsino = new PlanoDeEnsino();
 			listar(evt);
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

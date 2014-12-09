@@ -63,6 +63,7 @@ public class ColaboradorControl implements Serializable {
 			colaboradorDao.excluirPorId(colaborador.getId());
 			colaborador = new Colaborador();
 			colaboradores = colaboradorDao.listar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

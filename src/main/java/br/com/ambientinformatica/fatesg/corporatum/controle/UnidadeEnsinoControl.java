@@ -52,7 +52,6 @@ public class UnidadeEnsinoControl implements Serializable {
 			listar(evt);
 			unidadeEnsino = new UnidadeEnsino();
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
-
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -63,6 +62,7 @@ public class UnidadeEnsinoControl implements Serializable {
 			unidadeEnsinoDao.excluirPorId(unidadeEnsino.getId());
 			unidadeEnsino = new UnidadeEnsino();
 			unidadesEnsino = unidadeEnsinoDao.listar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -105,7 +105,8 @@ public class UnidadeEnsinoControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	public void limpar(){
+
+	public void limpar() {
 		unidadeEnsino = new UnidadeEnsino();
 	}
 

@@ -47,6 +47,7 @@ public class AvaliacaoControl implements Serializable {
 			avaliacaoDao.alterar(avaliacao);
 			listar(evt);
 			avaliacao = new Avaliacao();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -65,6 +66,7 @@ public class AvaliacaoControl implements Serializable {
 			avaliacaoDao.excluirPorId(avaliacao.getId());
 			avaliacao = new Avaliacao();
 			avaliacoes = avaliacaoDao.listar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
