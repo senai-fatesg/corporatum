@@ -252,7 +252,7 @@
 					<useStandardDocletOptions>true</useStandardDocletOptions>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--  <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jasperreports-maven-plugin</artifactId>
 				<configuration>
@@ -273,7 +273,7 @@
 						<version>4.6.0</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</reporting> 
 	
