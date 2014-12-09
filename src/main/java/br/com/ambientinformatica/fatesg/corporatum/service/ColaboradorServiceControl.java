@@ -21,13 +21,13 @@ public class ColaboradorServiceControl {
    ColaboradorDao colaboradorDao;
    
    @GET
-	@Path("listarPorNome/{nomeColaborador}")
+	@Path("consultarPorCpf/{cpfColaborador}")
 	@Produces("text/xml")
-   public List<Colaborador> listarPorNome(@PathParam("nomeColaborador") String nomeColaborador){
+   public Colaborador listarPorNome(@PathParam("cpfColaborador") String cpfColaborador){
    	
-   	List<Colaborador> colaboradores = colaboradorDao.listarPorNome(nomeColaborador.toLowerCase());
+   	Colaborador colaborador = colaboradorDao.consultarPorCpf(cpfColaborador);
    	
-   	return colaboradores;
+   	return colaborador;
    	
    }
 

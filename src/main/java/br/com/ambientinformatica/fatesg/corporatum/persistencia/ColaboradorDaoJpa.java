@@ -84,19 +84,24 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Colaborador> listarPorNome(String nome) {
-		Query q = this.em
-				.createQuery("from Colaborador as a where a.nome like :nome");
-		q.setParameter("nome", "%" + nome.toLowerCase() + "%");
+		Query q = em.createQuery("from Colaborador as a where upper(a.nome) like :nome");
+		q.setParameter("nome", "%" + nome.toUpperCase() + "%");
 		return q.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Colaborador> listarPorTipo(SelectItem tipo) {
-		Query q = this.em
-				.createQuery("from Colaborador as a where a.tipo like :tipo");
-		q.setParameter("tipo", "%" + tipo + "%");
-		return q.getResultList();
+		Query query = em.createQuery("from Colaborador as a where a.tipo like :tipo");
+		query.setParameter("tipo", "%" + tipo + "%");
+		return query.getResultList();
 	}
+
+	@Override
+   public Colaborador consultarPorCpf(String cpfColaborador) {
+		Query query = em.createQuery("from Colaborador a where a.cpfCnpj like :cpfColaborador");
+		query.setParameter("cpfColaborador", cpfColaborador);
+		return (Colaborador) query.getSingleResult();
+   }
 
 }
