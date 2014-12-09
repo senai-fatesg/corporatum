@@ -14,8 +14,8 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.MatrizDao;
+import br.com.ambientinformatica.fatesg.api.persistencia.CursoDao;
+import br.com.ambientinformatica.fatesg.api.persistencia.MatrizDao;
 
 @Controller("MatrizControl")
 @Scope("conversation")

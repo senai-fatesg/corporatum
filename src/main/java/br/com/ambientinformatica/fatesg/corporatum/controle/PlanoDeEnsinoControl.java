@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.PlanoDeEnsino;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.PlanoDeEnsinoDao;
+import br.com.ambientinformatica.fatesg.api.persistencia.PlanoDeEnsinoDao;
 
 @Controller("PlanoDeEnsinoControl")
 @Scope("conversation")

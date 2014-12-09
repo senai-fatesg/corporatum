@@ -9,7 +9,7 @@ import javax.faces.convert.FacesConverter;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
-import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
+import br.com.ambientinformatica.fatesg.api.persistencia.InstituicaoDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
