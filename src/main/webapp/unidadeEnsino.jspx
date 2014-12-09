@@ -25,7 +25,7 @@
 			<a:field label="Sigla">
 				<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.sigla }" />
 			</a:field>
-			<a:field label="Instituição" width="440px" spaceLeft="15px">
+			<a:field label="Instituição" spaceLeft="15px">
 				<p:autoComplete id="completUsuario"
 					value="#{UnidadeEnsinoControl.unidadeEnsino.instituicao}"
 					completeMethod="#{UnidadeEnsinoControl.completarInstituicoes}"
@@ -35,10 +35,13 @@
 				</p:autoComplete>
 				<p:watermark value="Pesquise pelo Nome Fantasia"
 					for="completUsuario" />
+			</a:field >
+			<a:field spaceLeft="10px">
+				<p:commandButton value="Cadastrar" type="button"
+					onclick="PF('dlg1').show();" />
 			</a:field>
 			<a:newLine />
 			<a:newLine />
-
 			<p:commandButton actionListener="#{UnidadeEnsinoControl.confirmar }"
 				value="Confirmar" update="unidadesEnsino, panel" ajax="false"></p:commandButton>
 			<p:spacer width="45px" />
@@ -46,8 +49,50 @@
 				action="/unidadeEnsinoLista.jspx?faces-redirect=true" value="Listar" />
 			<p:spacer width="45px" />
 			<p:commandButton actionListener="#{UnidadeEnsinoControl.limpar }"
-				value="Limpar" update="panel" ajax="false"/>
+				value="Limpar" update="panel" ajax="false" />
 			<a:newLine />
 		</p:panel>
+		<p:dialog showEffect="fade" hideEffect="explode" widgetVar="dlg1">
+			<p:panel header="Cadastro de Instituição" id="panelInstituicao">
+				<a:field label="Nome Fantasia">
+					<p:inputText
+						value="#{InstituicaoControl.instituicao.nomeFantasia }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="Razão Social">
+					<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="CNPJ">
+					<p:inputMask value="#{InstituicaoControl.instituicao.cnpj }"
+						mask="99.999.999/9999-99"></p:inputMask>
+				</a:field>
+
+				<a:field label="Inscrição Estadual" spaceLeft="15px">
+					<p:inputText
+						value="#{InstituicaoControl.instituicao.inscricaoEstadual }"></p:inputText>
+				</a:field>
+				<a:newLine />
+				<a:field label="Descrição">
+					<p:inputTextarea
+						value="#{InstituicaoControl.instituicao.descricao }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:newLine />
+				<p:commandButton ajax="true"
+					actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"/>
+				<p:spacer width="45px" />
+				<p:commandButton ajax="false"
+					actionListener="#{InstituicaoControl.limpar}" value="Limpar"
+					update="panel" />
+					<p:spacer width="45px" />
+				<p:commandButton ajax="false"
+					action="dlg1.close()" value="Fechar"
+					update="panel" />
+			</p:panel>
+		</p:dialog>
 	</ui:define>
 </ui:composition>
