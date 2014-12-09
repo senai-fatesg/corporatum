@@ -1,6 +1,9 @@
 package br.com.ambientinformatica.fatesg.corporatum.dao;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +33,14 @@ public class MatrizDaoJpa extends PersistenciaJpa<Matriz> implements MatrizDao {
 					"*Campo Obrigátorio: Quantitade de Periodo");
 		}
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Matriz> consultarPeloNome(String descricao) {
+		Query q = this.em
+				.createQuery("from Matriz as a where a.descricao like :descricao");
+		q.setParameter("descricao", "%" + descricao + "%");
+		return q.getResultList();
 	}
 }

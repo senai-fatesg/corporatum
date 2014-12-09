@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.dao.InstituicaoDao;
-import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.util.UtilCnpj;
 
 @Controller("InstituicaoControl")
@@ -82,13 +81,16 @@ public class InstituicaoControl {
 		}
 	}
 
-	public void limpar() {
+	public void limparConsulta() {
 		filtroGlobal = "";
 		try {
 			instituicoes = instituicaoDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
+	}
+	public void limpar(){
+		instituicao = new Instituicao();
 	}
 
 	public Instituicao getInstituicao() {
