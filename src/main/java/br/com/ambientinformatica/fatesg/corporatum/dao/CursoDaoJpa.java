@@ -1,5 +1,9 @@
 package br.com.ambientinformatica.fatesg.corporatum.dao;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
@@ -40,4 +44,12 @@ public class CursoDaoJpa extends PersistenciaJpa<Curso> implements CursoDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Curso> listarPorNome(String nome) {
+		Query q = this.em
+				.createQuery("from Curso as a where a.nome like :nome");
+		q.setParameter("nome", "%" + nome + "%");
+		return q.getResultList();
+	}
 }

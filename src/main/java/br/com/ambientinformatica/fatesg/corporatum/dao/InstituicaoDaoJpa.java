@@ -2,11 +2,7 @@ package br.com.ambientinformatica.fatesg.corporatum.dao;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
@@ -17,18 +13,14 @@ public class InstituicaoDaoJpa extends PersistenciaJpa<Instituicao> implements
 		InstituicaoDao {
 
 	private static final long serialVersionUID = 1L;
-
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Instituicao> consultarPeloNome(String nomeFantasia){
-		Session session = this.em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Instituicao.class);
-		
-		if (StringUtils.isNotBlank(nomeFantasia)) {
-			criteria.add(Restrictions.ilike("nomeFantasia", nomeFantasia.toUpperCase(), MatchMode.START));
-		}
-		return criteria.list();
+	public List<Instituicao> consultarPeloNome(String nome) {
+		Query q = this.em
+				.createQuery("from Instituicao as a where a.nomeFantasia like :nomeFantasia");
+		q.setParameter("nomeFantasia", "%" + nome + "%");
+		return q.getResultList();
 	}
+	
 	@Override
 	public void verificarCampos(Instituicao instituicao) {
 
