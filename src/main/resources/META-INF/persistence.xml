@@ -13,6 +13,8 @@
 	<class>br.com.ambientinformatica.fatesg.api.entidade.Instituicao</class>
 	<class>br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino</class>
 	<class>br.com.ambientinformatica.fatesg.api.entidade.PlanoDeEnsino</class>
+	
+	<class>br.com.ambientinformatica.corporativo.entidade.Municipio</class>
 		<properties>
 			<property name="javax.persistence.validation.mode" value="callback" />
 			<property name="javax.persistence.validation.group.pre-update"

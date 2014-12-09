@@ -22,6 +22,7 @@ import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.MunicipioDao;
 import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("AlunoControl")
@@ -34,6 +35,9 @@ public class AlunoControl implements Serializable {
 
 	@Autowired
 	private AlunoDao alunoDao;
+	
+	@Autowired
+	private MunicipioDao municipioDao;
 
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
@@ -57,6 +61,7 @@ public class AlunoControl implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		atualizarMunicipios();
 		listar(null);
 	}
 
@@ -66,6 +71,8 @@ public class AlunoControl implements Serializable {
 				throw new Exception("É necessário escolher o status do Aluno");
 			}
 			aluno.setStatus(status);
+			aluno.setMunicipio(municipio);
+			aluno.setUf(uf);
 			alunoDao.validarCampos(aluno);
 			String cpf = aluno.getCpfCnpj();
 			if (UtilCpf.validarCpf(cpf)) {
@@ -109,8 +116,20 @@ public class AlunoControl implements Serializable {
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces("Metodo não implementado!");
 		}
-		
 	}
+	
+	public void atualizarMunicipios(){
+		try {
+			municipios.clear();
+			List<Municipio> municipiosList = municipioDao.listarPorUf(uf);
+			for(Municipio m : municipiosList){
+				municipios.add(new SelectItem(m, m.getDescricao()));
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+	
 	public void limpar() {
 		aluno = new Aluno();
 	}
