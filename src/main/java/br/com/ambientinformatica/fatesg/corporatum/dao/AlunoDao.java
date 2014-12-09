@@ -4,12 +4,15 @@ import java.util.List;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
+import br.com.ambientinformatica.fatesg.corporatum.util.CorporatumException;
 import br.com.ambientinformatica.jpa.persistencia.Persistencia;
 
 public interface AlunoDao extends Persistencia<Aluno>{
 	
-	public void verificarCampos(Aluno aluno);
+	public void validarCampos(Aluno aluno) throws CorporatumException;
 	
-	public List<Aluno> consultarPeloStatus(EnumStatusAluno status);
+	public List<Aluno> listar(boolean todos, EnumStatusAluno status) throws CorporatumException;
+	
+	public Aluno consultarPorCpfCnpj(String cpfCnpj) throws CorporatumException;
 	
 }

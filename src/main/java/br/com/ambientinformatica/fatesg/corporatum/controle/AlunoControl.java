@@ -32,9 +32,14 @@ public class AlunoControl implements Serializable {
 
 	private List<Aluno> alunos = new ArrayList<Aluno>();
 	
-	private List<Aluno> filtrarAlunos = new ArrayList<Aluno>();
+	private EnumStatusAluno status;
 	
-	private EnumStatusAluno filtroGlobal;
+	private boolean listarTodos = false;
+	
+	private String nomeLista;
+	
+	private String cpfCnpjLista;
+	
 
 	@PostConstruct
 	public void init() {
@@ -43,11 +48,14 @@ public class AlunoControl implements Serializable {
 
 	public void confirmar(ActionEvent evt) {
 		try {
-			alunoDao.verificarCampos(aluno);
+			if(status == null){
+				throw new Exception("É necessário escolher o status do Aluno");
+			}
+			aluno.setStatus(status);
+			alunoDao.validarCampos(aluno);
 			String cpf = aluno.getCpfCnpj();
 			if (UtilCpf.validarCpf(cpf)) {
 				alunoDao.alterar(aluno);
-				listar(evt);
 				aluno = new Aluno();
 			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
@@ -69,23 +77,12 @@ public class AlunoControl implements Serializable {
 
 	public void listar(ActionEvent evt) {
 		try {
-			alunos = alunoDao.listar();
+			alunos = alunoDao.listar(listarTodos, status);
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 	
-	public void filtrarPorStatus() {
-		try {
-			alunos = alunoDao.consultarPeloStatus(filtroGlobal);
-			if (alunos.isEmpty()) {
-				alunos = alunoDao.consultarPeloStatus(filtroGlobal);
-			}
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);
-		}
-	}
-
 	public void limpar() {
 		aluno = new Aluno();
 	}
@@ -102,27 +99,44 @@ public class AlunoControl implements Serializable {
 		return alunos;
 	}	
 
-	public List<Aluno> getFiltrarAlunos() {
-		return filtrarAlunos;
-	}
-	
-	public void setFiltrarAlunos(List<Aluno> filtrarAlunos) {
-		this.filtrarAlunos = filtrarAlunos;
-	}
-
 	public List<SelectItem> getTiposSexo() {
 		return UtilFaces.getListEnum(EnumTipoSexo.values());
 	}
 
-	public List<SelectItem> getStatus() {
+	public List<SelectItem> getStatusAluno() {
 		return UtilFaces.getListEnum(EnumStatusAluno.values());
 	}
 
-	public EnumStatusAluno getFiltroGlobal() {
-		return filtroGlobal;
+	public boolean isListarTodos() {
+		return listarTodos;
 	}
 
-	public void setFiltroGlobal(EnumStatusAluno filtroGlobal) {
-		this.filtroGlobal = filtroGlobal;
-	}	
+	public void setListarTodos(boolean listarTodos) {
+		this.listarTodos = listarTodos;
+	}
+
+	public void setStatus(EnumStatusAluno status) {
+		this.status = status;
+	}
+
+	public EnumStatusAluno getStatus() {
+		return status;
+	}
+
+	public String getNomeLista() {
+		return nomeLista;
+	}
+
+	public void setNomeLista(String nomeLista) {
+		this.nomeLista = nomeLista;
+	}
+
+	public String getCpfCnpjLista() {
+		return cpfCnpjLista;
+	}
+
+	public void setCpfCnpjLista(String cpfCnpjLista) {
+		this.cpfCnpjLista = cpfCnpjLista;
+	}
+
 }

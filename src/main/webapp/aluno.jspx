@@ -19,9 +19,9 @@
 					mask="999.999.999-99" />
 			</a:field>
 			<a:field label="Status" spaceLeft="15px">
-				<h:selectOneMenu id="status" value="#{AlunoControl.aluno.status}">
+				<h:selectOneMenu id="status" value="#{AlunoControl.status}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{ AlunoControl.status}" var="tipo"
+					<f:selectItems value="#{ AlunoControl.statusAluno}" var="tipo"
 						itemValue="#{tipo}" itemLabel="#{tipo}" />
 				</h:selectOneMenu>
 			</a:field>
@@ -72,13 +72,12 @@
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton ajax="false"
-				actionListener="#{AlunoControl.confirmar}" value="Confirmar"
+				actionListener="#{AlunoControl.confirmar}" value="Confirmar" icon="ui-icon-disk"
 				update="panelAluno" />
 			<p:spacer width="45px" />
-			<p:commandButton action="/alunolista.jspx?faces-redirect=true"
-				value="Listar" />
+			<p:commandButton action="/alunolista.jspx?faces-redirect=true" value="Listar" icon="ui-icon-search"/>
 			<p:spacer width="45px" />
-			<p:commandButton action="#{AlunoControl.limpar}" value="Limpar"
+			<p:commandButton action="#{AlunoControl.limpar}" value="Limpar" icon="ui-icon-refresh"
 				update="panelAluno" />
 			<a:newLine />
 		</p:panel>
