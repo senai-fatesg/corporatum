@@ -91,6 +91,14 @@ public class ColaboradorControl implements Serializable {
 	public void limpar() {
 		colaborador = new Colaborador();
 	}
+	public void limparConsulta() {
+		filtroGlobal = "";
+		try {
+			colaboradores = colaboradorDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
 
 	public Colaborador getColaborador() {
 		return colaborador;
