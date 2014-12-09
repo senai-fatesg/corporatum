@@ -51,7 +51,8 @@
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/avaliaca.jspx?faces-redirect=true">
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this" action="/avaliacao.jspx?faces-redirect=true">
 
 					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
 						value="#{cont}" />
@@ -71,6 +72,6 @@
 		<a:newLine />
 		<p:spacer width="25px" />
 		<p:commandButton action="/avaliacao.jspx?faces-redirect=true"
-				value="Voltar" />
+			value="Voltar" />
 	</ui:define>
 </ui:composition>

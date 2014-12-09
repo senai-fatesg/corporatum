@@ -11,12 +11,12 @@
 			<a:field label="Disciplina" width="440px">
 				<p:autoComplete id="completadisciplina"
 					value="#{AvaliacaoControl.avaliacao.disciplina}"
-					completeMethod="#{DisciplinaControl.completarDisciplina}"
+					completeMethod="#{AvaliacaoControl.completarDisciplina}"
 					var="disciplina" itemLabel="#{disciplina.nome}"
 					itemValue="#{disciplina}" converter="disciplinaConverter">
 				</p:autoComplete>
 				<p:watermark value="Pesquise pelo nome" for="completadisciplina" />
-			</a:field>
+			</a:field>			
 			<a:field label="Tipo de Avaliação">
 				<h:selectOneRadio id="tipoAvaliacao"
 					value="#{AvaliacaoControl.avaliacao.tipoAvaliacao}">

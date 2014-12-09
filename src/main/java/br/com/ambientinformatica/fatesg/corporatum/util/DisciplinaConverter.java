@@ -6,8 +6,8 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.dao.DisciplinaDao;
 import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
+import br.com.ambientinformatica.fatesg.corporatum.dao.DisciplinaDao;
 import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 
@@ -15,14 +15,14 @@ import br.com.ambientinformatica.jpa.util.FabricaAbstrata;
 public class DisciplinaConverter implements Converter {
 	
 	
-	   private DisciplinaDao disciplinaDao = (DisciplinaDao)FabricaAbstrata.criarObjeto("DiciplinaDao");
+	   private DisciplinaDao disciplinaDao = (DisciplinaDao)FabricaAbstrata.criarObjeto("disciplinaDao");
 	   
 	   @Override
 	   public String getAsString(FacesContext facesContext, UIComponent component, Object value) {  
 	       if (value == null || value.equals("")) {  
 	           return "";  
 	       } else {  
-	           return String.valueOf(((Disciplina)value).getId());  
+	           return ((Disciplina)value).getId();  
 	       }  
 	   }
 
@@ -32,7 +32,7 @@ public class DisciplinaConverter implements Converter {
 	      if (value != null && !value.trim().equals("")) {  
 			Disciplina disciplina = new Disciplina();
 	         try {  
-	         	long id = Long.parseLong(value);  
+	         	String id = value;  
 
 	            try {
 	            	disciplina = disciplinaDao.consultar(id);

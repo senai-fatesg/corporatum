@@ -53,11 +53,11 @@ public class DisciplinaControl implements Serializable {
 		}
 	}
 
-	public void excluir() {
+	public void excluir(ActionEvent evt) {
 		try {			
 			disciplinaDao.excluirPorId(disciplina.getId());
 			disciplina = new Disciplina();
-			disciplinas = disciplinaDao.listar();
+			listar(evt);
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}	
@@ -67,13 +67,6 @@ public class DisciplinaControl implements Serializable {
 		disciplina = new Disciplina();
 	}
 	
-	public List<Disciplina> completarDisciplina(String nome){
-		List<Disciplina> listaDisciplinas = disciplinaDao.consultarPeloNome(nome);
-		if (listaDisciplinas.size() == 0) {
-			UtilFaces.addMensagemFaces("Disciplina não encontrada");
-		}
-		return listaDisciplinas;
-	}
 	public void selecionarDisciplina(ActionEvent evt) {
 		try {
 			 RequestContext.getCurrentInstance().closeDialog(disciplina);

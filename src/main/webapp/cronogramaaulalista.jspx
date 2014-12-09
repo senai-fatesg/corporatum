@@ -45,7 +45,6 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					actionListener="#{CronogramaAulaControl.excluir}"
 					update="cronogramasAulas" oncomplete="confirmacao.show()">
 
 					<f:setPropertyActionListener
@@ -53,8 +52,7 @@
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
-					process="@this" action="/cronogramaaula.jspx?faces-redirect=true">
+				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/cronogramaaula.jspx?faces-redirect=true">
 
 					<f:setPropertyActionListener
 						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />

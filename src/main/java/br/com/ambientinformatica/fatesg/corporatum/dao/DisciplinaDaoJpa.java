@@ -18,6 +18,7 @@ public class DisciplinaDaoJpa extends PersistenciaJpa<Disciplina> implements
 
 	private static final long serialVersionUID = 1L;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Disciplina> consultarPeloNome(String nome){
 		Session session = this.em.unwrap(Session.class);

@@ -74,12 +74,10 @@ public class AvaliacaoControl implements Serializable {
 		avaliacao = new Avaliacao();
 	}
 
-	public List<Disciplina> completarDisciplinas(String nome) {
-		List<Disciplina> listaDisciplinas = disciplinaDao
-				.consultarPeloNome(nome);
+	public List<Disciplina> completarDisciplina(String nome){
+		List<Disciplina> listaDisciplinas = disciplinaDao.consultarPeloNome(nome);
 		if (listaDisciplinas.size() == 0) {
-			UtilFaces
-					.addMensagemFaces("Instituição não encontrada\nVerifique o nome da Instituição.");
+			UtilFaces.addMensagemFaces("Disciplina não encontrada");
 		}
 		return listaDisciplinas;
 	}
@@ -107,4 +105,14 @@ public class AvaliacaoControl implements Serializable {
 	public List<SelectItem> getTiposAvaliacao() {
 		return UtilFaces.getListEnum(EnumTipoAvaliacao.values());
 	}
+
+	public AvaliacaoDao getAvaliacaoDao() {
+		return avaliacaoDao;
+	}
+
+	public DisciplinaDao getDisciplinaDao() {
+		return disciplinaDao;
+	}
+	
+	
 }
