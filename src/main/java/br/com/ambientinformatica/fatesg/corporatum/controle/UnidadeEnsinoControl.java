@@ -105,6 +105,9 @@ public class UnidadeEnsinoControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+	public void limpar(){
+		unidadeEnsino = new UnidadeEnsino();
+	}
 
 	public UnidadeEnsino getUnidadeEnsino() {
 		return unidadeEnsino;
