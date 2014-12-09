@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.CronogramaAula;
-import br.com.ambientinformatica.fatesg.corporatum.dao.CronogramaAulaDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.CronogramaAulaDao;
 
 @Controller("CronogramaAulaControl")
 @Scope("conversation")

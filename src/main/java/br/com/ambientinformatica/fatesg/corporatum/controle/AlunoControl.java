@@ -21,7 +21,7 @@ import br.com.ambientinformatica.corporativo.entidade.Municipio;
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
-import br.com.ambientinformatica.fatesg.corporatum.dao.AlunoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("AlunoControl")

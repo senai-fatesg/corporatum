@@ -16,7 +16,7 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoColaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
-import br.com.ambientinformatica.fatesg.corporatum.dao.ColaboradorDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("ColaboradorControl")
