@@ -36,13 +36,13 @@
 			<a:newLine />
 			<a:newLine />
 			<p:commandButton actionListener="#{AvaliacaoControl.confirmar}"
-				value="Confirmar" update="panelAvaliacao" />
+				value="Confirmar" update="panelAvaliacao" icon="ui-icon-disk"/>
 			<p:spacer width="25px" />
 			<p:commandButton action="/avaliacaolista.jspx?faces-redirect=true"
-				value="Listar" />
+				value="Listar" icon="ui-icon-search"/>
 			<p:spacer width="25px" />
 			<p:commandButton action="#{AvaliacaoControl.limpar}" value="Limpar"
-				update="panelAvaliacao" />
+				update="panelAvaliacao" icon="ui-icon-refresh"/>
 			<a:newLine />
 		</p:panel>
 

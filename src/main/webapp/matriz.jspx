@@ -32,14 +32,14 @@
 			</a:field>
 			<a:newLine />
 			<a:newLine />
-			<p:commandButton ajax="false"
+			<p:commandButton icon="ui-icon-disk" ajax="false"
 				actionListener="#{MatrizControl.confirmar }" value="Confirmar"
 				update="matrizes, panelMatriz" />
 			<p:spacer width="45px" />
-			<p:commandButton action="/matrizLista.jspx?faces-redirect=true"
+			<p:commandButton icon="ui-icon-search" action="/matrizLista.jspx?faces-redirect=true"
 				value="Listar" />
 			<p:spacer width="45px" />
-			<p:commandButton ajax="false"
+			<p:commandButton icon="ui-icon-refresh" ajax="false"
 				actionListener="#{MatrizControl.limpar}" value="Limpar"
 				update="panel" />
 		</p:panel>

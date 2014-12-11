@@ -26,13 +26,13 @@
 					style="width:70px" />
 			</a:field>
 			<a:newLine />
-			<p:commandButton actionListener="#{CronogramaAulaControl.confirmar}"
+			<p:commandButton icon="ui-icon-disk" actionListener="#{CronogramaAulaControl.confirmar}"
 				value="Confirmar" update="panelCronogramaAula" />
 			<p:spacer width="45px" />
-			<p:commandButton action="/cronogramaaulalista.jspx?faces-redirect=true"
+			<p:commandButton icon="ui-icon-search" action="/cronogramaaulalista.jspx?faces-redirect=true"
 				value="Listar" />
 			<p:spacer width="45px" />
-			<p:commandButton action="#{CronogramaAulaControl.limpar}"
+			<p:commandButton icon="ui-icon-refresh" action="#{CronogramaAulaControl.limpar}"
 				value="Limpar" update="panelCronogramaAula" />
 		</p:panel>		
 	</ui:define>

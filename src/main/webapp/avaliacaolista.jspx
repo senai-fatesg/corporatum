@@ -71,7 +71,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton action="/avaliacao.jspx?faces-redirect=true"
-			value="Voltar" />
+		<p:commandButton icon="ui-icon-contact" action="/avaliacao.jspx?faces-redirect=true"
+			value="Nova Avaliação" />
 	</ui:define>
 </ui:composition>

@@ -84,7 +84,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton action="/unidadeEnsino.jspx?faces-redirect=true"
-			value="Voltar" />
+		<p:commandButton icon="ui-icon-contact" action="/unidadeEnsino.jspx?faces-redirect=true"
+			value="Nova Unidade de Ensino" />
 	</ui:define>
 </ui:composition>

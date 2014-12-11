@@ -62,14 +62,14 @@
 			</a:field>
 			<a:newLine />
 			<a:newLine />
-			<p:commandButton ajax="false"
+			<p:commandButton icon="ui-icon-disk" ajax="false"
 				actionListener="#{CursoControl.confirmar}" value="Confirmar"
 				update="cursos, panel" />
 			<p:spacer width="45px" />
-			<p:commandButton
+			<p:commandButton icon="ui-icon-search"
 				action="/cursoLista.jspx?faces-redirect=true" value="Listar" />
 			<p:spacer width="45px" />
-			<p:commandButton actionListener="#{CursoControl.limpar}"
+			<p:commandButton icon="ui-icon-refresh" actionListener="#{CursoControl.limpar}"
 				value="Limpar" update="panel" />
 			<a:newLine />
 		</p:panel>

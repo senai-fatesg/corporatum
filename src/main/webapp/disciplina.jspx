@@ -22,14 +22,14 @@
 					style="width:70px" />
 			</a:field>
 			<a:newLine />
-			<p:commandButton ajax="false"
+			<p:commandButton icon="ui-icon-disk" ajax="false"
 				actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
 				update="panelDisciplina" />
 			<p:spacer width="45px" />
-			<p:commandButton action="/disciplinalista.jspx?faces-redirect=true"
+			<p:commandButton icon="ui-icon-search" action="/disciplinalista.jspx?faces-redirect=true"
 				value="Listar" />
 			<p:spacer width="45px" />
-			<p:commandButton ajax="true" action="#{DisciplinaControl.limpar}"
+			<p:commandButton icon="ui-icon-refresh" ajax="true" action="#{DisciplinaControl.limpar}"
 				value="Limpar" update="panelDisciplina" />
 		</p:panel>
 
