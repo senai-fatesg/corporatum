@@ -37,7 +37,7 @@
 					for="completUsuario" />
 			</a:field >
 			<a:field spaceLeft="10px">
-				<p:commandButton value="Cadastrar" type="button"
+				<p:commandButton icon="ui-icon-disk" value="Cadastrar Instituição" type="button"
 					onclick="PF('dlg1').show();" />
 			</a:field>
 			<a:newLine />
@@ -84,14 +84,14 @@
 				</a:field>
 				<a:newLine />
 				<a:newLine />
-				<p:commandButton ajax="false"
+				<p:commandButton icon="ui-icon-disk" ajax="false"
 					actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"/>
 				<p:spacer width="45px" />
-				<p:commandButton ajax="false"
+				<p:commandButton icon="ui-icon-refresh" ajax="false"
 					actionListener="#{InstituicaoControl.limpar}" value="Limpar"
 					update="panel" />
 					<p:spacer width="45px" />
-				<p:commandButton ajax="false"
+				<p:commandButton icon="ui-icon-close" ajax="false"
 					action="dlg1.close()" value="Fechar"
 					update="panel" />
 			</p:panel>

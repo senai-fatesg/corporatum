@@ -38,6 +38,7 @@ public class DisciplinaControl implements Serializable {
 	public void confirmar(ActionEvent evt){
 		try {
 			disciplinaDao.alterar(disciplina);
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso");
          listar(evt);
          disciplina = new Disciplina();
 		} catch (Exception e) {
