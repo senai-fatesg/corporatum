@@ -7,7 +7,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel header="Formulário" id="panelplanoensino">
+		<p:panel header="Cadastro Plano de Ensino" id="panelplanoensino">
 			<a:field label="Competências" width="440px">
 				<p:inputTextarea
 					value="#{PlanoDeEnsinoControl.planoDeEnsino.competencia}"
