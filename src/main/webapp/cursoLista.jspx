@@ -90,7 +90,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton icon="ui-icon-contact" action="/curso.jspx?faces-redirect=true"
-			value="Novo Curso" />
+		<p:commandButton action="/curso.jspx?faces-redirect=true"
+			value="Voltar" />
 	</ui:define>
 </ui:composition>

@@ -7,7 +7,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel header="Formulário" id="panelAvaliacao">
+		<p:panel header="Cadastro de Avaliação" id="panelAvaliacao">
 			<a:field label="Disciplina" width="440px">
 				<p:autoComplete id="completadisciplina"
 					value="#{AvaliacaoControl.avaliacao.disciplina}"

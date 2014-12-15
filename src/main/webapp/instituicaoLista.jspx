@@ -82,7 +82,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton icon="ui-icon-contact" action="/instituicao.jspx?faces-redirect=true"
-			value="Nova Instituição" />
+		<p:commandButton action="/instituicao.jspx?faces-redirect=true"
+			value="Voltar" />
 	</ui:define>
 </ui:composition>

@@ -66,7 +66,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton icon="ui-icon-contact" action="/disciplina.jspx?faces-redirect=true"
-				value="Nova Disciplina" />
+		<p:commandButton action="/disciplina.jspx?faces-redirect=true"
+				value="Voltar" />
 	</ui:define>
 </ui:composition>

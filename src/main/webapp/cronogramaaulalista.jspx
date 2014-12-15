@@ -71,7 +71,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton icon="ui-icon-contact" action="/cronogramaaula.jspx?faces-redirect=true"
-				value="Adicionar Aula" />
+		<p:commandButton action="/cronogramaaula.jspx?faces-redirect=true"
+				value="Voltar" />
 	</ui:define>
 </ui:composition>

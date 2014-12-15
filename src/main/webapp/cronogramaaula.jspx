@@ -7,7 +7,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel header="Formulário" id="panelCronogramaAula">
+		<p:panel header="Cadastro Cronograma de Aula" id="panelCronogramaAula">
 			<p:messages />
 			
 			<a:newLine />

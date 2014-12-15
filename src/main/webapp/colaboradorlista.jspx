@@ -94,7 +94,7 @@
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton icon="ui-icon-contact" action="/colaborador.jspx?faces-redirect=true"
-			value="Novo Colaborador" />
+		<p:commandButton action="/colaborador.jspx?faces-redirect=true"
+			value="Voltar" />
 	</ui:define>
 </ui:composition>
