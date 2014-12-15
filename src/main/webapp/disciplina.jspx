@@ -7,7 +7,7 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel header="Formulário" id="panelDisciplina">
+		<p:panel header="Cadastro de Disciplina" id="panelDisciplina">
 			<p:messages />
 			<a:field label="Código">
 				<p:inputText value="#{DisciplinaControl.disciplina.id }"
