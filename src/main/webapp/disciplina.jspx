@@ -26,13 +26,65 @@
 				actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
 				update="panelDisciplina" />
 			<p:spacer width="45px" />
-			<p:commandButton icon="ui-icon-search" action="/disciplinalista.jspx?faces-redirect=true"
+			<p:commandButton icon="ui-icon-search" update="disciplinas"
 				value="Listar" />
 			<p:spacer width="45px" />
 			<p:commandButton icon="ui-icon-refresh" ajax="true" action="#{DisciplinaControl.limpar}"
 				value="Limpar" update="panelDisciplina" />
 		</p:panel>
+		<p:dataTable id="disciplinas"
+			value="#{DisciplinaControl.disciplinas }" var="cont" width="100%"
+			emptyMessage="Sem registros" rows="200" paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+			<f:facet name="header">
+				<h:outputText value="Lista de Dsiciplinas" />
+			</f:facet>
+			<p:column sortBy="#{cont.id}">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.nome }">
+				<f:facet name="header">
+					<h:outputText value="Nome" />
+				</f:facet>
+				<h:outputText value="#{cont.nome }"></h:outputText>
+			</p:column>
+			<p:column sortBy="#{cont.cargaHoraria }">
+				<f:facet name="header">
+					<h:outputText value="Carga Horária" />
+				</f:facet>
+				<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
 
+					<f:setPropertyActionListener
+						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/disciplina.jspx?faces-redirect=true">
+
+					<f:setPropertyActionListener
+						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{DisciplinaControl.excluir}"
+				onclick="confirmacao.hide()" update="disciplinas" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+		<a:newLine />
+		<p:spacer width="25px" />
 
 	</ui:define>
 </ui:composition>

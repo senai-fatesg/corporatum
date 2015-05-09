@@ -136,6 +136,11 @@ html, body, hr {
 .content .sidebar .quickSignupForm {
 	margin-top:30px;	
 }
+.sidebar{
+	position: relative;
+	left: 35%;
+	margin-top: 100px;
+}
 .content .sidebar .btnSignup {
 	margin-top:10px;
 }
@@ -151,4 +156,10 @@ html, body, hr {
 }
 .footer p {
 	color:#999;
+}
+.btn-position{
+	background-position: 20px;
+}
+.btn-confirma{
+	background-position: 20px;
 }

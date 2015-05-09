@@ -7,7 +7,7 @@
       maxActive="10" 
       maxIdle="3" 
       name="jdbc/corporatum" 
-      password="123456"
+      password="bruno"
       type="javax.sql.DataSource" 
       url="jdbc:postgresql://localhost/corporatum"
       username="postgres" />

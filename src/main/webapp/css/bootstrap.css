@@ -2681,6 +2681,7 @@ button.close {
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
           border-radius: 5px;
+          background-position: 30px;
 }
 
 .btn-large [class^="icon-"] {
