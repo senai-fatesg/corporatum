@@ -31,6 +31,8 @@
            
         </div>        
     </div>
+    
+    <!--  
 	<div class="container content">
         <div class="row">
             <div class="span8 leftContent">
@@ -73,9 +75,9 @@
                     </div>                                        
                 </div>
             </div>
+            -->
             
             <div class="span4 sidebar">
-                <h2><a href="" class="btn btn-large btn-warning">Cadastre-se</a></h2>
                 <div class="well quickSignupForm">
                   <h3>Acesso ao Sistema</h3>
 					<%
@@ -85,8 +87,17 @@
                   <label>Login</label>
                   <input type="text" id="usuario" name="j_username" class="span3"  />
                   <label>Senha</label>
-                  <input name="j_password" type="password" class="span3" />                  
-                  <input class="btn btn-large btn-success btnSignup" type="submit" value="Entrar" />
+                  <input name="j_password" type="password" class="span3" />
+                  <table>
+                  		<tr>
+                  			<td>
+                  				<input class="btn btn-large btn-success btnSignup" type="submit" value="Entrar" />
+                  			</td>
+                  			<td class="btn-confirma">
+                  				<h2><a href="" class="btn btn-large btn-warning btn-position">Cadastre-se</a></h2>
+                  			</td>
+                  		</tr>
+                  </table>                  
                 </div>
                 <h3>Titulo caixa</h3>
                 <p>
