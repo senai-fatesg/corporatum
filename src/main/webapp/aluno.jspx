@@ -109,8 +109,8 @@
 				<p:selectBooleanCheckbox value="#{AlunoControl.listarTodos }"/>
 			</a:field>
 			<a:newLine/>
-			<p:commandButton actionListener="#{AlunoControl.listar }" value="Listar" update="alunos, panel" icon="ui-icon-search"/>
-			<p:spacer width="7px" />
+			<!-- <p:commandButton actionListener="#{AlunoControl.listar }" value="Listar" update="alunos, panel" icon="ui-icon-search"/>
+			<p:spacer width="7px" /> botão Listar -->
 			<!-- <p:commandButton action="/aluno.jspx?faces-redirect=true" value="Novo Aluno" icon="ui-icon-contact"/>
 						<p:spacer width="15px" /> botão "Novo Aluno" --> 
 			<p:commandButton value="Imprimir" icon="ui-icon-print" actionListener="#{AlunoControl.imprimirLista}"/>
