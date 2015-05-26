@@ -45,7 +45,71 @@
 				update="panelAvaliacao" icon="ui-icon-refresh"/>
 			<a:newLine />
 		</p:panel>
+		
+				<p:dataTable id="avaliacoes" value="#{AvaliacaoControl.avaliacoes }"
+			var="cont" width="100%" emptyMessage="Sem registros">
+			<f:facet name="header">
+				<h:outputText value="Lista de Avaliações" />
+			</f:facet>
+			<p:column sortBy="#{cont.id }">
+				<f:facet name="header">
+					<h:outputText value="Código" />
+				</f:facet>
+				<h:outputText value="#{cont.id }" />
+			</p:column>
+			<p:column sortBy="#{cont.disciplina.nome }">
+				<f:facet name="header">
+					<h:outputText value="Disciplina" />
+				</f:facet>
+				<h:outputText value="#{cont.disciplina.nome }" />
+			</p:column>
+			<p:column sortBy="#{cont.tipoAvaliacao }">
+				<f:facet name="header">
+					<h:outputText value="Tipo" />
+				</f:facet>
+				<h:outputText value="#{cont.tipoAvaliacao }" />
+			</p:column>
+			<p:column sortBy="#{cont.criterio }">
+				<f:facet name="header">
+					<h:outputText value="Critério" />
+				</f:facet>
+				<h:outputText value="#{cont.criterio}" />
+			</p:column>
+			<p:column sortBy="#{cont.observacao }">
+				<f:facet name="header">
+					<h:outputText value="Observação" />
+				</f:facet>
+				<h:outputText value="#{cont.observacao }" />
+			</p:column>
+			<p:column headerText="Ação">
+				<p:commandButton icon="ui-icon-trash" value="Excluir"
+					oncomplete="confirmacao.show()">
 
+					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
+						value="#{cont}" />
+
+				</p:commandButton>
+
+				<p:commandButton icon="ui-icon-pencil" value="Editar" update="@form"
+					process="@this" action="/avaliacao.jspx?faces-redirect=true">
+
+					<f:setPropertyActionListener target="#{AvaliacaoControl.avaliacao}"
+						value="#{cont}" />
+
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+		<p:confirmDialog widgetVar="confirmacao"
+			message="Tem Certeza que deseja excluir?" severity="alert"
+			closable="true">
+
+			<p:commandButton value="Sim"
+				actionListener="#{AvaliacaoControl.excluir}"
+				onclick="confirmacao.hide()" update="avaliacoes" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		</p:confirmDialog>
+		<a:newLine />
+		<p:spacer width="25px" />
 
 	</ui:define>
 </ui:composition>
