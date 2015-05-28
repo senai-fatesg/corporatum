@@ -56,7 +56,7 @@
 				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
 					actionListener="#{InstituicaoControl.filtrarPorNome}"
 					update="dtInstituicao" />
-				<p:commandButton action="#{InstituicaoControl.limpar}"
+				<p:commandButton action="#{InstituicaoControl.limparConsulta}"
 					value="Limpar" icon="ui-icon-cancel" update="dtInstituicao" />
 				<a:newLine />
 				<h:outputText value="Lista de Instituições"></h:outputText>
