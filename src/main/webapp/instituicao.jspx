@@ -39,8 +39,8 @@
 				actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"
 				update="instituicoes, panel" />
 			<p:spacer width="45px" />
-			<p:commandButton icon="ui-icon-search" value="Listar" update="dtInstituicao"/>
-			<p:spacer width="45px" />
+			<!--  <p:commandButton icon="ui-icon-search" value="Listar" update="dtInstituicao"/>
+			<p:spacer width="45px" /> -->
 			<p:commandButton icon="ui-icon-refresh" ajax="false"
 				actionListener="#{InstituicaoControl.limpar}" value="Limpar"
 				update="panel" />

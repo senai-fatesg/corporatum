@@ -119,8 +119,7 @@
 					actionListener="#{CursoControl.filtrarPorNome}" update="dtCurso" />
 				<p:commandButton action="#{CursoControl.limparConsulta}"
 					value="Limpar" icon="ui-icon-cancel" update="dtCurso" />
-				<p:commandButton action="#{CursoControl.voltar}" value="Voltar"
-					icon="ui-icon-voltar" ajax="false" />
+				
 				<a:newLine />
 			</f:facet>
 			<f:facet name="header">
