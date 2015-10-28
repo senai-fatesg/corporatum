@@ -1,7 +1,9 @@
 package br.com.ambientinformatica.fatesg.corporatum.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -20,32 +22,44 @@ import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 public class ColaboradorServiceControl {
 
 	@Autowired
-   ColaboradorDao colaboradorDao;
-   
-   @GET
+	ColaboradorDao colaboradorDao;
+
+	@GET
+	@Path("consultarPorNome/{nomeColaborador}")
+	@Produces("text/xml")
+	public List<Colaborador> listarPorNome(@PathParam("nomeColaborador") String nomeColaborador) {
+		try {
+			return colaboradorDao.listarPorNome(nomeColaborador);
+		} catch (NoResultException e) {
+			return new ArrayList<Colaborador>();
+		}
+	}
+
+	@GET
 	@Path("consultarPorCpf/{cpfColaborador}")
 	@Produces("text/xml")
-   public Colaborador listarPorNome(@PathParam("cpfColaborador") String cpfColaborador){
-   	
-   	Colaborador colaborador = colaboradorDao.consultarPorCpf(cpfColaborador);
-   	
-   	return colaborador;
-   	
-   }
-   
-   @GET
+	public Colaborador listarPorCPF(@PathParam("cpfColaborador") String cpfColaborador) {
+
+		Colaborador colaborador = new Colaborador();
+		colaborador = colaboradorDao.consultarPorCpf(cpfColaborador);
+
+		return colaborador;
+
+	}
+
+	@GET
 	@Path("listarTodos")
 	@Produces("text/xml")
-   public List<Colaborador> listarTodos() throws CorporatumException{
-   	List<Colaborador> colaboradores;
-      try {
-	      colaboradores = colaboradorDao.listar();
-      } catch (PersistenciaException e) {
-	      throw new CorporatumException(e);
-      }
-   	
-   	return colaboradores;
-   	
-   }
+	public List<Colaborador> listarTodos() throws CorporatumException {
+		List<Colaborador> colaboradores = new ArrayList<Colaborador>();
+		try {
+			colaboradores = colaboradorDao.listar();
+		} catch (PersistenciaException e) {
+			throw new CorporatumException(e);
+		}
+
+		return colaboradores;
+
+	}
 
 }

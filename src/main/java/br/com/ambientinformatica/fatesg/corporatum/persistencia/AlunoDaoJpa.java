@@ -102,4 +102,14 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 			return null;
 		}
    }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aluno> listarPorNome(String nome) throws CorporatumException {
+		Query q = em.createQuery("from Aluno as a where upper(a.nome) like :nome");
+		q.setParameter("nome", "%" + nome.toUpperCase() + "%" );
+		return q.getResultList();
+	}
+	
+	
 }

@@ -98,9 +98,9 @@ public class CursoControl implements Serializable {
 
 	public void filtrarPorNome() {
 		try {
-			cursos = cursoDao.listarPorNome(filtroGlobal);
+			cursos = cursoDao.listarPorDescricao(filtroGlobal);
 			if (cursos.isEmpty()) {
-				cursos = cursoDao.listarPorNome(filtroGlobal);
+				cursos = cursoDao.listarPorDescricao(filtroGlobal);
 			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);

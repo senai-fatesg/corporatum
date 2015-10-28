@@ -96,7 +96,7 @@ public class MatrizControl implements Serializable {
 	}
 
 	public List<Curso> completarCursos(String nome) {
-		List<Curso> listaCursos = cursoDao.listarPorNome(nome);
+		List<Curso> listaCursos = cursoDao.listarPorDescricao(nome);
 		if (listaCursos.size() == 0) {
 			UtilFaces
 					.addMensagemFaces("Curso não encontrado\nVerifique o nome do Curso.");

@@ -15,4 +15,6 @@ public interface AlunoDao extends Persistencia<Aluno>{
 	
 	public Aluno consultarPorCpfCnpj(String cpfCnpj) throws CorporatumException;
 	
+	public List<Aluno> listarPorNome (String nome) throws CorporatumException;
+	
 }

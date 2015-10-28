@@ -9,5 +9,5 @@ public interface CursoDao extends Persistencia<Curso>{
 	
 	public void verificarCampos(Curso curso);
 	
-	List<Curso> listarPorNome(String nome);
+	List<Curso> listarPorDescricao(String descricao);
 }
