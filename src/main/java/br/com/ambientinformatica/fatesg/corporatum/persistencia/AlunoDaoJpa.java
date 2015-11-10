@@ -1,5 +1,6 @@
 package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -106,9 +107,13 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Aluno> listarPorNome(String nome) throws CorporatumException {
-		Query q = em.createQuery("from Aluno as a where upper(a.nome) like :nome");
-		q.setParameter("nome", "%" + nome.toUpperCase() + "%" );
-		return q.getResultList();
+		try{
+			Query q = em.createQuery("from Aluno as a where upper(a.nome) like :nome");
+			q.setParameter("nome", "%" + nome.toUpperCase() + "%" );
+			return q.getResultList();
+		} catch (NoResultException e) {
+			return new ArrayList<Aluno>();
+		}
 	}
 	
 	
