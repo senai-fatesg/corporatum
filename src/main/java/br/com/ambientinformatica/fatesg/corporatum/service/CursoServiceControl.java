@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -22,7 +22,7 @@ public class CursoServiceControl {
 	@Autowired
 	private CursoDao cursoDao;
 
-	@POST
+	@GET
 	@Path("listaPorNome/{nome}")
 	@Produces("text/xml")
 	public List<Curso> listaPorNome(@PathParam("nome") String nome) {

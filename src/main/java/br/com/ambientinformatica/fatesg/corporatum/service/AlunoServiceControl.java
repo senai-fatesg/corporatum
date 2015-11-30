@@ -2,7 +2,7 @@ package br.com.ambientinformatica.fatesg.corporatum.service;
 
 import java.util.List;
 
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -21,7 +21,7 @@ public class AlunoServiceControl {
 	@Autowired
 	public AlunoDao alunoDao;
 	
-	@POST
+	@GET
 	@Path("listarPorNome/{nomeAluno}")
 	@Produces("text/xml")
 	public List<Aluno> listarPorNome(@PathParam("nomeAluno") String nomeAluno) throws CorporatumException {
