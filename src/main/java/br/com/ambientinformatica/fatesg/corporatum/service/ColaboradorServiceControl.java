@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -23,7 +22,7 @@ public class ColaboradorServiceControl {
 	@Autowired
 	ColaboradorDao colaboradorDao;
 
-	@POST
+	@GET
 	@Path("listarPorNome/{nomeColaborador}")
 	@Produces("text/xml")
 	public List<Colaborador> listarPorNome(
