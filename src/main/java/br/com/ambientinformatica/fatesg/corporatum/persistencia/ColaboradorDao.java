@@ -11,9 +11,9 @@ public interface ColaboradorDao extends Persistencia<Colaborador> {
 
 	public void verificarCampos(Colaborador colaborador);
 	
-	List<Colaborador> listarPorNome(String nome);
+	public List<Colaborador> listarPorNome(String nome);
 	
-	List<Colaborador> listarPorTipo(SelectItem tipo);
+	public List<Colaborador> listarPorTipo(SelectItem tipo);
 
 	public Colaborador consultarPorCpf(String cpfColaborador);
 }
