@@ -28,8 +28,8 @@
 			<a:field label="Turno" spaceLeft="15px">
 				<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{CursoControl.turnosCurso}"
-						itemValue="#{turno.descricao }" itemLabel="#{turno }" />
+					<f:selectItems value="#{CursoControl.turnosCurso}" var="turno"
+						itemValue="#{turno}" itemLabel="#{turno}" />
 				</h:selectOneMenu>
 			</a:field>
 			<a:newLine />
