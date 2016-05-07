@@ -1,9 +1,7 @@
 package br.com.ambientinformatica.fatesg.corporatum.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -13,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
+import com.thoughtworks.xstream.XStream;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
@@ -29,15 +27,10 @@ public class CursoServiceControl {
 	@Path("listaPorNome/{nome}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String listaPorNome(@PathParam("nome") String nome) {
-		try {
 			List<Curso> cur = cursoDao.listarPorNome(nome);
 
-			String cursos = new Gson().toJson(new ArrayList<Curso>(cur));
-
-			return cursos;
-		} catch (NoResultException e) {
-			return "";
-		}
+			return new XStream().toXML(cur);
+		
 	}
 
 }

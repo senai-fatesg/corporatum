@@ -166,6 +166,11 @@
 			<artifactId>jtidy</artifactId>
 			<version>r938</version>
 		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.9</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.xhtmlrenderer</groupId>

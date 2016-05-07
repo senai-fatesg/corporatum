@@ -1,6 +1,5 @@
 package br.com.ambientinformatica.fatesg.corporatum.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -12,11 +11,11 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.thoughtworks.xstream.XStream;
+
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.util.CorporatumException;
-
-import com.google.gson.Gson;
 
 @Component
 @Path("/aluno")
@@ -32,9 +31,7 @@ public class AlunoServiceControl {
 			throws CorporatumException {
 		List<Aluno> alu = alunoDao.listarPorNome(nomeAluno);
 
-		String alunos = new Gson().toJson(new ArrayList<Aluno>(alu));
-
-		return alunos;
+		return new XStream().toXML(alu);
 	}
 
 }

@@ -1,6 +1,5 @@
 package br.com.ambientinformatica.fatesg.corporatum.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -12,10 +11,10 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.thoughtworks.xstream.XStream;
+
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
-
-import com.google.gson.Gson;
 
 @Component
 @Path("/colaborador")
@@ -26,27 +25,20 @@ public class ColaboradorServiceControl {
 
 	@GET
 	@Path("listarPorNome/{nomeColaborador}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String listarPorNome(
-			@PathParam("nomeColaborador") String nomeColaborador) {
+	@Produces(MediaType.APPLICATION_XML)
+	public String listarPorNome(@PathParam("nomeColaborador") String nomeColaborador) {
 		List<Colaborador> col = colaboradorDao.listarPorNome(nomeColaborador);
 
-		String colaboradores = new Gson().toJson(new ArrayList<Colaborador>(col));
-
-		return colaboradores;
+		return new XStream().toXML(col);
 	}
 
 	@GET
 	@Path("listarPorCPF/{cpfColaborador}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String listarPorCPF(
-			@PathParam("cpfColaborador") String cpfColaborador) {
-
+	public String listarPorCPF(@PathParam("cpfColaborador") String cpfColaborador) {
 		Colaborador col = colaboradorDao.consultarPorCpf(cpfColaborador);
 
-		String colaborador = new Gson().toJson(col);
-		
-		return colaborador; 
+		return new XStream().toXML(col);
 	}
 
 }
