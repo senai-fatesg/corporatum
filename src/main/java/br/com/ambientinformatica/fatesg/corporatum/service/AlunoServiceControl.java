@@ -26,7 +26,7 @@ public class AlunoServiceControl {
 
 	@GET
 	@Path("listarPorNome/{nomeAluno}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	public String listarPorNome(@PathParam("nomeAluno") String nomeAluno)
 			throws CorporatumException {
 		List<Aluno> alu = alunoDao.listarPorNome(nomeAluno);

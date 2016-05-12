@@ -25,7 +25,7 @@ public class InstituicaoServiceControl {
 
 	@GET
 	@Path("listarPorNome/{nomeInstituicao}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	public String listarPorNome(@PathParam("nomeInstituicao") String nomeInstituicao) {
 		List<Instituicao> ins = instituicaoDao.consultarPeloNome(nomeInstituicao);
 

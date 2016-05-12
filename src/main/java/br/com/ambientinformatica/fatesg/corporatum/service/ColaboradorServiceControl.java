@@ -34,7 +34,7 @@ public class ColaboradorServiceControl {
 
 	@GET
 	@Path("listarPorCPF/{cpfColaborador}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	public String listarPorCPF(@PathParam("cpfColaborador") String cpfColaborador) {
 		Colaborador col = colaboradorDao.consultarPorCpf(cpfColaborador);
 

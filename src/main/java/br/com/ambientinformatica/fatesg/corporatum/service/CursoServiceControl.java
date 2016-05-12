@@ -25,7 +25,7 @@ public class CursoServiceControl {
 
 	@GET
 	@Path("listaPorNome/{nome}")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_XML)
 	public String listaPorNome(@PathParam("nome") String nome) {
 			List<Curso> cur = cursoDao.listarPorNome(nome);
 
