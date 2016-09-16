@@ -10,6 +10,7 @@
 	<url>http://solutioin.com/projetos</url>
 
 	<properties>
+		<jdk.version>1.7</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<webXmlPath>src/main/webapp/WEB-INF/web.xml</webXmlPath>
 	</properties>
@@ -44,7 +45,7 @@
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>ambient-jpa</artifactId>
-			<version>2.0.0</version>
+			<version>2.0.18</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -55,13 +56,23 @@
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>ambient-jsf</artifactId>
-			<version>2.0.0</version>
+			<version>3.0.5</version>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>net.sf.jasperreports</groupId>
+					<artifactId>jasperreports</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>jasperreports</groupId>
+					<artifactId>barbecue</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4</version>
+			<version>1.4.5</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -80,11 +91,6 @@
 			<version>1.6.7</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core-tiger</artifactId>
-			<version>2.0.6.RELEASE</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
@@ -99,27 +105,22 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<version>5.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>all-themes</artifactId>
-			<version>1.0.9</version>
+			<version>1.0.10</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>utilAmbient</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.11</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.1.GA</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -230,52 +231,86 @@
 		</repository>
 	</repositories>
 
-	<build>
+		<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					<encoding>UTF-8</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.3</version>
-				<executions>
-					<execution>
-						<id>configuracao</id>
-						<phase>test</phase>
-						<configuration>
-							<tasks>
-								<copy overwrite="true"
-									file="${project.build.directory}/classes/producao/log4j.properties"
-									todir="${project.build.directory}/classes" />
-								<copy overwrite="true"
-									file="${project.build.directory}/classes/producao/application.properties"
-									todir="${project.build.directory}/classes" />
-							</tasks>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.2</version>
 				<configuration>
-					<webXml>${webXmlPath}</webXml>
+					<locales>pt_BR</locales>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-utils</artifactId>
+						<version>1.5.9</version>
+					</dependency>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-interpolation</artifactId>
+						<version>1.12</version>
+					</dependency>
+				</dependencies>
 			</plugin>
-
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>9.2.6.v20141205</version>
+				<configuration>
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+					</webAppConfig>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
+					<systemPropertiesFile>${user.home}/.m2/system.properties</systemPropertiesFile>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.tomcat</groupId>
+						<artifactId>tomcat-dbcp</artifactId>
+						<version>7.0.47</version>
+					</dependency>
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>9.4-1200-jdbc41</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jasperreports-maven-plugin</artifactId>
+				<version>1.0-beta-2</version>
+				<configuration>
+					<outputDirectory>${project.build.directory}/classes/jasper</outputDirectory>
+				</configuration>
+				<executions> 
+					<execution> 
+						<phase>compile</phase> 
+						<goals> 
+							<goal>compile-reports</goal> 
+						</goals> 
+					</execution> 
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.jasperreports</groupId>
+						<artifactId>jasperreports</artifactId>
+						<version>5.2.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
-
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 	</build>
 	<!-- Geração de diagrama de classes -->
 	<reporting>
@@ -295,7 +330,7 @@
 					<useStandardDocletOptions>true</useStandardDocletOptions>
 				</configuration>
 			</plugin>
-			<!--  <plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jasperreports-maven-plugin</artifactId>
 				<configuration>
@@ -316,7 +351,7 @@
 						<version>4.6.0</version>
 					</dependency>
 				</dependencies>
-			</plugin> -->
+			</plugin>
 		</plugins>
 	</reporting>
 

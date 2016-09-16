@@ -59,7 +59,7 @@
 	</filter-mapping>
 	<servlet>
 		<servlet-name>Fabrica Servlet</servlet-name>
-		<servlet-class>br.com.ambientinformatica.jpa.util.FabricaLoadServlet</servlet-class>
+		<servlet-class>br.com.ambientinformatica.fatesg.corporatum.util.FabricaLoadServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
