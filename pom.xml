@@ -211,6 +211,10 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-context</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-asm</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<!-- habititando a execuçao da classe SpringJUnit4ClassRunner e o uso das 
