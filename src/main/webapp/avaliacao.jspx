@@ -13,7 +13,7 @@
 					value="#{AvaliacaoControl.avaliacao.disciplina}"
 					completeMethod="#{AvaliacaoControl.completarDisciplina}"
 					var="disciplina" itemLabel="#{disciplina.nome}"
-					itemValue="#{disciplina}" converter="disciplinaConverter">
+					itemValue="#{disciplina}" converter="objectConverter">
 				</p:autoComplete>
 				<p:watermark value="Pesquise pelo nome" for="completadisciplina" />
 			</a:field>			

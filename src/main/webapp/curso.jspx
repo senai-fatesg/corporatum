@@ -56,7 +56,7 @@
 					completeMethod="#{CursoControl.completarUnidadesEnsino}"
 					minQueryLength="2" var="unidadeEnsino"
 					itemLabel="#{unidadeEnsino.nome}" itemValue="#{unidadeEnsino}"
-					converter="unidadeEnsinoConverter">
+					converter="objectConverter">
 				</p:autoComplete>
 				<p:watermark value="Pesquise pelo Nome" for="completUnidadeEnsino" />
 			</a:field>

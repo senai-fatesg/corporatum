@@ -31,7 +31,7 @@ public class AlunoControl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Aluno aluno = new Aluno();
+	private Aluno aluno;
 
 	@Autowired
 	private AlunoDao alunoDao;
@@ -62,14 +62,11 @@ public class AlunoControl implements Serializable {
 	@PostConstruct
 	public void init() {
 		atualizarMunicipios();
-		listar(null);
+		listar();
 	}
 
-	public void confirmar(ActionEvent evt) {
+	public void confirmar() {
 		try {
-			if(status == null){
-				throw new Exception("É necessário escolher o status do Aluno");
-			}
 			aluno.setStatus(status);
 			aluno.setMunicipio(municipio);
 			aluno.setUf(uf);
@@ -90,13 +87,13 @@ public class AlunoControl implements Serializable {
 		try {
 			aluno.setStatus(EnumStatusAluno.INATIVO);
 			alunoDao.alterar(aluno);
-			listar(evt);
+			listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void listar(ActionEvent evt) {
+	public void listar() {
 		try {
 			alunos = alunoDao.listar(listarTodos, status);
 		} catch (Exception e) {

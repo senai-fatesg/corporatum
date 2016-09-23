@@ -19,10 +19,11 @@
 					mask="999.999.999-99" />
 			</a:field>
 			<a:field label="Status" spaceLeft="15px">
-				<h:selectOneMenu id="status" value="#{AlunoControl.status}">
+				<h:selectOneMenu id="status" value="#{AlunoControl.aluno.status}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{ AlunoControl.statusAluno}" var="tipo"
 						itemValue="#{tipo}" itemLabel="#{tipo}" />
+						<f:ajax event="change" execute="@this"/>
 				</h:selectOneMenu>
 			</a:field>
 			<a:newLine />
@@ -71,7 +72,7 @@
 			</a:field>
         
             <a:field label="Município" spaceLeft="15px;">
-               <p:selectOneMenu value="#{AlunoControl.municipio }" style="width:150px;" id="municipios" converter="municipioConverter"  >
+               <p:selectOneMenu value="#{AlunoControl.municipio }" style="width:150px;" id="municipios" converter="objectConverter"  >
                   <f:selectItem itemLabel="Selecione"/>
                   <f:selectItems value="#{AlunoControl.municipios }"/>
                </p:selectOneMenu>
@@ -100,7 +101,7 @@
 					mask="999.999.999-99" />
 			</a:field>
 			<a:field label="Status" spaceLeft="15px">
-				<h:selectOneMenu id="status" value="#{AlunoControl.status}">
+				<h:selectOneMenu id="status2" value="#{AlunoControl.status}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{ AlunoControl.statusAluno}" var="tipo"
 						itemValue="#{tipo}" itemLabel="#{tipo}" />
@@ -110,10 +111,6 @@
 				<p:selectBooleanCheckbox value="#{AlunoControl.listarTodos }"/>
 			</a:field>
 			<a:newLine/>
-			<!-- <p:commandButton actionListener="#{AlunoControl.listar }" value="Listar" update="alunos, panel" icon="ui-icon-search"/>
-			<p:spacer width="7px" /> botão Listar -->
-			<!-- <p:commandButton action="/aluno.jspx?faces-redirect=true" value="Novo Aluno" icon="ui-icon-contact"/>
-						<p:spacer width="15px" /> botão "Novo Aluno" --> 
 			<p:commandButton value="Imprimir" icon="ui-icon-print" actionListener="#{AlunoControl.imprimirLista}"/>
 		</p:panel>
 		

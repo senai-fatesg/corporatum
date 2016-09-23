@@ -31,7 +31,7 @@
 					completeMethod="#{UnidadeEnsinoControl.completarInstituicoes}"
 					minQueryLength="3" var="instituicao"
 					itemLabel="#{instituicao.nomeFantasia}" itemValue="#{instituicao}"
-					converter="instituicaoConverter">
+					converter="objectConverter">
 				</p:autoComplete>
 				<p:watermark value="Pesquise pelo Nome Fantasia"
 					for="completUsuario" />
@@ -145,11 +145,11 @@
 				</f:facet>
 				<h:outputText value="#{cont.sigla }"></h:outputText>
 			</p:column>
-			<p:column sortBy="#{cont.instituicao.nomeFantasia }">
+			<p:column sortBy="#{cont.instituicao.descricao }">
 				<f:facet name="header">
 					<h:outputText value="Instituição"></h:outputText>
 				</f:facet>
-				<h:outputText value="#{cont.instituicao.nomeFantasia }"></h:outputText>
+				<h:outputText value="#{cont.instituicao.descricao }"></h:outputText>
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"

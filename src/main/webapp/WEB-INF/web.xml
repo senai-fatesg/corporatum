@@ -129,4 +129,17 @@
 	</servlet-mapping>
 		<!-- Fim Configuração WS REST -->
 		
+	<mime-mapping>
+		<extension>jspx</extension>
+		<mime-type>application/xml</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>jpeg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>jpg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+		
 </web-app>

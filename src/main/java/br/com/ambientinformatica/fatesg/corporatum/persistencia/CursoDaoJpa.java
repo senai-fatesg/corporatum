@@ -47,10 +47,7 @@ public class CursoDaoJpa extends PersistenciaJpa<Curso> implements CursoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Curso> listarPorNome(String descricao) {
-		Query q = this.em
-				.createQuery("from Curso as c "
-						+ " left join fetch c.alunos c "
-						+ " where c.nome like :nome");
+		Query q = this.em.createQuery("select c from Curso c left join fetch c.alunos a where c.nome like :nome");
 		q.setParameter("nome", "%" + descricao + "%");
 		return q.getResultList();
 	}
