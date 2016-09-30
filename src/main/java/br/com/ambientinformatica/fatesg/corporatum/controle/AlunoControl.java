@@ -67,9 +67,6 @@ public class AlunoControl implements Serializable {
 
 	public void confirmar() {
 		try {
-			aluno.setStatus(status);
-			aluno.setMunicipio(municipio);
-			aluno.setUf(uf);
 			alunoDao.validarCampos(aluno);
 			String cpf = aluno.getCpfCnpj();
 			if (UtilCpf.validarCpf(cpf)) {
