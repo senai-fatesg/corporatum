@@ -31,7 +31,7 @@ public class AlunoControl implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Aluno aluno;
+	private Aluno aluno = new Aluno();
 
 	@Autowired
 	private AlunoDao alunoDao;

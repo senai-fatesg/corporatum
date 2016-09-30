@@ -74,7 +74,7 @@
             <a:field label="Município" spaceLeft="15px;">
                <p:selectOneMenu value="#{AlunoControl.municipio }" style="width:150px;" id="municipios" converter="objectConverter"  >
                   <f:selectItem itemLabel="Selecione"/>
-                  <f:selectItems value="#{AlunoControl.municipios }"/>
+                  <f:selectItems value="#{AlunoControl.municipios }" var="municipio" itemValue="#{municipio }" itemLabel="#{municipio}"/>
                </p:selectOneMenu>
             </a:field>
             
