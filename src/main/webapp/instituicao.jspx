@@ -99,7 +99,7 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
+					onclick="PF('confirmacao').show();">
 					<f:setPropertyActionListener
 						target="#{InstituicaoControl.instituicao}" value="#{cont}" />
 				</p:commandButton>
@@ -115,8 +115,8 @@
 			closable="true">
 			<p:commandButton value="Sim"
 				actionListener="#{InstituicaoControl.excluir}"
-				onclick="confirmacao.hide()" update="dtInstituicao" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+				onclick="confirmacao.hide();" update="dtInstituicao" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide();" actionListener="#{InstituicaoControl.listar }" />
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
