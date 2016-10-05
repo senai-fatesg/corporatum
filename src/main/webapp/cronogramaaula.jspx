@@ -20,6 +20,19 @@
 					value="#{CronogramaAulaControl.cronogramaAula.conteudoProgramatico }"
 					style="width:300px" />
 			</a:field>
+			
+			<a:field label="Disciplina" width="350" spaceLeft="15px">
+				<p:autoComplete id="completadisciplina"
+					value="#{CronogramaAulaControl.cronogramaAula.disciplina }"
+					completeMethod="#{AvaliacaoControl.completarDisciplina}"
+					var="disciplina" itemLabel="#{disciplina.nome}"
+					itemValue="#{disciplina}" converter="objectConverter">
+				</p:autoComplete>
+				<p:watermark value="Pesquise pelo nome" for="completadisciplina" />
+			</a:field>
+			
+			
+			
 			<a:field label="Horas Aulas" spaceLeft="15px">
 				<p:inputText
 					value="#{CronogramaAulaControl.cronogramaAula.horasAulas }"
@@ -74,7 +87,7 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					update="cronogramasAulas" oncomplete="confirmacao.show()">
+					update="cronogramasAulas" onclick="PF('confirmacao').show();" >
 
 					<f:setPropertyActionListener
 						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
