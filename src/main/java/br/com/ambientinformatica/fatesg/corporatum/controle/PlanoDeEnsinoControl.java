@@ -36,9 +36,9 @@ public class PlanoDeEnsinoControl implements Serializable {
 	public void confirmar(ActionEvent evt) {
 		try {
 			planoDeEnsinoDao.alterar(planoDeEnsino);
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 			listar(evt);
 			planoDeEnsino = new PlanoDeEnsino();
-			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

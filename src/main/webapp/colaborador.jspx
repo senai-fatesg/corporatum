@@ -171,7 +171,7 @@
 			<p:commandButton value="Sim"
 				actionListener="#{ColaboradorControl.excluir}"
 				onclick="confirmacao.hide()" update="dtColaboradores" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{ColaboradorControl.listar }"/>
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
