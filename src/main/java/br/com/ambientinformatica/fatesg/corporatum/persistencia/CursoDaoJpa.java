@@ -17,7 +17,7 @@ public class CursoDaoJpa extends PersistenciaJpa<Curso> implements CursoDao {
 	@Override
 	public void verificarCampos(Curso curso) {
 
-		String codigo = curso.getId();
+		String codigo = curso.getCodigo();
 		String nome = curso.getNome();
 		String descricao = curso.getDescricao();
 		int cargaHoraria = curso.getCargaHoraria();
@@ -47,8 +47,8 @@ public class CursoDaoJpa extends PersistenciaJpa<Curso> implements CursoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Curso> listarPorNome(String descricao) {
-		Query q = this.em.createQuery("select c from Curso c left join fetch c.alunos a where upper(c.nome) like :nome");
-		q.setParameter("nome", "%" + descricao.toUpperCase() + "%");
+		Query q = this.em.createQuery("select c from Curso c left join fetch c.alunos a where c.nome like :nome");
+		q.setParameter("nome", "%" + descricao + "%");
 		return q.getResultList();
 	}
 }
