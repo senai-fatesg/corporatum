@@ -64,12 +64,17 @@ public class CursoControl implements Serializable {
 		}
 	}
 
-	public void excluir() {
+	public void excluir(Curso curso) {
 		try {
-			cursoDao.excluirPorId(curso.getId());
-			curso = new Curso();
-			cursos = cursoDao.listar();
-			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
+			if (curso != null) {
+				cursoDao.excluirPorId(curso.getId());
+				curso = new Curso();
+				cursos = cursoDao.listar();
+				limpar();
+				UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
+			}else {
+				UtilFaces.addMensagemFaces("Erro ao excluir o curso");
+			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
