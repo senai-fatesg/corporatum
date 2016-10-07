@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ui:composition template="template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-
 		<p:panel header="Cadastro de Curso" id="panel">
 			<a:field label="Código">
-				<p:inputText value="#{CursoControl.curso.id }" />
+				<p:inputText value="#{CursoControl.curso.codigo }" />
 			</a:field>
 			<a:field label="Nome" spaceLeft="15px">
 				<p:inputText value="#{CursoControl.curso.nome }" />
@@ -28,8 +23,7 @@
 			<a:field label="Turno" spaceLeft="15px">
 				<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{CursoControl.turnosCurso}" var="turno"
-						itemValue="#{turno}" itemLabel="#{turno}" />
+					<f:selectItems value="#{CursoControl.turnosCurso}" var="turno" itemValue="#{turno}" itemLabel="#{turno}" />
 				</h:selectOneMenu>
 			</a:field>
 			<a:newLine />
@@ -37,142 +31,72 @@
 				<h:selectOneMenu value="#{CursoControl.curso.modalidade}"
 					id="modalidade">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{CursoControl.modalidadesCurso}"
-						itemValue="#{modalidade.descricao }" itemLabel="#{modalidade }" />
+					<f:selectItems value="#{CursoControl.modalidadesCurso}" itemValue="#{modalidade.descricao }" itemLabel="#{modalidade }" />
 				</h:selectOneMenu>
 			</a:field>
 			<a:field label="Data Inicio" spaceLeft="15px">
-				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio"
-					value="#{CursoControl.curso.dtInicio}" />
+				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio" value="#{CursoControl.curso.dtInicio}" />
+					
 			</a:field>
 			<a:field label="Data Termino" spaceLeft="15px">
-				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino"
-					value="#{CursoControl.curso.dtTermino}" />
+				<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino" value="#{CursoControl.curso.dtTermino}" />
+					
 			</a:field>
 			<a:newLine />
 			<a:field label="Unidade de Ensino" width="440px">
-				<p:autoComplete id="completUnidadeEnsino"
-					value="#{CursoControl.curso.unidadeEnsino}"
-					completeMethod="#{CursoControl.completarUnidadesEnsino}"
-					minQueryLength="2" var="unidadeEnsino"
-					itemLabel="#{unidadeEnsino.nome}" itemValue="#{unidadeEnsino}"
-					converter="objectConverter">
+				<p:autoComplete id="completUnidadeEnsino" value="#{CursoControl.curso.unidadeEnsino}" completeMethod="#{CursoControl.completarUnidadesEnsino}"
+					minQueryLength="2" var="unidadeEnsino" itemLabel="#{unidadeEnsino.nome}" itemValue="#{unidadeEnsino}" converter="objectConverter">
 				</p:autoComplete>
 				<p:watermark value="Pesquise pelo Nome" for="completUnidadeEnsino" />
 			</a:field>
 			<a:newLine />
 			<a:newLine />
-			<p:commandButton icon="ui-icon-disk" ajax="false"
-				actionListener="#{CursoControl.confirmar}" value="Confirmar"
-				update="cursos, panel" />
+			<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{CursoControl.confirmar}" value="Confirmar" update="cursos, panel" />
 			<p:spacer width="45px" />
 			<!--<p:commandButton icon="ui-icon-search"
 				action="/cursoLista.jspx?faces-redirect=true" value="Listar" /> botão Listar -->
 			<p:spacer width="45px" />
-			<p:commandButton icon="ui-icon-refresh" actionListener="#{CursoControl.limpar}"
-				value="Limpar" update="panel" />
+			<p:commandButton icon="ui-icon-refresh" actionListener="#{CursoControl.limpar}" value="Limpar" update="panel" />
 			<a:newLine />
 		</p:panel>
-		<script>
-			PrimeFaces.locales['pt'] = {
-				closeText : 'Fechar',
-				prevText : 'Anterior',
-				nextText : 'Próximo',
-				currentText : 'Começo',
-				monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
-						'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-						'Outubro', 'Novembro', 'Dezembro' ],
-				monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
-						'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-				dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
-						'Sexta', 'Sábado' ],
-				dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
-						'Sáb' ],
-				dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-				weekHeader : 'Semana',
-				firstDay : 0,
-				isRTL : false,
-				showMonthAfterYear : false,
-				yearSuffix : '',
-				timeOnlyTitle : 'Só Horas',
-				timeText : 'Tempo',
-				hourText : 'Hora',
-				minuteText : 'Minuto',
-				secondText : 'Segundo',
-				ampm : false,
-				month : 'Mês',
-				week : 'Semana',
-				day : 'Dia',
-				allDayText : 'Todo o Dia'
-			};
-		</script>
-		
-				<p:dataTable widgetVar="cursos" id="dtCurso"
-			value="#{CursoControl.cursos }" var="cont" width="100%"
-			emptyMessage="Sem registros" rows="20" paginator="true"
-			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		<p:dataTable widgetVar="cursos" id="dtCurso" value="#{CursoControl.cursos }" var="cont" width="100%"
+			emptyMessage="Sem registros" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+			{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 			<f:facet name="header">
 				<h:outputText value="Buscar por Nome:" />
-				<p:inputText id="inputFiltroGlobal"
-					value="#{CursoControl.filtroGlobal}" />
-				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
-					actionListener="#{CursoControl.filtrarPorNome}" update="dtCurso" />
-				<p:commandButton action="#{CursoControl.limparConsulta}"
-					value="Limpar" icon="ui-icon-cancel" update="dtCurso" />
+				<p:inputText id="inputFiltroGlobal" value="#{CursoControl.filtroGlobal}" />
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{CursoControl.filtrarPorNome}" update="dtCurso" />
+				<p:commandButton action="#{CursoControl.limparConsulta}" value="Limpar" icon="ui-icon-cancel" update="dtCurso" />
 				
-				<a:newLine />
+			<a:newLine />
 			</f:facet>
-			<f:facet name="header">
-				<h:outputText value="Lista de Cursos" />
-			</f:facet>
-			<p:column sortBy="#{cont.id }">
-				<f:facet name="header">
-					<h:outputText value="Código" />
-				</f:facet>
+			<p:column headerText="Código">
 				<h:outputText value="#{cont.id }" />
 			</p:column>
-			<p:column sortBy="#{cont.nome }">
-				<f:facet name="header">
-					<h:outputText value="Nome" />
-				</f:facet>
+			<p:column headerText="Nome">
 				<h:outputText value="#{cont.nome }" />
 			</p:column>
-			<p:column sortBy="#{cont.descricao }">
-				<f:facet name="header">
-					<h:outputText value="Descrição" />
-				</f:facet>
+			<p:column headerText="Descrição">
 				<h:outputText value="#{cont.descricao }" />
 			</p:column>
-			<p:column sortBy="#{cont.turno }">
-				<f:facet name="header">
-					<h:outputText value="Turno" />
-				</f:facet>
+			<p:column headerText="Turno">
 				<h:outputText value="#{cont.turno}" />
 			</p:column>
-			<p:column sortBy="#{cont.modalidade }">
-				<f:facet name="header">
-					<h:outputText value="Modalidade" />
-				</f:facet>
+			<p:column headerText="Modalidade">
 				<h:outputText value="#{cont.modalidade}" />
 			</p:column>
-			<p:column sortBy="#{cont.cargaHoraria }">
-				<f:facet name="header">
-					<h:outputText value="Carga Horária" />
-				</f:facet>
+			<p:column headerText="Carga horária">
 				<h:outputText value="#{cont.cargaHoraria }" />
 			</p:column>
-			<p:column sortBy="#{cont.unidadeEnsino.nome }">
-				<f:facet name="header">
-					<h:outputText value="Unidade de Ensino" />
-				</f:facet>
+			<p:column headerText="Unidade de Ensino">
 				<h:outputText value="#{cont.unidadeEnsino.nome }" />
 			</p:column>
 			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					onclick="PF('confirmacao').show();">
-					<f:setPropertyActionListener target="#{CursoControl.curso}"
-						value="#{cont}" />
-				</p:commandButton>
+				<p:commandButton value="Excluir" actionListener="#{CursoControl.excluir(cont)}" update="dtCurso">
+        			<p:confirm header="Curso" message="Tem certeza que voçê deseja excluir o curso?" icon="ui-icon-alert" />
+        			<f:setPropertyActionListener value="#{cont }" target="#{CursoControl.curso }"></f:setPropertyActionListener>
+    			</p:commandButton>
+				
 				<p:commandButton icon="ui-icon-pencil" value="Editar"
 					action="/curso.jspx?faces-redirect=true">
 					<f:setPropertyActionListener target="#{CursoControl.curso}"
@@ -180,15 +104,11 @@
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-			<p:commandButton value="Sim" actionListener="#{CursoControl.excluir}"
-				onclick="confirmacao.hide()" update="dtCurso" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{CursoControl.listar }"/>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+			<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" update="dtCurso" icon="ui-icon-close"/>
+			<p:commandButton value="Não" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		
 	</ui:define>
 </ui:composition>
