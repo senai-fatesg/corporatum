@@ -64,7 +64,9 @@ public class UnidadeEnsinoControl implements Serializable {
 			unidadesEnsino = unidadeEnsinoDao.listar();
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces("Erro ao excluir, provavelmente tem um Curso vinculado a esta unidade "
+					+ "de ensino. ");
+			
 		}
 	}
 

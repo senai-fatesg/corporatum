@@ -153,7 +153,7 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					onclick="PF('confirmacao').show();">
+					onclick="PF('confirmacao').show();" actionListener="#{UnidadeEnsinoControl.listar }">
 					<f:setPropertyActionListener
 						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
 				</p:commandButton>
@@ -168,7 +168,7 @@
 			message="Tem Certeza que deseja excluir?" severity="alert"
 			closable="true">
 			<p:commandButton value="Sim"
-				actionListener="#{UnidadeEnsinoControl.excluir}"
+				actionListener="#{UnidadeEnsinoControl.excluir}" 
 				onclick="confirmacao.hide()" update="dtUnidadeEnsino" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{UnidadeEnsinoControl.listar }"/>
 		</p:confirmDialog>

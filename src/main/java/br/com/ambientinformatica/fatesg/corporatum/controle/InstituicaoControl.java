@@ -59,7 +59,8 @@ public class InstituicaoControl {
 			instituicoes = instituicaoDao.listar();
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces("Erro ao excluir, provavelmente tem uma Unidade de Ensino vinculada a"
+					+" esta instituição.");
 		}
 	}
 

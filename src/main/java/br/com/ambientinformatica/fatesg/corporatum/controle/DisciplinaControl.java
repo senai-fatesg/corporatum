@@ -37,10 +37,13 @@ public class DisciplinaControl implements Serializable {
    
 	public void confirmar(ActionEvent evt){
 		try {
-			disciplinaDao.alterar(disciplina);
-			UtilFaces.addMensagemFaces("Operação realizada com sucesso");
-         listar(evt);
-         disciplina = new Disciplina();
+			   disciplinaDao.verificarCampos(disciplina);
+			   disciplinaDao.validar(disciplina);
+				disciplinaDao.alterar(disciplina);
+				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
+	         listar(evt);
+	         disciplina = new Disciplina();
+			
 		} catch (Exception e) {
 		   UtilFaces.addMensagemFaces(e);
 		}
@@ -54,11 +57,17 @@ public class DisciplinaControl implements Serializable {
 		}
 	}
 
-	public void excluir(ActionEvent evt) {
+	public void excluir(Disciplina disciplina) {
 		try {			
-			disciplinaDao.excluirPorId(disciplina.getId());
-			disciplina = new Disciplina();
-			listar(evt);
+			if(disciplina != null){
+					disciplinaDao.excluirPorId(disciplina.getId());
+					disciplina = new Disciplina();
+					disciplinas = disciplinaDao.listar();
+					limpar();
+					UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
+			}else{
+				UtilFaces.addMensagemFaces("Erro ao excluir a disciplina");
+			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}	

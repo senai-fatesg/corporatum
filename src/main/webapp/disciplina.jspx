@@ -10,7 +10,7 @@
 		<p:panel header="Cadastro de Disciplina" id="panelDisciplina">
 			<p:messages />
 			<a:field label="Código">
-				<p:inputText value="#{DisciplinaControl.disciplina.id }"
+				<p:inputText value="#{DisciplinaControl.disciplina.codigo }"
 					style="width:70px" />
 			</a:field>
 			<a:field label="Nome" spaceLeft="15px">
@@ -58,13 +58,13 @@
 				<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
 			</p:column>
 			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" value="Excluir" 
-					 onclick="PF('confirmacao').show();">
-
-					<f:setPropertyActionListener
-						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
-
-				</p:commandButton>
+			
+			
+		        <p:commandButton value="Excluir" actionListener="#{DisciplinaControl.excluir(cont)}" update="disciplinas">
+        			<p:confirm header="Disciplina" message="Tem certeza que voçê deseja excluir a disciplina?" icon="ui-icon-alert" />
+        			<f:setPropertyActionListener value="#{cont }" target="#{DisciplinaControl.disciplina }"></f:setPropertyActionListener>
+    			</p:commandButton>
+				
 
 				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/disciplina.jspx?faces-redirect=true">
 
@@ -74,15 +74,12 @@
 				</p:commandButton>
 			</p:column>
 		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-
-			<p:commandButton value="Sim"
-				actionListener="#{DisciplinaControl.excluir}"
-				onclick="confirmacao.hide()" update="disciplinas"   process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
+			<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" update="disciplinas" icon="ui-icon-close"/>
+			<p:commandButton value="Não" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
 		</p:confirmDialog>
+		
 		<a:newLine />
 		<p:spacer width="25px" />
 

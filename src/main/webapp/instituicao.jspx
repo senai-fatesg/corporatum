@@ -99,7 +99,7 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					onclick="PF('confirmacao').show();">
+					onclick="PF('confirmacao').show();" actionListener="#{InstituicaoControl.listar }">
 					<f:setPropertyActionListener
 						target="#{InstituicaoControl.instituicao}" value="#{cont}" />
 				</p:commandButton>
