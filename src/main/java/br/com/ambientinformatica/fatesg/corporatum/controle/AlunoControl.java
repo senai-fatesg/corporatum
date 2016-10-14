@@ -16,11 +16,11 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.ambientjsf.util.UtilFacesRelatorio;
-import br.com.ambientinformatica.corporativo.entidade.EnumUf;
-import br.com.ambientinformatica.corporativo.entidade.Municipio;
 import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumUf;
+import br.com.ambientinformatica.fatesg.api.entidade.Municipio;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.MunicipioDao;
 import br.com.ambientinformatica.util.UtilCpf;
@@ -47,20 +47,19 @@ public class AlunoControl implements Serializable {
 	
 	private String nomeLista;
 	
-	private String cpfCnpjLista;
-
-	private EnumUf uf = EnumUf.GO;
+	private EnumUf uf;
 	
-	private List<SelectItem> municipios = new ArrayList<SelectItem>();
+	private List<Municipio> municipios = new ArrayList<>();
 	
-	private Municipio municipio = new Municipio();
 	
-	public List<SelectItem> getUfs(){
-		return UtilFaces.getListEnum(EnumUf.values());
-	}
 
 	@PostConstruct
 	public void init() {
+		if(aluno != null && aluno.getMunicipio() != null){
+			uf = aluno.getMunicipio().getUf();
+		}else{
+			uf = EnumUf.GO;
+		}
 		atualizarMunicipios();
 		listar();
 	}
@@ -92,7 +91,7 @@ public class AlunoControl implements Serializable {
 
 	public void listar() {
 		try {
-			alunos = alunoDao.listar(listarTodos, status);
+			alunos = alunoDao.listar(nomeLista, listarTodos, status);
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -113,15 +112,11 @@ public class AlunoControl implements Serializable {
 	}
 	
 	public void atualizarMunicipios(){
-		try {
-			municipios.clear();
-			List<Municipio> municipiosList = municipioDao.listarPorUf(uf);
-			for(Municipio m : municipiosList){
-				municipios.add(new SelectItem(m, m.getDescricao()));
-			}
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);
-		}
+		municipios =  municipioDao.listarPorUf(uf, null);
+	}
+	
+	public List<SelectItem> getUfs(){
+		return UtilFaces.getListEnum(EnumUf.values());
 	}
 	
 	public void limpar() {
@@ -172,14 +167,6 @@ public class AlunoControl implements Serializable {
 		this.nomeLista = nomeLista;
 	}
 
-	public String getCpfCnpjLista() {
-		return cpfCnpjLista;
-	}
-
-	public void setCpfCnpjLista(String cpfCnpjLista) {
-		this.cpfCnpjLista = cpfCnpjLista;
-	}
-
 	public EnumUf getUf() {
 		return uf;
 	}
@@ -187,16 +174,13 @@ public class AlunoControl implements Serializable {
 	public void setUf(EnumUf uf) {
 		this.uf = uf;
 	}
-	
-	public List<SelectItem> getMunicipios() {
+
+	public List<Municipio> getMunicipios() {
 		return municipios;
 	}
 
-	public Municipio getMunicipio() {
-		return municipio;
+	public void setMunicipios(List<Municipio> municipios) {
+		this.municipios = municipios;
 	}
 
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
 }

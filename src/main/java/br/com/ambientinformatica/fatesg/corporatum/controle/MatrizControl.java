@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
+import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
 import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.CursoDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.MatrizDao;
 
 @Controller("MatrizControl")
@@ -25,40 +27,49 @@ public class MatrizControl implements Serializable {
 
 	private Matriz matriz = new Matriz();
 
+	private Disciplina disciplina;
+
 	@Autowired
 	private MatrizDao matrizDao;
 
+	private String filtroGlobal = "";
+
 	private List<Matriz> matrizes = new ArrayList<Matriz>();
 
-	private String filtroGlobal = "";
+	private List<Disciplina> disciplinas = new ArrayList<>();
 
 	@Autowired
 	private CursoDao cursoDao;
 
+	@Autowired
+	private DisciplinaDao disciplinaDao;
+
 	@PostConstruct
 	public void init() {
-		listar(null);
+		listar();
+	}
+
+	public void listar() {
+		try {
+			matrizes = matrizDao.listar();
+			disciplinas =  disciplinaDao.listar();
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
 	}
 
 	public void confirmar(ActionEvent evt) {
 		try {
 			matrizDao.verificarCampos(matriz);
 			matrizDao.alterar(matriz);
-			listar(evt);
 			matriz = new Matriz();
+			listar();
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void listar(ActionEvent evt) {
-		try {
-			matrizes = matrizDao.listar();
-		} catch (Exception e) {
-			UtilFaces.addMensagemFaces(e);
-		}
-	}
 
 	public void excluir() {
 		try {
@@ -73,6 +84,15 @@ public class MatrizControl implements Serializable {
 
 	public void limpar() {
 		matriz = new Matriz();
+	}
+
+	public void adicionarDisciplina(){
+		matriz.add(disciplina);
+	}
+
+	public void removerDisciplina(Disciplina parametro){
+		matriz.remover(parametro);
+		UtilFaces.addMensagemFaces("Item removido!");
 	}
 
 	public void filtrarPorNome() {
@@ -98,10 +118,13 @@ public class MatrizControl implements Serializable {
 	public List<Curso> completarCursos(String nome) {
 		List<Curso> listaCursos = cursoDao.listarPorNome(nome);
 		if (listaCursos.size() == 0) {
-			UtilFaces
-					.addMensagemFaces("Curso não encontrado\nVerifique o nome do Curso.");
+			UtilFaces.addMensagemFaces("Curso não encontrado\nVerifique o nome do Curso.");
 		}
 		return listaCursos;
+	}
+
+	public void editarMatriz(Matriz matriz){
+		this.matriz = matriz;
 	}
 
 	public Matriz getMatriz() {
@@ -122,6 +145,22 @@ public class MatrizControl implements Serializable {
 
 	public void setFiltroGlobal(String filtroGlobal) {
 		this.filtroGlobal = filtroGlobal;
+	}
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
 }

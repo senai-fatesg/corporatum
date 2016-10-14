@@ -7,8 +7,46 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
+		<p:messages />
 		<p:panel header="Cadastro de Disciplina" id="panelDisciplina">
-			<p:messages />
+			<p:spacer width="10px" />
+			<p:commandButton icon="ui-icon-search" update="disciplinas"
+				value="Listar" />
+			<p:spacer width="10px" />
+			<p:commandButton icon="ui-icon-refresh" ajax="true" action="#{DisciplinaControl.limpar}"
+				value="Limpar" update="panelDisciplina" />
+			<p:spacer width="10px" />
+			<p:commandButton value="Novo" type="button" onclick="PF('dlg1').show();" />	
+		</p:panel>
+		<p:panel>
+			<p:dataTable id="disciplinas"
+				value="#{DisciplinaControl.disciplinas }" var="cont"
+				emptyMessage="Sem registros" rows="200" paginator="true"
+	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				<p:column headerText="Código" style="width:250px">
+					<h:outputText value="#{cont.codigo }"></h:outputText>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{cont.nome }"></h:outputText>
+				</p:column>
+				<p:column headerText="Carga horária" style="width:100px">
+					<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
+				</p:column>
+				<p:column headerText="Editar" style="width:45px">
+					<p:commandButton id="alterarDisciplina" icon="ui-icon-pencil" process="@this" update="@form" oncomplete="PF('dlg1').show()">
+						<f:setPropertyActionListener target="#{DisciplinaControl.disciplina}" value="#{cont}" />
+					</p:commandButton>
+	    		</p:column>
+	    		<p:column headerText="Excluir" style="width: 45px">
+			        <p:commandButton actionListener="#{DisciplinaControl.excluir(cont)}" update=":formCorpo:disciplinas" icon="ui-icon-trash">
+	        			<p:confirm header="Disciplina" message="Tem certeza que voçê deseja excluir a disciplina?" icon="ui-icon-alert" />
+	        			<f:setPropertyActionListener value="#{cont }" target="#{DisciplinaControl.disciplina }"></f:setPropertyActionListener>
+	    			</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:dialog header="Cadastro de disciplinas" widgetVar="dlg1" minHeight="40" modal="true">
+    		<p:panel>
 			<a:field label="Código">
 				<p:inputText value="#{DisciplinaControl.disciplina.codigo }"
 					style="width:70px" />
@@ -21,60 +59,14 @@
 				<p:inputText value="#{DisciplinaControl.disciplina.cargaHoraria }"
 					style="width:70px" />
 			</a:field>
-			<a:newLine />
-			<p:commandButton icon="ui-icon-disk" 
-				actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
-				update="panelDisciplina" />
-			<p:spacer width="45px" />
-			<p:commandButton icon="ui-icon-search" update="disciplinas"
-				value="Listar" />
-			<p:spacer width="45px" />
-			<p:commandButton icon="ui-icon-refresh" ajax="true" action="#{DisciplinaControl.limpar}"
-				value="Limpar" update="panelDisciplina" />
-		</p:panel>
-		<p:dataTable id="disciplinas"
-			value="#{DisciplinaControl.disciplinas }" var="cont" width="100%"
-			emptyMessage="Sem registros" rows="200" paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-			<f:facet name="header">
-				<h:outputText value="Lista de Dsiciplinas" />
-			</f:facet>
-			<p:column sortBy="#{cont.id}">
-				<f:facet name="header">
-					<h:outputText value="Código" />
-				</f:facet>
-				<h:outputText value="#{cont.id }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.nome }">
-				<f:facet name="header">
-					<h:outputText value="Nome" />
-				</f:facet>
-				<h:outputText value="#{cont.nome }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.cargaHoraria }">
-				<f:facet name="header">
-					<h:outputText value="Carga Horária" />
-				</f:facet>
-				<h:outputText value="#{cont.cargaHoraria }"></h:outputText>
-			</p:column>
-			<p:column headerText="Ação">
-			
-			
-		        <p:commandButton value="Excluir" actionListener="#{DisciplinaControl.excluir(cont)}" update="disciplinas">
-        			<p:confirm header="Disciplina" message="Tem certeza que voçê deseja excluir a disciplina?" icon="ui-icon-alert" />
-        			<f:setPropertyActionListener value="#{cont }" target="#{DisciplinaControl.disciplina }"></f:setPropertyActionListener>
-    			</p:commandButton>
-				
-
-				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/disciplina.jspx?faces-redirect=true">
-
-					<f:setPropertyActionListener
-						target="#{DisciplinaControl.disciplina}" value="#{cont}" />
-
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-		
+			<a:newLine/>
+				<a:field>
+					<p:commandButton icon="ui-icon-disk" actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
+						action="disciplina?faces-redirect=true" update="disciplinas, @all"/>
+				</a:field>
+			<a:newLine/>
+    		</p:panel>
+		</p:dialog>
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >
 			<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes" update="disciplinas" icon="ui-icon-close"/>
 			<p:commandButton value="Não" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>

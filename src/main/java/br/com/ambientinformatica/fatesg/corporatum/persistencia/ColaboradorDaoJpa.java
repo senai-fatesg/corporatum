@@ -27,8 +27,6 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		String celular = colaborador.getCelular();
 		String email = colaborador.getEmail();
 		String endereco = colaborador.getEndereco();
-		String municipio = colaborador.getMunicipio();
-		String uf = colaborador.getUf();
 		String cep = colaborador.getCep();
 		String historico = colaborador.getHistorico();
 
@@ -71,12 +69,6 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		}
 		if (endereco.equals("")) {
 			throw new IllegalArgumentException("*Campo Obrigátorio: Endereço");
-		}
-		if (municipio.equals("")) {
-			throw new IllegalArgumentException("*Campo Obrigátorio: Municipio");
-		}
-		if (uf.equals("")) {
-			throw new IllegalArgumentException("*Campo Obrigátorio: UF(Estado)");
 		}
 
 	}

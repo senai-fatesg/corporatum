@@ -2,13 +2,13 @@ package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
 import java.util.List;
 
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.corporativo.entidade.EnumUf;
-import br.com.ambientinformatica.corporativo.entidade.Municipio;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumUf;
+import br.com.ambientinformatica.fatesg.api.entidade.Municipio;
+import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 import br.com.ambientinformatica.util.UtilLog;
 
@@ -17,17 +17,36 @@ public class MunicipioDaoJpa extends PersistenciaJpa<Municipio> implements Munic
 
 	private static final long serialVersionUID = 1L;
 
+
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Municipio> listarPorUf(EnumUf uf) throws PersistenceException {
-		try {
-			Query query = em
-			      .createQuery("select m from Municipio m where m.uf = :uf order by m.descricao");
-			query.setParameter("uf", uf);
-			return query.getResultList();
-		} catch (Exception e) {
-			UtilLog.getLog().error(e.getMessage(), e);
-			throw new PersistenceException(e.getMessage());
-		}
-	}
+   @Override
+   public List<Municipio> listarPorUf(EnumUf uf, String descricao) throws PersistenciaException {
+       try {
+
+           String sql = "select distinct m from Municipio m where 1 = 1 ";
+
+           if(uf != null){
+               sql += " and m.uf = :uf";
+           }
+           if(descricao != null && !descricao.isEmpty()){
+               sql += " and upper(m.descricao) like upper(:descricao)";
+           }
+
+           sql += " order by m.descricao";
+           Query query = em.createQuery(sql);
+           
+
+           if(uf != null){
+               query.setParameter("uf", uf);
+           }
+           if(descricao != null && !descricao.isEmpty()){
+           	query.setParameter("descricao", descricao + "%");
+           }
+
+           return query.getResultList();
+       }catch (Exception e) {
+           UtilLog.getLog().error(e.getMessage(), e);
+       }
+       return null;
+   }
 }

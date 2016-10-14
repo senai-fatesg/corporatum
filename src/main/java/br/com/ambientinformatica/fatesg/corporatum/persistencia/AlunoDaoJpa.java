@@ -80,9 +80,7 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 		if (aluno.getMunicipio() == null) {
 			throw new CorporatumException("*Campo Obrigátorio: Municipio");
 		}
-		if (aluno.getUf() == null) {
-			throw new CorporatumException("*Campo Obrigátorio: UF(Estado)");
-		}
+
 	}
 
 	@Override
@@ -114,6 +112,28 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 		} catch (NoResultException e) {
 			return new ArrayList<Aluno>();
 		}
+	}
+
+	@Override
+	public List<Aluno> listar(String nomeLista, boolean todos, EnumStatusAluno status) throws CorporatumException {
+		String sql = "select distinct a from Aluno a left join fetch Municipio m where 1 = 1";
+		if(status != null){
+			sql += " and a.status = :status";
+		}
+		if(nomeLista != null && !nomeLista.isEmpty()){
+			sql += " and a.nome = :nomeLista";
+		}
+      Query query = em.createQuery(sql);
+      if(status != null){
+      	query.setParameter("status", status);
+      }
+      if(todos){
+      	query.setMaxResults(200);
+      }
+      if(nomeLista != null && !nomeLista.isEmpty()){
+      	query.setParameter("nome", nomeLista);
+		}
+      return query.getResultList();
 	}
 	
 	

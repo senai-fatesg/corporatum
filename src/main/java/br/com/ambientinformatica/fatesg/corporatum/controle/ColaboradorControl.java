@@ -16,7 +16,10 @@ import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoColaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumUf;
+import br.com.ambientinformatica.fatesg.api.entidade.Municipio;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
+import br.com.ambientinformatica.fatesg.corporatum.persistencia.MunicipioDao;
 import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("ColaboradorControl")
@@ -29,25 +32,38 @@ public class ColaboradorControl implements Serializable {
 
 	@Autowired
 	private ColaboradorDao colaboradorDao;
+	
+	@Autowired
+	private MunicipioDao municipioDao;
+	
+	private EnumUf uf;
 
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
 	
 	private String filtroGlobal = "";
 	
 	private SelectItem tipo = new SelectItem();
+	
+	private List<Municipio> municipios = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
-		listar(null);
+		if(colaborador != null && colaborador.getMunicipio() != null){
+			uf = colaborador.getMunicipio().getUf();
+		}else{
+			uf = EnumUf.GO;
+		}
+		atualizarMunicipios();
+		listar();
 	}
 
-	public void confirmar(ActionEvent evt) {
+	public void confirmar() {
 		try {
 			colaboradorDao.verificarCampos(colaborador);
 			String cpf = colaborador.getCpfCnpj();
 			if (UtilCpf.validarCpf(cpf)) {
 				colaboradorDao.alterar(colaborador);
-				listar(evt);
+				listar();
 				colaborador = new Colaborador();
 				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
 			} else {
@@ -69,7 +85,7 @@ public class ColaboradorControl implements Serializable {
 		}
 	}
 
-	public void listar(ActionEvent evt) {
+	public void listar() {
 		try {
 			colaboradores = colaboradorDao.listar();
 		} catch (Exception e) {
@@ -100,7 +116,14 @@ public class ColaboradorControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+	public void atualizarMunicipios(){
+		municipios =  municipioDao.listarPorUf(uf, null);
+	}
 
+	public List<SelectItem> getUfs(){
+		return UtilFaces.getListEnum(EnumUf.values());
+	}
+	
 	public Colaborador getColaborador() {
 		return colaborador;
 	}
@@ -128,6 +151,21 @@ public class ColaboradorControl implements Serializable {
 	public void setFiltroGlobal(String filtroGlobal) {
 		this.filtroGlobal = filtroGlobal;
 	}
-	
 
+	public EnumUf getUf() {
+		return uf;
+	}
+
+	public void setUf(EnumUf uf) {
+		this.uf = uf;
+	}
+
+	public List<Municipio> getMunicipios() {
+		return municipios;
+	}
+
+	public void setMunicipios(List<Municipio> municipios) {
+		this.municipios = municipios;
+	}
+	
 }

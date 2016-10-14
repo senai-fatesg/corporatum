@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -48,15 +49,16 @@ public class CursoControl implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listar(null);
+		listar();
 	}
 
 	public void confirmar(ActionEvent evt) {
 		try {
 			cursoDao.verificarCampos(curso);
 			cursoDao.alterar(curso);
-			listar(evt);
+			listar();
 			curso = new Curso();
+			limparConsulta();
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 
 		} catch (Exception e) {
@@ -69,7 +71,7 @@ public class CursoControl implements Serializable {
 			if (curso != null) {
 				cursoDao.excluirPorId(curso.getId());
 				curso = new Curso();
-				cursos = cursoDao.listar();
+				listar();
 				limpar();
 				UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 			}else {
@@ -87,13 +89,13 @@ public class CursoControl implements Serializable {
 	public void voltar() {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext()
-					.redirect("curso.jspx");
+			.redirect("curso.jspx");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void listar(ActionEvent evt) {
+	public void listar() {
 		try {
 			cursos = cursoDao.listar();
 		} catch (Exception e) {
@@ -121,12 +123,22 @@ public class CursoControl implements Serializable {
 		}
 	}
 
+	public void editarCurso(Curso curso){
+		this.curso = curso;
+	}
+
+	public void novoCurso(){
+		curso = new Curso();
+		RequestContext context = RequestContext.getCurrentInstance(); 
+		context.execute("PF('dlg1').show();");	
+	}
+
 	public List<UnidadeEnsino> completarUnidadesEnsino(String nome) {
 		List<UnidadeEnsino> listaUnidadesEnsino = unidadeEnsinoDao
 				.listarPorNome(nome);
 		if (listaUnidadesEnsino.size() == 0) {
 			UtilFaces
-					.addMensagemFaces("UnidadeEnsino não encontrada\nVerifique o nome da UnidadeEnsino.");
+			.addMensagemFaces("UnidadeEnsino não encontrada\nVerifique o nome da UnidadeEnsino.");
 		}
 		return listaUnidadesEnsino;
 	}

@@ -7,84 +7,136 @@
 	xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:dataTable widgetVar="unidadesEnsino" id="dtUnidadeEnsino"
-			value="#{UnidadeEnsinoControl.unidadesEnsino }" var="cont"
-			width="100%" emptyMessage="Sem registros" rows="20" paginator="true"
-			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-			<f:facet name="header">
+		<p:panel>
+			<a:field>
 				<h:outputText value="Buscar por Nome:" />
-				<p:inputText id="inputFiltroGlobal"
-					value="#{UnidadeEnsinoControl.filtroGlobal}" />
-				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search"
-					actionListener="#{UnidadeEnsinoControl.filtrarPorNome}"
-					update="dtUnidadeEnsino" />
-				<p:commandButton action="#{UnidadeEnsinoControl.limparConsulta}"
-					value="Limpar" icon="ui-icon-cancel" update="dtUnidadeEnsino" />
+			</a:field>
+			<a:field spaceLeft="10px">
+				<p:inputText id="inputFiltroGlobal" value="#{UnidadeEnsinoControl.filtroGlobal}" />
+			</a:field>
+			<a:field spaceLeft="10px">
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{UnidadeEnsinoControl.filtrarPorNome}"
+					update="dtUnidadeEnsino, inputFiltroGlobal" />
+			</a:field>
+			<a:field spaceLeft="10px">
+				<p:commandButton action="#{UnidadeEnsinoControl.limparConsulta}" value="Limpar" icon="ui-icon-cancel" update="@form, dtUnidadeEnsino, inputFiltroGlobal" />
+			</a:field>
+			<a:field spaceLeft="10px">
+				<p:commandButton id="btnNovo" value="Novo" oncomplete="PF('dlg1').show();"/>
+			</a:field>
+			<a:field spaceLeft="10px">
+				<p:commandButton icon="ui-icon-disk" value="Cadastrar Instituição" type="button" onclick="PF('dlg2').show();" />
+			</a:field>
+			<a:newLine />
+		</p:panel>
+		<p:panel header="Unidades de ensino"  id="pnlUnidade">
+			<p:dataTable widgetVar="unidadesEnsino" id="dtUnidadeEnsino" value="#{UnidadeEnsinoControl.unidadesEnsino }" var="cont"
+				width="100%" emptyMessage="Sem registros" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}  
+					{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				<p:column headerText="Código" style="width: 45px">
+					<h:outputText value="#{cont.id }"></h:outputText>
+				</p:column>
+				<p:column headerText="Nome">
+					<h:outputText value="#{cont.nome }"></h:outputText>
+				</p:column>
+				<p:column headerText="Endereço">
+					<h:outputText value="#{cont.endereco }"></h:outputText>
+				</p:column>
+				<p:column headerText="Telefone" style="width: 120px">
+					<h:outputText value="#{cont.telefone }"></h:outputText>
+				</p:column>
+				<p:column headerText="Sigla" style="width: 90px">
+					<h:outputText value="#{cont.sigla }"></h:outputText>
+				</p:column>
+				<p:column headerText="Instituição">
+					<h:outputText value="#{cont.instituicao.nomeFantasia }"></h:outputText>
+				</p:column>
+				<p:column headerText="Editar" style="width: 45px">
+					<p:commandButton icon="ui-icon-pencil" process="@this" update="@form" oncomplete="PF('dlg1').show();">
+						<f:setPropertyActionListener target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Excluir" style="width: 45px">
+					<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();">
+						<f:setPropertyActionListener target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:dialog header="Unidade de ensino" widgetVar="dlg1" minHeight="40" modal="true" id="dlg1">
+	    	<p:panel id="panel">
+				<a:field label="Nome">
+					<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.nome }" />
+				</a:field>
+				<a:field label="Telefone" spaceLeft="15px">
+					<p:inputMask value="#{UnidadeEnsinoControl.unidadeEnsino.telefone }"
+						mask="(99)9999-9999" />
+					<a:newLine />
+				</a:field>
 				<a:newLine />
-			</f:facet>
-			<f:facet name="header">
-				<h:outputText value="Lista Unidades de Ensino"></h:outputText>
-			</f:facet>
-			<p:column sortBy="#{cont.id }">
-				<f:facet name="header">
-					<h:outputText value="Código"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.id }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.nome }">
-				<f:facet name="header">
-					<h:outputText value="Nome"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.nome }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.endereco }">
-				<f:facet name="header">
-					<h:outputText value="Endereço"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.endereco }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.telefone }">
-				<f:facet name="header">
-					<h:outputText value="Telefone"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.telefone }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.sigla }">
-				<f:facet name="header">
-					<h:outputText value="Sigla"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.sigla }"></h:outputText>
-			</p:column>
-			<p:column sortBy="#{cont.instituicao.nomeFantasia }">
-				<f:facet name="header">
-					<h:outputText value="Instituição"></h:outputText>
-				</f:facet>
-				<h:outputText value="#{cont.instituicao.nomeFantasia }"></h:outputText>
-			</p:column>
-			<p:column headerText="Ação">
-				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
-					<f:setPropertyActionListener
-						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
-				</p:commandButton>
-				<p:commandButton icon="ui-icon-pencil" value="Editar"
-					action="/unidadeEnsino.jspx?faces-redirect=true">
-					<f:setPropertyActionListener
-						target="#{UnidadeEnsinoControl.unidadeEnsino}" value="#{cont}" />
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-		<p:confirmDialog widgetVar="confirmacao"
-			message="Tem Certeza que deseja excluir?" severity="alert"
-			closable="true">
-			<p:commandButton value="Sim"
-				actionListener="#{UnidadeEnsinoControl.excluir}"
-				onclick="confirmacao.hide()" update="dtUnidadeEnsino" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+				<a:field label="Endereço">
+					<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.endereco }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="Sigla">
+					<p:inputText value="#{UnidadeEnsinoControl.unidadeEnsino.sigla }" />
+				</a:field>
+				<a:field label="Instituição" spaceLeft="15px">
+					<p:autoComplete id="completUsuario" value="#{UnidadeEnsinoControl.unidadeEnsino.instituicao}" completeMethod="#{UnidadeEnsinoControl.completarInstituicoes}"
+						minQueryLength="3" var="instituicao" itemLabel="#{instituicao.nomeFantasia}" itemValue="#{instituicao}" converter="objectConverter">
+					</p:autoComplete>
+					<p:watermark value="Pesquise pelo Nome Fantasia" for="completUsuario" />
+				</a:field >
+				<a:newLine />
+				<p:commandButton icon="ui-icon-disk" actionListener="#{UnidadeEnsinoControl.confirmar }" value="Confirmar" update="pnlUnidade,unidadesEnsino, panel, @all" 
+					ajax="false" action="unidadeEnsinoLista?faces-redirect=true"/>
+				<p:spacer width="10px" />
+				<p:commandButton icon="ui-icon-refresh" actionListener="#{UnidadeEnsinoControl.limpar }"
+					value="Limpar" update="dlg1" ajax="false" />
+				<a:newLine />
+			</p:panel>
+		</p:dialog>
+		<p:dialog showEffect="fade" hideEffect="explode" widgetVar="dlg2" modal="true">
+			<p:panel header="Cadastro de Instituição" id="panelInstituicao">
+				<a:field label="Nome Fantasia">
+					<p:inputText
+						value="#{InstituicaoControl.instituicao.nomeFantasia }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="Razão Social">
+					<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }" style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="CNPJ">
+					<p:inputMask value="#{InstituicaoControl.instituicao.cnpj }" mask="99.999.999/9999-99"></p:inputMask>
+				</a:field>
+
+				<a:field label="Inscrição Estadual" spaceLeft="15px">
+					<p:inputText value="#{InstituicaoControl.instituicao.inscricaoEstadual }"></p:inputText>
+				</a:field>
+				<a:newLine />
+				<a:field label="Descrição">
+					<p:inputTextarea value="#{InstituicaoControl.instituicao.descricao }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:newLine />
+				<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"/>
+				<p:spacer width="10px" />
+				<p:commandButton icon="ui-icon-refresh" ajax="false" actionListener="#{InstituicaoControl.limpar}" value="Limpar" update="panel" />
+					<p:spacer width="10px" />
+				<p:commandButton icon="ui-icon-close" ajax="false" action="dlg2.close()" value="Fechar" update="panel" />
+			</p:panel>
+		</p:dialog>
+    	<p:confirmDialog widgetVar="confirmacao" message="Tem Certeza que deseja excluir?" severity="alert" closable="true">
+			<p:commandButton value="Sim" actionListener="#{UnidadeEnsinoControl.excluir}"
+				onclick="confirmacao.hide();" update="dtUnidadeEnsino" process="@this" />
+			<p:commandButton value="Não" onclick="confirmacao.hide();" actionListener="#{UnidadeEnsinoControl.listar }" />
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
-		<p:commandButton action="/unidadeEnsino.jspx?faces-redirect=true"
-			value="Voltar" />
+		<p:commandButton action="/unidadeEnsino.jspx?faces-redirect=true" value="Voltar" />
 	</ui:define>
 </ui:composition>

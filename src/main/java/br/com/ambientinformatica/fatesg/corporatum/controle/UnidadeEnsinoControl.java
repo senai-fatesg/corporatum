@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
@@ -41,36 +42,38 @@ public class UnidadeEnsinoControl implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listar(null);
+		listar();
 	}
 
 	public void confirmar(ActionEvent evt) {
 		try {
-
 			unidadeEnsinoDao.verificarCampos(unidadeEnsino);
 			unidadeEnsinoDao.alterar(unidadeEnsino);
-			listar(evt);
 			unidadeEnsino = new UnidadeEnsino();
+			limparConsulta();
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void excluir(ActionEvent evt) {
+	public void excluir() {
 		try {
-			unidadeEnsinoDao.excluirPorId(unidadeEnsino.getId());
-			unidadeEnsino = new UnidadeEnsino();
-			unidadesEnsino = unidadeEnsinoDao.listar();
-			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
+			if (unidadeEnsino != null) {
+				unidadeEnsinoDao.excluirPorId(unidadeEnsino.getId());
+				unidadeEnsino = new UnidadeEnsino();
+				listar();
+				UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
+			}else {
+				UtilFaces.addMensagemFaces("Erro ao excluir o unidade de ensino");
+			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces("Erro ao excluir, provavelmente tem um Curso vinculado a esta unidade "
 					+ "de ensino. ");
-			
 		}
 	}
 
-	public void listar(ActionEvent evt) {
+	public void listar() {
 		try {
 			unidadesEnsino = unidadeEnsinoDao.listar();
 		} catch (Exception e) {
@@ -83,7 +86,7 @@ public class UnidadeEnsinoControl implements Serializable {
 				.consultarPeloNome(nomefantasia);
 		if (listaInstitucoes.size() == 0) {
 			UtilFaces
-					.addMensagemFaces("Instituição não encontrada\nVerifique o nome da Instituição.");
+			.addMensagemFaces("Instituição não encontrada\nVerifique o nome da Instituição.");
 		}
 		return listaInstitucoes;
 	}

@@ -40,7 +40,7 @@
 			</a:field>
 			<a:newLine />
 			<p:commandButton icon="ui-icon-disk" actionListener="#{CronogramaAulaControl.confirmar}"
-				value="Confirmar" update="panelCronogramaAula"/>
+				value="Confirmar" update="panelCronogramaAula" />
 			<p:spacer width="45px" />
 			<p:commandButton icon="ui-icon-search" action="/cronogramaaulalista.jspx?faces-redirect=true"
 				value="Listar" />
@@ -94,7 +94,7 @@
 
 				</p:commandButton>
 
-				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/cronogramaaula.jspx?faces-redirect=true" >
+				<p:commandButton icon="ui-icon-pencil" value="Editar" action="/cronogramaaula.jspx?faces-redirect=true">
 
 					<f:setPropertyActionListener
 						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
@@ -109,7 +109,7 @@
 			<p:commandButton value="Sim"
 				actionListener="#{CronogramaAulaControl.excluir}"
 				onclick="confirmacao.hide()" update="cronogramasAulas" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{CronogramaAulaControl.listar }"/>
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />

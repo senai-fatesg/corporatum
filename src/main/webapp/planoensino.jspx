@@ -127,7 +127,7 @@
 			<p:commandButton value="Sim"
 				actionListener="#{PlanoDeEnsinoControl.excluir}"
 				onclick="confirmacao.hide()" update="planosensino" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{PlanoDeEnsinoControl.listar }"/>
+			<p:commandButton value="Não" onclick="confirmacao.hide()" />
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />
