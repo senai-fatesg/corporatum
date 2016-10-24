@@ -45,7 +45,7 @@
 			</p:column>
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					update="cronogramasAulas" oncomplete="confirmacao.show()">
+					update="cronogramasAulas" onclick="PF('confirmacao').show();">
 
 					<f:setPropertyActionListener
 						target="#{CronogramaAulaControl.cronogramaAula}" value="#{cont}" />
@@ -67,7 +67,7 @@
 			<p:commandButton value="Sim"
 				actionListener="#{CronogramaAulaControl.excluir}"
 				onclick="confirmacao.hide()" update="cronogramasAulas" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{CronogramaAulaControl.listar }"/>
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />

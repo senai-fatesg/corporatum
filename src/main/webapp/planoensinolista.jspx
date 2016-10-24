@@ -58,7 +58,7 @@
 
 			<p:column headerText="Ação">
 				<p:commandButton icon="ui-icon-trash" value="Excluir"
-					oncomplete="confirmacao.show()">
+					onclick="PF('confirmacao').show();" actionListener="#{PlanoDeEnsinoControl.listar}">
 
 					<f:setPropertyActionListener
 						target="#{PlanoDeEnsinoControl.planoDeEnsino}" value="#{cont}" />

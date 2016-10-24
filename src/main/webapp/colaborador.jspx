@@ -55,7 +55,7 @@
 				</p:commandButton>
 			</p:column>
 			<p:column headerText="Excluir" style="width: 45px">
-				<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();">
+				<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();" actionListener="#{ColaboradorControl.listar}">
 					<f:setPropertyActionListener target="#{ColaboradorControl.colaborador}" value="#{cont}" />
 				</p:commandButton>
 			</p:column>
@@ -136,7 +136,7 @@
 		</p:dialog>
 		<p:confirmDialog widgetVar="confirmacao" message="Tem Certeza que deseja excluir?" severity="alert" closable="true">
 			<p:commandButton value="Sim" actionListener="#{ColaboradorControl.excluir}" onclick="confirmacao.hide()" update="dtColaboradores" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{ColaboradorControl.listar}" />
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />

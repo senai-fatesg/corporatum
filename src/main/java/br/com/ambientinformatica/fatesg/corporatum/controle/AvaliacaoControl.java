@@ -43,11 +43,12 @@ public class AvaliacaoControl implements Serializable {
 	}
 
 	public void confirmar(ActionEvent evt) {
-		try {
-			avaliacaoDao.alterar(avaliacao);
-			listar(evt);
-			avaliacao = new Avaliacao();
-			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
+		try {		
+				avaliacaoDao.verificarCampos(avaliacao);
+				avaliacaoDao.alterar(avaliacao);
+				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
+				listar(evt);
+				avaliacao = new Avaliacao();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}

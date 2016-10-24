@@ -64,7 +64,9 @@
 					<p:commandButton icon="ui-icon-disk" actionListener="#{DisciplinaControl.confirmar }" value="Confirmar"
 						action="disciplina?faces-redirect=true" update="disciplinas, @all"/>
 				</a:field>
+				
 			<a:newLine/>
+			
     		</p:panel>
 		</p:dialog>
 		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" >

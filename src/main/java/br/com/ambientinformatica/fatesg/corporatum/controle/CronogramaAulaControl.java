@@ -33,6 +33,8 @@ public class CronogramaAulaControl {
    
 	public void confirmar(ActionEvent evt){
 		try {
+			cronogramaAulaDao.verificarCampos(cronogramaAula);
+			cronogramaAulaDao.validar(cronogramaAula);
 			cronogramaAulaDao.alterar(cronogramaAula);
 			UtilFaces.addMensagemFaces("Operação realizada com sucesso");
          listar(evt);
