@@ -2,7 +2,6 @@ package br.com.ambientinformatica.fatesg.corporatum.persistencia;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
 import br.com.ambientinformatica.fatesg.api.entidade.PlanoDeEnsino;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
 

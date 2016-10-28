@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -33,25 +35,24 @@ public class AlunoControl implements Serializable {
 
 	private Aluno aluno = new Aluno();
 
+	private List<Aluno> alunos = new ArrayList<Aluno>();
+
+	private EnumStatusAluno status;
+
+	private boolean listarTodos = false;
+
+	private String nomeLista;
+
+	private EnumUf uf;
+
+	private List<Municipio> municipios = new ArrayList<>();
+
 	@Autowired
 	private AlunoDao alunoDao;
-	
+
 	@Autowired
 	private MunicipioDao municipioDao;
 
-	private List<Aluno> alunos = new ArrayList<Aluno>();
-	
-	private EnumStatusAluno status;
-	
-	private boolean listarTodos = false;
-	
-	private String nomeLista;
-	
-	private EnumUf uf;
-	
-	private List<Municipio> municipios = new ArrayList<>();
-	
-	
 
 	@PostConstruct
 	public void init() {
@@ -64,19 +65,21 @@ public class AlunoControl implements Serializable {
 		listar();
 	}
 
-	public void confirmar() {
+	public void confirmar(){
 		try {
 			alunoDao.validarCampos(aluno);
-			String cpf = aluno.getCpfCnpj();
-			if (UtilCpf.validarCpf(cpf)) {
-				alunoDao.alterar(aluno);
-				aluno = new Aluno();
-			} else {
-				UtilFaces.addMensagemFaces("CPF Inválido");
-			}
+			alunoDao.alterar(aluno);
+			limpar();
+			UtilFaces.addMensagemFaces("Aluno cadastrado com sucesso.");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
+	}
+
+	public void editarAluno(Aluno aluno){
+		this.aluno = aluno;
+		RequestContext context = RequestContext.getCurrentInstance(); 
+		context.execute("PF('dlg1').show();");
 	}
 
 	public void excluir(ActionEvent evt) {
@@ -92,17 +95,18 @@ public class AlunoControl implements Serializable {
 	public void listar() {
 		try {
 			alunos = alunoDao.listar(nomeLista, listarTodos, status);
+			nomeLista = "";
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
-	
-	
+
+
 	public void imprimirLista(ActionEvent evt){
 		try {
 			if(alunos != null){
 				Map<String, Object> parametros = new HashMap<String, Object>();
-				UtilFacesRelatorio.gerarRelatorioFaces("jasper/alunoLista.jasper", alunos, parametros);
+				UtilFacesRelatorio.gerarRelatorioFaces("jasper/relatorioAlunos.jasper", alunos, parametros);
 			}else{
 				UtilFaces.addMensagemFaces("É necessário listar ao menos um Aluno");
 			}
@@ -110,17 +114,22 @@ public class AlunoControl implements Serializable {
 			UtilFaces.addMensagemFaces("Metodo não implementado!");
 		}
 	}
-	
+
 	public void atualizarMunicipios(){
 		municipios =  municipioDao.listarPorUf(uf, null);
 	}
-	
+
 	public List<SelectItem> getUfs(){
 		return UtilFaces.getListEnum(EnumUf.values());
 	}
-	
+
 	public void limpar() {
-		aluno = new Aluno();
+		try {
+			aluno = new Aluno();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("alunoLista.jsf");			
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e.getMessage());
+		}
 	}
 
 	public Aluno getAluno() {

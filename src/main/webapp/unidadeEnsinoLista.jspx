@@ -91,11 +91,9 @@
 				<a:newLine />
 				<p:commandButton icon="ui-icon-disk" actionListener="#{UnidadeEnsinoControl.confirmar }" value="Confirmar" update="pnlUnidade,unidadesEnsino, panel, @all" 
 					ajax="false" action="unidadeEnsinoLista?faces-redirect=true"/>
-				<p:spacer width="10px" />
-				<p:commandButton icon="ui-icon-refresh" actionListener="#{UnidadeEnsinoControl.limpar }"
-					value="Limpar" update="dlg1" ajax="false" />
 				<a:newLine />
 			</p:panel>
+			<p:ajax event="close" listener="#{UnidadeEnsinoControl.limpar}" />
 		</p:dialog>
 		<p:dialog showEffect="fade" hideEffect="explode" widgetVar="dlg2" modal="true">
 			<p:panel header="Cadastro de Instituição" id="panelInstituicao">

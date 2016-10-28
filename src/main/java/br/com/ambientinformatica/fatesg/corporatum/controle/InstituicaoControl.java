@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class InstituicaoControl {
 
 	@PostConstruct
 	public void init() {
-		listar(null);
+		listar();
 	}
 
 	public void confirmar(ActionEvent evt) {
@@ -40,7 +41,8 @@ public class InstituicaoControl {
 			instituicaoDao.verificarCampos(instituicao);
 			if (UtilCnpj.validarCnpj(cnpj)) {
 				instituicaoDao.alterar(instituicao);
-				instituicoes = instituicaoDao.listar();
+				limpar();
+				listar();
 				instituicao = new Instituicao();
 				UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 			} else {
@@ -64,7 +66,7 @@ public class InstituicaoControl {
 		}
 	}
 
-	public void listar(ActionEvent evt) {
+	public void listar() {
 		try {
 			instituicoes = instituicaoDao.listar();
 		} catch (Exception e) {
@@ -75,16 +77,13 @@ public class InstituicaoControl {
 	public void filtrarPorNome() {
 		try {
 			instituicoes = instituicaoDao.consultarPeloNome(filtroGlobal);
-			if (instituicoes.isEmpty()) {
-				instituicoes = instituicaoDao.consultarPeloNome(filtroGlobal);
-			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
 	public void limparConsulta() {
-		filtroGlobal = "";
+		setFiltroGlobal("");
 		try {
 			instituicoes = instituicaoDao.listar();
 		} catch (Exception e) {
@@ -92,7 +91,12 @@ public class InstituicaoControl {
 		}
 	}
 	public void limpar(){
-		instituicao = new Instituicao();
+		try {
+			instituicao = new Instituicao();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("instituicao.jsf");
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
 	}
 
 	public Instituicao getInstituicao() {

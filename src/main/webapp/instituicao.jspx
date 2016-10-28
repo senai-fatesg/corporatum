@@ -3,7 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://www.ambientinformatica.com.br/jsf2"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="corpo">
-		<p:panel>
+		<p:panel header="Lista de Instituições">
 			<a:field>
 				<h:outputText value="Buscar por Nome:" />
 			</a:field>
@@ -11,95 +11,89 @@
 				<p:inputText id="inputFiltroGlobal" value="#{InstituicaoControl.filtroGlobal}" />
 			</a:field>
 			<a:field spaceLeft="10px">
-				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{InstituicaoControl.filtrarPorNome}"
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" value="Buscar" actionListener="#{InstituicaoControl.filtrarPorNome}"
 					update="dtInstituicao" />
 			</a:field>
 			<a:field  spaceLeft="10px">
-				<p:commandButton action="#{InstituicaoControl.limparConsulta}" value="Limpar" icon="ui-icon-cancel" update="dtInstituicao" />
+				<p:commandButton action="#{InstituicaoControl.limparConsulta}" value="Limpar" icon="ui-icon-cancel" update="@all" />
 			</a:field>
 			<a:field spaceLeft="10px">
 				<p:commandButton value="Novo" icon="ui-icon-document" type="button" onclick="PF('dlg1').show();" />
 			</a:field>
 			<a:newLine/>
-		</p:panel>
-		<p:dataTable widgetVar="instituicoes" id="dtInstituicao" value="#{InstituicaoControl.instituicoes }" var="cont" width="100%"
-			emptyMessage="Sem registros" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
-			{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-			<p:column headerText="Código" style="width: 45px">
-				<h:outputText value="#{cont.id }"></h:outputText>
-			</p:column>
-			<p:column headerText="Nome fantasia">
-				<h:outputText value="#{cont.nomeFantasia }"></h:outputText>
-			</p:column>
-			<p:column headerText="Razão social">
-				<h:outputText value="#{cont.razaoSocial }"></h:outputText>
-			</p:column>
-			<p:column headerText="CNPJ" style="width: 130px">
-				<h:outputText value="#{cont.cnpj }"></h:outputText>
-			</p:column>
-			<p:column headerText="Inscrição estadual" style="width: 130px">
-				<h:outputText value="#{cont.inscricaoEstadual }"></h:outputText>
-			</p:column>
-			<p:column headerText="Descrição">
-				<h:outputText value="#{cont.descricao }"></h:outputText>
-			</p:column>
-			<p:column headerText="Editar" style="width: 45px">
-				<p:commandButton icon="ui-icon-pencil" action="/instituicao.jspx?faces-redirect=true">
-					<f:setPropertyActionListener target="#{InstituicaoControl.instituicao}" value="#{cont}" />
-				</p:commandButton>
-			</p:column>
-			<p:column headerText="Excluir" style="width: 45px">
-				<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();" actionListener="#{InstituicaoControl.listar }">
-					<f:setPropertyActionListener target="#{InstituicaoControl.instituicao}" value="#{cont}" />
-				</p:commandButton>
-			</p:column>
-		</p:dataTable>
-		<p:dialog header="Cadastro de Instituição" widgetVar="dlg1" minHeight="40">
-    		<p:panel header="Cadastro de Instituição" id="panel">
-			<a:field label="Nome Fantasia">
-				<p:inputText value="#{InstituicaoControl.instituicao.nomeFantasia }"
-					style="width:444px" />
-			</a:field>
-			<a:newLine />
-			<a:field label="Razão Social">
-				<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }"
-					style="width:444px" />
-			</a:field>
-			<a:newLine />
-			<a:field label="CNPJ">
-				<p:inputMask value="#{InstituicaoControl.instituicao.cnpj }"
-					mask="99.999.999/9999-99"></p:inputMask>
-			</a:field>
-
-			<a:field label="Inscrição Estadual" spaceLeft="15px">
-				<p:inputText
-					value="#{InstituicaoControl.instituicao.inscricaoEstadual }"></p:inputText>
-			</a:field>
-			<a:newLine />
-			<a:field label="Descrição">
-				<p:inputTextarea value="#{InstituicaoControl.instituicao.descricao }" style="width:444px" />
-			</a:field>
-			<a:newLine />
-			<a:field>
-				<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"
-					update="instituicoes, panel" />
-			</a:field>
-			<a:field spaceLeft="10px">
-				<p:commandButton icon="ui-icon-search" value="Listar" update="dtInstituicao"/>
-			</a:field>
-			<a:field spaceLeft="10px">
-				<p:commandButton icon="ui-icon-refresh" ajax="false" actionListener="#{InstituicaoControl.limpar}" value="Limpar"
-					update="panel" />
-			</a:field>
-			<a:newLine/>
-		</p:panel>
-		</p:dialog>
-		<p:confirmDialog widgetVar="confirmacao" message="Tem Certeza que deseja excluir?" severity="alert" closable="true">
+			<p:dataTable widgetVar="instituicoes" id="dtInstituicao" value="#{InstituicaoControl.instituicoes }" var="cont" width="100%"
+				emptyMessage="Sem registros" rows="20" paginator="true" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} 
+				{PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+				<p:column headerText="Código" style="width: 45px">
+					<h:outputText value="#{cont.id }"></h:outputText>
+				</p:column>
+				<p:column headerText="Nome fantasia">
+					<h:outputText value="#{cont.nomeFantasia }"></h:outputText>
+				</p:column>
+				<p:column headerText="Razão social">
+					<h:outputText value="#{cont.razaoSocial }"></h:outputText>
+				</p:column>
+				<p:column headerText="CNPJ" style="width: 130px">
+					<h:outputText value="#{cont.cnpj }"></h:outputText>
+				</p:column>
+				<p:column headerText="Inscrição estadual" style="width: 130px">
+					<h:outputText value="#{cont.inscricaoEstadual }"></h:outputText>
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{cont.descricao }"></h:outputText>
+				</p:column>
+				<p:column headerText="Editar" style="width: 45px">
+					<p:commandButton icon="ui-icon-pencil" process="@this" update="@form" oncomplete="PF('dlg1').show();">
+						<f:setPropertyActionListener target="#{InstituicaoControl.instituicao}" value="#{cont}" />
+					</p:commandButton>
+				</p:column>
+				<p:column headerText="Excluir" style="width: 45px">
+					<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();">
+						<f:setPropertyActionListener target="#{InstituicaoControl.instituicao}" value="#{cont}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:dialog header="Cadastro de Instituição" widgetVar="dlg1" minHeight="40">
+	    		<p:panel header="Cadastro de Instituição" id="panel">
+				<a:field label="Nome Fantasia">
+					<p:inputText value="#{InstituicaoControl.instituicao.nomeFantasia }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="Razão Social">
+					<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }"
+						style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field label="CNPJ">
+					<p:inputMask value="#{InstituicaoControl.instituicao.cnpj }"
+						mask="99.999.999/9999-99"></p:inputMask>
+				</a:field>
+	
+				<a:field label="Inscrição Estadual" spaceLeft="15px">
+					<p:inputText
+						value="#{InstituicaoControl.instituicao.inscricaoEstadual }"></p:inputText>
+				</a:field>
+				<a:newLine />
+				<a:field label="Descrição">
+					<p:inputTextarea value="#{InstituicaoControl.instituicao.descricao }" style="width:444px" />
+				</a:field>
+				<a:newLine />
+				<a:field>
+					<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"
+						update="instituicoes, panel" />
+				</a:field>
+				<a:newLine/>
+			</p:panel>
+			<p:ajax event="close" listener="#{InstituicaoControl.limpar}" />
+			</p:dialog>
+			<p:confirmDialog widgetVar="confirmacao" message="Tem Certeza que deseja excluir?" severity="alert" closable="true">
 			<p:commandButton value="Sim" actionListener="#{InstituicaoControl.excluir}"
 				onclick="confirmacao.hide();" update="dtInstituicao" process="@this" />
 			<p:commandButton value="Não" onclick="confirmacao.hide();" actionListener="#{InstituicaoControl.listar }" />
 		</p:confirmDialog>
-		<a:newLine />
-		<p:spacer width="25px" />
+			<a:newLine />
+			<p:spacer width="25px" />
+		</p:panel>
 	</ui:define>
 </ui:composition>

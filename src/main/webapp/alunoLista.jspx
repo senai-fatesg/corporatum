@@ -8,23 +8,21 @@
 				<p:inputText value="#{AlunoControl.nomeLista }" />
 			</a:field>
 			<a:field label="Status" spaceLeft="10px">
-				<h:selectOneMenu id="cbStatus" value="#{AlunoControl.aluno.status}">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{ AlunoControl.statusAluno}" var="status" itemValue="#{status}" itemLabel="#{status}" />
+				<h:selectOneMenu id="cbStatus" value="#{AlunoControl.status}">
+					<f:selectItems value="#{AlunoControl.statusAluno}" var="status" itemValue="#{status}" itemLabel="#{status}" />
 				</h:selectOneMenu>
 			</a:field>
 			<a:field label="Listar Todos Alunos?" spaceLeft="10px">
 				<p:selectBooleanCheckbox value="#{AlunoControl.listarTodos }"/>
 			</a:field>
-			<a:field>
-				<p:commandButton value="Imprimir" icon="ui-icon-print" actionListener="#{AlunoControl.imprimirLista}"/>
-			</a:field>
-			<a:newLine/>
-			<a:field>
-				<p:commandButton action="#{AlunoControl.listar }" value="Listar" process="@this" update="alunos" icon="ui-icon-search"/>
+			<a:field spaceLeft="10px">
+				<p:commandButton actionListener="#{AlunoControl.listar }" value="Listar" ajax="false" update="alunos" icon="ui-icon-search"/>
 			</a:field>
 			<a:field spaceLeft="10px">
 				<p:commandButton value="Novo" icon="ui-icon-document" type="button" onclick="PF('dlg1').show();" />
+			</a:field>
+			<a:field spaceLeft="10px">
+				<p:commandButton value="Imprimir" icon="ui-icon-print" actionListener="#{AlunoControl.imprimirLista}"/>
 			</a:field>
 			<a:newLine/>
 			
@@ -32,7 +30,7 @@
 	
 		<p:dataTable widgetVar="alunos" id="alunos" value="#{AlunoControl.alunos }" var="aluno" width="100%" emptyMessage="Sem registros" rows="20" paginator="true"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-			<p:column headerText="Id" style="width: 45px">
+			<p:column headerText="Código" style="width: 45px">
 				<h:outputText value="#{aluno.id }"></h:outputText>
 			</p:column>
 			<p:column headerText="Nome">
@@ -57,7 +55,7 @@
 				<h:outputText value="#{aluno.email }"></h:outputText>
 			</p:column>
 			<p:column headerText="Editar" style="width: 45px">
-				<p:commandButton id="alterarAluno" icon="ui-icon-pencil" process="@this" update="@this" oncomplete="PF('dlg1').show();" actionListener="#{AlunoControl.editarAluno(aluno) }"/>
+				<p:commandButton icon="ui-icon-pencil" process="@this" update="@form" actionListener="#{AlunoControl.editarAluno(aluno)}"/>
 			</p:column>
 			<p:column headerText="Excluir" style="width: 45px">
 				<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmacao').show()">
@@ -74,8 +72,7 @@
 					<p:inputText value="#{AlunoControl.aluno.rg }" />
 				</a:field>
 				<a:field label="CPF" spaceLeft="10px">
-					<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }"
-						mask="999.999.999-99" />
+					<p:inputMask value="#{AlunoControl.aluno.cpfCnpj }" mask="999.999.999-99" />
 				</a:field>
 				<a:field label="Status" spaceLeft="10px">
 					<h:selectOneMenu id="status" value="#{AlunoControl.aluno.status}">
@@ -137,15 +134,15 @@
 				<a:newLine />
 				<a:newLine />
 				
-				<p:commandButton ajax="false" actionListener="#{AlunoControl.confirmar}" onclick="PF('dlg1').hide();"  value="Confirmar" icon="ui-icon-disk" update="alunos" />
-				<!-- <p:commandButton action="/alunoLista.jspx?faces-redirect=true" value="Listar" icon="ui-icon-search"/>  -->
+				<p:commandButton ajax="false" actionListener="#{AlunoControl.confirmar}" value="Confirmar" icon="ui-icon-disk" update="@all alunos" />
 				<p:commandButton action="#{AlunoControl.limpar}" value="Limpar" icon="ui-icon-refresh" update="panelAluno" />
 				<a:newLine />
 			</p:panel>
+			<p:ajax event="close" listener="#{AlunoControl.limpar}" />
 		</p:dialog>
 			<p:confirmDialog widgetVar="confirmacao" message="Tem Certeza que deseja excluir?" severity="alert" closable="true">
 				<p:commandButton value="Sim" actionListener="#{AlunoControl.excluir}" onclick="confirmacao.hide()" update="alunos" process="@this" />
-				<p:commandButton value="Não" onclick="confirmacao.hide()" />
+				<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{AlunoControl.listar }" process="@this"/>
 			</p:confirmDialog>
 			<a:newLine />
 	</ui:define>

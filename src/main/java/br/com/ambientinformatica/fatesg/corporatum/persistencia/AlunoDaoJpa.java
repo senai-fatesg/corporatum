@@ -12,6 +12,7 @@ import br.com.ambientinformatica.fatesg.api.entidade.Aluno;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno;
 import br.com.ambientinformatica.fatesg.corporatum.util.CorporatumException;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
+import br.com.ambientinformatica.util.UtilCpf;
 
 @Repository("alunoDao")
 public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
@@ -36,6 +37,7 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void validarCampos(Aluno aluno) throws CorporatumException {
 
@@ -47,6 +49,9 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 		}
 		if (aluno.getCpfCnpj() == null || aluno.getCpfCnpj().isEmpty()) {
 			throw new CorporatumException("*Campo Obrigátorio: CPF");
+		}
+		if (!UtilCpf.validarCpf(aluno.getCpfCnpj())) {
+			throw new CorporatumException("*Este CPF não é válido.");
 		}
 		if (aluno.getTituloEleitor() == null || aluno.getTituloEleitor().isEmpty()) {
 			throw new CorporatumException(
@@ -116,12 +121,12 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 
 	@Override
 	public List<Aluno> listar(String nomeLista, boolean todos, EnumStatusAluno status) throws CorporatumException {
-		String sql = "select distinct a from Aluno a left join fetch Municipio m where 1 = 1";
+		String sql = "select distinct a from Aluno a left join fetch a.municipio m where 1 = 1";
 		if(status != null){
 			sql += " and a.status = :status";
 		}
 		if(nomeLista != null && !nomeLista.isEmpty()){
-			sql += " and a.nome = :nomeLista";
+			sql += " and a.nome like :nomeLista";
 		}
       Query query = em.createQuery(sql);
       if(status != null){
@@ -131,7 +136,7 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
       	query.setMaxResults(200);
       }
       if(nomeLista != null && !nomeLista.isEmpty()){
-      	query.setParameter("nome", nomeLista);
+      	query.setParameter("nomeLista", "%" + nomeLista.toUpperCase() + "%");
 		}
       return query.getResultList();
 	}

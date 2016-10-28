@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-10-23T16:50:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAlunos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="88bb1fac-bc73-469f-84fd-cff29a401194">
+	<subDataset name="Dataset1" uuid="266e65d7-8223-44a8-b006-cede69e8106b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="telefone" class="java.lang.String">
+			<fieldDescription><![CDATA[telefone]]></fieldDescription>
+		</field>
+		<field name="nome" class="java.lang.String">
+			<fieldDescription><![CDATA[nome]]></fieldDescription>
+		</field>
+		<field name="celular" class="java.lang.String">
+			<fieldDescription><![CDATA[celular]]></fieldDescription>
+		</field>
+		<field name="cpfCnpj" class="java.lang.String">
+			<fieldDescription><![CDATA[cpfCnpj]]></fieldDescription>
+		</field>
+		<field name="email" class="java.lang.String">
+			<fieldDescription><![CDATA[email]]></fieldDescription>
+		</field>
+		<field name="status" class="br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno">
+			<fieldDescription><![CDATA[status]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="alunos" class="java.util.List">
+		<fieldDescription><![CDATA[alunos]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[telefone]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="celular" class="java.lang.String">
+		<fieldDescription><![CDATA[celular]]></fieldDescription>
+	</field>
+	<field name="cpfCnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[cpfCnpj]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="status" class="br.com.ambientinformatica.fatesg.api.entidade.EnumStatusAluno">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="14" width="400" height="30" uuid="4be3f9d4-f84d-474d-a191-2a50774a1d5f"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de alunos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="140" height="16" uuid="58600e6c-0103-4f53-abf0-3719accb9e0a"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="100" height="16" uuid="76ae0a91-942c-46f6-9faf-f3fc0072884e"/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="0" width="100" height="16" uuid="10d26d71-913e-4104-b5ae-03ba8647ade2"/>
+				<text><![CDATA[Celular
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="340" y="0" width="200" height="19" uuid="3b2e3428-1ecd-4b44-afad-fcddba6a383c"/>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<componentElement>
+				<reportElement key="" positionType="FixRelativeToBottom" x="0" y="0" width="540" height="20" uuid="975ddc04-86e8-43b6-928b-fdaa33fc805f">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="7e524dc1-391f-43f5-a9ac-dc53dc6b40d3">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{alunos})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="540">
+						<textField>
+							<reportElement x="0" y="0" width="140" height="20" uuid="721a058e-3ae4-4d06-84fe-bc6f07c3a276"/>
+							<box>
+								<pen lineWidth="1.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="140" y="0" width="100" height="20" uuid="673efcf6-15a1-470e-b188-f1a5da8da49e"/>
+							<box>
+								<pen lineWidth="1.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{cpfCnpj}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="240" y="0" width="100" height="20" uuid="7a48d959-0e3b-49a2-a348-39fa384cac61"/>
+							<box>
+								<pen lineWidth="1.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{celular}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="340" y="0" width="200" height="20" uuid="451600ae-929e-4ba5-bd45-3cc306c448af"/>
+							<box>
+								<pen lineWidth="1.0"/>
+							</box>
+							<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

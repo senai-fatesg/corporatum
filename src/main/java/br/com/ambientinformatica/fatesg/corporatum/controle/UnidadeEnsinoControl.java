@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
-import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.api.entidade.UnidadeEnsino;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
@@ -112,7 +112,12 @@ public class UnidadeEnsinoControl implements Serializable {
 	}
 
 	public void limpar() {
-		unidadeEnsino = new UnidadeEnsino();
+		try {
+			unidadeEnsino = new UnidadeEnsino();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("unidadeEnsinoLista.jsf");
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
 	}
 
 	public UnidadeEnsino getUnidadeEnsino() {

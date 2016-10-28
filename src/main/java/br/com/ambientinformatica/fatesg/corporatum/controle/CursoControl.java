@@ -66,7 +66,7 @@ public class CursoControl implements Serializable {
 		}
 	}
 
-	public void excluir(Curso curso) {
+	public void excluir() {
 		try {
 			if (curso != null) {
 				cursoDao.excluirPorId(curso.getId());
@@ -83,13 +83,17 @@ public class CursoControl implements Serializable {
 	}
 
 	public void limpar() {
-		curso = new Curso();
+		try {
+			curso = new Curso();
+			FacesContext.getCurrentInstance().getExternalContext().redirect("curso.jsf");
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
 	}
 
 	public void voltar() {
 		try {
-			FacesContext.getCurrentInstance().getExternalContext()
-			.redirect("curso.jspx");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("curso.jsf");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -115,16 +119,12 @@ public class CursoControl implements Serializable {
 	}
 
 	public void limparConsulta() {
-		filtroGlobal = "";
+		setFiltroGlobal("");
 		try {
 			cursos = cursoDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
-	}
-
-	public void editarCurso(Curso curso){
-		this.curso = curso;
 	}
 
 	public void novoCurso(){

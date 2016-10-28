@@ -11,14 +11,14 @@
 				<p:inputText id="inputFiltroGlobal" value="#{ColaboradorControl.filtroGlobal}" />
 			</a:field>
 			<a:field spaceLeft="10px">
-				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" actionListener="#{ColaboradorControl.filtrarPorNome}"
+				<p:commandButton id="cmdFiltroGlobal" icon="ui-icon-search" value="Buscar" actionListener="#{ColaboradorControl.filtrarPorNome}"
 					update="dtColaboradores" />
 			</a:field>
 			<a:field spaceLeft="10px">
 				<p:commandButton action="#{ColaboradorControl.limparConsulta}" value="Limpar" icon="ui-icon-cancel" update="dtColaboradores" />
 			</a:field>
 			<a:field spaceLeft="10px">
-				<p:commandButton id="btnNovo" value="Novo" oncomplete="PF('dlg1').show();"/>
+				<p:commandButton id="btnNovo" value="Novo" actionListener="#{ColaboradorControl.novoColaborador }"/>
 			</a:field>
 			<a:newLine/>
 		</p:panel>
@@ -50,12 +50,13 @@
 				<h:outputText value="#{cont.email }"></h:outputText>
 			</p:column>
 			<p:column headerText="Editar" style="width: 45px">
-				<p:commandButton icon="ui-icon-pencil" action="/colaborador.jspx?faces-redirect=true">
-					<f:setPropertyActionListener target="#{ColaboradorControl.colaborador}" value="#{cont}" />
+				<p:commandButton icon="ui-icon-pencil" process="@this" update="@form" oncomplete="PF('dlg1').show();">
+					<f:setPropertyActionListener
+						target="#{ColaboradorControl.colaborador}" value="#{cont}" />
 				</p:commandButton>
 			</p:column>
 			<p:column headerText="Excluir" style="width: 45px">
-				<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();" actionListener="#{ColaboradorControl.listar}">
+				<p:commandButton icon="ui-icon-trash" onclick="PF('confirmacao').show();">
 					<f:setPropertyActionListener target="#{ColaboradorControl.colaborador}" value="#{cont}" />
 				</p:commandButton>
 			</p:column>
@@ -128,15 +129,13 @@
 					update="colaboradores" />
 			</a:field>
 			<a:field spaceLeft="10px">
-				<p:commandButton icon="ui-icon-search" action="/colaboradorlista.jspx?faces-redirect=true" value="Listar" />
-			</a:field>
-			<a:field spaceLeft="10px">
 				<p:commandButton icon="ui-icon-refresh" ajax="true" action="#{ColaboradorControl.limpar}" value="Limpar" update="@all" />
 			</a:field>
+			<p:ajax event="close" listener="#{ColaboradorControl.limpar}" />
 		</p:dialog>
 		<p:confirmDialog widgetVar="confirmacao" message="Tem Certeza que deseja excluir?" severity="alert" closable="true">
 			<p:commandButton value="Sim" actionListener="#{ColaboradorControl.excluir}" onclick="confirmacao.hide()" update="dtColaboradores" process="@this" />
-			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{ColaboradorControl.listar}" />
+			<p:commandButton value="Não" onclick="confirmacao.hide()" actionListener="#{ColaboradorControl.listar}"/>
 		</p:confirmDialog>
 		<a:newLine />
 		<p:spacer width="25px" />

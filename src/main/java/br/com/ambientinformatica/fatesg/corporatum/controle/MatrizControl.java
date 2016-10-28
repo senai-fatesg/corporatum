@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
+import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.Curso;
 import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
 import br.com.ambientinformatica.fatesg.api.entidade.Matriz;
@@ -51,6 +54,7 @@ public class MatrizControl implements Serializable {
 
 	public void listar() {
 		try {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("matriz", new Matriz());
 			matrizes = matrizDao.listar();
 			disciplinas =  disciplinaDao.listar();
 		} catch (Exception e) {
@@ -84,6 +88,17 @@ public class MatrizControl implements Serializable {
 
 	public void limpar() {
 		matriz = new Matriz();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("matrizLista.jsf");
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+	
+	public void novoMatriz(){
+		matriz = new Matriz();
+		RequestContext context = RequestContext.getCurrentInstance(); 
+		context.execute("PF('dlgMatriz').show();");	
 	}
 
 	public void adicionarDisciplina(){
@@ -121,10 +136,6 @@ public class MatrizControl implements Serializable {
 			UtilFaces.addMensagemFaces("Curso não encontrado\nVerifique o nome do Curso.");
 		}
 		return listaCursos;
-	}
-
-	public void editarMatriz(Matriz matriz){
-		this.matriz = matriz;
 	}
 
 	public Matriz getMatriz() {

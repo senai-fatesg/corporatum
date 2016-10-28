@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -84,14 +86,21 @@ public class ColaboradorControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+	public void novoColaborador(){
+		colaborador = new Colaborador();
+		RequestContext context = RequestContext.getCurrentInstance(); 
+		context.execute("PF('dlg1').show();");	
+	}
 
 	public void listar() {
 		try {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("colaborador", new Colaborador());
 			colaboradores = colaboradorDao.listar();
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+
 	public void filtrarPorNome() {
 		colaboradores = colaboradorDao.listarPorNome(filtroGlobal);
 		if (colaboradores.isEmpty()) {
@@ -107,6 +116,11 @@ public class ColaboradorControl implements Serializable {
 
 	public void limpar() {
 		colaborador = new Colaborador();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("colaborador.jsf");
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
 	}
 	public void limparConsulta() {
 		filtroGlobal = "";

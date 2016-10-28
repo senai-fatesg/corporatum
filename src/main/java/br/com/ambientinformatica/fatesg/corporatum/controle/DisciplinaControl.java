@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
@@ -23,69 +24,68 @@ public class DisciplinaControl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Disciplina disciplina  = new Disciplina();
-	
+
 	@Autowired
 	private DisciplinaDao disciplinaDao;	
-	
+
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
-		
-	
-   @PostConstruct
-   public void init(){
-      listar(null);
-   }
-   
+
+
+	@PostConstruct
+	public void init(){
+		listar();
+	}
+
 	public void confirmar(ActionEvent evt){
 		try {
-			   disciplinaDao.verificarCampos(disciplina);
-			   disciplinaDao.validar(disciplina);
-				disciplinaDao.alterar(disciplina);
-				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
-	         listar(evt);
-	         disciplina = new Disciplina();
-			
+			disciplinaDao.verificarCampos(disciplina);
+			disciplinaDao.validar(disciplina);
+			disciplinaDao.alterar(disciplina);
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso");
+			listar();
+			disciplina = new Disciplina();
+
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void listar(ActionEvent evt){
+	public void novaDisciplina(){
+		disciplina = new Disciplina();
+		RequestContext context = RequestContext.getCurrentInstance(); 
+		context.execute("PF('dlg1').show();");	
+	}
+
+	public void listar(){
 		try {
 			disciplinas = disciplinaDao.listar();
 		} catch (Exception e) {
-		   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
 	}
 
-	public void excluir(Disciplina disciplina) {
+	public void excluir() {
 		try {			
-			if(disciplina != null){
-					disciplinaDao.excluirPorId(disciplina.getId());
-					disciplina = new Disciplina();
-					disciplinas = disciplinaDao.listar();
-					limpar();
-					UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
-			}else{
-				UtilFaces.addMensagemFaces("Erro ao excluir a disciplina");
-			}
+			disciplinaDao.excluirPorId(disciplina.getId());
+			disciplina = new Disciplina();
+			listar();
+			limpar();
+			UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}	
 	}
-	
+
 	public void limpar(){
 		disciplina = new Disciplina();
-	}
-	
-	public void selecionarDisciplina(ActionEvent evt) {
 		try {
-			 RequestContext.getCurrentInstance().closeDialog(disciplina);
-			 
+			FacesContext.getCurrentInstance().getExternalContext().redirect("disciplina.jsf");
 		} catch (Exception e) {
-			   UtilFaces.addMensagemFaces(e);
+			UtilFaces.addMensagemFaces(e);
 		}
-    }
-	
+	}
+
+
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
@@ -93,7 +93,7 @@ public class DisciplinaControl implements Serializable {
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
-	
+
 	public List<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
