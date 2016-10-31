@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.ambientinformatica.ambientjsf.util.UtilFaces;
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
+import br.com.ambientinformatica.fatesg.api.entidade.EnumPapelUsuario;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoColaborador;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumTipoSexo;
 import br.com.ambientinformatica.fatesg.api.entidade.EnumUf;
@@ -23,6 +25,8 @@ import br.com.ambientinformatica.fatesg.api.entidade.Municipio;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.MunicipioDao;
 import br.com.ambientinformatica.util.UtilCpf;
+import br.com.ambientinformatica.util.UtilHash;
+import br.com.ambientinformatica.util.UtilHash.Algoritimo;
 
 @Controller("ColaboradorControl")
 @Scope("conversation")
@@ -31,21 +35,33 @@ public class ColaboradorControl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Colaborador colaborador = new Colaborador();
+	
+	private Colaborador colaboradorAlterar = new Colaborador();
+	
+	private String nome;
+
+	private String senha1;
+
+	private String senha2;
+
+	private String confirmarSenha;
+	
+	private EnumPapelUsuario papel;
 
 	@Autowired
 	private ColaboradorDao colaboradorDao;
-	
+
 	@Autowired
 	private MunicipioDao municipioDao;
-	
+
 	private EnumUf uf;
 
 	private List<Colaborador> colaboradores = new ArrayList<Colaborador>();
-	
+
 	private String filtroGlobal = "";
-	
+
 	private SelectItem tipo = new SelectItem();
-	
+
 	private List<Municipio> municipios = new ArrayList<>();
 
 	@PostConstruct
@@ -56,7 +72,7 @@ public class ColaboradorControl implements Serializable {
 			uf = EnumUf.GO;
 		}
 		atualizarMunicipios();
-		listar();
+		filtrarPorNome();
 	}
 
 	public void confirmar() {
@@ -64,13 +80,24 @@ public class ColaboradorControl implements Serializable {
 			colaboradorDao.verificarCampos(colaborador);
 			String cpf = colaborador.getCpfCnpj();
 			if (UtilCpf.validarCpf(cpf)) {
+				colaborador.addPapel(EnumPapelUsuario.USUARIO);
+				colaborador.setSenhaNaoCriptografada("123456");
 				colaboradorDao.alterar(colaborador);
-				listar();
-				colaborador = new Colaborador();
+				limpar();
 				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
 			} else {
 				UtilFaces.addMensagemFaces("CPF Inválido");
 			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+	
+	public void alterar(){
+		try {
+			colaboradorDao.alterar(colaboradorAlterar);
+			limpar();
+			UtilFaces.addMensagemFaces("Cadastro salvo com sucesso!");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
@@ -103,9 +130,6 @@ public class ColaboradorControl implements Serializable {
 
 	public void filtrarPorNome() {
 		colaboradores = colaboradorDao.listarPorNome(filtroGlobal);
-		if (colaboradores.isEmpty()) {
-			colaboradores = colaboradorDao.listarPorNome(filtroGlobal);
-		}
 	}
 	public void filtrarPorTipo() {
 		colaboradores = colaboradorDao.listarPorTipo(tipo);
@@ -113,14 +137,21 @@ public class ColaboradorControl implements Serializable {
 			colaboradores = colaboradorDao.listarPorTipo(tipo);
 		}
 	}
-
 	public void limpar() {
 		colaborador = new Colaborador();
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("colaborador.jsf");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("colaboradorlista.jsf");
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);
 		}
+	}
+	public void cadastrarNovoUsuario(){
+		colaborador = new Colaborador();
+		colaboradorAlterar = new Colaborador();
+		RequestContext.getCurrentInstance().execute("PF('usuario').show()");
+	}
+	public void editarColaborador(Colaborador colaborador){
+		this.colaboradorAlterar = colaborador;
 	}
 	public void limparConsulta() {
 		filtroGlobal = "";
@@ -130,6 +161,46 @@ public class ColaboradorControl implements Serializable {
 			UtilFaces.addMensagemFaces(e);
 		}
 	}
+	public String alterarSenha() {
+		try {
+			String senhaAtualCripto = UtilHash.gerarStringHash(confirmarSenha, Algoritimo.MD5);
+			Colaborador pessoaLogada = UsuarioLogadoControl.getUsuarioConfigurado();
+			if (senhaAtualCripto.equals(pessoaLogada.getSenha())) {
+				if (senha1 != null && senha1.equals(senha2)) {
+					pessoaLogada.setSenhaNaoCriptografada(senha1);
+					pessoaLogada.setAlterarSenha(false);
+					colaboradorDao.alterar(pessoaLogada);
+					UtilFaces.addMensagemFaces("Senha alterada com sucesso!");
+					return "inicio.secima";
+				} else {
+					UtilFaces.addMensagemFaces("Senhas diferentes!", FacesMessage.SEVERITY_ERROR);
+				}
+			} else {
+				UtilFaces.addMensagemFaces("Senha atual incorreta!", FacesMessage.SEVERITY_ERROR);
+			}
+		} catch (Exception e) {
+			UtilFaces.addMensagemFaces(e);
+		}
+		return "alterarSenha.secima";
+	}
+	
+	public void adicionarPapel(){
+		try{
+			colaboradorAlterar.addPapel(papel);
+		}catch(Exception e){
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+
+	public void removerPapel(ActionEvent evt){
+		try{
+			colaboradorAlterar.removerPapel((EnumPapelUsuario) UtilFaces.getValorParametro(evt, "papel"));
+			UtilFaces.addMensagemFaces("Papel removido!");
+		}catch(Exception e){
+			UtilFaces.addMensagemFaces(e);
+		}
+	}
+	
 	public void atualizarMunicipios(){
 		municipios =  municipioDao.listarPorUf(uf, null);
 	}
@@ -137,13 +208,53 @@ public class ColaboradorControl implements Serializable {
 	public List<SelectItem> getUfs(){
 		return UtilFaces.getListEnum(EnumUf.values());
 	}
-	
+
 	public Colaborador getColaborador() {
 		return colaborador;
 	}
 
 	public void setColaborador(Colaborador colaborador) {
 		this.colaborador = colaborador;
+	}
+
+	public String getSenha1() {
+		return senha1;
+	}
+
+	public void setSenha1(String senha1) {
+		this.senha1 = senha1;
+	}
+
+	public String getSenha2() {
+		return senha2;
+	}
+
+	public void setSenha2(String senha2) {
+		this.senha2 = senha2;
+	}
+
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public EnumPapelUsuario getPapel() {
+		return papel;
+	}
+
+	public void setPapel(EnumPapelUsuario papel) {
+		this.papel = papel;
 	}
 
 	public List<Colaborador> getColaboradores() {
@@ -156,6 +267,10 @@ public class ColaboradorControl implements Serializable {
 
 	public List<SelectItem> getTiposColaboradores() {
 		return UtilFaces.getListEnum(EnumTipoColaborador.values());
+	}
+	
+	public List<SelectItem> getPapeis(){
+		return UtilFaces.getListEnum(EnumPapelUsuario.values());
 	}
 
 	public String getFiltroGlobal() {
@@ -181,5 +296,14 @@ public class ColaboradorControl implements Serializable {
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
 	}
+
+	public Colaborador getColaboradorAlterar() {
+		return colaboradorAlterar;
+	}
+
+	public void setColaboradorAlterar(Colaborador colaboradorAlterar) {
+		this.colaboradorAlterar = colaboradorAlterar;
+	}
+	
 	
 }

@@ -8,7 +8,9 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
+import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.PersistenciaJpa;
+import br.com.ambientinformatica.util.UtilLog;
 
 @Repository("colaboradorDao")
 public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
@@ -73,12 +75,26 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 
 	}
 
+	
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Colaborador> listarPorNome(String nome) {
-		Query q = em.createQuery("from Colaborador as a where upper(a.nome) like :nome");
-		q.setParameter("nome", "%" + nome.toUpperCase() + "%");
-		return q.getResultList();
+	public List<Colaborador> listarPorNome(String nome) throws PersistenciaException{
+		try {
+			String sql = "select distinct c from Colaborador c where 1=1 ";
+			if (nome != null && !nome.isEmpty()) {
+				sql += " and upper (c.nome) like upper (:nome) ";
+			}
+			
+			sql += " order by c.nome";
+			Query query = em.createQuery(sql);
+			
+			if (nome != null && !nome.isEmpty()) {
+				query.setParameter("nome", "%" + nome + "%");
+			}
+			return query.getResultList();
+		} catch (Exception e) {
+			UtilLog.getLog().error(e.getMessage(), e);
+			throw new PersistenciaException("Erro ao consultar", e);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

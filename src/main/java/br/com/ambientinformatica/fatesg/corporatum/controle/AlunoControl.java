@@ -25,7 +25,6 @@ import br.com.ambientinformatica.fatesg.api.entidade.EnumUf;
 import br.com.ambientinformatica.fatesg.api.entidade.Municipio;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.AlunoDao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.MunicipioDao;
-import br.com.ambientinformatica.util.UtilCpf;
 
 @Controller("AlunoControl")
 @Scope("conversation")

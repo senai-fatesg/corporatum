@@ -49,4 +49,17 @@ public class MunicipioDaoJpa extends PersistenciaJpa<Municipio> implements Munic
        }
        return null;
    }
+
+
+	@Override
+	public Municipio consultarPorCodigoIBGE(Integer codigoIBGE) throws PersistenciaException {
+		try{
+         Query query = em.createQuery("select distinct m from Municipio m where m.codigoIbge = :codigoIbge");
+         query.setParameter("codigoIbge", codigoIBGE);
+         return (Municipio) query.getSingleResult();
+     } catch (Exception e){
+         UtilLog.getLog().error(e.getMessage(), e);
+     }
+     return null;
+	}
 }

@@ -13,10 +13,22 @@
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
 	<script>
+		jQuery(function($) {
+			$("#usuario").mask("999.999.999-99");
+		});
 		function focar() {
 			document.getElementById("usuario").focus();
 		}
 	</script>
+	<style>
+		input.span3, textarea.span3, .uneditable-input.span3 {
+		    width: 210px;
+		}
+		.well {
+		    width: 230px;
+		    height: 250px;
+		}
+	</style>
 </head>
 <body>
 <form action="j_spring_security_check" method="post">
@@ -84,10 +96,12 @@
 					if (request.getParameter("msg") != null) {
 						out.print("<span style='color: red;font-weight: bold;'>Usuário ou senha incorretos</span>");
 					}%>		
-                  <label>Login</label>
-                  <input type="text" id="usuario" name="j_username" class="span3"  />
+                  <label>CPF</label>
+                  <input type="text" id="usuario" name="j_username" class="form-control" placeholder="Informe seu CPF." required="true" autofocus="true" />
                   <label>Senha</label>
-                  <input name="j_password" type="password" class="span3" />
+                  <input name="j_password" type="password" class="span3" placeholder="Informe sua senha."/>
+                  <br/>
+                  <br/>
                   <table>
                   		<tr>
                   			<td>
@@ -99,10 +113,6 @@
                   		</tr>
                   </table>                  
                 </div>
-                <h3>Titulo caixa</h3>
-                <p>
-					Conteúdo caixa 
-                </p>                
             </div>
             
     	</div>

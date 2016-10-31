@@ -11,4 +11,6 @@ public interface MunicipioDao extends Persistencia<Municipio>{
 
    List<Municipio> listarPorUf(EnumUf uf, String descricao) throws PersistenciaException;
 
+	Municipio consultarPorCodigoIBGE(Integer codigoIBGE)throws PersistenciaException;
+
 }

@@ -21,6 +21,13 @@
 			document.getElementById("usuario").focus();
 		}
 	</script>
+	<style>
+		.sair{
+			font-size: 20px;
+			margin-top: 10px;
+			margin-left: 80%;
+		}
+	</style>
 </h:head>
 
 <h:body>
@@ -43,6 +50,9 @@
 								<li><a href="/corporatum/planoensino.jsf" >Plano de Ensino</a></li>
 								<li><a href="/corporatum/cronogramaaula.jsf">Cronograma de Aulas</a></li>
 								<li><a href="/corporatum/avaliacao.jsf">Avaliações</a></li>
+								<div class="sair">
+									<p:commandLink value="Sair" icon="ui-icon-power" style="color: #000000" onclick="document.location.href='/corporatum/sair.jsp'" immediate="true" />
+								</div>
 							</ul>
 						</div>
 					</div>
