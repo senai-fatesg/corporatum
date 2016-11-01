@@ -115,6 +115,27 @@ a:hover {
 	
 } 
 
+
+html body.ui-layout-container div#j_idt6.ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-north.ui-layout-pane.ui-layout-pane-north
+{
+	overflow:visible !important; 
+	z-index: 999 !important;
+	padding: 0px;
+} 
+
+html body.ui-layout-container div#j_idt6.ui-layout-unit.ui-widget.ui-widget-content.ui-corner-all.ui-layout-north.ui-layout-pane.ui-layout-pane-north div.ui-layout-unit-content.ui-widget-content
+{
+	padding: 0px;		
+}
+
+.ui-layout-unit .ui-layout-unit-content
+{
+	overflow:visible; 
+	z-index: 999;
+	
+}
+
+
 /***
  PRIMEFACES
 */
