@@ -16,9 +16,14 @@ public class InstituicaoDaoJpa extends PersistenciaJpa<Instituicao> implements
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("unchecked")
 	public List<Instituicao> consultarPeloNome(String nome) {
-		Query q = this.em
-				.createQuery("from Instituicao as a where a.nomeFantasia like :nomeFantasia");
-		q.setParameter("nomeFantasia", "%" + nome + "%");
+		String sql = "select a from Instituicao a where 1=1 ";
+		if (nome != null) {
+			sql += " and lower(a.nomeFantasia) like :nomeFantasia";
+		}
+		Query q = this.em.createQuery(sql);
+		if (nome != null) {
+			q.setParameter("nomeFantasia", "%" + nome.toLowerCase() + "%");
+		}
 		return q.getResultList();
 	}
 	

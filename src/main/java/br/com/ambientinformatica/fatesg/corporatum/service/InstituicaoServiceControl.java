@@ -11,10 +11,10 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.thoughtworks.xstream.XStream;
-
 import br.com.ambientinformatica.fatesg.api.entidade.Instituicao;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.InstituicaoDao;
+
+import com.thoughtworks.xstream.XStream;
 
 @Component
 @Path("/instituicao")
@@ -30,6 +30,14 @@ public class InstituicaoServiceControl {
 		List<Instituicao> ins = instituicaoDao.consultarPeloNome(nomeInstituicao);
 
 		return new XStream().toXML(ins);
+	}
+	
+	@GET
+	@Path("listarInstituicoes")
+	@Produces(MediaType.APPLICATION_XML)
+	public String listarInstituicoes() {
+			List<Instituicao> instituicoes = instituicaoDao.listar();
+			return new XStream().toXML(instituicoes);
 	}
 
 }

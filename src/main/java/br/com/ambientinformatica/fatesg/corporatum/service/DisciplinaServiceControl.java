@@ -11,10 +11,10 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.thoughtworks.xstream.XStream;
-
 import br.com.ambientinformatica.fatesg.api.entidade.Disciplina;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.DisciplinaDao;
+
+import com.thoughtworks.xstream.XStream;
 
 @Component
 @Path("/disciplina")
@@ -31,6 +31,14 @@ public class DisciplinaServiceControl {
 			List<Disciplina> dis = disciplinaDao.consultarPeloNome(nomeDisciplina);
 
 			return new XStream().toXML(dis);
+	}
+	
+	@GET
+	@Path("listarDisciplinas")
+	@Produces(MediaType.APPLICATION_XML)
+	public String listarDisciplinas() {
+			List<Disciplina> disciplinas = disciplinaDao.listar();
+			return new XStream().toXML(disciplinas);
 	}
 
 }
