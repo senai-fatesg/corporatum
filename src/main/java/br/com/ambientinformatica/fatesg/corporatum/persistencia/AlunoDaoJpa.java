@@ -126,7 +126,7 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
 			sql += " and a.status = :status";
 		}
 		if(nomeLista != null && !nomeLista.isEmpty()){
-			sql += " and a.nome like :nomeLista";
+			sql += " and lower(a.nome) like :nomeLista";
 		}
       Query query = em.createQuery(sql);
       if(status != null){
@@ -136,7 +136,7 @@ public class AlunoDaoJpa extends PersistenciaJpa<Aluno> implements AlunoDao {
       	query.setMaxResults(200);
       }
       if(nomeLista != null && !nomeLista.isEmpty()){
-      	query.setParameter("nomeLista", "%" + nomeLista.toUpperCase() + "%");
+      	query.setParameter("nomeLista", "%" + nomeLista.toLowerCase() + "%");
 		}
       return query.getResultList();
 	}

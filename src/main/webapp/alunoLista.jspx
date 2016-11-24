@@ -137,7 +137,6 @@
 				<a:newLine />
 				
 				<p:commandButton ajax="false" actionListener="#{AlunoControl.confirmar}" value="Confirmar" icon="ui-icon-disk" update="@all alunos" />
-				<p:commandButton action="#{AlunoControl.limpar}" value="Limpar" icon="ui-icon-refresh" update="panelAluno" />
 				<a:newLine />
 			</p:panel>
 			<p:ajax event="close" listener="#{AlunoControl.limpar}" />
