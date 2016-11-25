@@ -5,6 +5,7 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
+import br.com.ambientinformatica.jpa.exception.PersistenciaException;
 import br.com.ambientinformatica.jpa.persistencia.Persistencia;
 
 public interface ColaboradorDao extends Persistencia<Colaborador> {
@@ -16,4 +17,6 @@ public interface ColaboradorDao extends Persistencia<Colaborador> {
 	public List<Colaborador> listarPorTipo(SelectItem tipo);
 
 	public Colaborador consultarPorCpf(String cpfColaborador);
+	
+	Colaborador consultarPorCpfExterno(String cpfColaborador) throws PersistenciaException;
 }

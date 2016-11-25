@@ -111,5 +111,22 @@ public class ColaboradorDaoJpa extends PersistenciaJpa<Colaborador> implements
 		query.setParameter("cpfColaborador", cpfColaborador);
 		return (Colaborador) query.getSingleResult();
    }
-
+	
+	public Colaborador consultarPorCpfExterno(String cpfColaborador) throws PersistenciaException{
+		try {
+			Query query = em.createQuery("select c from Colaborador c left join fetch c.municipio m WHERE c.cpfCnpj = :cpf");
+			query.setParameter("cpf", cpfColaborador);
+			query.setMaxResults(1);
+			List<Colaborador> colaboradores = query.getResultList();
+			if (colaboradores.isEmpty()) {
+				return null;
+			}else {
+				return colaboradores.get(0);
+			}
+		} catch (Exception e) {
+			UtilLog.getLog().error(e.getMessage(), e);
+			throw new PersistenciaException("Erro ao consultar colaborador por cpf", e);
+		}
+	}
+		
 }

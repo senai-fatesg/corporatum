@@ -28,7 +28,6 @@ public class ColaboradorServiceControl {
 	@Produces(MediaType.APPLICATION_XML)
 	public String listarPorNome(@PathParam("nomeColaborador") String nomeColaborador) {
 		List<Colaborador> col = colaboradorDao.listarPorNome(nomeColaborador);
-
 		return new XStream().toXML(col);
 	}
 
@@ -37,8 +36,16 @@ public class ColaboradorServiceControl {
 	@Produces(MediaType.APPLICATION_XML)
 	public String listarPorCPF(@PathParam("cpfColaborador") String cpfColaborador) {
 		Colaborador col = colaboradorDao.consultarPorCpf(cpfColaborador);
-
 		return new XStream().toXML(col);
 	}
+	
+	@GET
+	@Path("listarPorCPFNovo/{cpfColaborador}")
+	@Produces(MediaType.APPLICATION_XML)
+	public String listarPorCPFNovo(@PathParam("cpfColaborador") String cpfColaborador) {
+		Colaborador col = colaboradorDao.consultarPorCpfExterno(cpfColaborador);
+		return new XStream().toXML(col);
+	}
+
 
 }
