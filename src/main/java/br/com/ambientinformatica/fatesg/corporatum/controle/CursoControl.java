@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -75,7 +76,7 @@ public class CursoControl implements Serializable {
 				limpar();
 				UtilFaces.addMensagemFaces("Operação realizada com sucesso!");
 			}else {
-				UtilFaces.addMensagemFaces("Erro ao excluir o curso");
+				UtilFaces.addMensagemFaces("Erro ao excluir o curso", FacesMessage.SEVERITY_ERROR);
 			}
 		} catch (Exception e) {
 			UtilFaces.addMensagemFaces(e);

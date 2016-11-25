@@ -57,6 +57,7 @@
 				</p:column>
 			</p:dataTable>
 			<p:dialog id="dlgCurso" header="Cadastro de curso" widgetVar="dlg1" minHeight="40">
+				<p:messages autoUpdate="true" closable="true" />
 	   			<p:panel header="Cadastro de Curso" id="panel">
 					<a:field label="Código">
 						<p:inputText value="#{CursoControl.curso.codigo }" />
@@ -106,7 +107,7 @@
 					<a:newLine />
 					<a:newLine />
 					<a:field>
-						<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{CursoControl.confirmar}" value="Confirmar" action="curso?faces-redirect=true" update="cursos, panel, @all" />
+						<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{CursoControl.confirmar}" value="Confirmar" update="cursos, panel, @form" />
 					</a:field>
 					<a:field spaceLeft="10px">
 						<p:commandButton icon="ui-icon-refresh" actionListener="#{CursoControl.limpar}" value="Limpar" update="panel" />
