@@ -63,6 +63,7 @@ public class UsuarioService implements UserDetailsService{
 							user = new UsuarioImpl(cpfcnpj, rs.getString("password"), rs.getBoolean("enabled"), true, true, true, papeis);
 							registrarHistoricoLogin(con, cpfcnpj);
 						} finally {
+							pstmtPapeis.close();
 							rsPapeis.close();
 						}
 						return user;
