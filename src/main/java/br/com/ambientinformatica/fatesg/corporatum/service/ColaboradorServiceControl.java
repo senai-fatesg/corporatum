@@ -9,14 +9,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import com.thoughtworks.xstream.XStream;
 
 import br.com.ambientinformatica.fatesg.api.entidade.Colaborador;
 import br.com.ambientinformatica.fatesg.corporatum.persistencia.ColaboradorDao;
 
-@Component
+@Controller
 @Path("/colaborador")
 public class ColaboradorServiceControl {
 

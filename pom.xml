@@ -24,6 +24,13 @@
 	</profiles>
 
 	<dependencies>
+	
+		<dependency>
+		    <groupId>com.sun.jersey</groupId>
+		    <artifactId>jersey-servlet</artifactId>
+		    <version>1.19</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>br.com.ambientinformatica.fatesg</groupId>
 			<artifactId>fatesg-api</artifactId>
@@ -41,18 +48,7 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-client</artifactId>
-			<version>3.0.2.Final</version>
-		</dependency>
-
+	
 		<dependency>
 			<groupId>br.com.ambientinformatica</groupId>
 			<artifactId>ambient-jpa</artifactId>
@@ -178,7 +174,9 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-compiler-plugin</artifactId>
+		        <version>3.6.1</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
@@ -229,7 +227,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jasperreports-maven-plugin</artifactId>
 				<version>1.0-beta-2</version>
@@ -251,7 +249,7 @@
 						<version>5.2.0</version>
 					</dependency>
 				</dependencies>
-			</plugin>
+			</plugin> -->
 		</plugins>
 		<finalName>${project.artifactId}</finalName>
 	</build>
@@ -311,12 +309,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<repositories>
-		<repository>
-			<id>ambient</id>
-			<name>Solutio-in Maven Repository</name>
-			<url>http://solutioin.com/nexus/content/groups/public</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
+	
 </project>
