@@ -56,32 +56,42 @@
 			<p:dialog header="Cadastro de Instituição" widgetVar="dlg1" minHeight="40">
 	    		<p:panel header="Cadastro de Instituição" id="panel">
 				<a:field label="Nome Fantasia">
+				<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 					<p:inputText value="#{InstituicaoControl.instituicao.nomeFantasia }"
 						style="width:444px" />
 				</a:field>
 				<a:newLine />
 				<a:field label="Razão Social">
+				<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 					<p:inputText value="#{InstituicaoControl.instituicao.razaoSocial }"
 						style="width:444px" />
 				</a:field>
 				<a:newLine />
 				<a:field label="CNPJ">
+				<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 					<p:inputMask value="#{InstituicaoControl.instituicao.cnpj }"
 						mask="99.999.999/9999-99"></p:inputMask>
 				</a:field>
 	
 				<a:field label="Inscrição Estadual" spaceLeft="15px">
+				<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 					<p:inputText
 						value="#{InstituicaoControl.instituicao.inscricaoEstadual }"></p:inputText>
 				</a:field>
 				<a:newLine />
 				<a:field label="Descrição">
+				<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 					<p:inputTextarea value="#{InstituicaoControl.instituicao.descricao }" style="width:444px" />
 				</a:field>
 				<a:newLine />
 				<a:field>
-					<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"
-						update="instituicoes, panel" />
+					<p:commandButton id="buttonConfirm" icon="ui-icon-disk" ajax="false" actionListener="#{InstituicaoControl.confirmar}" value="Confirmar"
+						update="instituicoes, panel" 
+						disabled="#{empty InstituicaoControl.instituicao.nomeFantasia or
+						empty InstituicaoControl.instituicao.razaoSocial or
+						empty InstituicaoControl.instituicao.cnpj or
+						empty InstituicaoControl.instituicao.inscricaoEstadual or
+						empty InstituicaoControl.instituicao.descricao}"/>
 				</a:field>
 				<a:newLine/>
 			</p:panel>

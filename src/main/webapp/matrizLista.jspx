@@ -22,6 +22,7 @@
 			<p:dataTable widgetVar="matrizes" id="dtMatriz" value="#{MatrizControl.matrizes }" var="cont" width="100%" emptyMessage="Sem registros" rows="20" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 				<p:column headerText="Descrição" style="width: 600px">
+				
 					<h:outputText value="#{cont.descricao }"></h:outputText>
 				</p:column>
 				<p:column headerText="Data" style="width: 100px">
@@ -48,22 +49,27 @@
 			</p:dataTable>
 			<p:dialog id="dlgMatriz" widgetVar="dlgMatriz" modal="true">
 				<p:panel header="Cadastro de Matriz" id="panelMatriz" style="width: 500px;">
+					
 					<a:field label="Descrição">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:inputTextarea value="#{MatrizControl.matriz.descricao}" style="width:450px" />
 					</a:field>
 					<a:newLine />
 					<a:field label="Data">
+					
 						<p:inputMask mask="99/99/9999" id="dtInicio" value="#{MatrizControl.matriz.data}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 						</p:inputMask>
 					</a:field>
 					<a:field label="Qtde. Períodos" spaceLeft="15px">
+					
 						<p:inputText value="#{MatrizControl.matriz.qtdPeriodos }" />
 					</a:field>
 					<a:newLine />
 					<a:field label="Curso">
 						<p:autoComplete id="completUsuario" value="#{MatrizControl.matriz.curso}" completeMethod="#{MatrizControl.completarCursos}" minQueryLength="3" 
 							var="curso" itemLabel="#{curso.nome}" itemValue="#{curso}" style="width: 450px" converter="objectConverter">
+							
 						</p:autoComplete>
 						<p:watermark value="Pesquise pelo Nome" for="completUsuario" />
 					</a:field>
@@ -75,8 +81,12 @@
 		        		</p:selectOneMenu>
 	        		</a:field>
 					<a:field spaceLeft="10px">
+					
+						<f:ajax event="click" delay="200" render="buttonConfirm" />
 						<p:commandButton id="btnAdicionar" value="Adicionar" action="#{MatrizControl.adicionarDisciplina}" update="formCorpo:disciplinas">
+						
 						</p:commandButton>
+						
 					</a:field> 
 					<a:newLine/>
 					<p:dataTable id="disciplinas" var="disciplina" value="#{MatrizControl.matriz.disciplinas}" style="width: 450px">
@@ -84,13 +94,19 @@
 							<h:outputText value="#{disciplina.nome}"/>
 						</p:column>
 						<p:column headerText="Remover" style="width: 65px">
+						
 							<p:commandButton id="btnDisciplina" icon="ui-icon-trash" actionListener="#{MatrizControl.removerDisciplina(disciplina)}" update="disciplinas"/>
+						
+						
 						</p:column>
 					</p:dataTable>
 					<a:newLine />
 					<a:newLine />
 					<a:field>
-						<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{MatrizControl.confirmar }" value="Confirmar" update="matrizes panelMatriz" />
+					
+						<p:commandButton id="buttonConfirm" icon="ui-icon-disk" ajax="false" actionListener="#{MatrizControl.confirmar }" 
+						value="Confirmar" update="matrizes panelMatriz" 
+						disabled="#{empty MatrizControl.matriz.curso.codigo or empty MatrizControl.matriz.descricao or empty MatrizControl.matriz.disciplinas}"/>
 					</a:field>
 					<a:field spaceLeft="10px">
 						<p:commandButton icon="ui-icon-search" oncomplete="PF('dlgMatriz').hide();" value="Voltar" />

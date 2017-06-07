@@ -60,22 +60,28 @@
 				<p:messages autoUpdate="true" closable="true" />
 	   			<p:panel header="Cadastro de Curso" id="panel">
 					<a:field label="Código">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:inputText value="#{CursoControl.curso.codigo }" />
 					</a:field>
 					<a:field label="Nome" spaceLeft="10px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:inputText value="#{CursoControl.curso.nome }" />
 					</a:field>
 					<a:field label="Sigla" spaceLeft="10px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:inputText value="#{CursoControl.curso.sigla }" />
 					</a:field>
 					<a:newLine />
 					<a:field label="Descrição">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:inputText value="#{CursoControl.curso.descricao }" />
 					</a:field>
 					<a:field label="Carga Horária" spaceLeft="10px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:inputText value="#{CursoControl.curso.cargaHoraria }" />
 					</a:field>
 					<a:field label="Turno" spaceLeft="10px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<h:selectOneMenu value="#{CursoControl.curso.turno}" id="turno">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
 							<f:selectItems value="#{CursoControl.turnosCurso}" var="turno" itemValue="#{turno}" itemLabel="#{turno}" />
@@ -90,15 +96,18 @@
 						</h:selectOneMenu>
 					</a:field>
 					<a:field label="Data Inicio" spaceLeft="10px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtInicio" value="#{CursoControl.curso.dtInicio}" />
 							
 					</a:field>
 					<a:field label="Data Termino" spaceLeft="10px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:calendar locale="pt" pattern="dd/MM/yyyy" id="dtTermino" value="#{CursoControl.curso.dtTermino}" />
 							
 					</a:field>
 					<a:newLine />
 					<a:field label="Unidade de Ensino" width="440px">
+					<f:ajax event="keyup" delay="200" render="buttonConfirm" />
 						<p:autoComplete id="completUnidadeEnsino" value="#{CursoControl.curso.unidadeEnsino}" completeMethod="#{CursoControl.completarUnidadesEnsino}"
 							minQueryLength="2" var="unidadeEnsino" itemLabel="#{unidadeEnsino.nome}" itemValue="#{unidadeEnsino}" converter="objectConverter">
 						</p:autoComplete>
@@ -107,7 +116,16 @@
 					<a:newLine />
 					<a:newLine />
 					<a:field>
-						<p:commandButton icon="ui-icon-disk" ajax="false" actionListener="#{CursoControl.confirmar}" value="Confirmar" update="cursos, panel, @form" />
+						<p:commandButton id="buttonConfirm" icon="ui-icon-disk" ajax="false" actionListener="#{CursoControl.confirmar}" value="Confirmar" update="cursos, panel, @form" 
+						disable="#{empty CursoControl.curso.codigo or 
+								   empty CursoControl.curso.nome or
+								   empty CursoControl.curso.sigla or
+								   empty CursoControl.curso.turno or
+								   empty CursoControl.curso.modalidade or
+								   empty CursoControl.curso.dtInicio or
+								   empty CursoControl.curso.dtTermino or
+								   empty CursoControl.curso.unidadeEnsino}"/>
+								   
 					</a:field>
 					<a:field spaceLeft="10px">
 						<p:commandButton icon="ui-icon-refresh" actionListener="#{CursoControl.limpar}" value="Limpar" update="panel" />
