@@ -82,6 +82,7 @@ public class ColaboradorControl implements Serializable {
 			if (UtilCpf.validarCpf(cpf)) {
 				colaborador.addPapel(EnumPapelUsuario.USUARIO);
 				colaborador.setSenhaNaoCriptografada("123456");
+				colaborador.setConfirmado(true);
 				colaboradorDao.alterar(colaborador);
 				limpar();
 				UtilFaces.addMensagemFaces("Operação realizada com sucesso");
